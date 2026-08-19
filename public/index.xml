@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>我的技術網誌</title>
+    <link>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/</link>
+    <description>Recent content on 我的技術網誌</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Wed, 19 Aug 2026 10:00:00 +0800</lastBuildDate>
+    <atom:link href="//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第一篇文章</title>
+      <link>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/posts/first-post/</link>
+      <pubDate>Wed, 19 Aug 2026 10:00:00 +0800</pubDate>
+      <guid>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/posts/first-post/</guid>
+      <description>&lt;h1 id=&#34;hello-papermod&#34;&gt;Hello PaperMod&lt;/h1&gt;
+&lt;p&gt;這是本站第一篇測試文章。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>關於我</title>
+      <link>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/about/</link>
+      <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/about/</guid>
+      <description>&lt;p&gt;這裡填寫自我介紹文字&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/search/</guid>
+      <description>&lt;h1 id=&#34;searchmd&#34;&gt;search.md&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hidden-true&#34;&gt;title: &amp;ldquo;搜尋&amp;rdquo;
+layout: search
+hidden: true&lt;/h2&gt;</description>
+    </item>
+  </channel>
+</rss>

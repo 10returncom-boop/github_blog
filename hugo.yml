@@ -1,0 +1,42 @@
+baseURL: "https://10returncom‑boop.github.io/github_blog/"
+theme: PaperMod
+
+languages:
+  zh-tw:
+    languageName: "繁體中文"
+    title: "我的技術網誌"
+
+params:
+  author: "10returncom‑boop"
+  description: "Hugo PaperMod 個人網誌｜筆記與技術紀錄"
+  favicon: "/github_blog/favicon.ico"
+
+  homeInfoParams:
+    Title: "歡迎光臨"
+    Content: 技術筆記、學習紀錄
+
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: false
+  ShowSearch: true
+
+  giscus:
+    enable: false
+
+menu:
+  main:
+    - name: "首頁"
+      url: /
+      weight: 1
+    - name: "文章"
+      url: /posts/
+      weight: 2
+    - name: "搜尋"
+      url: /search/
+      weight: 3
+    - name: "關於"
+      url: /about/
+      weight: 4
