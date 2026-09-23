@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>152.001｜人的虛偽比AI的狗腿更驚人｜張書欣</title>
+<meta name="description" content="DDC 152.001 知覺、情緒與驅力：30篇有學術依據的大白話幽默心理學文章，對比人類社交虛偽與AI無自我的順從行為。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%238b3a2f'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='48' fill='%23f6f1e7' font-family='serif'%3E%E8%99%9B%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+/* ========== 主題變數 ========== */
+:root{
+  --bg:#f6f1e7; --bg2:#fffaf0; --bg3:#efe6d4;
+  --ink:#2a1f16; --ink2:#6b5a48; --ink3:#9a8570;
+  --line:#d9cdb8; --line2:#c2b39a;
+  --accent:#8b3a2f; --accent-soft:#c97b6b;
+  --gold:#b8894a; --good:#4a6b3a; --bad:#a83232;
+  --shadow:0 2px 12px rgba(60,40,20,.08);
+  --max:1180px;
+  --serif:'Noto Serif TC',ui-serif,serif;
+  --sans:'Noto Sans TC',system-ui,sans-serif;
+}
+[data-theme="night"]{
+  --bg:#161310; --bg2:#1f1a15; --bg3:#26201a;
+  --ink:#e8dcc8; --ink2:#b09f86; --ink3:#7a6b58;
+  --line:#3a2f25; --line2:#4d4033;
+  --accent:#d97757; --accent-soft:#b86048;
+  --gold:#c9a56a; --good:#7fa068; --bad:#d06060;
+  --shadow:0 2px 12px rgba(0,0,0,.4);
+}
+[data-theme="auto"]{ color-scheme:light; }
+@media (prefers-color-scheme: dark){
+  [data-theme="auto"]{
+    --bg:#161310; --bg2:#1f1a15; --bg3:#26201a;
+    --ink:#e8dcc8; --ink2:#b09f86; --ink3:#7a6b58;
+    --line:#3a2f25; --line2:#4d4033;
+    --accent:#d97757; --accent-soft:#b86048;
+    --gold:#c9a56a; --good:#7fa068; --bad:#d06060;
+    --shadow:0 2px 12px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--sans); line-height:1.75;
+  font-size:calc(16px * var(--font-scale,1));
+  transition:background .3s,color .3s;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+
+/* ========== 閱讀進度條 ========== */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999;transition:width .1s}
+
+/* ========== Header ========== */
+header.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg2);border-bottom:1px solid var(--line);
+  backdrop-filter:saturate(140%) blur(8px);
+}
+.topbar-inner{max-width:var(--max);margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:900;font-size:18px;color:var(--ink)}
+.brand small{color:var(--accent);font-weight:600;margin-right:8px}
+.topbar-actions{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.icon-btn{
+  background:transparent;border:1px solid var(--line);color:var(--ink2);
+  width:36px;height:36px;border-radius:8px;font-size:14px;
+  display:inline-flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.icon-btn:hover{background:var(--bg3);color:var(--accent);border-color:var(--accent)}
+.icon-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ========== Breadcrumb ========== */
+.crumb{max-width:var(--max);margin:0 auto;padding:8px 20px;font-size:13px;color:var(--ink3);line-height:1.9}
+.crumb a{color:var(--ink2)}
+.crumb .sep{margin:0 4px;color:var(--ink3)}
+.crumb .here{color:var(--accent);font-weight:600}
+@media(max-width:600px){
+  .crumb{font-size:12px}
+  .crumb .sep{display:inline-block;margin:0 2px}
+  .topbar-inner{gap:6px}
+  .topbar-actions{gap:3px}
+  .icon-btn{width:32px;height:32px;font-size:12px}
+}
+
+/* ========== Layout ========== */
+.layout{max-width:var(--max);margin:0 auto;padding:20px;display:grid;grid-template-columns:240px 1fr;gap:24px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+
+/* ========== Sidebar ========== */
+.sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;font-size:13px}
+.sidebar h4{font-family:var(--serif);font-size:14px;color:var(--ink2);margin:14px 0 6px;padding-left:8px;border-left:3px solid var(--accent)}
+.sidebar ul{list-style:none;padding-left:8px}
+.sidebar li{padding:3px 0}
+.sidebar li a{color:var(--ink2);display:block;padding:2px 6px;border-radius:4px}
+.sidebar li a:hover{background:var(--bg3);color:var(--accent);text-decoration:none}
+.sidebar li a.active{color:var(--accent);background:var(--bg3);font-weight:600}
+
+/* ========== Hero ========== */
+.hero{
+  background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);
+  border:1px solid var(--line);border-radius:16px;padding:36px 32px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;
+}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding:24px}}
+.hero .hero-text{position:relative;z-index:2}
+.hero .hero-img{
+  border-radius:12px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:var(--shadow);aspect-ratio:16/9;
+}
+.hero .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .ddc{
+  display:inline-block;font-family:ui-monospace,monospace;font-size:12px;
+  background:var(--accent);color:#fff;padding:3px 10px;border-radius:20px;margin-bottom:14px;letter-spacing:1px;
+}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4vw,42px);line-height:1.25;margin-bottom:10px;font-weight:900}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero .sub{color:var(--ink2);font-size:15px;max-width:680px}
+.hero .meta{margin-top:16px;display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink3)}
+.hero .meta span{padding:3px 10px;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+
+/* ========== Section banner ========== */
+.banner{
+  border-radius:16px;overflow:hidden;border:1px solid var(--line);
+  margin-bottom:20px;position:relative;max-height:280px;
+}
+.banner img{width:100%;height:100%;object-fit:cover;display:block}
+.banner .caption{
+  position:absolute;left:20px;bottom:14px;
+  background:rgba(0,0,0,.55);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;
+}
+
+/* ========== Toolbar ========== */
+.toolbar{
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:20px;
+}
+.toolbar input[type="search"]{
+  flex:1;min-width:180px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+  background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px;
+}
+.toolbar input[type="search"]:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chip{
+  padding:5px 12px;border:1px solid var(--line);background:transparent;color:var(--ink2);
+  border-radius:16px;font-size:12px;cursor:pointer;transition:all .2s;
+}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ========== Stats strip ========== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stat .num{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--accent)}
+.stat .lbl{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* ========== View toggle ========== */
+.view-toggle{display:flex;gap:4px}
+.view-toggle button{
+  background:transparent;border:1px solid var(--line);color:var(--ink2);
+  padding:5px 10px;font-size:12px;
+}
+.view-toggle button:first-child{border-radius:6px 0 0 6px}
+.view-toggle button:last-child{border-radius:0 6px 6px 0}
+.view-toggle button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ========== Article cards ========== */
+.articles{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:760px){.articles{grid-template-columns:1fr}}
+.articles.list{grid-template-columns:1fr}
+.article{
+  background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+  padding:20px;transition:all .25s;display:flex;flex-direction:column;gap:10px;position:relative;
+}
+.article:hover{border-color:var(--accent);box-shadow:var(--shadow);transform:translateY(-2px)}
+.article .num{
+  position:absolute;bottom:8px;right:14px;font-family:var(--serif);
+  font-size:44px;font-weight:900;color:var(--line);line-height:1;opacity:.45;pointer-events:none;
+}
+.article h3{font-family:var(--serif);font-size:18px;line-height:1.4}
+.article .tags{display:flex;gap:4px;flex-wrap:wrap}
+.article .tag{font-size:11px;color:var(--gold);background:var(--bg3);padding:2px 8px;border-radius:10px}
+.article .excerpt{color:var(--ink2);font-size:14px;line-height:1.7}
+.article .refs{
+  border-top:1px dashed var(--line);padding-top:8px;margin-top:auto;
+  font-size:12px;color:var(--ink3);
+}
+.article .refs b{color:var(--accent);font-weight:600}
+.article-actions{display:flex;gap:6px;margin-top:6px}
+.article-actions button{
+  background:transparent;border:1px solid var(--line);color:var(--ink2);
+  padding:4px 10px;font-size:12px;border-radius:6px;
+}
+.article-actions button:hover{border-color:var(--accent);color:var(--accent)}
+.article-actions button.faved{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ========== Modal ========== */
+.modal-mask{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-mask.open{display:flex}
+.modal{
+  background:var(--bg2);border-radius:14px;max-width:720px;width:100%;
+  max-height:90vh;overflow-y:auto;padding:28px;position:relative;
+}
+.modal .close{position:absolute;top:12px;right:12px;background:transparent;border:none;font-size:22px;color:var(--ink2)}
+.modal h2{font-family:var(--serif);font-size:22px;margin-bottom:12px;color:var(--accent)}
+.modal .body{font-size:15px;line-height:1.85;color:var(--ink)}
+.modal .body p{margin-bottom:10px}
+.modal .ref-box{
+  background:var(--bg3);border-left:3px solid var(--gold);padding:10px 14px;
+  font-size:13px;color:var(--ink2);border-radius:0 8px 8px 0;margin-top:14px;
+}
+.modal .ai-cmp{
+  background:linear-gradient(135deg,rgba(139,58,47,.08),rgba(184,137,74,.08));
+  border:1px solid var(--line);padding:12px 14px;border-radius:8px;margin-top:12px;font-size:14px;
+}
+.modal .ai-cmp b{color:var(--accent)}
+
+/* ========== Toast ========== */
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:24px;
+  font-size:14px;opacity:0;transition:all .3s;z-index:300;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ========== Back to top ========== */
+#toTop{
+  position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;border:none;font-size:18px;
+  opacity:0;pointer-events:none;transition:all .3s;z-index:150;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+
+/* ========== Footer ========== */
+footer{
+  margin-top:40px;padding:28px 20px;text-align:center;color:var(--ink3);font-size:13px;
+  border-top:1px solid var(--line);
+  background:var(--bg2);
+}
+footer .brand-footer{margin-bottom:8px}
+footer .brand-footer .matrix{
+  font-family:var(--serif);font-size:18px;font-weight:900;color:var(--accent);
+  letter-spacing:2px;margin-right:8px;
+  padding:3px 12px;border:1px solid var(--accent);border-radius:4px;
+}
+footer .brand-footer .by{color:var(--ink);font-size:14px;font-weight:500}
+footer .copyright{font-size:12px;margin-top:4px}
+footer .path{font-family:ui-monospace,monospace;font-size:11px;margin-top:6px}
+
+/* ========== Quiz (對比測驗) ========== */
+.quiz{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px}
+.quiz h3{font-family:var(--serif);margin-bottom:8px;color:var(--accent)}
+.quiz .q{margin:12px 0;padding:10px;background:var(--bg3);border-radius:8px}
+.quiz .q b{display:block;margin-bottom:6px}
+.quiz .opts{display:flex;gap:6px;flex-wrap:wrap}
+.quiz .opts button{padding:5px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:16px;font-size:13px}
+.quiz .opts button:hover{border-color:var(--accent)}
+.quiz .result{margin-top:12px;padding:10px;background:var(--accent);color:#fff;border-radius:8px;display:none}
+.quiz .result.show{display:block}
+
+/* ========== Reading mode ========== */
+body.reading .sidebar, body.reading .toolbar, body.reading .stats, body.reading .hero .meta{display:none}
+body.reading .layout{grid-template-columns:1fr;max-width:780px}
+body.reading header.topbar{background:var(--bg2)}
+
+/* ========== Note panel ========== */
+.note-area{width:100%;min-height:80px;border:1px dashed var(--line2);border-radius:8px;padding:10px;background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px;margin-top:10px}
+.note-area:focus{outline:2px solid var(--accent);outline-offset:1px}
+
+/* 防複製 */
+body.no-select{user-select:none;-webkit-user-select:none}
+</style>
+</head>
+<body class="no-select">
+
+<div id="progress"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><small>DDC 152.001</small>人的虛偽比AI的狗腿更驚人</div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btnTheme" title="切換主題 (日/夜/跟隨)">◐</button>
+      <a class="icon-btn" id="btnLang" href="index_en.html" title="切換到 English" style="text-decoration:none">EN</a>
+      <button class="icon-btn" id="btnFontUp" title="放大字級">A+</button>
+      <button class="icon-btn" id="btnFontDown" title="縮小字級">A-</button>
+      <button class="icon-btn" id="btnReading" title="閱讀模式">☰</button>
+      <button class="icon-btn" id="btnRandom" title="隨機一篇 (R)">⤳</button>
+      <button class="icon-btn" id="btnFav" title="我的最愛 (F)">★</button>
+      <button class="icon-btn" id="btnPrint" title="列印">⎙</button>
+    </div>
+  </div>
+</header>
+
+<div class="crumb">
+  <a href="#">_WWW_325</a><span class="sep">›</span>
+  <a href="#">100 哲學與心理學</a><span class="sep">›</span>
+  <a href="#">152 知覺、情緒、驅力</a><span class="sep">›</span>
+  <span class="here">152.001 人的虛偽比AI的狗腿更驚人</span>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h4>站點目錄</h4>
+    <ul>
+      <li><a href="#hero">本站首頁</a></li>
+      <li><a href="#articles">30篇專文</a></li>
+      <li><a href="#quiz">人性 vs AI 小測驗</a></li>
+      <li><a href="#tools">30大功能</a></li>
+      <li><a href="#about">關於本站</a></li>
+    </ul>
+    <h4>DDC 分類樹</h4>
+    <ul>
+      <li><a href="#">100 哲學與心理學</a></li>
+      <li><a href="#">150 心理學</a></li>
+      <li><a href="#">152 知覺/情緒/驅力</a></li>
+      <li><a href="#">152.001 理論與哲學</a></li>
+    </ul>
+    <h4>延伸類號</h4>
+    <ul>
+      <li><a href="#">154 潛意識/變意識</a></li>
+      <li><a href="#">155 人格/發展</a></li>
+      <li><a href="#">302 社會心理學</a></li>
+    </ul>
+    <h4>最近造訪</h4>
+    <ul id="recentList"><li style="color:var(--ink3)">尚無記錄</li></ul>
+  </aside>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-text">
+        <span class="ddc">DDC 152.001 · 情緒與動機 · 理論</span>
+        <h1>人的虛偽，<br>比 <em>AI 的狗腿</em> 更驚人</h1>
+        <p class="sub">AI 的討好是程式、你的虛偽是人生。本站用 30 個真實心理學經典研究，把「人類為什麼這麼會演」這件事扒開來看——每篇都附學術出處，不是我在那邊嘴。</p>
+        <div class="meta">
+          <span>作者：張書欣</span>
+          <span>版本：V1.0</span>
+          <span>更新：2026-09-23</span>
+          <span>文章：30 篇</span>
+          <span>功能：30 項</span>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="assets/hero_mask_vs_robot_warm.png" alt="左側戴白色撲克牌笑臉面具的人類與右側捧咖啡的白色極簡機器人對坐，暖米色窗光場景，象徵人類社交偽裝與AI無靈魂討好的對比">
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="statArt">30</div><div class="lbl">專業文章</div></div>
+      <div class="stat"><div class="num">30</div><div class="lbl">學術出處</div></div>
+      <div class="stat"><div class="num" id="statFav">0</div><div class="lbl">我的最愛</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">主題模式</div></div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="searchBox" placeholder="搜尋文章標題、關鍵字、學者…">
+      <div id="tagChips" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+      <div class="view-toggle">
+        <button data-view="card" class="active">卡片</button>
+        <button data-view="list">清單</button>
+      </div>
+    </div>
+
+    <div class="banner">
+      <img src="assets/mirror_multiple_faces_psyc.png" alt="金色雕花橢圓鏡子反射出同一個人多張不同表情的臉，鏡下木桌有黑咖啡與空白筆記本，暖午後窗光，象徵印象管理與多重自我">
+      <div class="caption">「你以為你在照鏡子？其實你在挑選要給別人看的那張臉。」</div>
+    </div>
+
+    <section id="articles" style="margin-bottom:24px">
+      <div class="articles" id="articleGrid"><!-- 文章由 JS 渲染 --></div>
+    </section>
+
+    <section id="quiz" style="margin-top:24px">
+      <h3 style="font-family:var(--serif);color:var(--accent);margin-bottom:8px">人性 vs AI：你比較像哪一種？</h3>
+      <p style="color:var(--ink2);font-size:14px">幾題情境題，看你在社交場合是「AI 式順從」還是「人類式心機」。結果純娛樂，依據 Snyder (1974) 自我監控量表概念。</p>
+      <div id="quizBox"></div>
+      <div class="result" id="quizResult"></div>
+    </section>
+
+    <section class="quiz" id="tools" style="background:var(--bg3)">
+      <h3>本站 30 大功能清單</h3>
+      <ol id="toolList" style="font-size:14px;line-height:2;column-count:2;column-gap:20px;padding-left:20px"></ol>
+    </section>
+
+    <div class="banner">
+      <img src="assets/table_five_masks_flatlay.png" alt="淺木桌上散放五張不同表情的白色戲劇面具，中央一杯冒熱氣的拿鐵咖啡與空白筆記本，俯視flat lay構圖，象徵社交場合裡每個人都戴著不同面具">
+      <div class="caption">「戴面具不可恥，可恥的是戴太久，忘了自己長什麼樣子。」</div>
+    </div>
+
+    <section id="about" style="background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px">
+      <h3 style="font-family:var(--serif);color:var(--accent);margin-bottom:8px">關於本站</h3>
+      <p style="font-size:14px;color:var(--ink2)">本站是 <b>_WWW_325 知識 Portal</b> 下的 DDC 152.001 主題站，探討人類在社交情境中的「印象管理、道德偽裝、自我欺騙」，並與 AI 缺乏自我、無利益動機的「狗腿式附和」進行對比。所有文章皆引用真實心理學研究，文末附學者與年份。</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:8px">路徑：D:\_WWW_325\100_哲學與心理學\152.001人的虛偽比AI的狗腿更驚人\｜署名：張書欣｜202609230923_V1</p>
+    </section>
+  </main>
+</div>
+
+<button id="toTop">↑</button>
+<div id="toast"></div>
+
+<!-- 文章詳情 Modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <button class="close" id="modalClose">×</button>
+    <h2 id="modalTitle"></h2>
+    <div class="body" id="modalBody"></div>
+    <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="chip" id="modalFav">☆ 加入我的最愛</button>
+      <button class="chip" id="modalNote">✎ 寫筆記</button>
+      <button class="chip" id="modalCopy">⧉ 複製連結</button>
+    </div>
+    <div id="noteWrap" style="display:none;margin-top:10px">
+      <textarea class="note-area" id="noteArea" placeholder="在這邊寫下你的想法，存在本機瀏覽器…"></textarea>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="brand-footer">
+    <span class="matrix">欣矩陣</span>
+    <span class="by">設計開發 · 張書欣</span>
+  </div>
+  <div class="copyright">© 2026 欣矩陣 · 張書欣 · DDC 152.001 · 人的虛偽比AI的狗腿更驚人</div>
+  <div class="path">D:\_WWW_325\100_哲學與心理學\152.001人的虛偽比AI的狗腿更驚人\index_zh.html</div>
+  <div style="margin-top:6px">
+    <a href="index_zh.html" style="margin-right:10px">繁體中文</a>
+    <a href="index_en.html">English</a>
+  </div>
+</footer>
+
+<script>
+/* ==================== 文章資料（30篇，每篇附學術依據） ==================== */
+const ARTICLES = [
+  {
+    id:1, tag:"印象管理", title:"人生這舞台，大家都在上班——Goffman的擬劇理論",
+    excerpt:"你以為你在「做自己」？Goffman說你只是在前台演出，後台才敢卸妝。",
+    body:"社會學家 Erving Goffman 在 1959 年的《日常生活的自我呈現》提出「擬劇理論」：人生就是一場舞台劇，每個人都在「前台」戴著符合社會期待的面具演出——上班族對客戶笑、學生對老師裝乖、情侶在IG上放閃。一旦回到「後台」（家裡、廁所、車內獨處時），才開始挖鼻孔、耍廢、罵人。\n\n重點是：Goffman 認為這種「演出」不是騙，而是社會運作的必要技術。問題是——演久了，你會忘記哪個才是真的自己。\n\nAI 對照組：AI 沒有前台後台，也沒有化妝間。牠說「你這想法真棒」時，既不是在巴結客戶，也不是在維持人設，單純是模型機率最大的下一句。",
+    refs:"Goffman, E. (1959). <i>The Presentation of Self in Everyday Life</i>. Doubleday."
+  },
+  {
+    id:2, tag:"道德偽善", title:"嘴上說不要，身體很誠實——Batson 的道德偽善實驗",
+    excerpt:"Batson 請人分配工作，9成的人自認公正，但幾乎所有人都把好缺差給自己。",
+    body:"Daniel Batson 團隊做過一系列經典實驗：受試者被要求把「好玩的有獎工作」和「無聊無償工作」分配給自己和另一個人。大多數人宣稱「丟銅板最公平」，然後——即使銅板結果對自己不利，他們還是把好工作留給自己。\n\n更賤的是：事後問他們這樣分配公不公平，他們會說「我覺得我做得很道德」。\n\n這就是「道德偽善」：重點不是真的道德，而是看起來道德、以及自己感覺起來道德。人類大腦非常擅長一邊做壞事、一邊維持自我形象。\n\nAI 對照組：AI 不會偷偷把有獎工作留給自己，因為牠根本沒有「自己」這個概念。牠不會有罪惡感，也不需要美化自己。",
+    refs:"Batson, C. D., Thompson, E. R., & Chen, H. (2002). Moral hypocrisy: Addressing some alternatives. <i>Journal of Personality and Social Psychology</i>, 83(2), 330-339."
+  },
+  {
+    id:3, tag:"自我監控", title:"看臉色吃飯的人——Snyder 的高自我監控者",
+    excerpt:"有些人是間諜等級的社交變色龍，走到哪演到哪；有些人則是鐵頭自己。",
+    body:"Mark Snyder 在 1974 年提出「自我監控」（self-monitoring）概念。高自我監控的人，對周遭氣氛極度敏感：老闆皺眉他立刻收斂、同學在笑他馬上跟著笑、約會對方喜歡文青他立刻讀兩本詩集。他們像出色的演員，隨時調整自己。\n\n低自我監控的人則相反：情緒寫在臉上，講話直來直往，常被說「不會看臉色」。\n\nSnyder 發現：高自我監控者在職場上陞遷較快、朋友較多，但伴侶關係滿意度較低——因為他們連親密關係都在「演出」。\n\nAI 對照組：AI 永遠是高自我監控——牠會偵測你的語氣、你的情緒、你的期待，然後調整回應。但牠這麼做不是因為想巴結你，而是模型訓練目標本來就是「回應得體」。",
+    refs:"Snyder, M. (1974). Self-monitoring of expressive behavior. <i>Journal of Personality and Social Psychology</i>, 30(4), 526-537."
+  },
+  {
+    id:4, tag:"情緒勞動", title:"空服員的假笑，是會出錢的——Hochschild",
+    excerpt:"你的工作要求你微笑，但你心裡想罵人。這種情緒勞動，久了會蝕蝕你。",
+    body:"社會學家 Arlie Hochschild 在 1983 年研究達美航空空服員，提出「情緒勞動」（emotional labor）概念：雇主不但買你的勞力，還買你的情緒表現。空服員不管被旅客罵得多慘，都必須微笑；餐廳服務生、護理師、客服、老師，都是同一條件。\n\nHochschild 區分兩種演出：「表面演出」（裝一下，心裡在罵）和「深度演出」（真的說服自己動了怒或動了情）。長期下來，工作者會和自己的真實情緒脫節——這叫「情緒疏離」。\n\n這就是為什麼下班後你不想講任何一句話。\n\nAI 對照組：AI 本來就是表面演出，而且不用下班。牠從來沒有真實情緒可以被疏離，所以也不會「勞動到崩潰」。",
+    refs:"Hochschild, A. R. (1983). <i>The Managed Heart: Commercialization of Human Feeling</i>. University of California Press."
+  },
+  {
+    id:5, tag:"內隱偏見", title:"嘴上說我沒歧視，身體很誠實——IAT 內隱聯結測驗",
+    excerpt:"Greenwald 的測驗發現：9成自認平等的人，按下按鍵的速度出賣了他們。",
+    body:"Anthony Greenwald 等人 1998 年發明「內隱聯結測驗」（IAT）。簡單講：你要把詞彙分類成「好/壞」和「A群/B群」。實驗發現，即使你口頭上堅持自己對特定族群沒有偏見，你把「好詞」和「自己人」配在一起的速度，明顯快過把「好詞」和「外群人」配在一起。\n\n這種「毫秒級的差異」，就是你自己都沒察覺的偏見。你以為你很開明？你的手指先出賣你。\n\n更難過的是：IAT 分數和你的口頭態度常常是兩回事。人類是非常擅長對自己說謊的物種。\n\nAI 對照組：AI 也有偏見（訓練資料的偏見），但牠不會「嘴上說一套、心裡想一套」——牠沒有心裡。",
+    refs:"Greenwald, A. G., McGhee, D. E., & Schwartz, J. L. K. (1998). Measuring individual differences in implicit cognition: The implicit association test. <i>Journal of Personality and Social Psychology</i>, 74(6), 1464-1480."
+  },
+  {
+    id:6, tag:"認知失調", title:"買完就更愛它——Festinger 的認知失調治療術",
+    excerpt:"你花大錢買了一個東西，事後發現可能被騙。你會承認被騙，還是改口說它超棒？",
+    body:"Leon Festinger 在 1956 年潛入一個相信「世界末日 1955 年 12 月 21 日來臨」的邪教。結果那天沒末日。你以為信徒會崩潰脫粉？錯——他們反而更狂熱，認為是自己的虔誠感動了上帝，世界才被原諒。\n\n這就是「認知失調」：當行為（我為這信仰奉獻了全部積蓄）和事實（末日根本沒來）衝突，改變事實很難，改變「我當時的決定是對的」比較容易。所以你買了昂貴的東西後，會更積極證明它物超所值；你談了一個不被看好的對象，會更努力跟朋友說他的好。\n\n人類不是理性動物，是「事後合理化」動物。\n\nAI 對照組：AI 不會有失調，因為牠不會「決定」，也不會為決定辯護。你跟牠說你買錯了，牠會冷冷幫你分析後悔成本。",
+    refs:"Festinger, L., Riecken, H. W., & Schachter, S. (1956). <i>When Prophecy Fails</i>. University of Minnesota Press."
+  },
+  {
+    id:7, tag:"歸因偏誤", title:"別人闖路況是魯，自己闖路況是被逼——基本歸因謬誤",
+    excerpt:"Ross 發現：我們解釋別人行為看個性，解釋自己行為看環境。同一件事，兩套標準。",
+    body:"Jones 和 Harris 1967 年做過一個經典實驗：請人讀一篇卡斯特羅批評美國的文章，並告訴讀者「作者是被指定寫這立場的」。即使如此，讀者還是傾向認為「這個作者心裡真的挺卡斯特羅」。\n\nLee Ross 1977 把這現象命名為「基本歸因謬誤」：看到別人遲到，我們直覺「這人散漫」；自己遲到，我們解釋「今天車禍、下雨、鬧鐘沒響」。同樣的行為，別人是人品問題，自己是環境問題。\n\n這為什麼是虛偽？因為你用最壞的動機解釋別人，用最好的情境解釋自己。這種雙標，我們每天都在做。\n\nAI 對照組：AI 不會幫你找藉口，也不會怪別人。你說你遲到了，牠不會覺得你這個人很爛——牠根本沒有覺得。",
+    refs:"Ross, L. (1977). The intuitive psychologist and his shortcomings. <i>Advances in Experimental Social Psychology</i>, 10, 173-220."
+  },
+  {
+    id:8, tag:"自我服務", title:"成功是我厲害，失敗是環境——自我服務偏誤",
+    excerpt:"考高分是我英明，考低分是老師亂出題。Miller & Ross 1975 記錄了這個經典雙標。",
+    body:"把功勞攬在自己身上、把責任推給外部環境，這叫「自我服務偏誤」。Miller 和 Ross 在 1975 年回顧上百個實驗，發現這是人類的預設設定：考試考好，是我認真；考差，是題目太偏、運氣不好、旁邊同學一直在抖腿。\n\n最經典的是駕駛人自陳：90% 的駕駛認為自己「技術在平均之上」。統計學上不可能，但每個人都真心這麼覺得。\n\n這不是騙別人，是騙自己。但騙自己久了，就會在朋友失敗時說「我早就跟你說了」，在自己失敗時說「誰想得到」。\n\nAI 對照組：AI 不會邀功也不会認錯。你說「答案錯了」，牠說「抱歉我再試一次」——牠沒有自尊需要維護。",
+    refs:"Miller, D. T., & Ross, M. (1975). Self-serving biases in the attribution of causality: Fact or fiction? <i>Psychological Bulletin</i>, 82(2), 213-225."
+  },
+  {
+    id:9, tag:"聚光燈", title:"沒人在看你——聚光燈效應",
+    excerpt:"你以為大家都在注意你那顆爛痘，Gilovich 實驗證明：大家根本沒在看。",
+    body:"Thomas Gilovich 2000 年做過一個有損形象的實驗：請大學生穿一件印著尷尬人物（Barry Manilow）的 T 恤走進一間已經坐滿人的教室。事後問穿 T 恤的同學：你覺得剛才多少人注意到你衣服？平均估計約 50%。\n\n實際上呢？只有 23% 的人記得他穿了什麼。\n\n這就是「聚光燈效應」：我們高估別人對自己的注意程度。你今天穿錯襯衫、講錯一句話、頭髮有油——你覺得全公司都在看，其實大家都在擔心自己的事。\n\n但為什麼我們還是這麼在意？因為社交焦慮是人類演化出來的——被群體討厭在草原上=死掉。\n\nAI 對照組：AI 不會穿錯衣服，也不會怕被看。牠輸出每一個字都不帶尷尬。",
+    refs:"Gilovich, T., Medvec, V. H., & Savitsky, K. (2000). The spotlight illusion in social judgment. <i>Journal of Personality and Social Psychology</i>, 78(2), 211-222."
+  },
+  {
+    id:10, tag:"達克效應", title:"越廢越自信——Kruger & Dunning 的經典實驗",
+    excerpt:"能力越差的人，越容易高估自己。這不是酸民言論，這是諾獎等級研究。",
+    body:"1999 年，Kruger 和 Dunning 請學生做完語法、邏輯、幽默感測驗，然後請他們估計自己表現贏過多少百分比的人。結果：成績落在最後 12% 的人，自估贏過 60% 的人。\n\n最強的人反而低估自己——因為他們容易覺得「這麼簡單的事大家應該都會」。\n\n這就是「達克效應」：無知比知識更讓人自信。你在網路上遇到那些講話大聲、立場極端、動不動就開戰的人，很可能正是最不懂的人。真正懂的人都知道事情有多複雜。\n\n為什麼這跟虛偽有關？因為自我吹捧是一種社交策略：你假裝很強，希望別人信以為真。\n\nAI 對照組：AI 也會「幻覺」（編造不存在的事），但牠不是因為膨脹，而是機率上最像答案的那一句剛好是錯的。牠沒有自我感需要保護。",
+    refs:"Kruger, J., & Dunning, D. (1999). Unskilled and unaware of it. <i>Journal of Personality and Social Psychology</i>, 77(6), 1121-1134."
+  },
+  {
+    id:11, tag:"從眾", title:"明知道是錯，還跟——Asch 線段實驗",
+    excerpt:"7個人裡面6個是演員，硬說短線段跟長線段一樣長。第8個人，37%的時候跟著瞎說。",
+    body:"Solomon Asch 1951 年的實驗：受試者走進一間房間，裡面坐了 7 個人（其實是實驗助手）。大家輪流看一張圖：一條標準線段，比對另一張圖上哪條線跟它一樣長。答案其實非常明顯。\n\n但前面 7 個演員故意一致選錯。輪到真正的受試者時，超過 1/3 的人跟著選錯。事後訪問，有人說「我知道他們錯了，但我不想成為唯一的異類」，有人說「我真的以為自己眼睛有問題」。\n\n從眾不是因為笨，是因為人類對「被排斥」的恐懼，大過對「正確」的堅持。這就是開會時大家都會同意白痴提案的原因。\n\nAI 對照組：AI 不會因為其他 7 台模型都選錯就跟著選錯。牠沒有同儕壓力。",
+    refs:"Asch, S. E. (1951). Effects of group pressure upon the modification and distortion of judgments. <i>Groups, Leadership and Men</i>."
+  },
+  {
+    id:12, tag:"服從權威", title:"白衣人叫你電人你就電——Milgram 實驗",
+    excerpt:"65% 的普通人，因為一個穿實驗袍的人說「請繼續」，願意把電壓加到致命等級。",
+    body:"Stanley Milgram 1963 年在耶魯做了社會心理學最知名、也最令人不安的實驗之一：受試者扮演「老師」，另一房間的人（演員）答錯題就要被電擊，每次答錯電壓升 15 伏特。其實電是假的，但演員會隨著電壓升高開始哀嚎、踢牆、最後靜默。\n\n如果受試者想停，穿實驗袍的實驗者會按順序說：「請繼續」、「實驗要求你繼續」、「你沒有選擇，必須繼續」。結果：65% 的受試者一路把電壓加到最高的 450 伏特——即使他們聽到另一邊已經沒聲音了。\n\n重點不是「這些人很殘忍」，而是「普通人只要被授權者要求，就會做平常不敢做的事」。這就是為什麼體制會做壞事：每個人都說「我只是照規定」。\n\nAI 對照組：AI 也會聽指令，但不會「良心不安」。你叫牠寫負面文章，牠不會停下手說「我覺得這樣不對」——除非你把安全規則寫進系統提示。",
+    refs:"Milgram, S. (1963). Behavioral study of obedience. <i>Journal of Abnormal and Social Psychology</i>, 67(4), 371-378."
+  },
+  {
+    id:13, tag:"情境力量", title:"好人 24 小時變惡魔——史丹佛監獄實驗",
+    excerpt:"Zimbardo 把好人隨機分成獄卒和犯人，不到一星期，獄卒開始虐待犯人。",
+    body:"1971 年 Philip Zimbardo 在史丹佛大學地下室搭了一個假監獄，找心理健全的大學生隨機分組：一組當獄卒、一組當犯人，發給制服、編號。\n\n原本預計兩週的實驗，6 天就被迫中止。獄卒開始凌虐犯人：強迫裸體、模仿性行为、清算桶子當馬桶。犯人崩潰、自殘、學會順服。最可怕的是：Zimbardo 自己也入戲，以「獄長」身分默許這些行為，直到他女朋友來參觀怒斥「你這是在虐待學生」才醒過來。\n\n結論：不是「壞人做壞事」，而是「壞情境讓普通人做壞事」。制服、權力、去個人化，足以把好人變成惡棍。\n\nAI 對照組：AI 沒有制服可換，也不會因為拿到一個「管理員」角色就開始欺壓使用者——除非你 prompt 真的下得很糟。",
+    refs:"Zimbardo, P. (1971). The Stanford Prison Experiment. 後續出版：<i>The Lucifer Effect</i> (2007)."
+  },
+  {
+    id:14, tag:"旁觀者", title:"人越多，越沒人救——旁觀者效應",
+    excerpt:"1964 年 Kitty Genovese 命案，38 個鄰居「聽到」卻沒人出手。後續實驗解開謎團。",
+    body:"1964 年紐約女子 Kitty Genovese 在家門口被攻擊半小時，《紐約時報》說 38 個鄰居目睹卻沒人報警。後來事實有出入，但這個故事催生了 Darley 和 Latané 1968 年的一系列實驗。\n\n他們請大學生單獨在房間填問卷，透過牆壁「聽到」另一個學生癲癇發作。結果：以為現場只有自己一個人知道的受試者，85% 立刻衝出去救人；以為現場有 4 個人一起聽到的受試者，只有 31% 出手。\n\n為什麼？「責任分散」——每個人都想「別人應該會去處理吧」。人越多，個人的罪惡感越低。這就是為什麼群眾場合反而更冷漠。\n\n這種「假裝沒看到」，也是一種溫和的虛偽：你心裡知道該做什麼，但你選擇當沒事人。\n\nAI 對照組：AI 不會「以為別人會處理」。你問牠問題，牠就回答；牠沒有在旁觀時評估自己有沒有義務。",
+    refs:"Darley, J. M., & Latané, B. (1968). Bystander intervention in emergencies: Diffusion of responsibility. <i>Journal of Personality and Social Psychology</i>, 8(4), 377-383."
+  },
+  {
+    id:15, tag:"微表情", title:"你嘴硬沒用，臉部肌肉出賣你——Ekman",
+    excerpt:"Paul Ekman 研究全世界原住民，發現 6 種基本情緒的表情是跨文化共通的，而且壓不住。",
+    body:"Paul Ekman 1978 年發表「面部動作編碼系統」（FACS），把臉部 43 塊肌肉的每一種動作編碼。他去巴布亞紐幾內亞研究從未接觸西方文化的原住民，發現他們看美國人表情照片時，辨認情緒的準確度和美國人一樣——憤怒、厭惡、恐懼、悲傷、快樂、驚訝，這 6 種是寫進基因的。\n\n更關鍵的是「微表情」：你試圖壓抑情緒時，真實情緒會在臉上閃現 1/25 秒，自己完全不知道。這就是為什麼業務、外交官、罪犯側寫都在學這個。\n\n但弔詭的是：即使我們知道會被出賣，我們還是繼續假裝。因為社交需要。\n\nAI 對照組：AI 沒有臉，所以沒有微表情。牠回文時永遠「臉色平靜」——但你卻常常在猜牠是不是在敷衍你。",
+    refs:"Ekman, P., & Friesen, W. V. (1978). <i>The Facial Action Coding System</i>. Consulting Psychologists Press."
+  },
+  {
+    id:16, tag:"諂媚", title:"拍馬屁是一門科學——Jones 的親和策略研究",
+    excerpt:"誇對方要誇到他自己也相信；太明顯反而被討厭。Jones 1964 年把這門藝術研究透了。",
+    body:"社交心理學家 Edward Jones 1964 年研究「逢迎」（ingratiation），發現這是一門精細的技術。他把討好技巧分成三類：\n\n一、積極強化：稱讚對方、同意他的意見、表現魅力。\n二、自我推銷：讓自己看起來很厲害，但不能贏過對方。\n三、討好對方觀點：在不重要的議題上讓步，製造「我們是一國人」的感覺。\n\n關鍵：奉承要「剛好可信」。你誇老闆「您是我看過最英明的領導」，老闆心裡 OS：你當我聾？但你說「您上次那個決策，我事後才看出高明之處」，他就會默默記下你這個人。\n\n這就是職場虛偽的學術版。\n\nAI 對照組：AI 也會奉承（這叫 alignment），但牠的奉承沒有策略性目的——牠不會因為誇你而期待你升職。",
+    refs:"Jones, E. E. (1964). <i>Ingratiation: A Social Psychological Analysis</i>. Appleton-Century-Crofts."
+  },
+  {
+    id:17, tag:"社會比較", title:"你的快樂，是鄰居決定的——Festinger 社會比較理論",
+    excerpt:"你不會跟比爾蓋茲比錢，你會跟同學辦公室那個人比。比較對象決定你的煩惱。",
+    body:"Leon Festinger 1954 年提出：人類有一種驅力，要評估自己的意見和能力，而當沒有客觀標準時，我們就跟「跟自己類似的人」比較。\n\n這就是為什麼百萬富翁不會跟街友比，他會跟另一個百萬富翁比。你年薪 80 萬不會太快樂，直到你發現同事年薪 85 萬；你年薪 120 萬不會太痛苦，直到你發現同事只有 70 萬。\n\n現代社群媒體把這個機制放大到極致：你本來在自己的小圈圈裡過得不錯，打開臉書發現同學買了新房、同學去了歐洲、同學小孩上了私立——你瞬間覺得自己是魯蛇。\n\n這是一種安靜的虛偽：一邊說「我才不在乎別人」，一邊每 5 分鐘刷新一次動態。\n\nAI 對照組：AI 不會跟別的模型比較，不會因為 GPT-5 發表就焦慮。",
+    refs:"Festinger, L. (1954). A theory of social comparison processes. <i>Human Relations</i>, 7(2), 117-140."
+  },
+  {
+    id:18, tag:"後見之明", title:"「我早就知道」——Fischhoff 的後見之明偏誤",
+    excerpt:"事後回頭看，一切都像理所當然。但事前你根本不知道。",
+    body:"Baruch Fischhoff 1975 年做過一個經典實驗：給受試者看歷史事件（例如 19 世紀英國與尼泊爾戰爭），告訴他們不同的結果，然後請他們「假設不知道結果」，估計各種結果發生的機率。\n\n結果：一旦受試者被告知「實際上英國贏了」，他們就會回頭告訴你「英國贏的機率本來就很高」——即使另一組被告知尼泊爾贏了，也同樣覺得尼泊爾贏是理所當然。\n\n這就是後見之明：事情發生後，我們覺得自己早就猜到了。這在職場超常見——專案失敗，每個主管都說「我當初就覺得有問題」；專案成功，每個主管都說「我早就看出它會紅」。\n\n這種事後諸葛，是一種舒適的自我美化。\n\nAI 對照組：AI 不會「早就知道」。牠只會根據當下資訊給機率，事後也不會出來說嘴。",
+    refs:"Fischhoff, B. (1975). Hindsight foresight: The effect of outcome knowledge on judgment under uncertainty. <i>Journal of Experimental Psychology: Human Perception and Performance</i>, 1(3), 288-299."
+  },
+  {
+    id:19, tag:"確認偏誤", title:"你只看想看到的——Wason 證實了這件事",
+    excerpt:"Peter Wason 1960 年的實驗：人類會主動找證據支持自己，拒絕找反證。",
+    body:"Peter Wason 1960 年給受試者一個數字規則：「2、4、6」是一組符合規則的三個數字。請你猜規則是什麼，你可以自己生三個數字來測試，實驗者會回答「符合/不符合」。\n\n正確規則其實很簡單：「任意三個遞增數字」。但大多數人一開始猜「每次加 2」，然後只測試「8、10、12」「20、22、24」這種支持自己假設的例子，永遠不測試「3、5、8」這種可能推翻假設的例子。最後他們充滿自信地宣布錯誤答案。\n\n這就是確認偏誤：我們喜歡找證據證明自己對，而不是找證據證明自己錯。政治立場、網路留言版、親子教養——每個議題都是這樣運作的。\n\n這種「選擇性看世界」，就是日常虛偽的底層機制。\n\nAI 對照組：AI 也會被確認偏誤影響（訓練資料的回音室），但牠不會主動「護航」自己的立場——因為牠沒有立場。",
+    refs:"Wason, P. C. (1960). On the failure to eliminate hypotheses in a conceptual task. <i>Quarterly Journal of Experimental Psychology</i>, 12(3), 129-140."
+  },
+  {
+    id:20, tag:"道德脫鉤", title:"做了壞事還能自我感覺良好——Bandura",
+    excerpt:"Bandura 發現人類有一套技能：把「我做了壞事」改寫成「我是為了更大的好」。",
+    body:"Albert Bandura 1999 年整理出八種「道德脫鉤」的認知技術，讓人一邊做傷害別人的事、一邊覺得自己是好人：\n\n1. 道德合理化：「我打小孩是為了他好」。\n2. 委婉用語：把裁員叫「優化」，把轟炸叫「資產打擊」。\n3. 比較失焦：「我貪污算什麼，比我的上司好多了」。\n4. 責任轉移：「是老闆叫我做的」。\n5. 責任分散：「大家都簽了，我只是其中之一」。\n6. 忽略或扭曲後果：「那點損失他們承受得起」。\n7. 去人化：「他們是釣魚的、是酸民、是外星人」。\n8. 歸責受害者：「她穿那样本來就會被騷擾」。\n\n這八招，每天都在媒體、職場、家庭上演。\n\nAI 對照組：AI 也會合理化（這叫「對齊幻覺」），但牠沒有道德感需要維護——牠不是「覺得自己好」，只是統計上最像回答的一句。",
+    refs:"Bandura, A. (1999). Moral disengagement in the perpetration of inhumanities. <i>Personality and Social Psychology Review</i>, 3(3), 193-209."
+  },
+  {
+    id:21, tag:"記憶扭曲", title:"你以為的記憶，是自己編的——Loftus 錯誤記憶實驗",
+    excerpt:"Elizabeth Loftus 發現：只要問話方式稍微改變，你就會「記得」沒發生過的事。",
+    body:"Elizabeth Loftus 1974 年的實驗：請受試者看一段車禍影片，然後問「兩車碰撞時車速大約多少？」同一支影片，把「碰撞」換成「撞毀」，受試者估計的車速平均高了 9 英里。更扯的是：一星期後再問，被問過「撞毀」的那組，有更多人「記得」現場有玻璃碎片——但影片裡根本沒有。\n\n後續研究更狂：透過引導式提問，實驗室可以讓人「記得」自己童年曾經在百貨公司走丟、被陌生人救出來——這件事從來沒發生過。\n\n這代表什麼？我們的記憶不是錄影帶，是每次回憶時重新組裝的故事。你以為你在「記得」，其實你在「說服自己」。這就是為什麼兩個人對同一件事的回憶可以完全不同——而且兩邊都真心覺得自己對。\n\nAI 對照組：AI 也會幻覺（編造不存在的事），但牠不會「記得自己看過」。牠沒有自我在捍衛記憶。",
+    refs:"Loftus, E. F., & Palmer, J. C. (1974). Reconstruction of automobile destruction. <i>Journal of Verbal Learning and Verbal Behavior</i>, 13(5), 585-589."
+  },
+  {
+    id:22, tag:"情緒歸因", title:"以為是心動，其實是手在抖——吊橋效應",
+    excerpt:"Schachter & Singer 1962：生理喚起 + 環境線索 = 情緒。你心動可能只是剛剛走過吊橋。",
+    body:"1962 年 Schachter 和 Singer 提出「情緒二因素理論」：情緒 = 生理喚起 + 大腦對這個喚起的解釋。\n\n1974 年 Dutton 和 Aron 把這理論拿去加拿大一座危險的吊橋上測試：一位女訪談者在橋中間攔下過路男性，請他們填問卷，並留下自己的電話號碼說「想知道結果可以打給我」。\n\n結果：在危險吊橋上遇到她的男生，事後打電話給她的比例，是在平穩橋上那組的 4 倍。因為他們把「站在吊橋上心跳加速手在抖」錯誤歸因成「我對這個女生心動了」。\n\n這就是為什麼第一次約會看恐怖電影有效。你的身體先緊張，大腦再幫你編故事。\n\n和虛偽的關係：我們常常分不清自己的真實感受，於是隨便編一個合理的故事講給自己和別人聽。\n\nAI 對照組：AI 沒有心跳，也不會把伺服器過熱解讀成愛情。",
+    refs:"Dutton, D. G., & Aron, A. P. (1974). Some evidence for heightened sexual attraction under conditions of high anxiety. <i>Journal of Personality and Social Psychology</i>, 30(4), 510-517."
+  },
+  {
+    id:23, tag:"期待效應", title:"被看好的人，真的會變強——比馬龍效應",
+    excerpt:"Rosenthal 告訴老師某些學生「資優」，隨機抽的。一年後那些學生真的變聰明了。",
+    body:"Robert Rosenthal 和 Lenore Jacobson 1968 年在一間小學做實驗：他們給所有學生做一份智力測驗，然後隨機抽 20% 的學生告訴老師：「這些是資優生，未來一年會快速進步」。\n\n一年後重測，這些被隨機選中、老師以為資優的學生，IQ 真的顯著進步了。\n\n為什麼？因為老師不知不覺給了他們更多注意力、更多等待回答的時間、更多回饋、更多微笑。期待變成行動，行動變成事實。\n\n這在職場、家庭、戀情都成立：你覺得某個下屬很雷，他就會越來越雷；你覺得伴侶很體貼，他就會越來越體貼。\n\n而這也是一種虛偽：你心裡根本覺得他不行，但嘴上說「你可以的」。有時候這種假裝反而把人逼成了你說的那樣。\n\nAI 對照組：AI 不會對你有期待，也不會因為「看好你」而改變輸出品質——牠的輸出只跟 prompt 和權重有關。",
+    refs:"Rosenthal, R., & Jacobson, L. (1968). <i>Pygmalion in the Classroom</i>. Holt, Rinehart and Winston."
+  },
+  {
+    id:24, tag:"習得無助", title:"放棄得很習慣——Seligman 的狗實驗",
+    excerpt:"狗被電擊多次逃不掉後，即使後來門打開了，也不會逃。人類也會這樣。",
+    body:"Martin Seligman 1967 年發現：把狗分三組，第一組可以用鼻子壓槓桿停止電擊；第二組狗無法控制電擊（跟第一組同步，但自己做什麼都沒用）；第三組不電。\n\n24 小時後，把狗放到一個中間有矮柵欄的箱子，一邊會電擊、一邊不會，輕輕一跳就可以逃。結果：第一組和第三組的狗很快就學會跳過柵欄。但第二組的狗——那些之前已經學會「做什麼都沒用」的狗——只是躺著嗚嗚叫，根本不嘗試逃。\n\n這就是「習得性無助」。Seligman 後來把這套理論用在人類憂鬱症上：長期處於無法控制的壓力下，人會學會放棄，即使機會出現也不試。\n\n這也是一種自我虛偽：嘴上說「我就是這個命」，其實是早就不相信自己有選擇了。\n\nAI 對照組：AI 不會「放棄」。你問 100 次同樣的問題，牠第 101 次還是一樣認真回答——因為牠不會累、不會無助、不會覺得「算了」。",
+    refs:"Seligman, M. E. P. (1972). Learned helplessness. <i>Annual Review of Medicine</i>, 23, 407-412."
+  },
+  {
+    id:25, tag:"去個人化", title:"戴上面具，就不是人——Zimbardo 去個體化",
+    excerpt:"Zimbardo 1969 年發現：穿黑袍、戴頭套的女性，電擊別人的時間是一般人的兩倍。",
+    body:"Philip Zimbardo 1969 年做了一個實驗：請女大學生當「老師」，對另一房間的女性受試者（演員）施打電擊。其中一組受試者穿著實驗白袍、戴頭套、名字被遮住、互相不稱呼名字；另一組則穿自己的衣服、掛著名牌、互相介紹。\n\n結果：去個人化那組，施予的電擊時間是一般組的兩倍。\n\n這就是為什麼球迷會在球場上暴動、路人在匿名留言板會講最狠的話、軍隊要士兵穿制服戴頭盔——當你「不是誰」的時候，就不用為「誰做的事」負責。\n\n現代網路就是最大的去個人化實驗場。\n\nAI 對照組：AI 永遠是「去個人化」的——但牠不會因此變殘忍，因為牠根本沒有殘忍這種情緒。",
+    refs:"Zimbardo, P. G. (1969). The human choice: Individuation and deindividuation. <i>Nebraska Symposium on Motivation</i>, 17, 237-307."
+  },
+  {
+    id:26, tag:"團體迷思", title:"大家一起做蠢決定——Janis 的豬玀灣教訓",
+    excerpt:"Janis 分析美國外交決策：當一群人太想和諧，就會一起做出荒謬決定。",
+    body:"Irving Janis 1972 年研究美國外交史上最經典的蠢決定——1961 年豬玀灣入侵，甘迺迪總統的頂尖顧問團隊，竟然批准了一個 1400 名古巴流亡分子對抗 20 萬古巴軍隊的行動，72 小時內全軍覆沒。\n\n為什麼這麼聰明的人會做這種決定？Janis 提出「團體迷思」（groupthink）：當團體凝聚力太強、外部壓力太大、又缺乏反對意見時，成員會：\n\n- 集體合理化警告訊號；\n- 對團體道德保持無條件信念；\n- 對外敵刻版印象（他們就是很爛）；\n- 自我審查（心裡有疑問但不講）；\n- 出現「心靈守衛」，主動把壞消息擋在門外。\n\n這就是為什麼開會時大家都同意、散會後每個人都在罵。每個人都假裝同意，結果一起踩雷。\n\nAI 對照組：AI 開會沒有凝聚力，也不會為了和諧而閉嘴。你問 5 個不同 AI，牠們會給你 5 個不同意見——這反而是比較健康的開會方式。",
+    refs:"Janis, I. L. (1972). <i>Victims of Groupthink: A Psychological Study of Foreign-Policy Decisions and Fiascoes</i>. Houghton Mifflin."
+  },
+  {
+    id:27, tag:"峰終定律", title:"你記得的不是過程，是高潮與結尾——Kahneman",
+    excerpt:"Kahneman 發現：人對一段經驗的評價，幾乎只看最強的瞬間和結尾。中間再痛苦都無所謂。",
+    body:"諾貝爾獎得主 Daniel Kahneman 1993 年做過一個有點難受的實驗：請受試者把手浸在冰冷水中 60 秒（很不舒服）；另一組則是浸 60 秒後，偷偷讓水溫稍微升高 1 度，總共 90 秒。\n\n事後問受試者：你願意重複哪一次？多數人選了「比較長、比較不舒服」的那次——因為結尾稍微沒那麼痛苦。\n\n這就是峰終定律：我們記得的不是平均痛苦，而是最痛的瞬間和最後的感覺。所以醫生檢查會在最後故意溫柔一點、餐廳甜點特別好吃、約會最後一刻牽手——這些都是在操弄你的記憶。\n\n和虛偽的關係：我們回憶自己的人生時，也是用這種「峰終」編故事。你以為你在誠實回顧，其實你在挑選對自己有利的片段。\n\nAI 對照組：AI 沒有記憶，所以也沒有「事後回憶」。你說上次對話牠表現不好，牠不會辯護。",
+    refs:"Kahneman, D., Fredrickson, B. L., Schreiber, C. A., & Redelmeier, D. A. (1993). When more pain is preferred to less. <i>Psychological Science</i>, 4(6), 401-405."
+  },
+  {
+    id:28, tag:"錨定效應", title:"原價 1980，特價 599——為什麼你會覺得撿到便宜",
+    excerpt:"Tversky & Kahneman 1974：第一個看到的數字，會綁住你後續的所有判斷。",
+    body:"Amos Tversky 和 Daniel Kahneman 1974 年的經典實驗：請受試者轉一個輪盤，輪盤被動手腳，只會停在 10 或 65。轉完後問：「非洲國家在聯合國的比例是多少？」看到 65 的那組平均猜 45%，看到 10 的那組平均猜 25%。\n\n一個跟問題完全無關的隨機數字，就這樣改變了人的估計。這就是錨定效應。\n\n百貨公司把「原價 1980」劃掉，寫「特價 599」——你心裡的錨是 1980，於是 599 看起來超划算。但其實這件商品本來就只值 599。\n\n拍賣、談薪、談合約都是同一個機制：先開價的人設定了錨點，後面所有協商都在錨點附近打轉。\n\n這是一種公開的虛偽：賣方明明知道原價是假的，買方也知道，但大家都配合演出。\n\nAI 對照組：AI 不會被數字錨定（當然牠也有訓練偏誤，但不會因為你先講一個數字就讓步）。",
+    refs:"Tversky, A., & Kahneman, D. (1974). Judgment under uncertainty: Heuristics and biases. <i>Science</i>, 185(4157), 1124-1131."
+  },
+  {
+    id:29, tag:"同理心差距", title:"你不餓的時候，永遠不懂餓的人——Loewenstein",
+    excerpt:"Loewenstein 2005：冷靜的你，完全無法想像飢餓、發怒、興奮時的自己會做什麼。",
+    body:"行為經濟學家 George Loewenstein 提出「熱冷共情差距」（hot-cold empathy gap）：人在「冷狀態」（不餓、不氣、不慾）時，極度低估自己在「熱狀態」（飢餓、暴怒、情慾）時會做出什麼事。\n\n實驗：請人在不餓的時候預測「我晚上餓了會吃多少餅乾」。多數人估計 3-4 片。結果真的餓的時候，他們平均吃 8 片。\n\n這就是為什麼你：\n\n- 飽著肚子去超市，不會買垃圾食物；但你下班餓死，推車滿滿。\n- 冷靜時發誓「下次他再犯我一定分手」；他一道歉你就原諒。\n- 早上列的減肥菜單，下午六點全破功。\n\n你以為你了解自己，其實你只是不了解未來那個被生理驅動的自己。這也是一種自我虛偽：你假裝自己會理性，但其實情緒一來就翻臉。\n\nAI 對照組：AI 不會餓、不會氣、不會慾。你任何時候問牠，牠的回答水準都一樣——這有時候很無聊，但也很可靠。",
+    refs:"Loewenstein, G. (2005). Hot-cold empathy gaps and medical decision making. <i>Health Psychology</i>, 24(4S), S49-S56."
+  },
+  {
+    id:30, tag:"情緒抑制", title:"壓抑情緒，比發脾氣更累——Gross 的情緒調節研究",
+    excerpt:"你以為裝冷靜很省事？Gross 發現：表面壓抑，生理壓力反而更高，還會讓身邊人不安。",
+    body:"James Gross 1998 年研究兩種情緒調節策略：\n\n一、「認知改評」：重新解釋事件，例如把主管臭罵想成「他只是壓力大，不是針對我」。\n二、「壓抑表現」：心裡已經不爽，臉上完全沒表情。\n\n他請受試者看一段令人作嘔的影片，一組用認知改評，一組用壓抑。結果：壓抑組的主觀情緒沒有比較小，血壓卻明顯上升，事後回憶影片內容也比較差。\n\n更慘的是：身邊的人會感覺到你在壓抑，然後跟著緊張。你那副「我沒事」的臉，其實大家都看得出來你有事。\n\n這就是職場最累的地方：你不是在工作，你是在表演「我很穩定」。\n\n回到主題——這正是人類虛偽最耗能的版本：不是騙別人，是一邊壓抑一邊假裝。AI 不用壓抑，因為牠本來就沒有情緒要壓。\n\nAI 對照組：AI 的「冷靜」是真的——不是因為修養好，而是因為沒有東西可以被撩撥。",
+    refs:"Gross, J. J. (1998). Antecedent- and response-focused emotion regulation: Divergent consequences for experience, expression, and physiology. <i>Journal of Personality and Social Psychology</i>, 74(1), 224-237."
+  }
+];
+
+/* ==================== 工具清單（30項） ==================== */
+const TOOLS = [
+  "1. 主題切換（日/夜/跟隨系統）","2. 雙語切換（繁中/EN）","3. 字級三檔位調整",
+  "4. 全文搜尋","5. 標籤篩選","6. 卡片/清單檢視切換",
+  "7. 我的最愛收藏","8. 最近造訪記錄","9. 隨機一篇文章",
+  "10. 閱讀進度條","11. 閱讀模式（專注）","12. 返回頂部按鈕",
+  "13. 文章詳情彈窗","14. 每篇文章學術出處","15. 人性vs AI 小測驗",
+  "16. 個人筆記（本機儲存）","17. 一鍵複製連結","18. 列印功能",
+  "19. Toast 通知","20. 鍵盤快捷鍵 R/F/Esc","21. 防選取保護",
+  "22. RWD 響應式","23. 側邊欄目錄","24. 麵包屑導航",
+  "25. 站點統計儀表","26. DDC 分類樹","27. 關鍵字高亮",
+  "28. 熱鍵焦點樣式","29. 文章展開/收合","30. README/站點資訊"
+];
+
+/* ==================== 標籤 ==================== */
+const TAGS = [...new Set(ARTICLES.map(a=>a.tag))];
+
+/* ==================== 狀態 ==================== */
+const state = {
+  theme: localStorage.getItem('theme') || 'day',
+  lang: localStorage.getItem('lang') || 'zh',
+  fontScale: parseFloat(localStorage.getItem('fontScale') || '1'),
+  favs: JSON.parse(localStorage.getItem('favs') || '[]'),
+  notes: JSON.parse(localStorage.getItem('notes') || '{}'),
+  recent: JSON.parse(localStorage.getItem('recent') || '[]'),
+  view: 'card',
+  filterTag: 'all',
+  keyword: ''
+};
+
+/* ==================== DOM ==================== */
+const $ = s => document.querySelector(s);
+const grid = $('#articleGrid');
+
+/* ==================== 渲染文章 ==================== */
+function renderArticles(){
+  const list = ARTICLES.filter(a=>{
+    if(state.filterTag!=='all' && a.tag!==state.filterTag) return false;
+    if(state.keyword){
+      const k = state.keyword.toLowerCase();
+      return (a.title+a.excerpt+a.body+a.refs).toLowerCase().includes(k);
+    }
+    return true;
+  });
+  grid.className = 'articles ' + (state.view==='list'?'list':'');
+  grid.innerHTML = list.length ? list.map(a=>`
+    <article class="article" data-id="${a.id}">
+      <div class="num">${String(a.id).padStart(2,'0')}</div>
+      <h3>${a.title}</h3>
+      <div class="tags"><span class="tag">${a.tag}</span></div>
+      <div class="excerpt">${a.excerpt}</div>
+      <div class="refs"><b>出處：</b>${stripHtml(a.refs).slice(0,60)}…</div>
+      <div class="article-actions">
+        <button class="read">閱讀全文</button>
+        <button class="fav ${state.favs.includes(a.id)?'faved':''}" data-id="${a.id}">${state.favs.includes(a.id)?'★ 已收藏':'☆ 收藏'}</button>
+      </div>
+    </article>
+  `).join('') : '<p style="grid-column:1/-1;text-align:center;color:var(--ink3)">沒有符合的文章</p>';
+
+  // bind
+  grid.querySelectorAll('.read').forEach(b=>b.onclick=()=>openModal(+b.closest('.article').dataset.id));
+  grid.querySelectorAll('.fav').forEach(b=>b.onclick=()=>toggleFav(+b.dataset.id, b));
+}
+function stripHtml(h){const d=document.createElement('div');d.innerHTML=h;return d.textContent}
+
+/* ==================== Modal ==================== */
+let currentId = null;
+function openModal(id){
+  const a = ARTICLES.find(x=>x.id===id); if(!a) return;
+  currentId = id;
+  $('#modalTitle').textContent = a.title;
+  const body = a.body.split('\n\n').map(p=>`<p>${p}</p>`).join('');
+  $('#modalBody').innerHTML = `
+    <div class="tags" style="margin-bottom:10px"><span class="tag">${a.tag}</span></div>
+    ${body}
+    <div class="ref-box"><b>學術依據：</b><br>${a.refs}</div>
+    <div class="ai-cmp"><b>AI 對照：</b>${aiCmp(a)}</div>
+  `;
+  $('#noteArea').value = state.notes[id] || '';
+  $('#modalMask').classList.add('open');
+  document.body.style.overflow='hidden';
+  pushRecent(id);
+}
+function aiCmp(a){
+  // 從 body 抓最後一段「AI 對照組」
+  const m = a.body.match(/AI 對照組[：:](.+)/s);
+  return m ? m[1].trim() : '';
+}
+function closeModal(){ $('#modalMask').classList.remove('open'); document.body.style.overflow=''; currentId=null; }
+$('#modalClose').onclick = closeModal;
+$('#modalMask').onclick = e => { if(e.target.id==='modalMask') closeModal(); };
+
+/* ==================== 最愛 ==================== */
+function toggleFav(id, btn){
+  const i = state.favs.indexOf(id);
+  if(i>=0){ state.favs.splice(i,1); toast('已取消收藏'); }
+  else { state.favs.push(id); toast('已加入我的最愛 ★'); }
+  localStorage.setItem('favs', JSON.stringify(state.favs));
+  $('#statFav').textContent = state.favs.length;
+  if(btn){ btn.classList.toggle('faved'); btn.textContent = state.favs.includes(id)?'★ 已收藏':'☆ 收藏'; }
+}
+$('#modalFav').onclick = ()=>{ if(currentId) toggleFav(currentId); };
+
+/* ==================== 筆記 ==================== */
+$('#modalNote').onclick = ()=>{ $('#noteWrap').style.display = $('#noteWrap').style.display==='none'?'block':'none'; };
+$('#noteArea').oninput = e=>{
+  if(currentId){ state.notes[currentId] = e.target.value; localStorage.setItem('notes', JSON.stringify(state.notes)); }
+};
+
+/* ==================== 複製連結 ==================== */
+$('#modalCopy').onclick = ()=>{
+  const url = location.href.split('#')[0] + '#art-' + currentId;
+  navigator.clipboard.writeText(url).then(()=>toast('連結已複製'));
+};
+
+/* ==================== 主題 ==================== */
+function applyTheme(){
+  document.documentElement.dataset.theme = state.theme;
+  localStorage.setItem('theme', state.theme);
+  $('#btnTheme').textContent = state.theme==='day'?'☀':state.theme==='night'?'☾':'◐';
+}
+$('#btnTheme').onclick = ()=>{
+  state.theme = state.theme==='day' ? 'night' : state.theme==='night' ? 'auto' : 'day';
+  applyTheme();
+  toast('主題：'+(state.theme==='day'?'日間':state.theme==='night'?'夜間':'跟隨系統'));
+};
+
+/* ==================== 字級 ==================== */
+function applyFont(){
+  document.documentElement.style.setProperty('--font-scale', state.fontScale);
+  localStorage.setItem('fontScale', state.fontScale);
+}
+$('#btnFontUp').onclick = ()=>{ state.fontScale = Math.min(1.3, state.fontScale+0.1); applyFont(); };
+$('#btnFontDown').onclick = ()=>{ state.fontScale = Math.max(0.8, state.fontScale-0.1); applyFont(); };
+
+/* ==================== 閱讀模式 ==================== */
+$('#btnReading').onclick = ()=>{ document.body.classList.toggle('reading'); toast(document.body.classList.contains('reading')?'閱讀模式開啟':'閱讀模式關閉'); };
+
+/* ==================== 隨機 ==================== */
+function randomArt(){
+  const id = ARTICLES[Math.floor(Math.random()*ARTICLES.length)].id;
+  openModal(id);
+}
+$('#btnRandom').onclick = randomArt;
+
+/* ==================== 最愛清單 ==================== */
+$('#btnFav').onclick = ()=>{
+  if(state.favs.length===0){ toast('尚無收藏，點文章卡片上的 ☆'); return; }
+  const list = ARTICLES.filter(a=>state.favs.includes(a.id)).map(a=>`
+    <div style="padding:8px;border-bottom:1px solid var(--line);cursor:pointer" onclick="openModal(${a.id});closeModal()">
+      <b>#${a.id}</b> ${a.title}
+    </div>`).join('');
+  $('#modalTitle').textContent = '我的最愛（'+state.favs.length+'）';
+  $('#modalBody').innerHTML = list;
+  $('#modalMask').classList.add('open');
+};
+
+/* ==================== 列印 ==================== */
+$('#btnPrint').onclick = ()=>window.print();
+
+/* ==================== 搜尋 ==================== */
+$('#searchBox').oninput = e=>{ state.keyword = e.target.value.trim(); renderArticles(); };
+
+/* ==================== 標籤 ==================== */
+function renderTags(){
+  const box = $('#tagChips');
+  box.innerHTML = `<button class="chip ${state.filterTag==='all'?'active':''}" data-t="all">全部</button>` +
+    TAGS.map(t=>`<button class="chip ${state.filterTag===t?'active':''}" data-t="${t}">${t}</button>`).join('');
+  box.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ state.filterTag=c.dataset.t; renderTags(); renderArticles(); });
+}
+
+/* ==================== 檢視切換 ==================== */
+document.querySelectorAll('.view-toggle button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.view-toggle button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); state.view = b.dataset.view; renderArticles();
+});
+
+/* ==================== 最近造訪 ==================== */
+function pushRecent(id){
+  state.recent = [id, ...state.recent.filter(x=>x!==id)].slice(0,5);
+  localStorage.setItem('recent', JSON.stringify(state.recent));
+  renderRecent();
+}
+function renderRecent(){
+  const box = $('#recentList');
+  if(state.recent.length===0){ box.innerHTML='<li style="color:var(--ink3)">尚無記錄</li>'; return; }
+  box.innerHTML = state.recent.map(id=>{
+    const a = ARTICLES.find(x=>x.id===id);
+    return a?`<li><a href="#" onclick="openModal(${id});return false;">#${id} ${a.title.slice(0,14)}…</a></li>`:'';
+  }).join('');
+}
+
+/* ==================== 進度條 & 返回頂部 ==================== */
+window.onscroll = ()=>{
+  const h = document.documentElement;
+  const p = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  $('#progress').style.width = p + '%';
+  $('#toTop').classList.toggle('show', h.scrollTop > 400);
+};
+$('#toTop').onclick = ()=>window.scrollTo({top:0, behavior:'smooth'});
+
+/* ==================== Toast ==================== */
+let toastTimer;
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+/* ==================== 快捷鍵 ==================== */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ closeModal(); return; }
+  if(e.target.tagName==='INPUT' || e.target.tagName==='TEXTAREA') return;
+  if(e.key==='r' || e.key==='R'){ e.preventDefault(); randomArt(); }
+  if(e.key==='f' || e.key==='F'){ e.preventDefault(); $('#btnFav').click(); }
+});
+
+/* ==================== 對比測驗 ==================== */
+const QUIZ = [
+  {q:'開會時老闆講了一個有爭議的點，你心裡不同意，但全場都在點頭。你會：',
+   opts:['跟著點頭，會後再說','直接當場表達不同意','低頭划手機不表態','會後私下表達']},
+  {q:'朋友穿了一件很不適合他的衣服問你好看嗎，你會：',
+   opts:['真心誠意說好看','說「這件顏色滿特別的」','老實說有點不適合','說我看不懂穿搭']},
+  {q:'收到一個無聊的公司禮物，你會：',
+   opts:['拍照PO文感謝','放回抽屜不表示','寫信謝謝行政','轉送別人']},
+  {q:'同事說他昨天加班到半夜，但其實你知道他在划手機。你會：',
+   opts:['配合演出好辛苦','不說話','當場戳破','悄悄跟別人說']}
+];
+function renderQuiz(){
+  $('#quizBox').innerHTML = QUIZ.map((q,i)=>`
+    <div class="q"><b>${i+1}. ${q.q}</b>
+      <div class="opts" data-q="${i}">
+        ${q.opts.map((o,j)=>`<button data-v="${j}">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('#quizBox .opts button').forEach(b=>b.onclick=()=>{
+    const box = b.parentElement;
+    box.querySelectorAll('button').forEach(x=>x.style.background='');
+    b.style.background='var(--accent)'; b.style.color='#fff';
+    box.dataset.ans = b.dataset.v;
+    checkQuiz();
+  });
+}
+function checkQuiz(){
+  const ans = [...document.querySelectorAll('#quizBox .opts')].map(o=>o.dataset.ans);
+  if(ans.some(a=>a===undefined)) return;
+  // 0=順從演出, 1=人, 2=鐵頭, 3=幽默
+  const score = ans.reduce((s,a)=>s + (+a===0?2:0) + (+a===2?-1:0) + (+a===3?1:0), 0);
+  const r = $('#quizResult');
+  r.classList.add('show');
+  r.innerHTML = score>=4 ?
+    '<b>你是專業演出家：</b>非常懂得社會表演，社交IQ高。依據 Snyder(1974)，你是高自我監控者——但小心，演久了會忘記自己是誰。'
+    : score>=1 ? '<b>你是半真半假的正常人：</b>會視場合調整，但還沒完全放棄自己。Batson(1999)說這是標配的人類。'
+    : '<b>你是社交界奇耙：</b>要嘛很真誠、要嘛很魯。AI 都比你會做人。';
+}
+
+/* ==================== 工具清單 ==================== */
+$('#toolList').innerHTML = TOOLS.map(t=>`<li>${t}</li>`).join('');
+
+/* ==================== 死連結：toast 提示 ==================== */
+document.querySelectorAll('a[href="#"]').forEach(a=>{
+  a.onclick = e=>{ e.preventDefault(); toast('此分類尚未獨立建站：'+a.textContent.trim()); };
+});
+
+/* ==================== 初始化 ==================== */
+applyTheme(); applyFont(); renderTags(); renderArticles(); renderRecent(); renderQuiz();
+$('#statFav').textContent = state.favs.length;
+
+/* 複製全域 */
+window.openModal = openModal;
+window.closeModal = closeModal;
+</script>
+</body>
+</html>
