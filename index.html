@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKU舊城風華｜台中歐酷酒店參訪紀實</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛</text></svg>">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+/* ===== 設計變數 ===== */
+:root {
+  --bg-primary: #f5f1e8;
+  --bg-secondary: #ebe4d4;
+  --bg-card: #ffffff;
+  --text-primary: #2a2520;
+  --text-secondary: #5a5045;
+  --text-muted: #8a7f72;
+  --accent: #c9a961;
+  --accent-dark: #a8884a;
+  --accent-light: #e6d5a3;
+  --border: #d4c9b5;
+  --shadow: 0 4px 24px rgba(42, 37, 32, 0.08);
+  --shadow-hover: 0 12px 40px rgba(42, 37, 32, 0.15);
+  --nav-bg: rgba(245, 241, 232, 0.95);
+  --hero-overlay: linear-gradient(135deg, rgba(26,47,42,0.7) 0%, rgba(26,47,42,0.4) 100%);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #12201c;
+  --bg-secondary: #1a2f2a;
+  --bg-card: #1f352f;
+  --text-primary: #f0ebe0;
+  --text-secondary: #b8b0a0;
+  --text-muted: #8a8070;
+  --accent: #d4b872;
+  --accent-dark: #c9a961;
+  --accent-light: #5a4a2a;
+  --border: #2a453d;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --nav-bg: rgba(18, 32, 28, 0.95);
+  --hero-overlay: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,47,42,0.6) 100%);
+}
+
+/* ===== 重置 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.8;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ===== 滾動進度條 ===== */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-dark));
+  z-index: 1000;
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* ===== 導航列 ===== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  z-index: 900;
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-logo svg { width: 28px; height: 28px; }
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: rotate(15deg);
+}
+
+/* ===== Hero 區 ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('assets/hero-lobby.jpg') center/cover no-repeat;
+  transform: scale(1.1);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1.1); }
+  to { transform: scale(1.15); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 2rem;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.9;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.hero-meta-item {
+  text-align: center;
+}
+
+.hero-meta-num {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+  display: block;
+}
+
+.hero-meta-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  opacity: 0.6;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  z-index: 2;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+
+/* ===== 照片畫廊 ===== */
+.gallery-section {
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.gallery-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 50%, rgba(0,0,0,0.75));
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay-text {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.gallery-item.tall {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 1024px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .gallery-item.tall { grid-row: span 1; }
+  .gallery-title { font-size: 1.5rem; }
+}
+
+
+.gallery-3x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-3x3 .gallery-item {
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 768px) {
+  .gallery-3x3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== 主要內容區 ===== */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+/* ===== 章節卡片 ===== */
+.chapter-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border);
+}
+
+.chapter-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.chapter-hero {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+}
+
+.chapter-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.chapter-card:hover .chapter-hero img {
+  transform: scale(1.05);
+}
+
+.chapter-number {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: var(--accent);
+  color: #1a1a1a;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  padding: 0.4rem 1rem;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  z-index: 2;
+}
+
+.chapter-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 2rem 1.5rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: #fff;
+}
+
+.chapter-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.chapter-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.chapter-body {
+  padding: 2rem;
+}
+
+.chapter-excerpt {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+
+.chapter-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.chapter-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.6rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chapter-expand-btn:hover {
+  background: var(--accent);
+  color: #1a1a1a;
+}
+
+.chapter-expand-btn svg {
+  transition: transform 0.3s;
+}
+
+.chapter-card.expanded .chapter-expand-btn svg {
+  transform: rotate(180deg);
+}
+
+.chapter-full-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chapter-card.expanded .chapter-full-content {
+  max-height: 3000px;
+}
+
+.chapter-full-inner {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+.chapter-full-inner h3 {
+  font-size: 1.2rem;
+  margin: 1.5rem 0 0.8rem;
+  color: var(--accent);
+}
+
+.chapter-full-inner p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.chapter-full-inner ul {
+  margin: 0.5rem 0 1rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.chapter-full-inner li {
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+}
+
+/* ===== 資訊表格 ===== */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.info-table th, .info-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.info-table th {
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--bg-secondary);
+  width: 30%;
+}
+
+/* ===== 側邊欄 ===== */
+.sidebar-toggle {
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  font-size: 1.1rem;
+}
+
+.sidebar-toggle:hover {
+  border-color: var(--accent);
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  width: 280px;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  z-index: 700;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent);
+}
+
+.sidebar-nav {
+  list-style: none;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0.3rem;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 0.6rem 0.8rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.sidebar-nav a:hover, .sidebar-nav a.active {
+  background: var(--bg-secondary);
+  color: var(--accent);
+  padding-left: 1.2rem;
+}
+
+/* ===== 搜尋 ===== */
+.search-box {
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+/* ===== 返回頂部 ===== */
+.back-to-top {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #1a1a1a;
+  border: none;
+  cursor: pointer;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s;
+  font-size: 1.2rem;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--bg-secondary);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+}
+
+.footer-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.footer-text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ===== 響應式 ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .chapter-hero { height: 240px; }
+  .chapter-title { font-size: 1.3rem; }
+  .main-container { padding: 2rem 1rem; }
+  .hero-meta { gap: 1.5rem; }
+  .hero-meta-num { font-size: 1.5rem; }
+  .sidebar { width: 260px; }
+}
+
+/* ===== 滾動動畫 ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: var(--accent);
+  color: #1a1a1a;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- 滾動進度條 -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- 導航列 -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="scrollToTop()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>
+      </svg>
+      OKU舊城風華
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="scrollToChapter('ch1')">活動邀約</a></li>
+      <li><a onclick="scrollToChapter('ch2')">建築重生</a></li>
+      <li><a onclick="scrollToChapter('ch3')">空間美學</a></li>
+      <li><a onclick="scrollToChapter('ch4')">在地脈絡</a></li>
+      <li><a onclick="scrollToChapter('ch5')">參訪手記</a></li>
+      <li><a onclick="scrollToChapter('ch6')">後記</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="切換主題">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 側邊欄 -->
+<button class="sidebar-toggle" onclick="toggleSidebar()" title="目錄">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="search-box">
+    <input type="text" class="search-input" placeholder="搜尋章節關鍵字..." id="searchInput" oninput="filterChapters()">
+  </div>
+  <div class="sidebar-title">探索這趟旅程</div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <li><a onclick="scrollToChapter('ch1')">赴一場舊城盛宴</a></li>
+    <li><a onclick="scrollToChapter('ch2')">從櫻田百貨到 Art Deco</a></li>
+    <li><a onclick="scrollToChapter('ch3')">走進三層酒塔</a></li>
+    <li><a onclick="scrollToChapter('ch4')">舊城的靈魂脈絡</a></li>
+    <li><a onclick="scrollToChapter('ch5')">沙龍共學之夜</a></li>
+    <li><a onclick="scrollToChapter('ch6')">凝固的城市記憶</a></li>
+    <li><a onclick="scrollToChapter('appendix')">關鍵詞小辭典</a></li>
+    <li><a onclick="scrollToChapter('reading')">你可能想知道</a></li>
+  </ul>
+</aside>
+
+<!-- Hero 區 -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Art Deco Ｘ 舊城再生</div>
+    <h1 class="hero-title">OKU舊城風華</h1>
+    <p class="hero-subtitle">
+      台中歐酷酒店 OKU 參訪紀實<br>
+      一場走進 Art Deco 奢華與城市歷史的共學之旅
+    </p>
+  </div>
+  <div class="scroll-hint" onclick="scrollToChapter('ch1')">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ===== 照片畫廊 ===== -->
+<section class="gallery-section reveal">
+  <h2 class="gallery-title">影像廊</h2>
+  <p class="gallery-subtitle">走進 OKU 的 Art Deco 世界</p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="assets/hero-lobby.jpg" alt="三層樓高酒塔大廳">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">三層樓高酒塔大廳</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/ch2-building.jpg" alt="Art Deco 建築外觀">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Art Deco 建築外觀</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/ch3-room.jpg" alt="銅質浴缸客房">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">銅質浴缸客房</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/ch1-invitation.jpg" alt="復古邀請函設計">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">復古邀請函設計</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/ch4-oldcity.jpg" alt="台中舊城街道">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">台中舊城街道</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/ch5-salon.jpg" alt="沙龍共學場景">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">沙龍共學場景</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/ch6-sunset.jpg" alt="城市黃昏天際線">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">城市黃昏天際線</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/appendix-blueprint.jpg" alt="建築設計藍圖">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">建築設計藍圖</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 主要內容 -->
+<main class="main-container">
+
+<!-- ===== 第一章：活動邀約 ===== -->
+<article class="chapter-card reveal" id="ch1">
+  <div class="chapter-hero">
+    <span class="chapter-number">CHAPTER 01</span>
+    <img src="assets/ch1-invitation.jpg" alt="Art Deco 復古邀請函設計">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">活動邀約</h2>
+      <p class="chapter-subtitle">赴一場舊城的盛宴</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      本次參訪由郭宜書董事長（郭哥）發起。耗費漫長歲月、不計成本打造的歐酷酒店，是他留給台中的一件傳世經典。他邀請同好親自走進這座建築，看見空間背後的思考與執念。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">2026.09.27</span>
+      <span class="tag">台中中區</span>
+      <span class="tag">共學參訪</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('ch1')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>活動核心資訊</h3>
+        <table class="info-table">
+          <tr><th>活動日期</th><td>2026 年 9 月 27 日（星期日）</td></tr>
+          <tr><th>活動地點</th><td>台中市中區成功路 357 號，OKU 歐酷酒店</td></tr>
+          <tr><th>活動費用</th><td>每人新台幣 1,200 元，內含晚餐 Buffet，其餘費用由郭宜書董事長贊助</td></tr>
+          <tr><th>繳費方式</th><td>當天報到，現金支付</td></tr>
+          <tr><th>停車建議</th><td>第二市場（興中）停車場，沿大誠街、成功路步行抵達</td></tr>
+        </table>
+        <h3>參訪完整流程</h3>
+        <table class="info-table">
+          <tr><th>15:30</th><td>報到（台中市中區成功路 357 號）</td></tr>
+          <tr><th>16:00–17:00</th><td>歐酷酒店分享會，由主辦方與設計團隊解說建築理念</td></tr>
+          <tr><th>17:00–18:00</th><td>共學分享會，參訪者交流、提問與討論</td></tr>
+          <tr><th>18:00–20:30</th><td>酒店內 Buffet 晚餐，品嘗餐點與酒款，自由參觀空間</td></tr>
+        </table>
+        <p>
+          <strong>重要提醒：</strong>活動備有美酒，建議不要開車前來，安全相聚。
+        </p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 第二章：建築重生 ===== -->
+<article class="chapter-card reveal" id="ch2">
+  <div class="chapter-hero">
+    <span class="chapter-number">CHAPTER 02</span>
+    <img src="assets/ch2-building.jpg" alt="舊百貨建築重生為精品酒店">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">建築重生</h2>
+      <p class="chapter-subtitle">從櫻田百貨到 OKU 歐酷酒店</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      歐酷酒店坐落台中舊城中區，建築前身為櫻田百貨，是舊時代台中人的共同記憶。當百貨繁華落幕，這棟建築並沒有被拆除，而是迎來一場漫長的轉生計畫。由國際頂尖設計團隊 HBA Studio 操刀，以 Art Deco 為核心美學。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">HBA Studio</span>
+      <span class="tag">Art Deco</span>
+      <span class="tag">Adaptive Reuse</span>
+      <span class="tag">米其林推薦</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('ch2')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>創辦人郭宜書：為台中留下一棟傳世建築</h3>
+        <p>
+          郭宜書是台中歐酷酒店 OKU 的創辦人，也是這項老建築再生計畫的核心推手，參訪活動中大家習慣稱他「郭哥」。
+        </p>
+        <p>
+          他的核心理念，並非單純投資興建一間追求獲利的飯店，而是希望為台中舊城留下一件<strong>傳世的建築作品</strong>。為此投入漫長時間、不計成本，推動舊櫻田百貨的改造工程。
+        </p>
+        <ul>
+          <li><strong>開發信念：</strong>不採取拆除重建，選擇適應性再利用（Adaptive Reuse），保留老百貨的建築骨架與城市記憶。</li>
+          <li><strong>設計決策：</strong>力邀國際頂級酒店設計團隊 HBA Studio 操刀，堅持 Art Deco 美學路線。</li>
+          <li><strong>文化共學理念：</strong>酒店不只是住宿營運場所，更是城市文化交流、共學分享的平台。</li>
+          <li><strong>城市願景：</strong>期待透過 OKU 這座地標，帶動台中中區舊城再生。</li>
+        </ul>
+        <h3>國際頂尖設計團隊 HBA Studio</h3>
+        <p>
+          HBA（Hirsch Bedner Associates）是全球歷史最悠久、規模最大的專業酒店室內設計事務所。代表作包含東京四季酒店、蘇州柏悅酒店、曼谷嘉佩樂、加州麗思卡爾頓等國際旗艦飯店。
+        </p>
+        <h3>國際獎項肯定</h3>
+        <ul>
+          <li>榮獲<strong>米其林指南推薦酒店</strong></li>
+          <li>館內酒吧入圍<strong> 2026 全球餐廳與酒吧設計大獎</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 第三章：空間美學 ===== -->
+<article class="chapter-card reveal" id="ch3">
+  <div class="chapter-hero">
+    <span class="chapter-number">CHAPTER 03</span>
+    <img src="assets/ch3-room.jpg" alt="Art Deco 奢華客房與銅質浴缸">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">空間美學</h2>
+      <p class="chapter-subtitle">Art Deco 在台中舊城</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      走進 OKU 大廳，三層高酒塔垂直貫穿空間，是整間酒店的視覺核心。金屬、玻璃、木質互相襯托，Art Deco 典型的幾何線條、放射狀紋理隨處可見。夜晚時大廳帷幕緩緩降下，搭配音響燈光，氛圍從白天的城市客廳，變成夜晚華麗的社交場域。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">三層酒塔</span>
+      <span class="tag">艾莉蕬酒吧</span>
+      <span class="tag">Lumen 餐廳</span>
+      <span class="tag">85 間客房</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('ch3')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>大廳：三層酒塔的儀式感</h3>
+        <p>
+          三層樓高的巨型酒塔是酒店最具代表性的標誌，金色金屬框架，是踏入酒店第一眼的視覺焦點。大廳本身就是社交場域，白天是城市客廳，夜晚轉換為酒吧氛圍。
+        </p>
+        <h3>客房空間：黃銅與銅質浴盆的細節</h3>
+        <p>
+          全館共 85 間客房，延續整體 Art Deco 風格，海軍藍與金色的扇形牆紙、人字形木地板、黃銅框做空間隔間。特色是銅質獨立浴缸，以金屬框架隔開臥區與浴區。
+        </p>
+        <table class="info-table">
+          <tr><th>典藏客房</th><td>約 12 坪</td></tr>
+          <tr><th>歐酷套房</th><td>約 25 坪，附陽台、手工紅銅浴缸、OKU 專屬 Mini Bar</td></tr>
+          <tr><th>寓邸套房</th><td>約 26 坪，最大房型</td></tr>
+        </table>
+        <h3>艾莉蕬酒吧 Ailìse Bar</h3>
+        <p>
+          入圍全球酒吧設計大獎的館內旗艦酒吧，空間設計延續大廳的華麗感，由冠軍調酒師團隊駐店。
+        </p>
+        <h3>Lumen 全日餐廳</h3>
+        <p>
+          融合台灣在地食材與歐式料理，本次參訪的 Buffet 晚宴就在此餐廳舉辦。
+        </p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 第四章：在地脈絡 ===== -->
+<article class="chapter-card reveal" id="ch4">
+  <div class="chapter-hero">
+    <span class="chapter-number">CHAPTER 04</span>
+    <img src="assets/ch4-oldcity.jpg" alt="台中舊城復古街道">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">在地脈絡</h2>
+      <p class="chapter-subtitle">OKU 與台中舊城</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      舊城中區曾經盛極一時，後來商業重心外移。OKU 的誕生，被視為舊城再生的重要里程碑，以精品酒店的力量，重新帶動舊城的人流與目光。很多城市更新是直接剷除老建築，蓋全新大樓，OKU 走的是「轉生」路線。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">台中中區</span>
+      <span class="tag">舊城再生</span>
+      <span class="tag">第二市場</span>
+      <span class="tag">城市地標</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('ch4')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>地理位置</h3>
+        <table class="info-table">
+          <tr><th>地址</th><td>台中市中區成功路 357 號</td></tr>
+          <tr><th>周遭環境</th><td>鄰近第二市場、台中火車站、中華路一段，舊城巷弄密布</td></tr>
+          <tr><th>停車建議</th><td>第二市場（興中）停車場，步行沿大誠街、成功路抵達酒店</td></tr>
+        </table>
+        <h3>舊城再生的意義</h3>
+        <p>
+          OKU 保留原有建築骨架，注入當代奢華旅宿、餐飲、酒吧功能。讓新一代看見舊城的價值，讓老建築繼續承載新的故事。郭宜書董事長不計成本投入，正是希望留下這件屬於台中的傳世作品。
+        </p>
+        <p>
+          相較一般商業開發者，郭宜書的開發模式更偏向「建築藝術收藏家」，把開發當成一件長期的文化創作，而非短期開發案。
+        </p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 第五章：參訪手記 ===== -->
+<article class="chapter-card reveal" id="ch5">
+  <div class="chapter-hero">
+    <span class="chapter-number">CHAPTER 05</span>
+    <img src="assets/ch5-salon.jpg" alt="Art Deco 沙龍共學分享場景">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">參訪手記</h2>
+      <p class="chapter-subtitle">共學與對話</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      這場參訪不是一次簡單的飯店參觀，而是走進一棟建築背後的時間、金錢、美學與理想。從郭宜書董事長的分享，到設計團隊的理念解說，再到晚宴的輕鬆交流，每個環節都是一場共學。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">分享會</span>
+      <span class="tag">共學討論</span>
+      <span class="tag">晚宴交流</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('ch5')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>分享會看點</h3>
+        <ul>
+          <li>郭宜書董事長分享從構想、尋址、改造舊百貨到與 HBA 團隊合作的漫長心路。</li>
+          <li>HBA 設計理念解說：為什麼選擇 Art Deco、如何平衡歷史保存與現代旅宿功能。</li>
+          <li>酒吧與餐飲團隊分享空間設計、酒單與菜單的思考。</li>
+        </ul>
+        <h3>共學討論議題</h3>
+        <ul>
+          <li>老建築再利用，如何在「保存歷史」與「商業營運」之間取得平衡？</li>
+          <li>Art Deco 美學移植到台灣舊城，如何避免只是表面裝飾，做到在地化融合？</li>
+          <li>精品酒店除了住宿，還可以承載什麼樣的城市文化功能？</li>
+          <li>一間酒店，能不能成為城市文化地標？OKU 的實踐案例。</li>
+        </ul>
+        <h3>晚宴與交流</h3>
+        <p>
+          18:00 起的 Buffet 晚餐，在 Lumen 餐廳用餐，可自由走訪大廳、酒吧拍照參觀。備有美酒，適合輕鬆交流。
+        </p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 第六章：後記 ===== -->
+<article class="chapter-card reveal" id="ch6">
+  <div class="chapter-hero">
+    <span class="chapter-number">CHAPTER 06</span>
+    <img src="assets/ch6-sunset.jpg" alt="城市黃昏天際線與建築剪影">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">後記</h2>
+      <p class="chapter-subtitle">建築是凝固的城市記憶</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      OKU 歐酷酒店，不只是一間五星精品飯店。它是舊城與新時代的對話，是老百貨建築的重生，是 HBA 國際設計團隊與台灣在地創辦人共同寫下的建築詩篇。這本書記錄這場共學，也記錄台中舊城裡，這座華麗重生的 Art Deco 殿堂。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">城市記憶</span>
+      <span class="tag">建築詩篇</span>
+      <span class="tag">傳世之作</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('ch6')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <p>
+          這場 9 月 27 日的參訪，不是一次簡單的飯店參觀。而是走進一棟建築背後的時間、金錢、美學與理想。
+        </p>
+        <p>
+          從櫻田百貨的輝煌年代，到舊城區的沒落沉寂，再到 OKU 的華麗重生——這條時間軸上，每一階段都是台中這座城市的縮影。而郭宜書董事長的選擇，不是拆掉重來，而是讓老靈魂穿上新衣，繼續說故事。
+        </p>
+        <p>
+          也許，這就是建築最動人的地方：它不只是遮風避雨的殼，更是一座城市的記憶載體，是一代又一代人共同生活的證據。
+        </p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 附錄A：專業名詞 ===== -->
+<article class="chapter-card reveal" id="appendix">
+  <div class="chapter-hero">
+    <span class="chapter-number">APPENDIX A</span>
+    <img src="assets/appendix-books.jpg" alt="復古書本與黃銅檯燈">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">專業名詞解釋</h2>
+      <p class="chapter-subtitle">建築、設計與酒店產業術語</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      本附錄整理書中出現的建築、室內設計、都市再生、酒店產業相關專業術語，協助讀者深入理解 OKU 背後的專業脈絡。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">Art Deco</span>
+      <span class="tag">Adaptive Reuse</span>
+      <span class="tag">HBA</span>
+      <span class="tag">米其林</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('appendix')">
+      展開詳細內容
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>Art Deco（裝飾藝術風格）</h3>
+        <p>
+          1920–1940 年代興起的國際設計風格，源於巴黎裝飾藝術博覽會。核心特徵：幾何圖形、放射線條、階梯造型、對稱構圖、黃銅金屬、深色貴重木材，強調奢華、現代感與機械美。OKU 屬於當代轉譯版 Art Deco。
+        </p>
+        <h3>HBA Studio（Hirsch Bedner Associates）</h3>
+        <p>
+          全球歷史最悠久、規模最大的專業酒店室內設計事務所，總部美國。專注奢華酒店、精品旅館、高階餐飲空間，不做一般住宅設計。
+        </p>
+        <h3>Adaptive Reuse（適應性再利用）</h3>
+        <p>
+          都市更新領域專業術語。保留原有建築主體結構、外牆、歷史記憶，改變建物原本功能（舊百貨→精品酒店），而非拆除重建。優點：減少碳排、保留城市歷史紋理、獨特空間氛圍。
+        </p>
+        <h3>挑高空間（Double / Triple-height）</h3>
+        <p>
+          樓層高度拉開，兩層或三層樓打通的空間。OKU 大廳三層酒塔就是 triple-height 挑空，目的營造宏大儀式感。
+        </p>
+        <h3>舊城再生（Urban Regeneration）</h3>
+        <p>
+          相對於大規模拆遷的都市更新，舊城再生軟硬體並重，保留原有街廓、巷弄、在地居民，透過文創、餐飲、精品旅館等新產業注入，重新活化衰退老城區。
+        </p>
+        <h3>米其林指南推薦酒店</h3>
+        <p>
+          米其林除餐廳外，也有酒店評選體系。「米其林推薦酒店」代表空間、服務、設備、體驗達到高標準。
+        </p>
+        <h3>全球餐廳與酒吧設計大獎</h3>
+        <p>
+          英國主辦，全球最具影響力的餐飲空間設計競賽，不分預算、不分國家，只評空間設計，是餐飲室內設計界的指標獎項。
+        </p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== 附錄B：FAQ 常見問題 ===== -->
+<article class="chapter-card reveal" id="reading">
+  <div class="chapter-hero">
+    <span class="chapter-number">FAQ</span>
+    <img src="assets/appendix-blueprint.jpg" alt="常見問題解答">
+    <div class="chapter-overlay">
+      <h2 class="chapter-title">常見問題</h2>
+      <p class="chapter-subtitle">關於 OKU 與這次參訪，你可能想知道</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="chapter-excerpt">
+      整理大家最常問的問題，從酒店基本資訊到參訪注意事項，一次說清楚。
+    </p>
+    <div class="chapter-tags">
+      <span class="tag">活動資訊</span>
+      <span class="tag">交通方式</span>
+      <span class="tag">酒店特色</span>
+    </div>
+    <button class="chapter-expand-btn" onclick="toggleCard('reading')">
+      展開常見問題
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div class="chapter-full-content">
+      <div class="chapter-full-inner">
+        <h3>Q1：OKU 歐酷酒店是什麼時候開幕的？</h3>
+        <p>
+          OKU 於 2025 年 10 月正式開幕，位於台中市中區成功路 357 號，前身為老牌的櫻田百貨。由國際頂級酒店設計團隊 HBA Studio 操刀改造，是一棟由老百貨重生的 Art Deco 精品酒店。
+        </p>
+
+        <h3>Q2：這次參訪活動是免費的嗎？</h3>
+        <p>
+          活動每人新台幣 1,200 元，費用已包含晚餐 Buffet。其餘場地、分享會、酒款等費用皆由郭宜書董事長贊助。當天報到時以現金支付即可。
+        </p>
+
+        <h3>Q3：沒有開車，要怎麼到達 OKU？</h3>
+        <p>
+          OKU 位於台中中區，距離台中火車站步行約 10 分鐘。可搭火車到台中火車站，再沿中華路、成功路步行抵達。活動現場也備有美酒，強烈建議不要開車前來。
+        </p>
+
+        <h3>Q4：如果開車，停車場在哪裡？</h3>
+        <p>
+          推薦停放於第二市場（興中）停車場，停好車後沿大誠街、成功路步行即可抵達酒店，步行時間約 5 分鐘。
+        </p>
+
+        <h3>Q5：OKU 最具代表性的地標是什麼？</h3>
+        <p>
+          大廳中央那座三層樓高的巨型酒塔。金色黃銅框架，垂直貫穿三層樓，是踏入酒店第一眼的視覺焦點，也是 OKU 的精神象徵。
+        </p>
+
+        <h3>Q6：誰是 OKU 的創辦人？</h3>
+        <p>
+          郭宜書董事長，大家都稱他「郭哥」。他不計成本投入這項老建築再生計畫，希望為台中舊城留下一件傳世的建築作品，而非只是一間追求獲利的飯店。
+        </p>
+
+        <h3>Q7：OKU 獲得過什麼國際獎項？</h3>
+        <p>
+          OKU 已獲得米其林指南推薦酒店認證，館內的艾莉蕬酒吧也入圍 2026 全球餐廳與酒吧設計大獎，是台灣少數同時在建築室內與餐飲酒吧兩大領域都獲得國際肯定的精品酒店。
+        </p>
+
+        <h3>Q8：這次參訪活動的行程是什麼？</h3>
+        <table class="info-table">
+          <tr><th>15:30</th><td>報到入場</td></tr>
+          <tr><th>16:00–17:00</th><td>歐酷酒店分享會</td></tr>
+          <tr><th>17:00–18:00</th><td>共學分享與交流討論</td></tr>
+          <tr><th>18:00–20:30</th><td>Lumen 餐廳 Buffet 晚餐</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</article>
+
+</main>
+
+
+<!-- ===== 3x3 影像總覽 ===== -->
+<section class="gallery-section reveal">
+  <h2 class="gallery-title">空間細節</h2>
+  <p class="gallery-subtitle">九個瞬間，看見 OKU 的 Art Deco 靈魂</p>
+  <div class="gallery-3x3">
+    <div class="gallery-item">
+      <img src="assets/gallery-staircase.jpg" alt="Art Deco 樓梯">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">華麗樓梯</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-bar.jpg" alt="艾莉蕬酒吧">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">艾莉蕬酒吧</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-restaurant.jpg" alt="Lumen 餐廳">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Lumen 全日餐廳</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-room-detail.jpg" alt="客房床頭細節">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">客房床頭細節</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-bathtub.jpg" alt="銅質浴缸">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">手工紅銅浴缸</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-entrance.jpg" alt="飯店夜景入口">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">夜晚飯店入口</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-alley.jpg" alt="舊城巷弄">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">台中舊城巷弄</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-deco-detail.jpg" alt="Art Deco 黃銅細節">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Art Deco 黃銅細節</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/gallery-rooftop.jpg" alt="屋頂俯瞰舊城">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">屋頂俯瞰舊城</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-title">OKU舊城風華</div>
+  <p class="footer-text">
+    記錄東海EMBA於 2026 年 9 月 27 日台中歐酷酒店 OKU 共學參訪活動。<br>
+    建築是凝固的城市記憶，每一面磚牆都在訴說舊城的故事。
+  </p>
+  <p class="footer-text" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+    規劃設計開發：張書欣<br>
+    TEL：0968-222201　LINE：331.today
+  </p>
+</footer>
+
+<!-- 返回頂部 -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== 主題切換 =====
+const sunSVG = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  const icon = document.getElementById('themeIcon');
+  if (isDark) {
+    html.removeAttribute('data-theme');
+    icon.innerHTML = sunSVG;
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    icon.innerHTML = moonSVG;
+  }
+  showToast(isDark ? '已切換為日間模式' : '已切換為夜間模式');
+}
+
+// ===== 滾動進度條 =====
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progressBar').style.width = scrolled + '%';
+
+  // 返回頂部按鈕
+  const backToTop = document.getElementById('backToTop');
+  if (winScroll > 500) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+});
+
+// ===== 滾動到頂部 =====
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== 滾動到章節 =====
+function scrollToChapter(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // 在手機上自動收起側邊欄
+  if (window.innerWidth < 768) {
+    document.getElementById('sidebar').classList.remove('open');
+  }
+}
+
+// ===== 側邊欄開關 =====
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ===== 卡片展開 =====
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('expanded');
+}
+
+// ===== Toast =====
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ===== 搜尋篩選 =====
+function filterChapters() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.querySelectorAll('.chapter-card');
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(query)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ===== 滾動揭示動畫 =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
