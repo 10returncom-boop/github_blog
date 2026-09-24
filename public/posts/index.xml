@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on 我的技術網誌</title>
+    <link>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/posts/</link>
+    <description>Recent content in Posts on 我的技術網誌</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Wed, 19 Aug 2026 10:00:00 +0800</lastBuildDate>
+    <atom:link href="//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第一篇文章</title>
+      <link>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/posts/first-post/</link>
+      <pubDate>Wed, 19 Aug 2026 10:00:00 +0800</pubDate>
+      <guid>//expert-space-system-97rpvg5vrp7p2pjpx-1313.app.github.dev/posts/first-post/</guid>
+      <description>&lt;h1 id=&#34;hello-papermod&#34;&gt;Hello PaperMod&lt;/h1&gt;
+&lt;p&gt;這是本站第一篇測試文章。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

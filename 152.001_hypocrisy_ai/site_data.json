@@ -1,0 +1,30 @@
+{
+  "site_id": "152.001",
+  "ddc": "152.001",
+  "sk_code": "SK152001",
+  "title_zh": "人的虛偽比AI的狗腿更驚人",
+  "title_en": "Human Hypocrisy Is More Striking Than AI's Obsequiousness",
+  "category": "100_哲學與心理學",
+  "sub_category": "152 知覺、動作、情緒、驅力",
+  "version": "V1.0",
+  "author": "張書欣",
+  "update_time": "202609230923",
+  "tags": ["心理學", "情緒", "社交表演", "AI倫理", "虛偽", "DDC152", "認知偏誤", "社會心理"],
+  "feature_count": 30,
+  "article_count": 30,
+  "path": "D:\\_WWW_325\\100_哲學與心理學\\152.001人的虛偽比AI的狗腿更驚人",
+  "index_file": "index.html",
+  "related": ["154.4", "155.2", "302", "150", "152"],
+  "references": [
+    "Goffman (1959)", "Batson et al. (2002)", "Snyder (1974)",
+    "Hochschild (1983)", "Greenwald et al. (1998)", "Festinger et al. (1956)",
+    "Ross (1977)", "Miller & Ross (1975)", "Gilovich et al. (2000)",
+    "Kruger & Dunning (1999)", "Asch (1951)", "Milgram (1963)",
+    "Zimbardo (1971)", "Darley & Latané (1968)", "Ekman & Friesen (1978)",
+    "Jones (1964)", "Festinger (1954)", "Fischhoff (1975)",
+    "Wason (1960)", "Bandura (1999)", "Loftus & Palmer (1974)",
+    "Dutton & Aron (1974)", "Rosenthal & Jacobson (1968)", "Seligman (1972)",
+    "Zimbardo (1969)", "Janis (1972)", "Kahneman et al. (1993)",
+    "Tversky & Kahneman (1974)", "Loewenstein (2005)", "Gross (1998)"
+  ]
+}
