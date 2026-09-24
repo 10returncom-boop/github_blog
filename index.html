@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10return's Lab - Prototype Collection</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: #0f0f12;
+  color: #f0ebe0;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.hero {
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f12 100%);
+}
+
+.hero h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #d4b872, #c9a961);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  color: #888;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.section-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #d4b872;
+  border-left: 3px solid #d4b872;
+  padding-left: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #1a1a24;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 1px solid #2a2a35;
+  display: block;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #d4b872;
+  box-shadow: 0 20px 40px rgba(212, 184, 114, 0.15);
+}
+
+.card-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(26,26,36,0.9));
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(212, 184, 114, 0.15);
+  color: #d4b872;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.card h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #f0ebe0;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #555;
+  font-size: 0.85rem;
+  border-top: 1px solid #2a2a35;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 4rem 1.5rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>10return's Lab</h1>
+  <p>Prototype Collection — 一系列設計實驗、文化記錄與互動體驗</p>
+</section>
+
+<main class="container">
+  <h2 class="section-title">全部作品</h2>
+
+  <div class="grid">
+    <a href="oku-travel/" class="card">
+      <div class="card-image" style="background-image: url('oku-travel/assets/hero-lobby.jpg')"></div>
+      <div class="card-body">
+        <span class="card-tag">互動書籍網站</span>
+        <h3>OKU 舊城風華</h3>
+        <p>台中歐酷酒店參訪紀實 — Art Deco 奢華與舊城再生的視覺旅程</p>
+      </div>
+    </a>
+
+    <a href="9return/" class="card">
+      <div class="card-image" style="background: linear-gradient(135deg, #2c3e50, #4a6572)"></div>
+      <div class="card-body">
+        <span class="card-tag">文化內容站</span>
+        <h3>9return.com.tw</h3>
+        <p>經典建築、紅樓夢心理、金庸人物分析、曾侯乙編鐘 — 文化深度內容平台</p>
+      </div>
+    </a>
+
+    <a href="https://10returncom-boop.github.io/urban-renewal-roi-analysis/LandVol_v2.html" class="card" target="_blank">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a472a, #2d6a4f)"></div>
+      <div class="card-body">
+        <span class="card-tag">房地產工具</span>
+        <h3>都市更新 ROI 分析</h3>
+        <p>土地容積率試算、都更報酬率分析工具（外部站）</p>
+      </div>
+    </a>
+  </div>
+</main>
+
+<footer>
+  © 2026 10return's Lab · 張書欣 · 0968-222201
+</footer>
+
+</body>
+</html>
