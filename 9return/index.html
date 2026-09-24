@@ -1,0 +1,911 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欣矩陣 ∞ 欣媒體</title>
+
+<!-- Favicon & OG -->
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="theme-color" content="#231409">
+
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
+
+<style>
+/* ===== Reset & Variables ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #231409;
+  --bg-2: #332012;
+  --white: #F2F0EB;
+  --white-dim: rgba(242, 240, 235, 0.6);
+  --white-faint: rgba(242, 240, 235, 0.25);
+  --accent: #E8C84B;
+  --accent-2: #FF6B35;
+  --accent-3: #4ECDC4;
+  --font-display: 'Playfair Display', 'Noto Sans TC', Georgia, serif;
+  --font-sans: 'Space Grotesk', 'Noto Sans TC', -apple-system, sans-serif;
+  --font-tc: 'Noto Sans TC', 'Space Grotesk', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== Background Image ===== */
+.bg-image {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('assets/bg-main.webp') center center / cover no-repeat fixed;
+  pointer-events: none; z-index: 0;
+}
+.bg-image::after {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(35,20,9,0.72) 0%, rgba(35,20,9,0.82) 50%, rgba(35,20,9,0.92) 100%);
+}
+/* ===== Background Orbs ===== */
+.bg-orbs {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); opacity: 0.15;
+  animation: orb-float 20s var(--ease) infinite alternate;
+}
+.orb-1 { width: 500px; height: 500px; background: var(--accent); top: -10%; left: -5%; animation-duration: 25s; }
+.orb-2 { width: 400px; height: 400px; background: var(--accent-2); top: 40%; right: -8%; animation-duration: 30s; animation-delay: -5s; }
+.orb-3 { width: 350px; height: 350px; background: var(--accent-3); bottom: -10%; left: 30%; animation-duration: 22s; animation-delay: -10s; }
+@keyframes orb-float {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.1); }
+  66% { transform: translate(-30px, 50px) scale(0.95); }
+  100% { transform: translate(40px, 20px) scale(1.05); }
+}
+
+/* ===== Grain ===== */
+.grain {
+  position: fixed; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  pointer-events: none; z-index: 9998; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.5s steps(4) infinite;
+}
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1%); }
+  50% { transform: translate(1%, -2%); }
+  75% { transform: translate(-1%, 2%); }
+  100% { transform: translate(2%, -1%); }
+}
+
+/* ===== Navigation ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(20px);
+  background: rgba(8, 8, 10, 0.45);
+  border-bottom: 1px solid rgba(242, 240, 235, 0.06);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.01em;
+  display: flex; align-items: center; gap: 2px;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  background: var(--accent); border-radius: 50%;
+  animation: pulse-dot 3s var(--ease) infinite;
+  margin: 0 2px;
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+.nav-logo em { font-style: normal; color: var(--accent); font-weight: 400; margin: 0 3px; }
+.nav-right {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 13px;
+}
+.nav-right a { transition: color 0.3s var(--ease); }
+.nav-right a:hover { color: var(--accent); }
+.nav-sep { color: var(--white-faint); font-weight: 300; }
+.nav-phone { display: flex; align-items: center; gap: 5px; }
+.nav-phone svg { width: 13px; height: 13px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; z-index: 2;
+  padding: 40px 50px 0;
+  text-align: center;
+
+  background-image:
+    linear-gradient(180deg,rgba(15,15,20,.7),rgba(15,15,20,.92)),
+    url('assets/hero-main.webp');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+@keyframes ripple {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes ripple-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 800; line-height: 1.0; letter-spacing: 0.02em;
+}
+.hero-title .line { display: block; overflow: hidden; }
+.hero-title .line:nth-child(1) { margin-bottom: 0.5em; }
+.hero-title .line-inner {
+  display: block; opacity: 0; transform: translateY(110%);
+  animation: title-rise 1s var(--ease-out) forwards;
+}
+.hero-title .line:nth-child(1) .line-inner { animation-delay: 0.3s; }
+.hero-title .line:nth-child(2) .line-inner { animation-delay: 0.45s; }
+.hero-title em {
+  font-style: italic; font-weight: 400;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-title .hero-orange {
+  font-weight: 700;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #ffffff, #fef9c3, #fde68a, #ffffff, #fbbf24, #fef3c7, #ffffff);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: ripple 4s ease-in-out infinite, ripple-pulse 3s ease-in-out infinite;
+  text-shadow: none;
+}
+.hero-title .hero-yellow {
+  color: var(--accent); font-weight: 800;
+}
+.hero-desc {
+  max-width: 800px; margin: 36px auto 0; padding: 0 0 28px; text-align: center;
+  font-family: var(--font-tc);
+  font-size: 16px; font-weight: 400; line-height: 1.85; color: var(--white);
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.7s forwards;
+}
+@keyframes title-rise {
+  from { opacity: 0; transform: translateY(110%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Marquee ===== */
+.marquee {
+  position: relative; z-index: 2;
+  padding: 72px 0 6px;
+  border-top: 1px solid rgba(242, 240, 235, 0.06);
+  border-bottom: 1px solid rgba(242, 240, 235, 0.06);
+  overflow: hidden; white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex; align-items: center; gap: 18px;
+  animation: marquee-scroll 24s linear infinite;
+}
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 600; font-style: normal; color: var(--white);
+  display: flex; align-items: center; gap: 18px;
+  transition: color 0.3s var(--ease);
+  white-space: nowrap;
+}
+.marquee-item:hover { color: var(--white); }
+.marquee-item::after {
+  content: ''; width: 7px; height: 7px;
+  background: var(--accent); border-radius: 50%; flex-shrink: 0;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ===== Bento Grid ===== */
+.grid-section {
+  position: relative; z-index: 2;
+  padding: 56px 40px 72px;
+}
+.section-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 32px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 600; letter-spacing: -0.02em; line-height: 1;
+}
+.section-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.section-sub {
+  font-size: 12px; color: var(--white-dim); max-width: 280px; text-align: right; line-height: 1.6;
+}
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 260px;
+  gap: 48px;
+}
+.card {
+  position: relative; border-radius: 16px; overflow: hidden;
+  opacity: 0; transform: translateY(30px) scale(0.97);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.card.visible { opacity: 1; transform: translateY(0) scale(1); }
+.card-img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-out), filter 0.5s var(--ease-out);
+  filter: saturate(0.85) brightness(0.75);
+}
+.card:hover .card-img { transform: scale(1.12); filter: saturate(1.05) brightness(0.5); }
+.card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0) 70%);
+  transition: background 0.4s var(--ease-out);
+}
+.card:hover .card-overlay { background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.08) 100%); }
+.card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; z-index: 2; text-align: center; }
+.card-num {
+  position: absolute; top: 18px; right: 20px;
+  font-family: var(--font-display); font-size: 13px; font-weight: 500; font-style: italic;
+  color: var(--white-faint); z-index: 2; transition: color 0.3s var(--ease);
+}
+.card:hover .card-num { color: var(--accent); }
+.card-cat {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px; padding: 3px 9px;
+  border: 1px solid rgba(232, 200, 75, 0.3); border-radius: 100px;
+  backdrop-filter: blur(6px); background: rgba(0,0,0,0.2);
+  transform: translateY(8px); opacity: 0; transition: all 0.35s var(--ease-out) 0.05s;
+}
+.card:hover .card-cat { transform: translateY(0); opacity: 1; }
+.card-name {
+  font-family: var(--font-display); font-size: 28px; font-weight: 700; line-height: 1.1; margin-bottom: 5px;
+  transition: transform 0.35s var(--ease-out);
+}
+.card:hover .card-name { transform: translateY(-3px); }
+.card-name .sub {
+  display: block; font-family: var(--font-tc); font-size: 0.48em; font-weight: 400;
+  color: var(--white-dim); margin-top: 3px; letter-spacing: 0.06em;
+}
+.card-desc {
+  font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.6;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.45s var(--ease-out), opacity 0.35s var(--ease-out) 0.08s, margin 0.35s var(--ease-out);
+}
+.card:hover .card-desc { max-height: 70px; opacity: 1; margin-top: 7px; }
+.card-url {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 12px;
+  font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: 0.03em;
+  transform: translateY(8px); opacity: 0; transition: all 0.35s var(--ease-out) 0.12s;
+}
+.card:hover .card-url { transform: translateY(0); opacity: 1; }
+.card-url svg { width: 13px; height: 13px; transition: transform 0.3s var(--ease); }
+.card:hover .card-url svg { transform: translateX(3px); }
+.card-corner {
+  position: absolute; top: 0; left: 0; width: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.45s var(--ease-out); z-index: 3;
+}
+.card:hover .card-corner { width: 100%; }
+
+/* Bento spans */
+.card-1 { grid-column: span 2; grid-row: span 2; }
+.card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9 { grid-column: span 1; grid-row: span 1; }
+.card-18, .card-19, .card-20, .card-21, .card-22 { grid-column: span 1; grid-row: span 1; }
+
+
+
+
+/* ===== Footer ===== */
+.footer {
+  position: relative; z-index: 2;
+  padding: 40px 40px 24px;
+  border-top: 1px solid rgba(242, 240, 235, 0.06);
+}
+.footer-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px;
+}
+.footer-brand {
+  font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.02em;
+}
+.footer-brand em { font-style: italic; color: var(--accent); }
+.footer-info { display: flex; flex-wrap: wrap; gap: 32px; }
+.footer-info-item { font-size: 24px; color: var(--white); line-height: 1.8; }
+.footer-info-item strong {
+  color: var(--white); font-weight: 600; display: block; margin-bottom: 4px;
+  font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.8;
+}
+.footer-info-item a { transition: color 0.3s var(--ease); }
+.footer-info-item a:hover { color: var(--accent); }
+.footer-social { display: flex; gap: 9px; }
+.footer-social a {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--white-faint);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white-dim); transition: all 0.3s var(--ease);
+}
+.footer-social a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.footer-social svg { width: 15px; height: 15px; }
+.footer-bottom {
+  width: 100%; text-align: center; margin-top: 28px; padding-top: 16px;
+  border-top: 1px solid rgba(242, 240, 235, 0.06);
+  font-size: 16px; color: var(--white-dim); letter-spacing: 0.06em;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; }
+  .card-1 { grid-column: span 2; grid-row: span 2; }
+  .card-6 { grid-column: span 1; }
+  .card-2, .card-3, .card-4, .card-5, .card-7, .card-8, .card-9 { grid-column: span 1; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 12px 16px; gap: 8px; }
+  .nav-logo { font-size: 11px; }
+  .nav-logo-dot { width: 6px; height: 6px; }
+  .nav-right .nav-home { display: none; }
+  .nav-right .nav-sep { display: none; }
+  .nav-phone { font-size: 12px; gap: 4px; }
+  .nav-phone svg { width: 13px; height: 13px; }
+  .marquee { padding: 64px 0 4px; }
+  .marquee-item { font-size: 13px; padding: 0 10px; }
+  .hero { padding: 20px 16px 0; }
+  .hero-title { font-size: clamp(28px, 8vw, 56px); letter-spacing: 0.01em; }
+  .hero-title .line:nth-child(1) { margin-bottom: 0.35em; }
+  .hero-desc { font-size: 13px; margin-top: 24px; padding-bottom: 20px; max-width: 100%; }
+  .grid-section { padding: 36px 16px 48px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 24px; }
+  .section-title { font-size: 28px; }
+  .section-sub { text-align: left; font-size: 12px; }
+  .bento { grid-template-columns: 1fr; grid-auto-rows: 240px; gap: 22px; }
+  .card-1, .card-6 { grid-column: span 1; grid-row: span 1; }
+  
+  .card-name .sub { font-size: 11px; }
+  .card-desc { font-size: 12px; }
+  .footer { padding: 28px 16px 16px; }
+  .footer-inner { flex-direction: column; text-align: center; gap: 20px; }
+  .footer-brand { font-size: 20px; }
+  .footer-info { justify-content: center; gap: 20px; flex-direction: column; align-items: center; }
+  .footer-info-item { font-size: 17px; }
+  .footer-social { justify-content: center; }
+  .footer-bottom { font-size: 13px; margin-top: 20px; }
+}
+@media (max-width: 480px) {
+  .nav { padding: 10px 12px; }
+  .nav-logo { font-size: 10px; letter-spacing: 0; }
+  .nav-phone { font-size: 11px; }
+  .nav-phone span { display: none; }
+  .marquee { padding: 58px 0 2px; }
+  .marquee-item { font-size: 13px; padding: 0 10px; }
+  .hero { padding: 16px 14px 0; }
+  .hero-title { font-size: clamp(24px, 7.5vw, 44px); }
+  .hero-desc { font-size: 12px; margin-top: 18px; padding-bottom: 16px; }
+  .grid-section { padding: 28px 14px 40px; }
+  .section-title { font-size: 24px; }
+  .bento { grid-auto-rows: 220px; gap: 18px; }
+  oter { padding: 24px 14px 14px; }
+  .footer-brand { font-size: 18px; }
+  .footer-info-item { font-size: 15px; }
+  .footer-bottom { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .card, .hero-desc { opacity: 1 !important; transform: none !important; }
+  .card-img { animation: none !important; }
+}
+
+/* ===== Anti-Copy Protection ===== */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+img, a {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+.protect-toast {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: rgba(35,20,9,0.95); color: #E8C84B; padding: 18px 32px;
+  border-radius: 8px; font-size: 16px; font-weight: 600; z-index: 99999;
+  border: 1px solid rgba(232,200,75,0.4); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.protect-toast.show { opacity: 1; }
+</style>
+<!-- Open Graph / LINE分享預覽 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="欣矩陣 ∞ 欣媒體">
+<meta property="og:title" content="欣矩陣 ∞ 欣媒體 | 30大網站入口">
+<meta property="og:description" content="沒有做不到，只有想不到。跨產業垂直站點全面佈局，一站導入全網流量、SEO優化、內容自動更新。">
+<meta property="og:url" content="https://9return.com.tw/">
+<meta property="og:image" content="https://9return.com.tw/assets/og/og-brand-main.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="欣矩陣 ∞ 欣媒體 | 30大網站入口">
+<meta name="twitter:description" content="沒有做不到，只有想不到。跨產業垂直站點全面佈局，一站導入全網流量、SEO優化、內容自動更新。">
+<meta name="twitter:image" content="https://9return.com.tw/assets/og/og-brand-main.webp">
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-image"></div>
+<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<div class="grain"></div>
+
+<!-- ===== Navigation ===== -->
+<nav class="nav">
+  <a href="./index.html" class="nav-logo">
+    【欣矩陣 ∞ 欣媒體】
+  </a>
+    
+
+
+  <div class="nav-right">
+    <a href="jinyong-psychology/iamsusi.html" class="nav-about">關於</a>
+    <span class="nav-sep">｜</span>
+    <a href="./index.html" class="nav-home">首頁</a>
+    <span class="nav-sep">｜</span>
+    <a href="tel:0968222201" class="nav-phone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      0968-222201
+    </a>
+  </div>
+</nav>
+
+<!-- ===== Marquee ===== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <a href="./zeng-hou-yi-bells/index.html" class="marquee-item">曾侯乙編鐘</a>
+    <a href="https://331.today" target="_blank" rel="noopener noreferrer" class="marquee-item">331 Gallery</a>
+    <a href="https://zootecture.com" target="_blank" rel="noopener noreferrer" class="marquee-item">ZooTecture 入梯</a>
+    <a href="https://petlogic.org" target="_blank" rel="noopener noreferrer" class="marquee-item">Petlogic 毛毛邏輯</a>
+    <a href="./hongloumeng/index.html" class="marquee-item">夢見紅樓夢的家</a>
+    <a href="./classic-architecture/index.html" class="marquee-item">古代建築還原記</a>
+    <a href="https://vocus.cc/salon/zootecture" target="_blank" rel="noopener noreferrer" class="marquee-item">順寵毛小孩</a>
+    <a href="https://vocus.cc/salon/petlogic" target="_blank" rel="noopener noreferrer" class="marquee-item">安寵好好學</a>
+    <a href="#" class="marquee-item">寵物空間好好裝</a>
+    <a href="./dashboard.html" class="marquee-item">九回房地觀測站</a>
+    <a href="#" class="marquee-item">虛擬試衣間</a>
+    <a href="#" class="marquee-item">經濟學的小遊戲</a>
+    <a href="#" class="marquee-item">星象命盤占星</a>
+    <a href="#" class="marquee-item">三國演義 vs 賽局</a>
+    <a href="#" class="marquee-item">以物易物好好玩</a>
+    <a href="#" class="marquee-item">Infucoco 愛幻想</a>
+    <a href="#" class="marquee-item">音樂家都很怪</a>
+    <a href="#" class="marquee-item">當榮格遇到易經</a>
+    <a href="#" class="marquee-item">舒心玫瑰園</a>
+    <a href="#" class="marquee-item">我看不到但都知道</a>
+    <a href="#" class="marquee-item">世界名牌這樣唸</a>
+    <a href="./jinyong-psychology/index.html" class="marquee-item">金庸人物與心理學</a>
+    <a href="./zeng-hou-yi-bells/index.html" class="marquee-item">曾侯乙編鐘</a>
+    <a href="https://331.today" target="_blank" rel="noopener noreferrer" class="marquee-item">331 Gallery</a>
+    <a href="https://zootecture.com" target="_blank" rel="noopener noreferrer" class="marquee-item">ZooTecture 入梯</a>
+    <a href="https://petlogic.org" target="_blank" rel="noopener noreferrer" class="marquee-item">Petlogic 毛毛邏輯</a>
+    <a href="./hongloumeng/index.html" class="marquee-item">夢見紅樓夢的家</a>
+    <a href="./classic-architecture/index.html" class="marquee-item">古代建築還原記</a>
+    <a href="https://vocus.cc/salon/zootecture" target="_blank" rel="noopener noreferrer" class="marquee-item">順寵毛小孩</a>
+    <a href="https://vocus.cc/salon/petlogic" target="_blank" rel="noopener noreferrer" class="marquee-item">安寵好好學</a>
+    <a href="#" class="marquee-item">寵物空間好好裝</a>
+    <a href="./dashboard.html" class="marquee-item">九回房地觀測站</a>
+    <a href="#" class="marquee-item">虛擬試衣間</a>
+    <a href="#" class="marquee-item">經濟學的小遊戲</a>
+    <a href="#" class="marquee-item">星象命盤占星</a>
+    <a href="#" class="marquee-item">三國演義 vs 賽局</a>
+    <a href="#" class="marquee-item">以物易物好好玩</a>
+    <a href="#" class="marquee-item">Infucoco 愛幻想</a>
+    <a href="#" class="marquee-item">音樂家都很怪</a>
+    <a href="#" class="marquee-item">當榮格遇到易經</a>
+    <a href="#" class="marquee-item">舒心玫瑰園</a>
+    <a href="#" class="marquee-item">我看不到但都知道</a>
+    <a href="#" class="marquee-item">世界名牌這樣唸</a>
+    <a href="./jinyong-psychology/index.html" class="marquee-item">金庸人物與心理學</a>
+  </div>
+</div>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <h1 class="hero-title">
+    <span class="line"><span class="line-inner"><span class="hero-orange">欣矩陣 ∞ 欣媒體</span></span></span>
+    
+  </h1>
+  <p class="hero-desc">
+    欣矩陣 ∞ 欣媒體：沒有做不到，只有想不到。跨產業垂直站點全面佈局，涵蓋產業情報、知識庫、商品展示與數位行銷，一站導入全網流量、SEO 優化、內容自動更新，協助品牌擴大網路聲量，打通曝光、獲客、數據回饋完整閉環，完成你的數位佈局。
+  </p>
+</section>
+
+<!-- ===== Bento Grid ===== -->
+<section class="grid-section">
+  <div class="bento" id="bento">
+
+    <a class="card card-1" href="./zeng-hou-yi-bells/index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-22-zeng-hou-yi-bells.webp" alt="曾侯乙編鐘" loading="eager" decoding="async" fetchpriority="high" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">01</span>
+      <div class="card-content">
+        <span class="card-cat">Music Archaeology</span>
+        <h3 class="card-name">曾侯乙編鐘<span class="sub">戰國青銅禮樂重器</span></h3>
+        <p class="card-desc">出土於湖北隨州的戰國早期青銅禮樂重器，65件編鐘音域跨五個半八度，一鐘雙音，改寫世界音樂史的驚世發現。</p>
+        <span class="card-url">zeng-hou-yi-bells <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-2" href="./jinyong-psychology/index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-01-jinyong.webp" alt="金庸人物與心理學" loading="eager" decoding="async" fetchpriority="high" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">02</span>
+      <div class="card-content">
+        <span class="card-cat">Wuxia Psychology</span>
+        <h3 class="card-name">金庸人物與心理學<span class="sub">江湖兒女內心世界</span></h3>
+        <p class="card-desc">一百位金庸江湖人物的心理畫像，用現代心理學透視刀光劍影之外的愛恨情仇與人格底色。</p>
+        <span class="card-url">jinyong-psychology <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-3" href="https://331.today" target="_blank" rel="noopener noreferrer">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-02-gallery.webp" alt="藝品藝廊 331 Gallery" loading="eager" decoding="async" fetchpriority="high" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">03</span>
+      <div class="card-content">
+        <span class="card-cat">Art Gallery</span>
+        <h3 class="card-name">331 Gallery<span class="sub">331.today</span></h3>
+        <p class="card-desc">當代藝品展售與藝術家平台，以數位畫廊的形式呈現精品藝術收藏，匯聚兩岸三地新銳與資深藝術家作品。</p>
+        <span class="card-url">331.today <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-4" href="https://zootecture.com" target="_blank" rel="noopener noreferrer">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-03-zootecture.webp" alt="ZooTecture 入梯 Zootecture" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">04</span>
+      <div class="card-content">
+        <span class="card-cat">Pet Architecture</span>
+        <h3 class="card-name">ZooTecture 入梯<span class="sub">zootecture.com</span></h3>
+        <p class="card-desc">毛孩與空間的對話。</p>
+        <span class="card-url">zootecture.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-5" href="https://petlogic.org" target="_blank" rel="noopener noreferrer">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-04-petlogic.webp" alt="Petlogic毛毛邏輯 Petlogic" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">05</span>
+      <div class="card-content">
+        <span class="card-cat">Pet Lifestyle</span>
+        <h3 class="card-name">Petlogic毛毛邏輯<span class="sub">petlogic.org</span></h3>
+        <p class="card-desc">用邏輯理解毛孩。</p>
+        <span class="card-url">petlogic.org <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-6" href="./dashboard.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-10-realestate.webp" alt="九回房地觀測站" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">06</span>
+      <div class="card-content">
+        <span class="card-cat">Real Estate</span>
+        <h3 class="card-name">九回房地觀測站<span class="sub">9return.com.tw</span></h3>
+        <p class="card-desc">台灣房地產資訊與建案資料平台，提供最完整的房屋交易、行情與區域分析，是購屋與投資者的專業參考入口。</p>
+        <span class="card-url">9return.com.tw <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-7" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-18-jung-iching.webp" alt="當榮格遇到易經" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">07</span>
+      <div class="card-content">
+        <span class="card-cat">Philosophy</span>
+        <h3 class="card-name">當榮格遇到易經<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">當瑞士心理學大師榮格遇見東方易經智慧，探索集體潛意識與卦象的神秘對話</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-8" href="./hongloumeng/index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-05-hongloumeng.webp" alt="夢見紅樓夢的家" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">08</span>
+      <div class="card-content">
+        <span class="card-cat">Dream of Red Chamber</span>
+        <h3 class="card-name">夢見紅樓夢的家<span class="sub">大觀園營造</span></h3>
+        <p class="card-desc">以紅樓夢為本，還原大觀園的亭台樓閣、山水庭院，見證古典園林的詩意空間。</p>
+        <span class="card-url">hongloumeng <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-9" href="./classic-architecture/index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-06-classic-arch.webp" alt="古代建築還原記" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">09</span>
+      <div class="card-content">
+        <span class="card-cat">Classical Architecture</span>
+        <h3 class="card-name">古代建築還原記<span class="sub">十大經典還原</span></h3>
+        <p class="card-desc">從十大古代經典文獻還原中國古典建築之美，探索斗拱飛簷與營造法式的千年智慧。</p>
+        <span class="card-url">classic-architecture <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-10" href="https://vocus.cc/salon/zootecture" target="_blank" rel="noopener noreferrer">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-07-pets.webp" alt="順寵毛小孩" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">10</span>
+      <div class="card-content">
+        <span class="card-cat">Pet Encyclopedia</span>
+        <h3 class="card-name">順寵毛小孩<span class="sub">Pets Salon</span></h3>
+        <p class="card-desc">寵物品種圖鑑百科。</p>
+        <span class="card-url">vocus.cc/salon/zootecture <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-11" href="https://vocus.cc/salon/petlogic" target="_blank" rel="noopener noreferrer">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-08-education.webp" alt="安寵好好學" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">11</span>
+      <div class="card-content">
+        <span class="card-cat">Pet Education</span>
+        <h3 class="card-name">安寵好好學<span class="sub">Petlogic Salon</span></h3>
+        <p class="card-desc">寵物照護知識學堂。</p>
+        <span class="card-url">vocus.cc/salon/petlogic <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-12" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-09-petspace.webp" alt="寵物空間好好裝" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">12</span>
+      <div class="card-content">
+        <span class="card-cat">Pet Design</span>
+        <h3 class="card-name">寵物空間好好裝<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">寵物友善室內設計靈感，貓狗與人共享的美好空間，從寵物窩到互動設施一次滿足。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-13" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-11-fitting.webp" alt="虛擬試衣間" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">13</span>
+      <div class="card-content">
+        <span class="card-cat">Fashion Tech</span>
+        <h3 class="card-name">虛擬試衣間<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">AR增強現實虛擬試衣，線上即時預覽服裝穿搭效果，數位人台與智慧尺寸推薦，打造沉浸式購物體驗。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-14" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-12-economics.webp" alt="經濟學的小遊戲" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">14</span>
+      <div class="card-content">
+        <span class="card-cat">Economics</span>
+        <h3 class="card-name">經濟學的小遊戲<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">透過遊戲化方式學習經濟學原理，從供需法則到賽局理論，在互動中理解市場運作與決策邏輯。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-15" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-13-astrology.webp" alt="星象命盤占星" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">15</span>
+      <div class="card-content">
+        <span class="card-cat">Astrology</span>
+        <h3 class="card-name">星象命盤占星<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">十二星座星圖解析、每日運勢、紫微斗數與占星術結合，探索星象與人性的神秘對應。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-16" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-14-sanguo.webp" alt="三國演義 vs 賽局" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">16</span>
+      <div class="card-content">
+        <span class="card-cat">Game Theory</span>
+        <h3 class="card-name">三國演義 vs 賽局<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">以三國經典戰役解析賽局理論，從空城計到連環計，探索兵法謀略背後的博弈數學與決策智慧。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-17" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-15-barter.webp" alt="以物易物好好玩" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">17</span>
+      <div class="card-content">
+        <span class="card-cat">Barter</span>
+        <h3 class="card-name">以物易物好好玩<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">回歸物物交換的純粹樂趣，社區共享經濟平台，讓閒置物品找到新主人，永續又好玩。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-18" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-16-infucoco.webp" alt="Infucoco愛幻想" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">18</span>
+      <div class="card-content">
+        <span class="card-cat">Fantasy</span>
+        <h3 class="card-name">Infucoco愛幻想<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">走進Infucoco的奇幻世界，獨角獸、彩虹與雲朵共築的夢幻國度，釋放無限想像力與創造力。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-19" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-17-musician.webp" alt="音樂家都很怪" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">19</span>
+      <div class="card-content">
+        <span class="card-cat">Music</span>
+        <h3 class="card-name">音樂家都很怪<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">探索音樂家的怪癖與天才，從爵士到古典，解構音符背後的靈魂與不為人知的創作祕辛。</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-20" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-19-rose-garden.webp" alt="舒心玫瑰園" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">20</span>
+      <div class="card-content">
+        <span class="card-cat">Healing</span>
+        <h3 class="card-name">舒心玫瑰園<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">在玫瑰花園中尋找心靈療癒，以芳香與自然撫慰日常疲憊，打造屬於你的舒心角落</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-21" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-20-intuition.webp" alt="我看不到但都知道" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">21</span>
+      <div class="card-content">
+        <span class="card-cat">Intuition</span>
+        <h3 class="card-name">我看不到但都知道<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">超越視覺的靈性感知，探索直覺、第六感與內在智慧的神秘力量，看見眼睛看不到的真相</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="card card-22" href="./index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-21-luxury-brands.webp" alt="世界名牌這樣唸" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">22</span>
+      <div class="card-content">
+        <span class="card-cat">Fashion</span>
+        <h3 class="card-name">世界名牌這樣唸<span class="sub" style="color:#fbbf24;font-weight:600;">會員制 ∞ 第一版更新中</span></h3>
+        <p class="card-desc">LV、Gucci、Hermès、Chanel…世界精品品牌的正確發音教學，從此不再唸錯鬧笑話</p>
+        <span class="card-url">會員制 ∞ 第一版更新中 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-info">
+      <div class="footer-info-item">
+        <strong>聯絡</strong>
+        <a href="tel:0968222201">0968-222201</a>
+      </div>
+      <div class="footer-info-item">
+        <strong>Line</strong>
+        <a href="https://line.me/R/ti/p/@331.today" target="_blank" rel="noopener noreferrer">331.today</a>
+      </div>
+      <div class="footer-info-item">
+        <strong>設計規劃開發</strong>
+        <a href="https://9return.com.tw/jinyong-psychology/iamsusi.html" style="color:inherit;text-decoration:none;">張書欣</a>
+      </div>
+    </div>
+    <div class="footer-social">
+      <a href="https://line.me/R/ti/p/@331.today" target="_blank" rel="noopener noreferrer" title="Line">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.108 0 .215.004.322.011a7.329 7.329 0 0 0-14.499 1.944 5.813 5.813 0 0 0 5.805 5.798 5.76 5.76 0 0 0 2.733-.686l.134-.077.13.08a5.79 5.79 0 0 0 3.017.845 5.813 5.813 0 0 0 2.358-.505l.06-.024a4.82 4.82 0 0 0-.06-.143 4.79 4.79 0 0 0 0-.365c0-2.633 2.13-4.78 4.76-4.78z"/><path d="M12 2C6.486 2 2 5.69 2 10.2c0 2.545 1.348 4.828 3.445 6.33L4.5 21l4.738-2.483c.884.243 1.82.383 2.762.383 5.514 0 10-3.69 10-8.2S17.514 2 12 2z"/></svg>
+      </a>
+      <a href="tel:0968222201" title="電話">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a href="https://331.today" target="_blank" rel="noopener noreferrer" title="藝品藝廊">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </a>
+    </div>
+    <div class="footer-bottom">&copy; 2026 30站聯播 &middot; 設計規劃開發：<a href="https://9return.com.tw/jinyong-psychology/iamsusi.html" style="color:inherit;text-decoration:none;">張書欣</a></div>
+  </div>
+</footer>
+
+<script>
+/* ===== Scroll Reveal ===== */
+(function() {
+  var cards = document.querySelectorAll('.card');
+  if (!('IntersectionObserver' in window)) { cards.forEach(function(c){c.classList.add('visible');}); return; }
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var i = Array.from(cards).indexOf(entry.target);
+        setTimeout(function(){ entry.target.classList.add('visible'); }, i * 80);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  cards.forEach(function(c){ obs.observe(c); });
+})();
+
+/* ===== Parallax Orbs ===== */
+(function() {
+  var orbs = document.querySelectorAll('.orb');
+  if (!orbs.length) return;
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(function() {
+        var sy = window.pageYOffset;
+        orbs.forEach(function(b, i) { b.style.transform = 'translateY(' + (sy * (i + 1) * 0.08) + 'px)'; });
+        ticking = false;
+      });
+    }
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
+
+

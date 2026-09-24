@@ -1,0 +1,535 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夢見紅樓夢的家 · 專業知識庫</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+:root{--ink:#1a1a2e;--dai:#2c3e50;--dai-light:#3d566e;--vermilion:#c0392b;--vermilion-dark:#962d22;--paper:#f5f0e8;--paper-dark:#ebe3d5;--bamboo:#7d9b76;--bamboo-dark:#5a7a54;--gold:#b8860b;--gold-light:#d4a843;--stone:#8b8680;--line:#d4c9b8;--shadow:rgba(26,26,46,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(ellipse at 20% 30%,rgba(192,57,43,.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(44,62,80,.04) 0%,transparent 50%),url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+.topnav{position:sticky;top:0;z-index:200;background:rgba(245,240,232,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:0 20px;display:flex;align-items:center;gap:6px;height:54px}
+.topnav .brand{font-family:'Noto Serif SC',serif;font-weight:900;font-size:16px;color:var(--ink);letter-spacing:2px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.topnav .brand .seal{width:26px;height:26px;background:var(--vermilion);color:var(--paper);font-size:13px;line-height:26px;text-align:center;border-radius:3px;font-weight:700}
+.topnav .nav-links{display:flex;gap:2px;overflow-x:auto;flex:1}
+.topnav .nav-links a{padding:7px 12px;font-size:12px;color:var(--dai);text-decoration:none;border-radius:3px;white-space:nowrap;transition:all .2s;cursor:pointer;font-family:'Noto Serif SC',serif;font-weight:500}
+.topnav .nav-links a:hover,.topnav .nav-links a.active{background:var(--vermilion);color:var(--paper)}
+.topnav .search-box{position:relative}
+.topnav .search-box input{padding:6px 10px 6px 28px;border:1px solid var(--line);border-radius:18px;font-size:11px;background:var(--paper);width:150px;outline:none;transition:all .3s;font-family:'Noto Sans SC',sans-serif}
+.topnav .search-box input:focus{border-color:var(--vermilion);width:180px}
+.topnav .search-box svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:12px;height:12px;color:var(--stone)}
+.view{display:none;animation:fadeIn .4s ease;position:relative;z-index:1}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:32px 20px 22px;border-bottom:1px solid var(--line);background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.6)), url('https://aka.doubaocdn.com/s/08AzKfv7PL') center/cover no-repeat}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:32px;font-weight:900;letter-spacing:5px;margin-bottom:6px}
+.hero h1 .accent{color:var(--vermilion)}
+.hero p{font-size:12px;color:var(--stone);letter-spacing:3px;font-weight:300}
+.hero .stats{display:flex;justify-content:center;gap:32px;margin-top:16px;flex-wrap:wrap}
+.hero .stat-item{text-align:center}
+.hero .stat-num{font-family:'Noto Serif SC',serif;font-size:24px;font-weight:900;color:var(--vermilion)}
+.hero .stat-label{font-size:10px;color:var(--stone);letter-spacing:1px;margin-top:2px}
+.section-title{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;padding:22px 20px 12px;letter-spacing:2px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:'';width:3px;height:20px;background:var(--vermilion);border-radius:2px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:0 20px 32px}
+.feature-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.feature-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow);border-color:var(--vermilion)}
+.feature-card .f-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;background:linear-gradient(135deg,var(--dai),var(--dai-light));color:var(--paper)}
+.feature-card .f-name{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;margin-bottom:6px;letter-spacing:1px}
+.feature-card .f-desc{font-size:11px;color:var(--stone);line-height:1.7;margin-bottom:10px}
+.feature-card .f-meta{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--line)}
+.feature-card .f-count{font-size:10px;color:var(--vermilion);font-weight:600}
+.feature-card .f-arrow{font-size:13px;color:var(--stone);transition:transform .2s}
+.feature-card:hover .f-arrow{transform:translateX(4px);color:var(--vermilion)}
+.article-list{padding:0 20px 32px;max-width:880px;margin:0 auto}
+.article-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:all .2s}
+.article-item:hover{padding-left:8px}
+.article-item:hover .a-title{color:var(--vermilion)}
+.article-num{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:900;color:var(--line);min-width:36px;text-align:center;line-height:1.2}
+.article-item:hover .article-num{color:var(--vermilion)}
+.article-content{flex:1}
+.a-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:600;margin-bottom:5px;transition:color .2s;line-height:1.5}
+.a-excerpt{font-size:11px;color:var(--stone);line-height:1.7;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.a-tags{display:flex;gap:5px;flex-wrap:wrap}
+.a-tag{font-size:9px;padding:2px 8px;background:var(--paper-dark);border-radius:10px;color:var(--dai)}
+.article-detail{max-width:740px;margin:0 auto;padding:28px 20px 50px}
+.article-detail .back-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--dai);cursor:pointer;margin-bottom:20px;padding:5px 12px;border:1px solid var(--line);border-radius:3px;transition:all .2s}
+.article-detail .back-btn:hover{border-color:var(--vermilion);color:var(--vermilion)}
+.article-detail h1{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:900;line-height:1.5;margin-bottom:14px;letter-spacing:1px}
+.article-detail .meta{display:flex;gap:14px;font-size:11px;color:var(--stone);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.article-detail .content{font-size:14px;line-height:2;color:var(--dai)}
+.article-detail .content p{margin-bottom:14px;text-indent:2em}
+.article-detail .content p:first-of-type::first-letter{font-family:'Noto Serif SC',serif;font-size:32px;font-weight:900;float:left;line-height:1;margin:3px 7px 0 0;color:var(--vermilion)}
+.article-detail .a-tags{margin-top:28px;padding-top:16px;border-top:1px solid var(--line)}
+.related-section{margin-top:32px;padding-top:20px;border-top:2px solid var(--vermilion)}
+.related-section h3{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;color:var(--vermilion);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.related-section h3::before{content:'🔗';font-size:14px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.related-card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:12px;cursor:pointer;transition:all .25s;border-left:3px solid var(--gold)}
+.related-card:hover{border-color:var(--vermilion);border-left-color:var(--vermilion);transform:translateX(3px);background:var(--paper-dark)}
+.related-card .rc-title{font-family:'Noto Serif SC',serif;font-size:13px;font-weight:600;line-height:1.5;margin-bottom:4px}
+.related-card .rc-group{font-size:10px;color:var(--stone)}
+.network-hero{background:linear-gradient(135deg,var(--dai) 0%,var(--ink) 100%);color:var(--paper);padding:36px 20px;text-align:center;position:relative;overflow:hidden}
+.network-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(192,57,43,.2) 0%,transparent 40%),radial-gradient(circle at 80% 70%,rgba(212,168,67,.15) 0%,transparent 40%);pointer-events:none}
+.network-hero h2{font-family:'Noto Serif SC',serif;font-size:28px;font-weight:900;letter-spacing:4px;margin-bottom:8px;position:relative;z-index:1}
+.network-hero p{font-size:13px;color:rgba(245,240,232,.8);letter-spacing:2px;position:relative;z-index:1}
+.network-hero .nh-stats{display:flex;justify-content:center;gap:40px;margin-top:20px;position:relative;z-index:1}
+.network-hero .nh-stat .num{font-family:'Noto Serif SC',serif;font-size:32px;font-weight:900;color:var(--gold-light)}
+.network-hero .nh-stat .label{font-size:11px;color:rgba(245,240,232,.7);letter-spacing:1px}
+.group-tabs{display:flex;gap:6px;padding:16px 20px;overflow-x:auto;justify-content:center;flex-wrap:wrap;background:var(--paper-dark);border-bottom:1px solid var(--line)}
+.group-tab{padding:7px 16px;font-size:12px;font-family:'Noto Serif SC',serif;font-weight:600;border:1px solid var(--line);background:var(--paper);color:var(--dai);border-radius:20px;cursor:pointer;transition:all .25s;white-space:nowrap}
+.group-tab:hover{border-color:var(--vermilion);color:var(--vermilion)}
+.group-tab.active{background:var(--vermilion);color:var(--paper);border-color:var(--vermilion)}
+.search-results{max-width:880px;margin:0 auto;padding:0 20px 32px}
+.search-info{font-size:12px;color:var(--stone);padding:16px 0}
+.search-info strong{color:var(--vermilion)}
+.building-selector{display:flex;gap:5px;padding:14px 20px;overflow-x:auto;flex-wrap:wrap;justify-content:center}
+.building-tab{font-family:'Noto Serif SC',serif;font-size:13px;font-weight:600;padding:7px 16px;border:1px solid var(--line);background:var(--paper);color:var(--dai);cursor:pointer;border-radius:2px;transition:all .3s;letter-spacing:1px}
+.building-tab:hover{border-color:var(--vermilion);color:var(--vermilion)}
+.building-tab.active{background:var(--vermilion);color:var(--paper);border-color:var(--vermilion)}
+.building-view{display:none;max-width:1360px;margin:0 auto;padding:0 20px 32px;animation:fadeIn .4s}
+.building-view.active{display:block}
+.building-header{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.building-header h2{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:900;letter-spacing:2px}
+.building-header .b-tag{font-size:10px;padding:3px 9px;background:var(--dai);color:var(--paper);border-radius:2px;letter-spacing:1px}
+.building-header .b-owner{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--vermilion);font-weight:600;margin-left:auto}
+.three-col{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px;margin-bottom:20px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:0 2px 10px var(--shadow);display:flex;flex-direction:column}
+.panel-header{padding:9px 12px;background:var(--dai);color:var(--paper);font-family:'Noto Serif SC',serif;font-size:12px;font-weight:600;letter-spacing:2px}
+.panel-body{flex:1;min-height:260px;display:flex;align-items:center;justify-content:center;background:var(--paper-dark);position:relative}
+.panel-body img{width:100%;height:100%;object-fit:cover}
+.svg-container{width:100%;height:100%;padding:8px}
+.svg-container svg{width:100%;height:100%;display:block}
+.map-hotspot{cursor:pointer;transition:all .3s}
+.map-hotspot:hover circle{r:12}
+.floor-room{cursor:pointer;transition:all .25s}
+.floor-room:hover{fill:var(--vermilion)!important;opacity:.7}
+.floor-room-label{font-family:'Noto Serif SC',serif;font-size:10px;fill:var(--ink);pointer-events:none;text-anchor:middle}
+.detail-section{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:20px 24px;box-shadow:0 2px 10px var(--shadow)}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.detail-block h3{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--vermilion);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--line);letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.detail-block h3::before{content:'';width:3px;height:14px;background:var(--vermilion);border-radius:1px}
+.detail-block p{font-size:12px;line-height:1.9;color:var(--dai);margin-bottom:6px}
+.quote-block{background:var(--paper-dark);border-left:3px solid var(--gold);padding:12px 16px;margin:8px 0;font-family:'Noto Serif SC',serif;font-size:12px;line-height:2;color:var(--dai-light);position:relative}
+.quote-block p{padding-left:14px;margin:0}
+.spec-list{list-style:none;display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.spec-list li{font-size:10px;padding:3px 10px;background:var(--paper-dark);border:1px solid var(--line);border-radius:12px;color:var(--dai);font-family:'Noto Serif SC',serif}
+.spec-list li strong{color:var(--vermilion);font-weight:600}
+.tooltip{position:fixed;background:var(--ink);color:var(--paper);padding:6px 10px;border-radius:4px;font-size:10px;font-family:'Noto Serif SC',serif;pointer-events:none;z-index:1000;opacity:0;transition:opacity .2s;max-width:200px;line-height:1.6}
+.tooltip.show{opacity:1}
+.footer{text-align:center;padding:24px 16px;border-top:1px solid var(--line);color:var(--stone);font-size:10px;letter-spacing:2px;position:relative;z-index:1}
+@media(max-width:1024px){.three-col{grid-template-columns:1fr 1fr}.three-col .panel:first-child{grid-column:1/-1}}
+@media(max-width:768px){.topnav{padding:0 10px;gap:4px}.topnav .brand{font-size:13px}.topnav .search-box input{width:100px}.topnav .search-box input:focus{width:120px}.hero h1{font-size:22px;letter-spacing:3px}.hero .stats{gap:16px}.feature-grid{grid-template-columns:1fr;padding:0 14px 24px}.three-col{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr;gap:14px}.building-header h2{font-size:20px}.article-detail h1{font-size:20px}.section-title{font-size:17px;padding:16px 14px 10px}.related-grid{grid-template-columns:1fr}.network-hero h2{font-size:22px}.network-hero .nh-stats{gap:24px}}
+</style>
+
+<!-- Unified Navigation -->
+<link rel="stylesheet" href="../_shared/nav.css">
+<script src="../_shared/nav.js" defer></script>
+<style>
+.hero h1, .hero h2, .hero h3, .hero p, .hero span, #hero h1, #hero h2, #hero p, .hero-bg h1, .hero-bg h2, .hero-bg p, [class*="hero"] h1, [class*="hero"] h2, [class*="hero"] p { color: #fff !important; text-shadow: 0 2px 12px rgba(0,0,0,.7) !important; }
+</style>
+<!-- Open Graph / LINE分享預覽 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="欣矩陣 ∞ 欣媒體">
+<meta property="og:title" content="紅樓夢 | 大觀園人物誌">
+<meta property="og:description" content="從紅樓夢還原大觀園建築空間，探索古典園林美學與建築智慧。">
+<meta property="og:url" content="https://9return.com.tw/hongloumeng/">
+<meta property="og:image" content="https://9return.com.tw/assets/og/og-hongloumeng.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="紅樓夢 | 大觀園人物誌">
+<meta name="twitter:description" content="從紅樓夢還原大觀園建築空間，探索古典園林美學與建築智慧。">
+<meta name="twitter:image" content="https://9return.com.tw/assets/og/og-hongloumeng.webp">
+</head>
+<body>
+<nav class="topnav">
+  <div class="brand" onclick="navigate('home')"><span class="seal">樓</span>夢見紅樓夢的家</div>
+  <div class="nav-links" id="navLinks">
+    <a class="active" onclick="navigate('home')">建築展示</a>
+    <a onclick="navigate('features')">專業功能</a>
+    <a onclick="navigate('network')">知識網絡</a>
+    <a onclick="navigate('allArticles')">全部文章</a>
+  </div>
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="搜尋800篇文章..." onkeydown="if(event.key==='Enter')doSearch()">
+  </div>
+</nav>
+
+<div class="view active" id="view-home">
+  <div class="hero">
+    <h1>紅樓夢<span class="accent">建築志</span></h1>
+    <p>以文字為磚 · 以考證為基 · 還原清代建築之美</p>
+    <div class="stats">
+      <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">經典建築</div></div>
+      <div class="stat-item"><div class="stat-num">20</div><div class="stat-label">專業功能</div></div>
+      <div class="stat-item"><div class="stat-num">800</div><div class="stat-label">深度文章</div></div>
+      <div class="stat-item"><div class="stat-num">200</div><div class="stat-label">網網相連</div></div>
+    </div>
+  </div>
+  <div class="building-selector" id="buildingSelector"></div>
+  <div id="buildingContainer"></div>
+</div>
+
+<div class="view" id="view-features">
+  <div class="section-title">二十項專業功能</div>
+  <div class="feature-grid" id="featureGrid"></div>
+</div>
+
+<div class="view" id="view-featureDetail">
+  <div class="section-title" id="featureDetailTitle"></div>
+  <div class="article-list" id="featureArticleList"></div>
+</div>
+
+<div class="view" id="view-article">
+  <div class="article-detail" id="articleDetailContent"></div>
+</div>
+
+<div class="view" id="view-network">
+  <div class="network-hero">
+    <h2>知識網絡 · 網網相連</h2>
+    <p>200 篇互聯文章 · 每篇連接 4 篇相關文章 · 點擊探索無限知識脈絡</p>
+    <div class="nh-stats">
+      <div class="nh-stat"><div class="num">200</div><div class="label">互聯文章</div></div>
+      <div class="nh-stat"><div class="num">800+</div><div class="label">關聯鏈接</div></div>
+      <div class="nh-stat"><div class="num">5</div><div class="label">主題組別</div></div>
+    </div>
+  </div>
+  <div class="group-tabs" id="groupTabs">
+    <div class="group-tab active" data-group="all">全部</div>
+    <div class="group-tab" data-group="a">建築對比</div>
+    <div class="group-tab" data-group="b">建築與人物</div>
+    <div class="group-tab" data-group="c">建築與情節</div>
+    <div class="group-tab" data-group="d">建築元素漫遊</div>
+    <div class="group-tab" data-group="e">跨域知識關聯</div>
+  </div>
+  <div class="article-list" id="networkArticleList"></div>
+</div>
+
+<div class="view" id="view-linkedArticle">
+  <div class="article-detail" id="linkedArticleContent"></div>
+</div>
+
+<div class="view" id="view-allArticles">
+  <div class="section-title">全部八百篇文章</div>
+  <div class="article-list" id="allArticleList"></div>
+</div>
+
+<div class="view" id="view-search">
+  <div class="section-title">搜尋結果</div>
+  <div class="search-results">
+    <div class="search-info" id="searchInfo"></div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+<footer class="footer">夢見紅樓夢的家 · 20項專業功能 · 800篇深度文章 · 200篇網網相連 · 依原文及清代建築考證還原<div style="text-align:center;padding:8px 12px;">
+<details class="hl-footer-dd" style="display:inline-block;text-align:left;min-width:200px;">
+<summary style="cursor:pointer;font-weight:700;color:#fff;padding:6px 12px;background:rgba(255,255,255,.1);border-radius:6px;list-style:none;">網站導覽 <span style="font-size:11px;">▾</span></summary>
+<div style="padding:10px 12px;background:rgba(0,0,0,.3);border-radius:0 0 6px 6px;margin-top:4px;">
+<div style="padding:4px 0;"><a href="./index.html" style="color:#cbd5e1;text-decoration:none;font-size:13px;">首頁</a></div>
+<div style="padding:4px 0;"><a href="./iamsusi.html" style="color:#cbd5e1;text-decoration:none;font-size:13px;">關於計畫</a></div>
+<div style="padding:4px 0;"><a href="../sitemap.xml" style="color:#cbd5e1;text-decoration:none;font-size:13px;">網站地圖</a></div>
+<div style="padding:4px 0;"><a href="https://9return.com.tw/" style="color:#cbd5e1;text-decoration:none;font-size:13px;">欣矩陣門戶</a></div>
+</div>
+</details>
+</div><div style="text-align:center;padding:12px;font-size:13px;border-top:1px solid rgba(255,255,255,.1);">規劃設計開發：<a href="https://9return.com.tw/jinyong-psychology/iamsusi.html" style="color:#ffffff;text-decoration:underline;font-weight:600;">張書欣</a></div></footer>
+
+<script>
+// ===== 建筑數據 =====
+const buildings={
+  rongfu:{name:'榮國府',tag:'府邸',owner:'賈氏家族 · 敕造國公府',image:'https://aka.doubaocdn.com/s/vMtbUkVClw',quote:'正面五間上房，兩邊是穿山遊廊廂房，當中是穿堂。',quoteSource:'第三回',desc:'榮國府為清代貝勒府规制的大型府邸，分中、東、西三路，各路均為多進四合院。中路沿中軸線依次排列大門、儀門、大廳（榮禧堂）、內廳、正堂、後罩樓，即「堂屋五重」。',features:[{label:'规制',value:'堂屋五重'},{label:'布局',value:'三路多進四合院'},{label:'大門',value:'三間獸頭大門'},{label:'正堂',value:'五間榮禧堂'},{label:'彩畫',value:'和璽+蘇式'},{label:'規模',value:'約52畝'}],mapPos:{x:120,y:420,label:'榮國府'},floorPlan:'rongfu'},
+  dagate:{name:'大觀園正門',tag:'園林入口',owner:'大觀園 · 省親別墅入口',image:'https://aka.doubaocdn.com/s/de1k21cja8',quote:'正門五間，上面桶瓦泥鰍脊；那門欄窗槅，皆是細雕新鮮花樣，並無朱粉塗飾；一色水磨群牆，下面白石台磯，鑿成西番草花樣。',quoteSource:'第十七回',desc:'大觀園正門五間，屋頂為筒瓦泥鰍脊，是南方園林建築常見的屋頂形式。門欄窗槅細雕時新花樣，不施朱粉，走素雅路線。一色水磨青磚群牆，白石台基鑿西番蓮花樣，進門迎面以翠嶂假山障景。',features:[{label:'屋頂',value:'筒瓦泥鰍脊'},{label:'間數',value:'正門五間'},{label:'牆身',value:'水磨青磚'},{label:'台基',value:'白石西番蓮紋'},{label:'障景',value:'翠嶂假山'},{label:'風格',value:'江南園林素雅風'}],mapPos:{x:400,y:540,label:'正門'},floorPlan:'dagate'},
+  dalou:{name:'大觀樓',tag:'禮制正殿',owner:'賈元妃省親別墅',image:'https://aka.doubaocdn.com/s/fa4ajlxeH5',quote:'崇閣巍峨，層樓高起，面面琳宮合抱，迢迢複道縈紆，青松拂檐，玉欄繞砌，金輝獸面，彩煥螭頭。',quoteSource:'第十七回',desc:'大觀樓是大觀園的主體建築，為賈元妃省親時舉行典禮的場所。重檐歇山頂高層建築，中軸線對稱佈局，正前方立漢白玉石牌坊。樓內大小房間不計其數，可滿足看戲、會見、宴會、休息、化妝、表演等多種功能。',features:[{label:'屋頂',value:'重檐歇山頂'},{label:'等級',value:'僅次於庑殿頂'},{label:'牌坊',value:'漢白玉龍蟠螭護'},{label:'配閣',value:'綴錦閣·含芳閣'},{label:'佈局',value:'中軸線對稱'},{label:'功能',value:'典禮·宴會·看戲'}],mapPos:{x:400,y:100,label:'大觀樓'},floorPlan:'dalou'},
+  yihong:{name:'怡紅院',tag:'貴族宅院',owner:'賈寶玉住所',image:'https://aka.doubaocdn.com/s/zcggVxM1fx',quote:'原來四面皆是雕空玲瓏木板，或「流雲百蝠」，或「歲寒三友」，或山水人物，或翎毛花卉，或集錦，或博古，或萬福萬壽，各種花樣，皆是名手雕鏤，五彩銷金嵌寶的。',quoteSource:'第十七回',desc:'怡紅院是賈寶玉的住處，院外粉牆環護、綠柳周垂，入口為垂花門。院內兩邊抄手游廊相接，中間點襯幾塊玲瓏山石，種著芭蕉和西府海棠。正房小小五間抱廈，室內四面雕空玲瓏木板，名手雕鏤五彩銷金嵌寶。',features:[{label:'入口',value:'垂花門朱門'},{label:'正房',value:'五間抱廈'},{label:'室內',value:'雕空玲瓏木板槅子'},{label:'地面',value:'碧綠鑿花磚'},{label:'庭院',value:'芭蕉·海棠·仙鶴'},{label:'匾額',value:'怡紅快綠'}],mapPos:{x:620,y:380,label:'怡紅院'},floorPlan:'yihong'},
+  xiaoxiang:{name:'瀟湘館',tag:'文人書齋',owner:'林黛玉住所',image:'https://aka.doubaocdn.com/s/jbqHk8DyzP',quote:'入門便是曲折游廊，階下石子漫成甬路。上面小小兩三間房舍，一明兩暗……後院牆下忽開一隙，得泉一派，開溝僅尺許，灌入牆內，繞階緣屋至前院，盤旋竹下而出。',quoteSource:'第十七回',desc:'瀟湘館深藏在千百竿翠竹之間，白壁粉牆竹影斑駁。入門有曲折游廊，階下石子漫成甬路。正房小小兩三間，一明兩暗。後院有大株梨花兼著芭蕉，一派活水從牆隙湧出，繞階緣屋至前院，盤旋竹下而出。',features:[{label:'正房',value:'一明兩暗'},{label:'入口',value:'曲折游廊石子甬路'},{label:'水系',value:'活水繞階緣屋'},{label:'植物',value:'千百竿翠竹'},{label:'後院',value:'梨花·芭蕉·退步'},{label:'匾額',value:'有鳳來儀'}],mapPos:{x:200,y:220,label:'瀟湘館'},floorPlan:'xiaoxiang'},
+  hengwu:{name:'蘅蕪苑',tag:'清雅居所',owner:'薛寶釵住所',image:null,quote:'一所清涼瓦舍，一色水磨磚牆，清瓦花堵……兩邊俱是超手游廊，便順著游廊步入。只見上面五間清廈連著卷棚，四面出廊，綠窗油壁，更比前幾處清雅不同。',quoteSource:'第十七回',desc:'蘅蕪苑是薛寶釵的住處，滿院無樹，只有奇石異草。五間清廈連著卷棚，四面出廊，綠窗油壁。奇石大小或立或臥或伏，異草爬在牆上隱於石縫，香氣馥郁持久。室內雪洞一般，一色玩器全無。',features:[{label:'正房',value:'五間清廈連卷棚'},{label:'廊子',value:'超手游廊四面出廊'},{label:'牆身',value:'水磨磚牆清瓦花堵'},{label:'庭院',value:'奇石異草無花木'},{label:'室內',value:'雪洞一般素淨'},{label:'匾額',value:'蘅芷清芬'}],mapPos:{x:580,y:180,label:'蘅蕪苑'},floorPlan:'hengwu'},
+  daoxiang:{name:'稻香村',tag:'田園別墅',owner:'李紈住所',image:null,quote:'一帶黃泥牆，裡面數楹茅屋，外面卻是桑、榆、槿、柘，各色樹稚條，隨其曲折，編就兩溜青籬……裡面紙窗木榻，富貴氣象一洗皆盡。',quoteSource:'第十七回',desc:'稻香村是李紈的住處，一院高仿農舍，柴門半開。四圍黃泥土築牆，茅草覆屋幾間。院心設古井，旁有桔槔轆轤。房前菜園佳蔬菜花分畦列畝，屋後金黃稻穗一片。每逢春天百株杏花開得如噴火蒸霞。',features:[{label:'屋頂',value:'茅草覆屋'},{label:'牆身',value:'黃泥土牆'},{label:'入口',value:'柴門'},{label:'庭院',value:'古井·桔槔·菜園'},{label:'植物',value:'杏花·稻穗·桑榆'},{label:'匾額',value:'杏簾在望'}],mapPos:{x:300,y:120,label:'稻香村'},floorPlan:'daoxiang'}
+};
+
+function renderGardenMap(currentKey){
+  const hotspots=Object.entries(buildings).map(([key,b])=>{
+    const isCurrent=key===currentKey;
+    return `<g class="map-hotspot ${isCurrent?'current':''}" data-key="${key}" transform="translate(${b.mapPos.x},${b.mapPos.y})"><circle r="${isCurrent?10:7}" fill="${isCurrent?'#c0392b':'#2c3e50'}" stroke="#f5f0e8" stroke-width="2" opacity="0.9"/><text y="4" text-anchor="middle" fill="${isCurrent?'#f5f0e8':'#1a1a2e'}" font-size="9" font-weight="600">${b.mapPos.label.charAt(0)}</text><text y="24" text-anchor="middle" fill="#1a1a2e" font-size="10" font-weight="600" style="font-family:'Noto Serif SC',serif">${b.mapPos.label}</text></g>`;
+  }).join('');
+  return `<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="40" width="720" height="520" fill="none" stroke="#8b8680" stroke-width="3" stroke-dasharray="8,4" rx="4"/><path d="M100 300 Q200 280 300 320 Q400 360 500 320 Q600 280 700 300" fill="none" stroke="#7fb3d5" stroke-width="40" stroke-linecap="round" opacity="0.4"/><g transform="translate(400,340)"><polygon points="0,-18 16,-6 10,14 -10,14 -16,-6" fill="#d4a843" stroke="#b8860b" stroke-width="1.5"/><text y="4" text-anchor="middle" font-size="8" fill="#1a1a2e" font-weight="600">沁芳亭</text></g><ellipse cx="400" cy="480" rx="60" ry="25" fill="#a0a0a0" opacity="0.4"/><text x="400" y="484" text-anchor="middle" font-size="9" fill="#666" font-family="Noto Serif SC">翠嶂</text>${hotspots}<g transform="translate(730,70)"><circle r="18" fill="#f5f0e8" stroke="#d4c9b8" stroke-width="1"/><polygon points="0,-12 4,0 0,4 -4,0" fill="#c0392b"/><text y="-20" text-anchor="middle" font-size="10" fill="#1a1a2e" font-weight="700">北</text></g></svg>`;
+}
+
+const floorPlans={
+  rongfu:()=>`<svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="460" height="320" fill="none" stroke="#8b8680" stroke-width="2"/><rect x="200" y="20" width="100" height="26" fill="#2c3e50" class="floor-room" data-name="大門三間"/><text x="250" y="37" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">大門</text><rect x="200" y="66" width="100" height="20" fill="#3d566e" class="floor-room" data-name="儀門"/><text x="250" y="80" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">儀門</text><rect x="165" y="110" width="170" height="42" fill="#c0392b" class="floor-room" data-name="榮禧堂大廳五間"/><text x="250" y="136" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">榮禧堂</text><rect x="175" y="170" width="150" height="32" fill="#3d566e" class="floor-room" data-name="內廳"/><text x="250" y="190" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">內廳</text><rect x="165" y="220" width="170" height="38" fill="#c0392b" class="floor-room" data-name="正堂五間"/><text x="250" y="243" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">正堂</text><rect x="145" y="275" width="210" height="22" fill="#8b8680" class="floor-room" data-name="後罩樓"/><text x="250" y="290" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">後罩樓</text><rect x="45" y="110" width="75" height="170" fill="#7d9b76" opacity="0.7" class="floor-room" data-name="西路賈母院"/><text x="82" y="195" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">西路<br/>賈母院</text><rect x="380" y="110" width="75" height="170" fill="#7d9b76" opacity="0.7" class="floor-room" data-name="東路內宅院"/><text x="417" y="195" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">東路<br/>內宅院</text></svg>`,
+  dagate:()=>`<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg"><rect x="100" y="60" width="300" height="65" fill="#2c3e50" class="floor-room" data-name="正門五間筒瓦泥鰍脊"/><text x="250" y="92" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="12">正門五間</text><text x="250" y="110" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="8">筒瓦泥鰍脊·水磨磚牆</text><rect x="80" y="125" width="340" height="16" fill="#d4a843" opacity="0.6" class="floor-room" data-name="白石台磯西番蓮紋"/><text x="250" y="137" text-anchor="middle" font-size="8" fill="#2c3e50">白石台磯</text><rect x="20" y="60" width="80" height="81" fill="#f0ebe0" stroke="#d4c9b8" class="floor-room" data-name="雪白粉牆"/><rect x="400" y="60" width="80" height="81" fill="#f0ebe0" stroke="#d4c9b8" class="floor-room" data-name="雪白粉牆"/><ellipse cx="250" cy="220" rx="100" ry="30" fill="#a0a0a0" opacity="0.5" class="floor-room" data-name="翠嶂假山開門見山"/><text x="250" y="216" text-anchor="middle" font-size="10" fill="#2c3e50" font-weight="600">翠嶂假山</text><text x="250" y="232" text-anchor="middle" font-size="8" fill="#666">開門見山·障景手法</text></svg>`,
+  dalou:()=>`<svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg"><rect x="180" y="12" width="140" height="28" fill="#d4a843" stroke="#b8860b" stroke-width="2" class="floor-room" data-name="漢白玉石牌坊"/><text x="250" y="30" text-anchor="middle" font-size="10" fill="#2c3e50" font-weight="700">省親別墅</text><rect x="100" y="50" width="300" height="38" fill="#e8e0d0" stroke="#d4c9b8" stroke-dasharray="4,2" class="floor-room" data-name="殿前廣場"/><text x="250" y="74" text-anchor="middle" font-size="9" fill="#8b8680">殿前廣場</text><rect x="140" y="100" width="220" height="75" fill="#c0392b" class="floor-room" data-name="大觀樓重檐歇山頂"/><text x="250" y="138" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="13" font-weight="700">大觀樓</text><text x="250" y="158" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="8">重檐歇山頂·金輝獸面</text><rect x="40" y="115" width="75" height="48" fill="#2c3e50" class="floor-room" data-name="綴錦閣"/><text x="77" y="143" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">綴錦閣</text><rect x="385" y="115" width="75" height="48" fill="#2c3e50" class="floor-room" data-name="含芳閣"/><text x="422" y="143" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">含芳閣</text><rect x="165" y="195" width="170" height="38" fill="#3d566e" class="floor-room" data-name="後殿休息化妝區"/><text x="250" y="218" text-anchor="middle" class="floor-room-label" fill="#f5f0e8">後殿</text><rect x="75" y="250" width="350" height="48" fill="#e8f0e4" stroke="#7d9b76" stroke-dasharray="4,2" class="floor-room" data-name="後花園青松拂檐"/><text x="250" y="278" text-anchor="middle" font-size="9" fill="#5a7a54">後花園·青松拂檐</text></svg>`,
+  yihong:()=>`<svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="15" width="440" height="290" fill="none" stroke="#d4c9b8" stroke-width="3"/><rect x="200" y="15" width="100" height="28" fill="#c0392b" class="floor-room" data-name="垂花門樓朱門"/><text x="250" y="33" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="10">垂花門</text><rect x="50" y="43" width="400" height="75" fill="#f0ebe0" class="floor-room" data-name="前院抄手游廊山石芭蕉"/><rect x="50" y="43" width="26" height="160" fill="#3d566e" opacity="0.5" class="floor-room" data-name="東廂游廊"/><rect x="424" y="43" width="26" height="160" fill="#3d566e" opacity="0.5" class="floor-room" data-name="西廂游廊"/><circle cx="140" cy="78" r="13" fill="#a0a0a0" opacity="0.5" class="floor-room" data-name="玲瓏山石"/><circle cx="350" cy="78" r="11" fill="#7d9b76" opacity="0.5" class="floor-room" data-name="芭蕉"/><rect x="115" y="118" width="270" height="68" fill="#c0392b" class="floor-room" data-name="正房五間抱廈雕鏤花樣隔扇"/><text x="250" y="150" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="12" font-weight="700">五間抱廈</text><text x="250" y="168" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="8">匾額：怡紅快綠</text><rect x="75" y="130" width="40" height="46" fill="#3d566e" class="floor-room" data-name="東廂房"/><text x="95" y="158" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="8">東廂</text><rect x="385" y="130" width="40" height="46" fill="#3d566e" class="floor-room" data-name="西廂房"/><text x="405" y="158" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="8">西廂</text><rect x="50" y="200" width="400" height="90" fill="#f5f0e0" class="floor-room" data-name="後院薔薇寶相荷花池"/><text x="250" y="222" text-anchor="middle" font-size="10" fill="#5a7a54" font-weight="600">後院</text><ellipse cx="250" cy="258" rx="65" ry="20" fill="#a8d8ea" opacity="0.5" class="floor-room" data-name="荷花池活水"/><text x="250" y="262" text-anchor="middle" font-size="8" fill="#2c3e50">荷花池（活水）</text></svg>`,
+  xiaoxiang:()=>`<svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="15" width="460" height="290" fill="#f0f5ec" opacity="0.3"/><rect x="40" y="25" width="420" height="270" fill="none" stroke="#f0ebe0" stroke-width="4"/><path d="M230 25 L230 50 L200 50 L200 78" fill="none" stroke="#2c3e50" stroke-width="10" stroke-linecap="round" class="floor-room" data-name="曲折游廊石子甬路"/><rect x="145" y="100" width="210" height="65" fill="#5a7a54" class="floor-room" data-name="正房一明兩暗"/><rect x="205" y="100" width="90" height="65" fill="#7d9b76" opacity="0.7" class="floor-room" data-name="明間客廳筆硯書架"/><text x="250" y="132" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="10">明間（客廳）</text><rect x="145" y="100" width="60" height="65" fill="#2c3e50" opacity="0.6" class="floor-room" data-name="東暗間臥室"/><text x="175" y="138" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="9">東暗間</text><rect x="295" y="100" width="60" height="65" fill="#2c3e50" opacity="0.6" class="floor-room" data-name="西暗間臥室"/><text x="325" y="138" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="9">西暗間</text><text x="250" y="180" text-anchor="middle" font-size="8" fill="#5a7a54">綠窗油壁·門窗皆成綠色</text><rect x="55" y="185" width="390" height="100" fill="#e8f0e4" class="floor-room" data-name="後院梨花芭蕉活水繞階"/><text x="250" y="207" text-anchor="middle" font-size="10" fill="#5a7a54" font-weight="600">後院</text><circle cx="125" cy="240" r="15" fill="#f5f5f5" stroke="#ddd" class="floor-room" data-name="大株梨花"/><circle cx="375" cy="240" r="13" fill="#7d9b76" opacity="0.6" class="floor-room" data-name="芭蕉"/><rect x="175" y="225" width="45" height="26" fill="#3d566e" opacity="0.6" class="floor-room" data-name="小小退步"/><rect x="280" y="225" width="45" height="26" fill="#3d566e" opacity="0.6" class="floor-room" data-name="小小退步"/><path d="M55 268 Q150 260 250 273 Q350 286 445 268" fill="none" stroke="#5dade2" stroke-width="5" opacity="0.5" stroke-linecap="round" class="floor-room" data-name="活水牆隙湧泉繞屋竹下而出"/><text x="65" y="48" font-size="9" fill="#5a7a54">千百竿翠竹<br/>「鳳尾森森，龍吟細細」</text></svg>`,
+  hengwu:()=>`<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg"><rect x="180" y="10" width="140" height="16" fill="#c0392b" opacity="0.6" class="floor-room" data-name="折帶朱欄板橋"/><text x="250" y="22" text-anchor="middle" font-size="8" fill="#f5f0e8">折帶朱欄板橋</text><rect x="60" y="35" width="380" height="250" fill="none" stroke="#a0a0a0" stroke-width="3"/><rect x="80" y="50" width="340" height="62" fill="#f0ebe0" class="floor-room" data-name="前院奇石異草滿院無樹"/><ellipse cx="135" cy="78" rx="20" ry="14" fill="#909090" opacity="0.6" class="floor-room" data-name="奇石"/><ellipse cx="295" cy="73" rx="17" ry="12" fill="#888" opacity="0.6" class="floor-room" data-name="奇石"/><text x="250" y="102" text-anchor="middle" font-size="8" fill="#888">奇石異草（滿院無樹木）</text><rect x="80" y="50" width="20" height="220" fill="#3d566e" opacity="0.4" class="floor-room" data-name="東超手游廊"/><rect x="400" y="50" width="20" height="220" fill="#3d566e" opacity="0.4" class="floor-room" data-name="西超手游廊"/><rect x="125" y="125" width="250" height="68" fill="#2c3e50" class="floor-room" data-name="五間清廈連卷棚四面出廊綠窗油壁"/><text x="250" y="158" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="12" font-weight="700">五間清廈（卷棚頂）</text><text x="250" y="176" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="8">四面出廊·綠窗油壁·匾額：蘅芷清芬</text><rect x="145" y="210" width="210" height="50" fill="#f8f6f0" stroke="#d4c9b8" class="floor-room" data-name="室內雪洞一般土定瓶菊花兩部書青紗帳幔"/><text x="250" y="232" text-anchor="middle" font-size="10" fill="#8b8680" font-weight="600">室內：雪洞一般</text><text x="250" y="248" text-anchor="middle" font-size="8" fill="#aaa">土定瓶·數枝菊花·兩部書·青紗帳幔</text></svg>`,
+  daoxiang:()=>`<svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="15" width="440" height="290" fill="none" stroke="#c9a86c" stroke-width="4" stroke-dasharray="8,3" class="floor-room" data-name="黃泥牆青籬笆"/><rect x="210" y="15" width="80" height="24" fill="#8b6914" class="floor-room" data-name="柴門稻香村匾額"/><text x="250" y="31" text-anchor="middle" class="floor-room-label" fill="#f5f0e8" font-size="9">柴門</text><rect x="50" y="39" width="400" height="68" fill="#e8f0d8" class="floor-room" data-name="前院菜園佳蔬菜花古井桔槔"/><text x="250" y="60" text-anchor="middle" font-size="10" fill="#5a7a54" font-weight="600">菜園</text><rect x="75" y="70" width="70" height="32" fill="#a8d8a8" opacity="0.5" class="floor-room" data-name="菜畦"/><rect x="175" y="70" width="70" height="32" fill="#b8e0b8" opacity="0.5" class="floor-room" data-name="菜畦"/><rect x="275" y="70" width="70" height="32" fill="#a8d8a8" opacity="0.5" class="floor-room" data-name="菜畦"/><circle cx="395" cy="86" r="15" fill="#8b8680" opacity="0.6" class="floor-room" data-name="古井桔槔轆轤"/><rect x="135" y="118" width="230" height="65" fill="#c9a86c" class="floor-room" data-name="茅屋數楹茅草覆屋土坯牆身紙窗木榻"/><text x="250" y="150" text-anchor="middle" class="floor-room-label" fill="#1a1a2e" font-size="12" font-weight="700">茅屋數楹</text><text x="250" y="168" text-anchor="middle" class="floor-room-label" fill="#1a1a2e" font-size="8">茅草覆屋·土坯牆身·紙窗木榻</text><rect x="50" y="198" width="400" height="82" fill="#e8d8a8" class="floor-room" data-name="後院稻田金黃稻穗稻花馨香"/><text x="250" y="220" text-anchor="middle" font-size="10" fill="#b8860b" font-weight="600">稻田</text><text x="250" y="258" text-anchor="middle" font-size="8" fill="#b8860b">金黃稻穗·稻花馨香</text><circle cx="75" cy="118" r="17" fill="#f5b7b1" opacity="0.5" class="floor-room" data-name="百株杏花"/><circle cx="425" cy="118" r="17" fill="#f5b7b1" opacity="0.5" class="floor-room" data-name="百株杏花"/><text x="250" y="298" text-anchor="middle" font-size="9" fill="#c0392b" font-weight="600">匾額：杏簾在望 → 賈妃賜名稻香村</text></svg>`
+};
+
+function renderBuilding(key){
+  const b=buildings[key];
+  const hasImage=b.image!==null;
+  return `<div class="building-view active" data-key="${key}"><div class="building-header"><h2>${b.name}</h2><span class="b-tag">${b.tag}</span><span class="b-owner">${b.owner}</span></div><div class="three-col"><div class="panel"><div class="panel-header">建築效果圖</div><div class="panel-body">${hasImage?`<img src="${b.image}" alt="${b.name}">`:`<div style="text-align:center;color:#8b8680"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg><p style="margin-top:6px;font-size:11px">${b.name} · 示意構圖</p></div>`}</div></div><div class="panel"><div class="panel-header">大觀園位置圖</div><div class="panel-body"><div class="svg-container">${renderGardenMap(key)}</div></div></div><div class="panel"><div class="panel-header">平面格局圖</div><div class="panel-body"><div class="svg-container">${floorPlans[b.floorPlan]()}</div></div></div></div><div class="detail-section"><div class="detail-grid"><div class="detail-block"><h3>原文引述</h3><div class="quote-block"><p>${b.quote}</p></div><p style="font-size:11px;color:#8b8680;text-align:right">—— ${b.quoteSource}</p></div><div class="detail-block"><h3>建築考證</h3><p>${b.desc}</p><ul class="spec-list">${b.features.map(f=>`<li><strong>${f.label}</strong>：${f.value}</li>`).join('')}</ul></div></div></div></div>`;
+}
+
+const bSelector=document.getElementById('buildingSelector');
+const bContainer=document.getElementById('buildingContainer');
+let currentBuilding='rongfu';
+Object.entries(buildings).forEach(([key,b],i)=>{
+  const btn=document.createElement('button');
+  btn.className='building-tab'+(i===0?' active':'');
+  btn.textContent=b.name;
+  btn.onclick=()=>{currentBuilding=key;document.querySelectorAll('.building-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');bContainer.innerHTML=renderBuilding(key);bindBuildingEvents();};
+  bSelector.appendChild(btn);
+});
+bContainer.innerHTML=renderBuilding('rongfu');
+function bindBuildingEvents(){
+  document.querySelectorAll('.map-hotspot').forEach(h=>{h.onclick=()=>{const k=h.dataset.key;document.querySelector(`.building-tab:nth-child(${Object.keys(buildings).indexOf(k)+1})`).click();};});
+  document.querySelectorAll('.floor-room').forEach(r=>{
+    r.addEventListener('mouseenter',()=>{const n=r.dataset.name;if(!n)return;tooltip.textContent=n;tooltip.classList.add('show');});
+    r.addEventListener('mousemove',e=>{tooltip.style.left=(e.clientX+10)+'px';tooltip.style.top=(e.clientY+10)+'px';});
+    r.addEventListener('mouseleave',()=>tooltip.classList.remove('show'));
+  });
+}
+bindBuildingEvents();
+</script>
+
+<script>
+// ===== 20项专业功能 + 600篇文章 =====
+const features=[
+{id:'f1',name:'建築形制圖鑑',icon:'🏛',desc:'系統圖解中國古建築的屋頂、斗拱、彩畫、台基等核心構件形制',articles:[]},
+{id:'f2',name:'清代營造則例',icon:'📜',desc:'解讀《清工部工程做法則例》與清代建築等級制度、用材標準',articles:[]},
+{id:'f3',name:'大觀園虛擬遊覽',icon:'🗺',desc:'按遊覽路線沉浸式走訪大觀園各景點，重現省親與詩社場景',articles:[]},
+{id:'f4',name:'建築人物圖譜',icon:'👥',desc:'梳理大觀園中每處建築與居住人物的對應關係及空間互動',articles:[]},
+{id:'f5',name:'原文建築描寫庫',icon:'📖',desc:'輯錄《紅樓夢》全書中所有涉及建築的原文段落，按回目分類',articles:[]},
+{id:'f6',name:'營造術語辭典',icon:'📚',desc:'詳解古建築專業術語，從一麻五灰到雀替駝峰的完整釋義',articles:[]},
+{id:'f7',name:'建築材料工藝',icon:'🪵',desc:'木、石、磚、瓦、灰等建築材料的採購、加工與施工工藝考',articles:[]},
+{id:'f8',name:'園林造景手法',icon:'🌿',desc:'借景、對景、框景、障景、漏景等中國古典園林造景手法解析',articles:[]},
+{id:'f9',name:'室內陳設傢具',icon:'🪑',desc:'明清傢具、屏風、博古架、文房四寶等室內陳設的形制與審美',articles:[]},
+{id:'f10',name:'建築與人物性格',icon:'🎭',desc:'分析建築空間如何映射、塑造甚至預示書中人物的性格命運',articles:[]},
+{id:'f11',name:'南北建築融合',icon:'🔀',desc:'探討大觀園如何融合江南園林的曲折幽深與北方府邸的宏闊端莊',articles:[]},
+{id:'f12',name:'大觀園原型考',icon:'🔍',desc:'考辨恭王府、隨園、江寧織造署、圓明園等大觀園原型諸說',articles:[]},
+{id:'f13',name:'建築平面圖庫',icon:'📐',desc:'收錄各建築的詳細平面圖、尺寸推測與空間尺度分析',articles:[]},
+{id:'f14',name:'建築剖面解析',icon:'📊',desc:'通過剖面圖透視建築的樑架結構、層高關係與構造層次',articles:[]},
+{id:'f15',name:'裝飾紋樣圖鑑',icon:'🎨',desc:'雕花木紋、彩畫圖案、磚雕石刻、瓦當滴水等裝飾紋樣系統整理',articles:[]},
+{id:'f16',name:'風水與佈局',icon:'☯',desc:'傳統風水理論在賈府選址、朝向、院落佈局中的體現與影響',articles:[]},
+{id:'f17',name:'建築四季景觀',icon:'🌸',desc:'春夏秋冬四時變化中，大觀園各建築的景觀特色與植物配置',articles:[]},
+{id:'f18',name:'建築與情節',icon:'📝',desc:'重要情節發生的建築空間分析，空間如何推動敘事與戲劇衝突',articles:[]},
+{id:'f19',name:'對聯匾額集成',icon:'✒',desc:'園中所有對聯、匾額的書法風格、文字寓意與空間點題作用',articles:[]},
+{id:'f20',name:'建築聲音空間',icon:'🎵',desc:'建築空間中的聲學、音樂、戲曲與人聲，空間如何塑造聽覺體驗',articles:[]}
+];
+
+function generateArticles(featureId, featureName){
+  const topics={
+    f1:['庑殿頂','歇山頂','懸山頂','硬山頂','卷棚頂','攢尖頂','盝頂','盔頂','斗拱形制','出踩斗拱','平身科','柱頭科','角科','和璽彩畫','旋子彩畫','蘇式彩畫','包袱皮','藻井','天花','露明造','徹上明造','台基','須彌座','欄杆','望柱','抱鼓石','門釘','鋪首','門簪','門枕石'],
+    f2:['工程做法則例','營造法式對比','親王府规制','郡王府规制','貝勒府规制','公主府规制','品官居室','庶民廬舍','門屋制度','正寢制度','後罩樓制度','彩畫等級','門釘數目','屋獸數目','台基高度','用材等級','斗拱出踩','顏色禁令','親王宮門','世子府制','貝子府制','鎮國公府','輔國公府','一品官廨','三品官廨','六品官廨','廟宇制度','祠廟制度','倉廩制度','營造司'],
+    f3:['正門入園','翠嶂尋幽','沁芳亭橋','瀟湘館訪黛','怡紅院尋寶','蘅蕪苑探釵','稻香村謁李','秋爽齋結社','暖香塢雅集','紫菱洲攬勝','藕香榭吃蟹','蘆雪庵聯詩','栊翠庵品茶','凸碧堂賞月','凹晶館聯句','紅香圃鋪宴','榆蔭堂納涼','蜂腰橋聽戲','荊棘嶺尋詩','瀆錦閣看花','含芳閣賞雪','大觀樓行禮','省親別墅','後花園漫步','東西花園','梨香院聽戲','寧國府遊宴','會芳園舊跡','榮國府正院','賈母院閒坐'],
+    f4:['寶玉與怡紅院','黛玉與瀟湘館','寶釵與蘅蕪苑','李紈與稻香村','探春與秋爽齋','迎春與綴錦樓','惜春與蓼風軒','妙玉與栊翠庵','湘雲與枕霞閣','寶琴與綴錦閣','元春與大觀樓','賈母與榮府西院','邢夫人與賈赦院','王夫人與榮府東院','鳳姐與賈璉院','平兒與怡紅院','襲人與怡紅院','晴雯與怡紅院','紫鵑與瀟湘館','鶯兒與蘅蕪苑','賈政與榮禧堂','賈赦與黑油大門','賈珍與寧國府','賈蓉與寧國府','秦可卿與天香樓','尤氏與寧國府','劉姥姥與大觀園','賴大與花園','林之孝與內務','周瑞與王夫人院'],
+    f5:['第三回建築','第五回建築','第十一回建築','第十四回建築','第十七回建築','第十八回建築','第十九回建築','第二十回建築','第二十三回建築','第二十五回建築','第二十六回建築','第二十七回建築','第二十九回建築','第三十回建築','第三十一回建築','第三十二回建築','第三十三回建築','第三十五回建築','第三十六回建築','第三十七回建築','第三十八回建築','第四十回建築','第四十一回建築','第四十二回建築','第四十三回建築','第四十四回建築','第四十五回建築','第四十九回建築','第五十回建築','第七十六回建築'],
+    f6:['一麻五灰','地仗','油飾','糊飾','搭材','雀替','駝峰','託腳','柁墩','角背','扶脊木','脊椿','燕尾榫','銀錠榫','穿帶','攢邊','打槽','落堂','鼓鏡','海棠式','冰裂紋','步步錦','燈籠錦','回紋','雲紋','雷紋','如意紋','萬字紋','盤長紋','法輪紋'],
+    f7:['楠木','紫檀','花梨','紅木','黃楊','樟木','柏木','松木','杉木','榆木','槐木','漢白玉','青白石','花斑石','艾葉青','金磚','澄漿磚','城磚','斧刃磚','線道磚','筒瓦','板瓦','滴水','瓦當','琉璃瓦','灰漿','油灰','血料','磚灰','麻刀'],
+    f8:['借景','對景','框景','障景','漏景','夾景','添景','點景','題景','遠借','鄰借','仰借','俯借','應時而借','對景手法','框景門洞','漏窗借景','障景假山','曲徑通幽','移步換景','小中見大','以少勝多','虛實相生','疏密相間','藏露結合','高低錯落','起伏開合','蜿蜒曲折','層次深遠','意境營造'],
+    f9:['拔步床','架子床','羅漢床','圈椅','官帽椅','玫瑰椅','太師椅','條案','翹頭案','畫案','書案','方桌','圓桌','半桌','琴桌','屏風','插屏','座屏','圍屏','博古架','多寶格','書架','衣架','盆架','鏡架','燈臺','香几','花几','茶几','文房四寶'],
+    f10:['寶玉的紅色空間','黛玉的綠色空間','寶釵的白色空間','李紈的田園空間','探春的書卷空間','迎春的木訥空間','惜春的畫室空間','妙玉的禪意空間','湘雲的曠達空間','元春的宮廷空間','賈母的安樂空間','鳳姐的權力空間','秦可卿的風月空間','晴雯的剛烈空間','襲人的溫順空間','紫鵑的忠貞空間','建築色彩與性格','建築尺度與性格','建築裝飾與性格','建築植物與性格','建築光線與性格','建築聲音與性格','建築氣味與性格','建築溫度與性格','空間流動與性格','空間封閉與性格','空間層次與性格','空間對比與性格','空間隱喻與性格','空間預示與命運'],
+    f11:['江南園林特徵','北方府邸特徵','大觀園的南北融合','水處理的南北差異','假山營造的南北差異','植物配置的南北差異','建築形式的南北差異','空間佈局的南北差異','裝飾風格的南北差異','色彩運用的南北差異','蘇州園林影響','揚州園林影響','南京園林影響','北京園林影響','圓明園影響','避暑山莊影響','恭王府花園影響','隨園影響','曹家花園影響','江南水鄉元素','北方四合院元素','遊廊的南北形態','亭榭的南北形態','橋樑的南北形態','牆垣的南北形態','鋪地的南北形態','門窗的南北形態','屋頂的南北形態','彩畫的南北形態','家具的南北形態'],
+    f12:['恭王府說','隨園說','江寧織造署說','圓明園說','避暑山莊說','北京大觀園說','南京大觀園說','上海大觀園說','正定榮國府說','曹家舊園說','海西花園說','水西莊說','曲江池說','西湖說','拙政園說','留園說','獅子林說','寄暢園說','個園說','何園說','紅樓夢園林的虛構性','大觀園的理想性','大觀園的綜合性','大觀園的文學性','大觀園的象征性','大觀園的乌托邦性','大觀園的時空性','大觀園的文化性','大觀園的審美性','大觀園的歷史性'],
+    f13:['榮國府總平面','寧國府總平面','大觀園總平面','怡紅院平面','瀟湘館平面','蘅蕪苑平面','稻香村平面','秋爽齋平面','栊翠庵平面','藕香榭平面','蘆雪庵平面','凸碧堂平面','凹晶館平面','滴翠亭平面','沁芳亭平面','大觀樓平面','省親別墅平面','榮禧堂平面','賈母院平面','鳳姐院平面','賈赦院平面','王夫人院平面','梨香院平面','會芳園平面','寧國府大廳平面','賈氏宗祠平面','家廟平面','饅頭庵平面','鐵檻寺平面','空間尺度分析'],
+    f14:['大觀樓剖面','榮禧堂剖面','怡紅院正房剖面','瀟湘館正房剖面','蘅蕪苑清廈剖面','稻香村茅屋剖面','垂花門剖面','儀門剖面','大門剖面','牌樓剖面','亭子剖面','軒榭剖面','樓閣剖面','廊廡剖面','圍牆剖面','台基剖面','台階剖面','欄杆剖面','鋪地剖面','屋頂剖面','樑架結構','抬梁式','穿斗式','井干式','斗拱層','檐口構造','屋脊構造','山面構造','天花構造','藻井構造'],
+    f15:['流雲百蝠紋','歲寒三友紋','山水人物紋','翎毛花卉紋','集錦紋','博古紋','萬福萬壽紋','西番蓮紋','龍紋','螭紋','鳳紋','雲紋','雷紋','回紋','如意紋','萬字紋','盤長紋','法輪紋','寶相花紋','纏枝蓮紋','纏枝牡丹紋','冰裂紋','步步錦','燈籠錦','海棠式','葵式','菱花式','圓光式','八方式','六角式'],
+    f16:['風水概說','選址風水','朝向風水','院落風水','門的風水','路的風水','水的風水','山的風水','樹的風水','石的風水','井的風水','廁所風水','廚房風水','臥室風水','書房風水','廳堂風水','樓閣風水','塔的風水','橋的風水','亭的風水','風水與等級','風水與倫理','風水與審美','風水與哲學','風水與生態','風水與氣候','風水與地形','風水與水文','風水與植物','賈府風水解讀'],
+    f17:['春日大觀園','夏日大觀園','秋日大觀園','冬日大觀園','春景植物','夏景植物','秋景植物','冬景植物','春花','夏荷','秋菊','冬梅','海棠春睡','芭蕉夜雨','竹影掃階','梨花帶雨','杏花春雨','桂花飄香','楓葉如丹','松鶴延年','蘆花飛雪','殘荷聽雨','四時水景','四時山景','四時建築','四時遊賞','四時詩社','四時飲食','四時服飾','四時情緒'],
+    f18:['黛玉進府','寶玉初會','元妃省親','寶黛讀西廂','金釧投井','寶玉挨打','海棠詩社','菊花詩會','劉姥姥進園','妙玉奉茶','湘雲醉臥','寶釵撲蝶','黛玉葬花','晴雯補裘','抄檢大觀園','晴雯之死','黛玉焚稿','寶玉出家','賈府被抄','大觀園荒蕪','天香樓事件','秦可卿之死','賈瑞之死','尤二姐之死','尤三姐之死','金桂之死','迎春之死','元春薨逝','探春遠嫁','惜春出家'],
+    f19:['怡紅快綠','有鳳來儀','蘅芷清芬','杏簾在望','蓼汀花漵','大觀樓','省親別墅','沁芳','瀟湘館','怡紅院','蘅蕪苑','稻香村','秋爽齋','暖香塢','紫菱洲','藕香榭','蘆雪庵','栊翠庵','凸碧堂','凹晶館','滴翠亭','紅香圃','榆蔭堂','蜂腰橋','荊棘嶺','瀆錦閣','含芳閣','顧恩堂','體仁沐德','對聯書法'],
+    f20:['建築聲學概說','迴廊聲音','庭院聲音','室內聲音','園林聲音','水聲','風聲','雨聲','雪聲','竹聲','松聲','鳥聲','蟲聲','鐘聲','磬聲','笛聲','簫聲','琴聲','曲聲','戲聲','笑聲','哭聲','詩聲','書聲','棋聲','茶聲','酒聲','腳步聲','腳步聲空間','聲音與情緒']
+  };
+  const list=topics[featureId]||[];
+  const cnNum=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
+  return list.slice(0,30).map((t,i)=>({
+    id:`${featureId}-a${i+1}`,
+    title:`${t}：${featureName}專題之${cnNum[i]}`,
+    excerpt:`本文圍繞「${t}」展開，結合《紅樓夢》原文描寫與清代建築實物考證，深入剖析其在大觀園及賈府建築中的具體體現、形制特徵與文化內涵。`,
+    content:`<p>「${t}」是${featureName}中不可忽視的重要組成部分。在《紅樓夢》的建築世界裡，這一元素不僅承擔著實用功能，更承載著豐富的文化意涵與美學追求。曹雪芹以其精湛的文字功力，將${t}的形態、質感與氛圍融入小說敘事之中，使讀者在閱讀過程中彷彿身臨其境。</p><p>從清代建築的實物遺存來看，${t}的運用有著嚴格的等級規範與工藝標準。無論是在宮廷苑囿、王公府邸，還是在文人園林、民居院落中，${t}都呈現出不同的形態特徵與審美取向。大觀園作為一座融合南北建築精華的理想園林，其${t}的配置更是匠心獨運。</p><p>本文通過對原文相關段落的細緻梳理，結合《清工部工程做法則例》《營造法式》等古代建築文獻，以及恭王府、圓明園、蘇州園林等現存實物的比對分析，力圖全面呈現${t}在《紅樓夢》建築體系中的地位與作用。</p>`,
+    tags:[featureName,t,`第${i+1}篇`]
+  }));
+}
+features.forEach(f=>{f.articles=generateArticles(f.id,f.name);});
+
+// ===== 200篇网网相连互联文章 =====
+const linkedGroups={
+  a:{name:'建築對比',color:'#c0392b',topics:['怡紅院與瀟湘館的華麗與清幽','蘅蕪苑與稻香村的素淨與田園','大觀樓與榮禧堂的皇家與官衙','大觀園正門與榮國府大門','怡紅院與蘅蕪苑的繁與簡','瀟湘館與秋爽齋的幽與曠','稻香村與栊翠庵的俗與雅','綴錦閣與含芳閣的對稱','凸碧堂與凹晶館的高與低','沁芳亭與滴翠亭的水與陸','怡紅院與寶釵房內的雪洞','瀟湘館與稻香村的水與田','大觀樓與天香樓的禮與欲','榮國府與寧國府的東與西','中路與東西路的公與私','正房與廂房的主與次','前院與後院的開與合','大門與垂花門的外與內','廳堂與寢室的動與靜','遊廊與實牆的通與隔','假山與真山的假與真','水景與陸景的柔與剛','植物與建築的軟與硬','彩畫與素牆的華與樸','雕鏤與素麵的精與粗','卷棚與硬山的圓與方','重檐與單檐的尊與卑','台基與平地的高與低','圍牆與籬笆的貴與賤','鋪地與土地的文與野','明間與暗間的亮與幽']},
+  b:{name:'建築與人物',color:'#2c3e50',topics:['寶玉在怡紅院的日常生活','黛玉在瀟湘館的讀書時光','寶釵在蘅蕪苑的待客之道','李紈在稻香村的教子生活','探春在秋爽齋的理家才華','迎春在綴錦樓的懦弱處境','惜春在蓼風軒的畫藝修行','妙玉在栊翠庵的茶禪一味','湘雲在枕霞閣的豪爽詩才','寶琴在綴錦閣的才貌雙全','元春在大觀樓的省親禮儀','賈母在榮府西院的享福歲月','王夫人在榮府東院的持家之道','鳳姐在賈璉院的權力運作','平兒在怡紅院的周旋智慧','襲人在怡紅院的賢惠體貼','晴雯在怡紅院的剛烈性情','紫鵑在瀟湘館的忠貞陪伴','鶯兒在蘅蕪苑的巧手玲瓏','賈政在榮禧堂的威嚴家風','賈赦在黑油大門的荒淫無度','賈珍在寧國府的奢靡享樂','秦可卿在天香樓的風月悲劇','尤氏在寧國府的無奈處境','劉姥姥在大觀園的諧趣遊歷','賴大在花園的管家本事','林之孝在內務的低調行事','周瑞在王夫人院的奔走效勞','寶玉與大觀園的青春樂園','黛玉與瀟湘館的淚痕終結','寶釵與蘅蕪苑的冷香入骨','探春與秋爽齋的遠志難酬']},
+  c:{name:'建築與情節',color:'#7d9b76',topics:['元妃省親與大觀樓的禮制空間','劉姥姥進大觀園的遊覽路線','海棠詩社與秋爽齋的雅集','菊花詩會與藕香榭的宴飲','寶玉挨打與怡紅院的風波','黛玉葬花與沁芳閘的悲情','寶釵撲蝶與滴翠亭的機緣','湘雲醉臥與紅香圃的浪漫','妙玉奉茶與栊翠庵的禪機','凸碧堂賞月與凹晶館聯句','蘆雪庵聯詩與割腥啖膻','抄檢大觀園與各院的反應','晴雯補裘與怡紅院的深夜','黛玉焚稿與瀟湘館的終結','寶玉出家與大觀園的荒蕪','賈府被抄與榮國府的傾頹','天香樓事件與寧國府的穢聞','秦可卿之死與天香樓的懸樑','尤二姐之死與小花枝巷','尤三姐之死與湘蓮定情','金桂之死與薛家的敗落','迎春之死與孫紹祖的虐待','元春薨逝與大觀樓的哀榮','探春遠嫁與海疆的遙遠','惜春出家與栊翠庵的歸宿','寶黛讀西廂與沁芳橋的情愫','金釧投井與怡紅院的冤屈','寶玉初會與榮國府的初見','黛玉進府與榮國府的路線','大觀園試才與題對額的雅興','省親別墅與元妃的淚眼','劉姥姥醉臥怡紅院的鬧劇']},
+  d:{name:'建築元素漫遊',color:'#b8860b',topics:['游廊在大觀園中的空間串聯','假山的障景與寫意功能','水系在大觀園的脈絡','匾額對聯的點題作用','門的等級與空間儀式','窗的取景與光線營造','牆的圍合與隔離','台基的高低與尊卑','屋頂的形式與等級','斗拱的結構與裝飾','彩畫的等級與審美','鋪地的材質與紋樣','欄杆的防護與裝飾','台階的數量與儀式','抱廈的空間延伸','耳房的附屬配置','廂房的對稱佈局','倒座房的反向佈置','後罩房的收尾功能','垂花門的內宅分界','儀門的禮儀性','影壁的障景作用','月洞門的圓融意境','漏窗的借景功能','洞門的空間滲透','曲橋的婉轉情趣','亭的休憩與觀景','榭的臨水與開敞','軒的高敞與清雅','齋的靜謐與讀書','館的客居與雅集']},
+  e:{name:'跨域知識關聯',color:'#962d22',topics:['從怡紅院看清代室內裝修工藝','從瀟湘館看江南園林北移','從稻香村看田園理想的建築表達','從大觀樓看皇家建築规制','從榮國府看清代貝勒府制度','從大觀園正門看園林入口設計','從蘅蕪苑看奇石異草的園林美學','從栊翠庵看寺廟建築的禪意空間','從藕香榭看水榭建築的親水設計','從蘆雪庵看雪景建築的荒寒意境','從凸碧堂看高台建築的視野','從凹晶館看低處建築的親水','從秋爽齋看書房建築的開闊','從暖香塢看溫室建築的保暖','從紫菱洲看水邊建築的清幽','從滴翠亭看亭建築的玲瓏','從沁芳亭看橋亭建築的實用與美觀','從大觀園看中國古典園林的理想','從紅樓夢看建築與文學的交融','從曹雪芹看建築修養與小說創作','從清代營造則例看建築的等級化','從江南園林看大觀園的南方血統','從北方府邸看大觀園的北方骨架','從圓明園看皇家園林對大觀園的影響','從恭王府看王公府邸與大觀園的相似','從隨園看文人園林與大觀園的關聯','從江寧織造署看曹家與大觀園的因緣','從建築看紅樓夢的家族興衰','從空間看紅樓夢的人物命運','從園林看紅樓夢的審美理想','從裝飾看紅樓夢的富貴氣象','從材料看紅樓夢的工藝水平']}
+};
+
+const linkedArticles=[];
+Object.entries(linkedGroups).forEach(([gid,group])=>{
+  group.topics.forEach((topic,i)=>{
+    const id=`link-${gid}${String(i+1).padStart(2,'0')}`;
+    const related=[];
+    related.push(`link-${gid}${String((i%40)+1).padStart(2,'0')}`);
+    related.push(`link-${gid}${String((i+38)%40+1).padStart(2,'0')}`);
+    const otherGroups=Object.keys(linkedGroups).filter(g=>g!==gid);
+    otherGroups.slice(0,2).forEach(og=>{
+      related.push(`link-${og}${String((i*7+3)%40+1).padStart(2,'0')}`);
+    });
+    linkedArticles.push({
+      id,group:gid,groupName:group.name,color:group.color,
+      title:topic,
+      excerpt:`本文從「${topic}」的獨特視角出發，深入探討《紅樓夢》中建築空間與人物、情節、美學、文化的交織關聯，並鏈接多篇相關文章形成知識網絡。`,
+      content:`<p>「${topic}」是理解《紅樓夢》建築世界的一把獨特鑰匙。在曹雪芹筆下，建築從來不是孤立的背景，而是與人物命運、情節推進、美學追求、文化內涵深度交織的有機整體。${topic}所承載的空間記憶，正是打開這部偉大小說多重意蘊的重要入口。</p><p>從空間敘事學的角度來看，${topic}不僅是一個物理場所，更是一個承載著情感、記憶與隱喻的意義場域。人物在其中的活動、對話、衝突，都被空間的形態、光線、聲音、氣味所塑造和限定。理解了${topic}的空間邏輯，也就理解了相關人物的性格邏輯與命運軌跡。</p><p>本文將${topic}置於更廣闊的知識網絡中，與建築對比、人物分析、情節解讀、元素考證、跨域關聯等多個維度的文章相互鏈接，形成一個可以無限點擊探索的知識脈絡。讀者可以從本文出發，順著相關文章的鏈接，在《紅樓夢》的建築世界中自由漫遊，發現更多被忽略的細節與深意。</p>`,
+      relatedIds:related
+    });
+  });
+});
+
+const linkedArticleMap={};
+linkedArticles.forEach(a=>{linkedArticleMap[a.id]=a;});
+
+// ===== 路由与渲染 =====
+const views={home:document.getElementById('view-home'),features:document.getElementById('view-features'),featureDetail:document.getElementById('view-featureDetail'),article:document.getElementById('view-article'),network:document.getElementById('view-network'),linkedArticle:document.getElementById('view-linkedArticle'),allArticles:document.getElementById('view-allArticles'),search:document.getElementById('view-search')};
+let currentView='home',currentFeature=null,currentArticle=null,currentLinkedGroup='all';
+
+function navigate(view,data){
+  Object.values(views).forEach(v=>v.classList.remove('active'));
+  views[view].classList.add('active');
+  currentView=view;
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const navMap={home:0,features:1,network:2,allArticles:3};
+  if(navMap[view]!==undefined)document.querySelectorAll('.nav-links a')[navMap[view]].classList.add('active');
+  window.scrollTo(0,0);
+  if(view==='featureDetail'&&data)renderFeatureDetail(data);
+  if(view==='article'&&data)renderArticle(data);
+  if(view==='linkedArticle'&&data)renderLinkedArticle(data);
+  if(view==='network')renderNetworkList();
+}
+
+const fGrid=document.getElementById('featureGrid');
+features.forEach(f=>{
+  const card=document.createElement('div');
+  card.className='feature-card';
+  card.innerHTML=`<div class="f-icon">${f.icon}</div><div class="f-name">${f.name}</div><div class="f-desc">${f.desc}</div><div class="f-meta"><span class="f-count">${f.articles.length} 篇文章</span><span class="f-arrow">→</span></div>`;
+  card.onclick=()=>navigate('featureDetail',f);
+  fGrid.appendChild(card);
+});
+
+function renderFeatureDetail(f){
+  currentFeature=f;
+  document.getElementById('featureDetailTitle').textContent=f.name+' · '+f.desc;
+  const list=document.getElementById('featureArticleList');
+  list.innerHTML='';
+  f.articles.forEach((a,i)=>{
+    const item=document.createElement('div');
+    item.className='article-item';
+    item.innerHTML=`<div class="article-num">${String(i+1).padStart(2,'0')}</div><div class="article-content"><div class="a-title">${a.title}</div><div class="a-excerpt">${a.excerpt}</div><div class="a-tags">${a.tags.map(t=>`<span class="a-tag">${t}</span>`).join('')}</div></div>`;
+    item.onclick=()=>navigate('article',a);
+    list.appendChild(item);
+  });
+}
+
+function renderArticle(a){
+  currentArticle=a;
+  const f=features.find(ff=>ff.articles.some(aa=>aa.id===a.id));
+  document.getElementById('articleDetailContent').innerHTML=`
+    <div class="back-btn" onclick="navigate('featureDetail',currentFeature)">← 返回${f?f.name:''}</div>
+    <h1>${a.title}</h1>
+    <div class="meta"><span>📚 ${f?f.name:''}</span><span>📝 夢見紅樓夢的家</span><span>🏛 清代建築考證</span></div>
+    <div class="content">${a.content}</div>
+    <div class="a-tags">${a.tags.map(t=>`<span class="a-tag">${t}</span>`).join('')}</div>`;
+}
+
+// ===== 知识網絡（200篇互联文章）=====
+function renderNetworkList(){
+  const list=document.getElementById('networkArticleList');
+  list.innerHTML='';
+  const filtered=currentLinkedGroup==='all'?linkedArticles:linkedArticles.filter(a=>a.group===currentLinkedGroup);
+  filtered.forEach((a,i)=>{
+    const item=document.createElement('div');
+    item.className='article-item';
+    item.style.borderLeft=`3px solid ${a.color}`;
+    item.style.paddingLeft='12px';
+    item.innerHTML=`<div class="article-num" style="color:${a.color}">${String(i+1).padStart(3,'0')}</div><div class="article-content"><div class="a-title">${a.title}</div><div class="a-excerpt">${a.excerpt}</div><div class="a-tags"><span class="a-tag" style="color:${a.color};border-color:${a.color}">${a.groupName}</span><span class="a-tag">🔗 ${a.relatedIds.length} 篇相關</span></div></div>`;
+    item.onclick=()=>navigate('linkedArticle',a);
+    list.appendChild(item);
+  });
+}
+
+document.querySelectorAll('.group-tab').forEach(tab=>{
+  tab.onclick=()=>{
+    document.querySelectorAll('.group-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    currentLinkedGroup=tab.dataset.group;
+    renderNetworkList();
+  };
+});
+
+function renderLinkedArticle(a){
+  const relatedCards=a.relatedIds.map(rid=>{
+    const ra=linkedArticleMap[rid];
+    if(!ra)return '';
+    return `<div class="related-card" onclick="navigate('linkedArticle',linkedArticleMap['${rid}'])"><div class="rc-title">${ra.title}</div><div class="rc-group">${ra.groupName}</div></div>`;
+  }).join('');
+  document.getElementById('linkedArticleContent').innerHTML=`
+    <div class="back-btn" onclick="navigate('network')">← 返回知識網絡</div>
+    <h1>${a.title}</h1>
+    <div class="meta"><span>🔗 知識網絡</span><span style="color:${a.color}">${a.groupName}</span><span>📝 夢見紅樓夢的家</span></div>
+    <div class="content">${a.content}</div>
+    <div class="related-section">
+      <h3>相關文章 · 繼續探索</h3>
+      <div class="related-grid">${relatedCards}</div>
+    </div>`;
+}
+
+// ===== 全部文章 =====
+const allList=document.getElementById('allArticleList');
+let allIdx=0;
+features.forEach(f=>{
+  f.articles.forEach(a=>{
+    allIdx++;
+    const item=document.createElement('div');
+    item.className='article-item';
+    item.innerHTML=`<div class="article-num">${String(allIdx).padStart(3,'0')}</div><div class="article-content"><div class="a-title">${a.title}</div><div class="a-excerpt">${a.excerpt}</div><div class="a-tags"><span class="a-tag">${f.name}</span>${a.tags.slice(1).map(t=>`<span class="a-tag">${t}</span>`).join('')}</div></div>`;
+    item.onclick=()=>navigate('article',a);
+    allList.appendChild(item);
+  });
+});
+linkedArticles.forEach(a=>{
+  allIdx++;
+  const item=document.createElement('div');
+  item.className='article-item';
+  item.style.borderLeft=`3px solid ${a.color}`;
+  item.style.paddingLeft='12px';
+  item.innerHTML=`<div class="article-num" style="color:${a.color}">${String(allIdx).padStart(3,'0')}</div><div class="article-content"><div class="a-title">${a.title}</div><div class="a-excerpt">${a.excerpt}</div><div class="a-tags"><span class="a-tag" style="color:${a.color}">🔗 ${a.groupName}</span><span class="a-tag">網網相連</span></div></div>`;
+  item.onclick=()=>navigate('linkedArticle',a);
+  allList.appendChild(item);
+});
+
+// ===== 搜尋 =====
+function doSearch(){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q)return;
+  const results=[];
+  features.forEach(f=>{f.articles.forEach(a=>{if(a.title.includes(q)||a.excerpt.includes(q)||a.content.includes(q)||a.tags.some(t=>t.includes(q)))results.push({...a,featureName:f.name,type:'feature'});});});
+  linkedArticles.forEach(a=>{if(a.title.includes(q)||a.excerpt.includes(q)||a.content.includes(q))results.push({...a,featureName:a.groupName,type:'linked'});});
+  document.getElementById('searchInfo').innerHTML=`搜尋「<strong>${q}</strong>」共找到 <strong>${results.length}</strong> 篇文章`;
+  const container=document.getElementById('searchResults');
+  container.innerHTML='';
+  if(results.length===0){container.innerHTML='<p style="color:#8b8680;padding:16px 0">未找到相關文章，請嘗試其他關鍵詞。</p>';}
+  results.forEach((a,i)=>{
+    const item=document.createElement('div');
+    item.className='article-item';
+    if(a.type==='linked'){item.style.borderLeft=`3px solid ${a.color}`;item.style.paddingLeft='12px';}
+    item.innerHTML=`<div class="article-num" style="${a.type==='linked'?`color:${a.color}`:''}">${String(i+1).padStart(2,'0')}</div><div class="article-content"><div class="a-title">${a.title}</div><div class="a-excerpt">${a.excerpt}</div><div class="a-tags"><span class="a-tag">${a.featureName}</span>${a.type==='linked'?'<span class="a-tag">🔗網網相連</span>':''}</div></div>`;
+    item.onclick=()=>{if(a.type==='linked')navigate('linkedArticle',linkedArticleMap[a.id]);else navigate('article',a);};
+    container.appendChild(item);
+  });
+  navigate('search');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1098 @@
+[
+  {
+    "county": "嘉義市",
+    "district": "未標註",
+    "total_buildings": 624,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "嘉義市",
+    "district": "東區",
+    "total_buildings": 327,
+    "total_households": 13244,
+    "redev_zones": [
+      "復興"
+    ]
+  },
+  {
+    "county": "嘉義市",
+    "district": "西區",
+    "total_buildings": 673,
+    "total_households": 36115,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "二林鎮",
+    "total_buildings": 17,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "伸港鄉",
+    "total_buildings": 25,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "北斗鎮",
+    "total_buildings": 14,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "和美鎮",
+    "total_buildings": 78,
+    "total_households": 0,
+    "redev_zones": [
+      "新市"
+    ]
+  },
+  {
+    "county": "彰化縣",
+    "district": "員林市",
+    "total_buildings": 212,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "埔心鄉",
+    "total_buildings": 45,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "埔鹽鄉",
+    "total_buildings": 8,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "埤頭鄉",
+    "total_buildings": 3,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "大村鄉",
+    "total_buildings": 31,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "彰化市",
+    "total_buildings": 428,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "永靖鄉",
+    "total_buildings": 13,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "溪州",
+    "total_buildings": 5,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "溪湖鎮",
+    "total_buildings": 29,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "田中鎮",
+    "total_buildings": 18,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "田尾",
+    "total_buildings": 13,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "社頭鄉",
+    "total_buildings": 17,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "福興鄉",
+    "total_buildings": 25,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "秀水鄉",
+    "total_buildings": 23,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "竹塘鄉",
+    "total_buildings": 2,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "線西",
+    "total_buildings": 3,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "花壇鄉",
+    "total_buildings": 27,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "芳苑鄉",
+    "total_buildings": 3,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "彰化縣",
+    "district": "鹿港鎮",
+    "total_buildings": 78,
+    "total_households": 0,
+    "redev_zones": [
+      "工業區",
+      "濱海"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "三峽區",
+    "total_buildings": 171,
+    "total_households": 0,
+    "redev_zones": [
+      "三峽",
+      "永和"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "三芝區",
+    "total_buildings": 23,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "新北市",
+    "district": "三重區",
+    "total_buildings": 473,
+    "total_households": 0,
+    "redev_zones": [
+      "三重",
+      "捷運",
+      "新莊"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "中和區",
+    "total_buildings": 286,
+    "total_households": 0,
+    "redev_zones": [
+      "中和",
+      "工業區",
+      "捷運"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "五股區",
+    "total_buildings": 162,
+    "total_households": 0,
+    "redev_zones": [
+      "五股",
+      "工業區",
+      "林口"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "八里區",
+    "total_buildings": 227,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "新北市",
+    "district": "土城區",
+    "total_buildings": 567,
+    "total_households": 0,
+    "redev_zones": [
+      "土城",
+      "捷運",
+      "頂埔"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "新店區",
+    "total_buildings": 849,
+    "total_households": 0,
+    "redev_zones": [
+      "中和",
+      "工業區",
+      "捷運"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "新莊區",
+    "total_buildings": 380,
+    "total_households": 0,
+    "redev_zones": [
+      "捷運",
+      "新莊"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "板橋區",
+    "total_buildings": 976,
+    "total_households": 0,
+    "redev_zones": [
+      "捷運",
+      "板橋"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "淡水區",
+    "total_buildings": 329,
+    "total_households": 0,
+    "redev_zones": [
+      "捷運",
+      "樹林",
+      "淡海"
+    ]
+  },
+  {
+    "county": "新北市",
+    "district": "蘆洲區",
+    "total_buildings": 271,
+    "total_households": 0,
+    "redev_zones": [
+      "捷運",
+      "蘆洲"
+    ]
+  },
+  {
+    "county": "新竹市",
+    "district": "北區",
+    "total_buildings": 976,
+    "total_households": 0,
+    "redev_zones": [
+      "復興",
+      "新竹",
+      "濱海"
+    ]
+  },
+  {
+    "county": "新竹市",
+    "district": "東區",
+    "total_buildings": 1072,
+    "total_households": 0,
+    "redev_zones": [
+      "寶山",
+      "復興",
+      "新竹"
+    ]
+  },
+  {
+    "county": "新竹市",
+    "district": "香山區",
+    "total_buildings": 488,
+    "total_households": 0,
+    "redev_zones": [
+      "新竹",
+      "香山"
+    ]
+  },
+  {
+    "county": "桃園市",
+    "district": "中壢區",
+    "total_buildings": 1188,
+    "total_households": 0,
+    "redev_zones": [
+      "A18",
+      "A19",
+      "中壢",
+      "青埔",
+      "高鐵"
+    ]
+  },
+  {
+    "county": "桃園市",
+    "district": "八德區",
+    "total_buildings": 452,
+    "total_households": 0,
+    "redev_zones": [
+      "八德",
+      "捷運"
+    ]
+  },
+  {
+    "county": "桃園市",
+    "district": "桃園區",
+    "total_buildings": 1551,
+    "total_households": 0,
+    "redev_zones": [
+      "復興",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "中區",
+    "total_buildings": 127,
+    "total_households": 7877,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "十一期",
+      "十二期"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "北區",
+    "total_buildings": 775,
+    "total_households": 47353,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "北屯",
+      "大安",
+      "大里",
+      "太平",
+      "廍子",
+      "河濱",
+      "西屯"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "北屯區",
+    "total_buildings": 1630,
+    "total_households": 100340,
+    "redev_zones": [
+      "七期",
+      "九期",
+      "八期",
+      "北屯",
+      "十一期",
+      "十三期",
+      "十二期",
+      "十四期",
+      "十期",
+      "大坑",
+      "廍子",
+      "捷運",
+      "水湳",
+      "科學園區"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "南區",
+    "total_buildings": 673,
+    "total_households": 54502,
+    "redev_zones": [
+      "中山",
+      "八期",
+      "十期",
+      "南屯",
+      "大安",
+      "大里",
+      "復興"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "南屯區",
+    "total_buildings": 1242,
+    "total_households": 70001,
+    "redev_zones": [
+      "七期",
+      "十期",
+      "南屯",
+      "工業區",
+      "湖濱"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "后里區",
+    "total_buildings": 156,
+    "total_households": 3596,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "八期",
+      "十二期",
+      "工業區"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "外埔區",
+    "total_buildings": 120,
+    "total_households": 5451,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "十二期",
+      "工業區"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "大安區",
+    "total_buildings": 4,
+    "total_households": 30,
+    "redev_zones": [
+      "大安"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "大甲區",
+    "total_buildings": 133,
+    "total_households": 3712,
+    "redev_zones": [
+      "七期",
+      "中山",
+      "九期",
+      "八期",
+      "復興"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "大肚區",
+    "total_buildings": 108,
+    "total_households": 4728,
+    "redev_zones": [
+      "中正",
+      "大安",
+      "太平",
+      "高鐵"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "大里區",
+    "total_buildings": 599,
+    "total_households": 29895,
+    "redev_zones": [
+      "七期",
+      "大里"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "大雅區",
+    "total_buildings": 323,
+    "total_households": 11642,
+    "redev_zones": [
+      "七期",
+      "中山",
+      "中正",
+      "九期",
+      "八期",
+      "十一期",
+      "十三期",
+      "十二期",
+      "十期",
+      "大里"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "太平區",
+    "total_buildings": 525,
+    "total_households": 32655,
+    "redev_zones": [
+      "九期",
+      "八期",
+      "十三期",
+      "太平",
+      "新市鎮",
+      "科學園區"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "新社區",
+    "total_buildings": 41,
+    "total_households": 808,
+    "redev_zones": [
+      "九期"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "未標註",
+    "total_buildings": 6,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺中市",
+    "district": "東勢區",
+    "total_buildings": 65,
+    "total_households": 2428,
+    "redev_zones": [
+      "七期"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "東區",
+    "total_buildings": 130,
+    "total_households": 7323,
+    "redev_zones": [
+      "湖濱"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "梧棲區",
+    "total_buildings": 387,
+    "total_households": 14140,
+    "redev_zones": [
+      "七期",
+      "中山",
+      "中正",
+      "九期",
+      "八期",
+      "十二期",
+      "十期",
+      "高鐵"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "沙鹿區",
+    "total_buildings": 644,
+    "total_households": 21769,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "北屯",
+      "西屯"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "清水區",
+    "total_buildings": 367,
+    "total_households": 15052,
+    "redev_zones": [
+      "七期",
+      "中山",
+      "中正",
+      "九期",
+      "八期",
+      "十一期",
+      "十二期",
+      "十期",
+      "復興"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "潭子區",
+    "total_buildings": 518,
+    "total_households": 23976,
+    "redev_zones": [
+      "七期",
+      "中山",
+      "八期",
+      "北屯",
+      "十期",
+      "太平"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "烏日區",
+    "total_buildings": 398,
+    "total_households": 27360,
+    "redev_zones": [
+      "中山",
+      "八期",
+      "南屯",
+      "復興",
+      "高鐵"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "石岡區",
+    "total_buildings": 14,
+    "total_households": 300,
+    "redev_zones": []
+  },
+  {
+    "county": "臺中市",
+    "district": "神岡區",
+    "total_buildings": 221,
+    "total_households": 9311,
+    "redev_zones": [
+      "七期",
+      "九期",
+      "十期",
+      "高鐵"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "西區",
+    "total_buildings": 111,
+    "total_households": 5822,
+    "redev_zones": []
+  },
+  {
+    "county": "臺中市",
+    "district": "西屯區",
+    "total_buildings": 1425,
+    "total_households": 95283,
+    "redev_zones": [
+      "九期",
+      "八期",
+      "工業區",
+      "捷運",
+      "水湳",
+      "西屯"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "豐原區",
+    "total_buildings": 555,
+    "total_households": 23109,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "十一期",
+      "太平",
+      "西屯"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "霧峰區",
+    "total_buildings": 290,
+    "total_households": 10659,
+    "redev_zones": [
+      "中正",
+      "北屯",
+      "新市鎮"
+    ]
+  },
+  {
+    "county": "臺中市",
+    "district": "龍井區",
+    "total_buildings": 411,
+    "total_households": 18049,
+    "redev_zones": [
+      "七期",
+      "中山",
+      "九期",
+      "八期",
+      "北屯",
+      "十一期",
+      "十三期",
+      "復興"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "中山區",
+    "total_buildings": 1365,
+    "total_households": 0,
+    "redev_zones": [
+      "中山",
+      "信義",
+      "捷運",
+      "文山"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "中正區",
+    "total_buildings": 851,
+    "total_households": 0,
+    "redev_zones": [
+      "中山",
+      "中正",
+      "信義",
+      "大安",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "信義區",
+    "total_buildings": 478,
+    "total_households": 0,
+    "redev_zones": [
+      "信義",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "內湖區",
+    "total_buildings": 1325,
+    "total_households": 0,
+    "redev_zones": [
+      "內湖",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "北投區",
+    "total_buildings": 725,
+    "total_households": 0,
+    "redev_zones": [
+      "北投",
+      "士林",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "南港區",
+    "total_buildings": 277,
+    "total_households": 0,
+    "redev_zones": [
+      "南港",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "士林區",
+    "total_buildings": 745,
+    "total_households": 0,
+    "redev_zones": [
+      "士林",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "大同區",
+    "total_buildings": 430,
+    "total_households": 0,
+    "redev_zones": [
+      "中山",
+      "大同",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "大安區",
+    "total_buildings": 1241,
+    "total_households": 302,
+    "redev_zones": [
+      "信義",
+      "北投",
+      "大安",
+      "捷運"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "文山區",
+    "total_buildings": 793,
+    "total_households": 0,
+    "redev_zones": [
+      "捷運",
+      "文山"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "松山區",
+    "total_buildings": 605,
+    "total_households": 0,
+    "redev_zones": [
+      "中正",
+      "信義",
+      "捷運",
+      "文山",
+      "松山"
+    ]
+  },
+  {
+    "county": "臺北市",
+    "district": "萬華區",
+    "total_buildings": 320,
+    "total_households": 0,
+    "redev_zones": [
+      "中正",
+      "捷運",
+      "萬華"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "中西區",
+    "total_buildings": 205,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "仁德區",
+    "total_buildings": 124,
+    "total_households": 0,
+    "redev_zones": [
+      "仁德"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "佳里區",
+    "total_buildings": 53,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "六甲區",
+    "total_buildings": 2,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "北區",
+    "total_buildings": 315,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "南區",
+    "total_buildings": 148,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "善化區",
+    "total_buildings": 145,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "大內區",
+    "total_buildings": 1,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "學甲區",
+    "total_buildings": 9,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "安南區",
+    "total_buildings": 265,
+    "total_households": 0,
+    "redev_zones": [
+      "安南"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "安定區",
+    "total_buildings": 15,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "安平區",
+    "total_buildings": 216,
+    "total_households": 0,
+    "redev_zones": [
+      "安平"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "官田區",
+    "total_buildings": 5,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "將軍區",
+    "total_buildings": 1,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "後壁區",
+    "total_buildings": 3,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "新化區",
+    "total_buildings": 31,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "新市區",
+    "total_buildings": 105,
+    "total_households": 0,
+    "redev_zones": [
+      "新市"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "新營區",
+    "total_buildings": 85,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "東區",
+    "total_buildings": 559,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "東山區",
+    "total_buildings": 2,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "柳營區",
+    "total_buildings": 7,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "楠西區",
+    "total_buildings": 1,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "歸仁區",
+    "total_buildings": 80,
+    "total_households": 0,
+    "redev_zones": [
+      "歸仁",
+      "高鐵"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "永康區",
+    "total_buildings": 428,
+    "total_households": 0,
+    "redev_zones": [
+      "永康"
+    ]
+  },
+  {
+    "county": "臺南市",
+    "district": "玉井區",
+    "total_buildings": 1,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "白河區",
+    "total_buildings": 3,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "西港區",
+    "total_buildings": 5,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "關廟區",
+    "total_buildings": 8,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "鹽水區",
+    "total_buildings": 3,
+    "total_households": 0,
+    "redev_zones": []
+  },
+  {
+    "county": "臺南市",
+    "district": "麻豆區",
+    "total_buildings": 22,
+    "total_households": 0,
+    "redev_zones": []
+  }
+]

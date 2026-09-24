@@ -1,0 +1,3262 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金庸人物與心理學 — 江湖兒女的內心世界</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+/* ===== 設計令牌 ===== */
+:root {
+  --ink: #1a1a2e;
+  --ink-light: #2d2d44;
+  --ink-muted: #5a5a72;
+  --cinnabar: #a93226;
+  --cinnabar-light: #c0392b;
+  --cinnabar-deep: #7b241c;
+  --rice: #f5f0e8;
+  --rice-warm: #faf6ee;
+  --rice-dark: #e8e0d0;
+  --indigo: #2c3e50;
+  --indigo-light: #34495e;
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --shadow-soft: 0 4px 24px rgba(26,26,46,0.08);
+  --shadow-card: 0 8px 32px rgba(26,26,46,0.12);
+  --radius: 4px;
+  --font-serif: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* ===== 重置與基礎 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(180deg,#2d1f1a 0%,#4E342E 50%,#3E2723 100%);
+  color: #e5e7eb;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ===== 水墨紋理背景 ===== */
+.ink-texture {
+  position: relative;
+}
+.ink-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(26,26,46,0.03) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 300px at 90% 80%, rgba(169,50,38,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== 導覽 ===== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rice-dark);
+  transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: var(--shadow-soft); }
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-brand .seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--cinnabar);
+  color: var(--rice);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 3px;
+  letter-spacing: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a:hover { color: var(--cinnabar); }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--cinnabar);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.nav-toggle svg { width: 24px; height: 24px; stroke: var(--ink); }
+
+/* ===== Hero ===== */
+#nav { display: none !important; }
+.hero {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  background: var(--rice-warm);
+  margin-top: calc(var(--nav-h, 52px) * -1);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/hero-bg.webp");
+  background-size: cover;
+  background-position: center;
+
+  z-index: 0;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 24px 20px 70px;
+  width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cinnabar);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.hero-eyebrow .line {
+  width: 40px;
+  height: 1px;
+  background: var(--cinnabar);
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(22px, 3vw, 40px);
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+.hero-title .accent {
+  color: var(--cinnabar);
+  position: relative;
+}
+.hero-subtitle {
+  font-size: clamp(14px, 1.6vw, 18px);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 560px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: all 0.25s;
+  letter-spacing: 1px;
+}
+.btn-primary {
+  background: var(--cinnabar);
+  color: var(--rice);
+}
+.btn-primary:hover {
+  background: var(--cinnabar-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(169,50,38,0.3);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--rice);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  animation: float 2.5s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+.hero-scroll svg { width: 20px; height: 20px; stroke: var(--ink-muted); }
+
+/* ===== 通用區塊 ===== */
+.section {
+  padding: 100px 24px;
+  position: relative;
+}
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cinnabar);
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--cinnabar);
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(24px, 3.2vw, 38px);
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.section-desc {
+  font-size: 16px;
+  color: var(--ink-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ===== 人物篩選 ===== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+.filter-btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--rice-dark);
+  border-radius: 100px;
+  transition: all 0.2s;
+}
+.filter-btn:hover {
+  border-color: var(--cinnabar);
+  color: var(--cinnabar);
+}
+.filter-btn.active {
+  background: var(--cinnabar);
+  color: var(--rice);
+  border-color: var(--cinnabar);
+}
+
+/* ===== 人物卡片網格 ===== */
+#characters {
+  background: linear-gradient(160deg, #1c1917 0%, #431407 30%, #9a3412 65%, #c2410c 100%);
+  position: relative;
+  border-bottom: 4px solid #D7CCC8;
+}
+#characters .section-title { color: #fff7ed; text-shadow: 0 2px 12px rgba(0,0,0,.4); }
+#characters .section-desc { color: #fef3c7; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+#characters .section-eyebrow { color: #fdba74; }
+#characters .section-eyebrow::before,
+#characters .section-eyebrow::after { background: #fdba74; }
+#characters .filter-btn {
+  background: rgba(255,255,255,.15);
+  color: #ffffff;
+  border-color: rgba(255,255,255,.3);
+  font-weight: 600;
+}
+#characters .filter-btn:hover {
+  background: rgba(255,255,255,.22);
+  color: #fff;
+}
+#characters .filter-btn.active {
+  background: #fff7ed;
+  color: #9a3412;
+  border-color: #fff7ed;
+}
+#characters .pagination-info { color: #fde68a; font-weight: 600; }
+#characters .pagination-btn {
+  background: rgba(255,255,255,.15);
+  color: #ffffff;
+  border-color: rgba(255,255,255,.3);
+  font-weight: 600;
+}
+#characters .pagination-btn:hover { border-color: #fdba74; color: #fdba74; }
+#characters .pagination-btn.active { background: #fff7ed; color: #9a3412; border-color: #fff7ed; }
+#characters .pagination-ellipsis { color: rgba(255,237,213,.5); }
+
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+.char-card {
+  background: #E8DED4;
+  border: 1px solid #C9B8A8;
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.char-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--cinnabar);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.char-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--cinnabar);
+}
+.char-card:hover::before { transform: scaleX(1); }
+.char-seal {
+  width: 64px;
+  height: 64px;
+  background: var(--cinnabar);
+  color: var(--rice);
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  letter-spacing: 0;
+  position: relative;
+}
+.char-seal::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(245,240,232,0.3);
+  border-radius: 2px;
+}
+.char-info { flex: 1; min-width: 0; }
+.char-name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.char-work {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.char-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.char-tag {
+  font-size: 12px;
+  padding: 3px 10px;
+  background: var(--rice-dark);
+  color: var(--ink-muted);
+  border-radius: 100px;
+  font-weight: 500;
+}
+.char-mbti {
+  font-size: 12px;
+  color: var(--indigo);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.char-personality {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.char-mbti .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--indigo);
+  border-radius: 50%;
+}
+.char-card-hidden {
+  display: none;
+}
+
+/* ===== 人物詳情彈窗 ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,46,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+.modal {
+  background: var(--rice-warm);
+  border-radius: 8px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  box-shadow: 0 24px 64px rgba(26,26,46,0.3);
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  min-width: 76px;
+  height: 36px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 18px;
+  border: none;
+  background: var(--cinnabar);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.modal-close:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+.modal-close svg { width: 14px; height: 14px; stroke: currentColor; }
+.modal-header {
+  padding: 40px 40px 24px;
+  border-bottom: 1px solid var(--rice-dark);
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.modal-seal {
+  width: 80px;
+  height: 80px;
+  background: var(--cinnabar);
+  color: var(--rice);
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  flex-shrink: 0;
+  position: relative;
+}
+.modal-seal::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(245,240,232,0.3);
+  border-radius: 3px;
+}
+.modal-title-group { flex: 1; }
+.modal-name {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.modal-work {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.modal-meta-item {
+  font-size: 12px;
+  padding: 4px 12px;
+  background: var(--rice-dark);
+  color: var(--ink-muted);
+  border-radius: 100px;
+  font-weight: 500;
+}
+.modal-meta-item.mbti {
+  background: var(--indigo);
+  color: var(--rice);
+}
+.modal-body {
+  padding: 32px 40px 40px;
+}
+.modal-section {
+  margin-bottom: 28px;
+}
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--cinnabar);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-section-title::before {
+  content: "";
+  width: 4px;
+  height: 18px;
+  background: var(--cinnabar);
+  border-radius: 2px;
+}
+.modal-section p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-light);
+}
+.modal-quote {
+  border-left: 3px solid var(--gold);
+  padding: 12px 20px;
+  background: rgba(184,134,11,0.06);
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.8;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ===== 心理學理論區 ===== */
+.psych-section {
+  background: var(--ink);
+  color: var(--rice);
+}
+.psych-section .section-title { color: var(--rice); }
+.psych-section .section-desc { color: rgba(245,240,232,0.6); }
+.psych-section .section-eyebrow { color: var(--gold-light); }
+.psych-section .section-eyebrow::before,
+.psych-section .section-eyebrow::after { background: var(--gold-light); }
+
+.psych-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.psych-tab {
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(245,240,232,0.5);
+  background: transparent;
+  border: 1px solid rgba(245,240,232,0.15);
+  border-radius: 100px;
+  transition: all 0.25s;
+}
+.psych-tab:hover {
+  color: var(--rice);
+  border-color: rgba(245,240,232,0.4);
+}
+.psych-tab.active {
+  background: var(--cinnabar);
+  color: var(--rice);
+  border-color: var(--cinnabar);
+}
+.psych-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+.psych-content.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.psych-card {
+  background: rgba(245,240,232,0.05);
+  border: 1px solid rgba(245,240,232,0.1);
+  border-radius: 8px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.psych-theory h3 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--rice);
+  margin-bottom: 8px;
+}
+.psych-theory .theory-origin {
+  font-size: 13px;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.psych-theory p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(245,240,232,0.7);
+  margin-bottom: 16px;
+}
+.psych-theory p:last-child { margin-bottom: 0; }
+.psych-chars h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(245,240,232,0.5);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.psych-char-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.psych-char-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(245,240,232,0.04);
+  border-radius: 6px;
+  border-left: 3px solid var(--cinnabar);
+  transition: background 0.2s;
+}
+.psych-char-item:hover { background: rgba(245,240,232,0.08); }
+.psych-char-name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--rice);
+  white-space: nowrap;
+}
+.psych-char-desc {
+  font-size: 13px;
+  color: rgba(245,240,232,0.6);
+  line-height: 1.7;
+}
+
+/* ===== 測驗區 ===== */
+.quiz-section {
+  background: linear-gradient(135deg, #5D4037 0%, #4E342E 50%, #3E2723 100%);
+  position: relative;
+  overflow: hidden;
+}
+.quiz-section .section-title {
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.6), 0 0 40px rgba(93,64,55,.4);
+}
+.quiz-section .section-desc {
+  color: rgba(255,255,255,.75);
+}
+.quiz-section .section-eyebrow {
+  color: #D7CCC8;
+}
+.quiz-section .section-eyebrow::before,
+.quiz-section .section-eyebrow::after {
+  background: #D7CCC8;
+}
+.quiz-bg-img {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45%;
+  max-width: 500px;
+  opacity: 0.15;
+  z-index: 0;
+}
+.quiz-container {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.quiz-box {
+  background: var(--rice);
+  border: 1px solid var(--rice-dark);
+  border-radius: 12px;
+  padding: 48px;
+  box-shadow: var(--shadow-card);
+}
+.quiz-progress {
+  height: 4px;
+  background: var(--rice-dark);
+  border-radius: 2px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+.quiz-progress-bar {
+  height: 100%;
+  background: var(--cinnabar);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.quiz-question-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cinnabar);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.quiz-question {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--rice-warm);
+  border: 1.5px solid var(--rice-dark);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+}
+.quiz-option:hover {
+  border-color: var(--cinnabar);
+  background: rgba(169,50,38,0.03);
+}
+.quiz-option.selected {
+  border-color: var(--cinnabar);
+  background: rgba(169,50,38,0.06);
+}
+.quiz-option-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--rice-dark);
+  color: var(--ink-muted);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.quiz-option.selected .quiz-option-letter {
+  background: var(--cinnabar);
+  color: var(--rice);
+}
+.quiz-option-text {
+  font-size: 15px;
+  color: var(--ink-light);
+  line-height: 1.6;
+  padding-top: 3px;
+}
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  gap: 12px;
+}
+.quiz-btn {
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.quiz-btn-prev {
+  background: transparent;
+  color: var(--ink-muted);
+  border: 1px solid var(--rice-dark);
+}
+.quiz-btn-prev:hover {
+  border-color: var(--ink-muted);
+  color: var(--ink);
+}
+.quiz-btn-next {
+  background: var(--cinnabar);
+  color: var(--rice);
+}
+.quiz-btn-next:hover {
+  background: var(--cinnabar-deep);
+}
+.quiz-btn-next:disabled {
+  background: var(--rice-dark);
+  color: var(--ink-muted);
+  cursor: not-allowed;
+}
+
+/* 測驗結果 */
+.quiz-result {
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+.quiz-result-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cinnabar);
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+.quiz-result-char {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.quiz-result-work {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+.quiz-result-desc {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-light);
+  text-align: left;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: var(--rice-warm);
+  border-radius: 8px;
+  border-left: 3px solid var(--cinnabar);
+}
+.quiz-result-traits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.quiz-result-trait {
+  font-size: 13px;
+  padding: 6px 16px;
+  background: var(--ink);
+  color: var(--rice);
+  border-radius: 100px;
+  font-weight: 500;
+}
+.quiz-restart {
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.quiz-restart:hover {
+  background: var(--ink);
+  color: var(--rice);
+}
+
+/* ===== 引言區 ===== */
+.quote-section {
+  background: var(--indigo);
+  color: var(--rice);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quote-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -10%;
+  width: 40%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(169,50,38,0.15) 0%, transparent 70%);
+}
+.quote-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.quote-mark {
+  font-family: var(--font-serif);
+  font-size: 80px;
+  color: var(--cinnabar);
+  line-height: 1;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.quote-text {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  line-height: 1.8;
+  color: var(--rice);
+  margin-bottom: 20px;
+  min-height: 80px;
+  transition: opacity 0.4s;
+}
+.quote-author {
+  font-size: 14px;
+  color: rgba(245,240,232,0.5);
+  letter-spacing: 2px;
+}
+
+/* ===== 頁腳 ===== */
+.footer {
+  background: var(--ink);
+  color: rgba(245,240,232,0.5);
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(245,240,232,0.08);
+}
+.footer-brand {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--rice);
+  margin-bottom: 12px;
+}
+.footer-desc {
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.footer-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(245,240,232,0.2);
+  margin: 0 auto 24px;
+}
+.footer-copy {
+  font-size: 12px;
+  color: rgba(245,240,232,0.3);
+  letter-spacing: 1px;
+}
+
+/* ===== 響應式 ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--rice);
+    padding: 20px 24px;
+    gap: 16px;
+    border-bottom: 1px solid var(--rice-dark);
+    box-shadow: var(--shadow-soft);
+  }
+  .hero-content { padding: 100px 20px 60px; }
+  .section { padding: 64px 20px; }
+  .modal-header { padding: 32px 24px 20px; flex-direction: column; }
+  .modal-body { padding: 24px; }
+  .psych-card { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
+  .quiz-box { padding: 28px 20px; }
+  .quiz-question { font-size: 18px; }
+  .char-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== 人物肖像 ===== */
+.char-portrait-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid var(--cinnabar);
+  box-shadow: 0 4px 16px rgba(169,50,38,0.2);
+  transition: transform 0.3s;
+}
+.char-card:hover .char-portrait-wrap {
+  transform: scale(1.08);
+}
+.char-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.modal-portrait {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--cinnabar);
+  flex-shrink: 0;
+}
+
+
+/* ===== 分頁 Pagination ===== */
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.pagination-info {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-right: 8px;
+}
+.pagination-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--rice-dark);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagination-btn:hover {
+  border-color: var(--cinnabar);
+  color: var(--cinnabar);
+}
+.pagination-btn.active {
+  background: var(--cinnabar);
+  color: #fff;
+  border-color: var(--cinnabar);
+}
+.pagination-btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+.pagination-ellipsis {
+  color: var(--ink-muted);
+  font-size: 14px;
+  padding: 0 4px;
+}
+
+</style>
+
+<!-- Unified Navigation -->
+<link rel="stylesheet" href="../_shared/nav.css">
+<script>try{localStorage.setItem("xinmatrix_lang","zh");}catch(e){}</script>
+<script src="../_shared/nav.js" defer></script>
+<style>
+.hero h1, .hero h2, .hero h3, .hero p, .hero span, #hero h1, #hero h2, #hero p, .hero-bg h1, .hero-bg h2, .hero-bg p, [class*="hero"] h1, [class*="hero"] h2, [class*="hero"] p { color: #1c1917 !important; text-shadow: none !important; }
+/* ===== Hero 素雅淺底 + 深色文字 ===== */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,253,250,0.75) 0%, rgba(255,253,250,0.5) 30%, rgba(255,253,250,0.15) 55%, rgba(30,41,59,0.2) 75%, rgba(30,41,59,0.5) 100%);
+  z-index: 1;
+}
+.hero-content { z-index: 3 !important; }
+.hero-eyebrow { color: #57534e !important; text-shadow: none !important; }
+.hero-eyebrow .line { background: rgba(87,83,78,0.5) !important; }
+.hero-title { text-shadow: 0 1px 4px rgba(255,255,255,0.6) !important; }
+.hero-subtitle { color: #44403c !important; text-shadow: none !important; }
+.hero .btn-ghost {
+  background: var(--cinnabar) !important;
+  color: var(--rice) !important;
+  border-color: var(--cinnabar) !important;
+}
+.hero .btn-ghost:hover {
+  background: var(--cinnabar-deep) !important;
+  color: var(--rice) !important;
+  border-color: var(--cinnabar-deep) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(169,50,38,0.3);
+}
+.hero .btn-primary {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+/* ===== 各區域底圖紋理 ===== */
+#quiz {
+  background:
+    linear-gradient(135deg, rgba(93,64,55,.92) 0%, rgba(62,39,35,.95) 100%),
+    url("images/quiz-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+}
+#characters {
+  background: linear-gradient(160deg, #1c1917 0%, #431407 30%, #9a3412 65%, #c2410c 100%);
+  position: relative;
+}
+#characters::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("images/char-atlas.webp");
+  background-size: 50%;
+  background-position: right center;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+#characters > * { position: relative; z-index: 1; }
+#psychology {
+  background:
+    linear-gradient(135deg, rgba(28,25,23,.95) 0%, rgba(69,26,3,.9) 100%),
+    url("images/quiz-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+section:not(#hero):not(#quiz):not(#characters):not(#psychology) {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(220,38,38,.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(154,52,18,.04) 0%, transparent 40%);
+}
+</style>
+<!-- Open Graph / LINE分享預覽 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="欣矩陣 ∞ 欣媒體">
+<meta property="og:title" content="金庸心理學 | 武俠人格解析">
+<meta property="og:description" content="刀光劍影之外，江湖兒女的內心世界。100位金庸人物心理圖譜，探索武俠背後的人性。">
+<meta property="og:url" content="https://9return.com.tw/jinyong-psychology/">
+<meta property="og:image" content="https://9return.com.tw/assets/og/og-jinyong-psychology.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="金庸心理學 | 武俠人格解析">
+<meta name="twitter:description" content="刀光劍影之外，江湖兒女的內心世界。100位金庸人物心理圖譜，探索武俠背後的人性。">
+<meta name="twitter:image" content="https://9return.com.tw/assets/og/og-jinyong-psychology.webp">
+</head>
+<body>
+<!-- ===== 導覽 ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">
+      <span class="seal">金</span>
+      <span>金庸人物與心理學</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">首頁</a></li>
+      <li><a href="#characters">人物圖譜</a></li>
+      <li><a href="#psychology">心理視角</a></li>
+      <li><a href="#quiz">人格測驗</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== 站內導覽 Sitemap ===== -->
+<nav class="site-sitemap" style="background:#1c1917;border-bottom:2px solid #7c2d12;position:sticky;top:0;z-index:99;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;">
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;color:#fef3c7;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.5px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderBottomColor='#ef4444'" onmouseout="this.style.color='#fef3c7';this.style.borderBottomColor='transparent'"><i class="fas fa-home"></i> 回首頁</a>
+    <span style="color:#57534e;font-size:12px;">|</span>
+    <a href="index.html#characters" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;color:#fef3c7;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.5px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderBottomColor='#ef4444'" onmouseout="this.style.color='#fef3c7';this.style.borderBottomColor='transparent'"><i class="fas fa-users"></i> 金庸人物</a>
+    <span style="color:#57534e;font-size:12px;">|</span>
+    <a href="index.html#quiz" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;color:#fef3c7;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.5px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderBottomColor='#ef4444'" onmouseout="this.style.color='#fef3c7';this.style.borderBottomColor='transparent'"><i class="fas fa-question-circle"></i> 你像誰</a>
+    <span style="color:#57534e;font-size:12px;">|</span>
+    <a href="iamsusi.html" style="display:inline-flex;align-items:center;gap:6px;padding:10px 16px;color:#fef3c7;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.5px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderBottomColor='#ef4444'" onmouseout="this.style.color='#fef3c7';this.style.borderBottomColor='transparent'"><i class="fas fa-info-circle"></i> 關於我</a>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div style="margin-bottom:8px;"><span style="display:inline-block;font-size:clamp(20px,3vw,36px);font-weight:900;color:#7f1d1d !important;letter-spacing:4px;text-shadow:0 0 10px rgba(255,255,255,.9),0 0 20px rgba(255,255,255,.6),0 0 8px rgba(0,0,0,.7),0 0 16px rgba(0,0,0,.5),0 2px 4px rgba(0,0,0,.3) !important;">金庸武俠世界</span></div>
+    <div class="hero-eyebrow">
+      <span>江湖 · 人心 · 心理學</span>
+    </div>
+    <h1 class="hero-title">
+      刀光劍影之外<br>
+      <span class="accent">江湖兒女的內心世界</span>
+    </h1>
+    <p class="hero-subtitle">
+      金庸筆下十五部小說，塑造了數以千計的鮮活人物。他們的愛恨情仇、悲歡離合，不僅是武俠傳奇，更是一部生動的心理學百科全書。讓我們用現代心理學的透鏡，重新審視這些熟悉的江湖兒女。
+    </p>
+    <div class="hero-cta" style="display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#characters" class="btn btn-primary" style="flex:1;min-width:150px;max-width:200px;text-align:center;justify-content:center;">探索人物圖譜</a>
+      <a href="#quiz" class="btn btn-ghost" style="flex:1;min-width:150px;max-width:200px;text-align:center;justify-content:center;">測測你是誰？</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>向下滾動</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ===== 人格測驗 ===== -->
+<section class="section quiz-section" id="quiz">
+  <img class="quiz-bg-img" src="images/quiz-bg.webp" alt="">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">QUIZ</div>
+      <h2 class="section-title">你是哪位江湖兒女？</h2>
+      <p class="section-desc">八道題，窺見你的人格底色。答案沒有對錯，只有不同的江湖路。</p>
+    </div>
+    <div class="quiz-container">
+      <div class="quiz-box" id="quizBox"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 人物圖譜 ===== -->
+<section class="section ink-texture" id="characters">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">CHARACTERS</div>
+      <h2 class="section-title">人物圖譜</h2>
+      <p class="section-desc">一百位經典金庸人物，每一個都是一種人格的縮影。點擊卡片，走進他們的內心世界。</p>
+    </div>
+    
+    <!-- 人物圖譜 Character Atlas -->
+    <div class="char-atlas" style="margin-bottom:48px;text-align:center;">
+      <img src="images/char-atlas.webp" alt="金庸人物圖譜" style="max-width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(26,26,46,.15);">
+      <p style="margin-top:12px;font-size:13px;color:var(--ink-muted);letter-spacing:2px;">— 江湖人物圖譜 —</p>
+    </div>
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="char-grid" id="charGrid"></div>
+    <div class="pagination-wrap" id="paginationWrap"></div>
+  </div>
+</section>
+
+<!-- ===== 人物詳情彈窗 ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="關閉">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>關閉</span>
+    </button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ===== 引言輪播 ===== -->
+<section class="quote-section">
+  <div class="quote-inner">
+    <div class="quote-mark">"</div>
+    <div class="quote-text" id="quoteText"></div>
+    <div class="quote-author" id="quoteAuthor"></div>
+  </div>
+</section>
+
+<!-- ===== 心理學理論 ===== -->
+<section class="section psych-section" id="psychology">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">PSYCHOLOGY</div>
+      <h2 class="section-title">心理視角</h2>
+      <p class="section-desc">八大心理學理論，照見江湖人物的行爲邏輯與內心困境。</p>
+    </div>
+    <div class="psych-tabs" id="psychTabs"></div>
+    <div id="psychContents"></div>
+  </div>
+</section>
+
+
+<!-- ===== 頁腳 ===== -->
+<footer class="footer">
+  <div class="footer-brand">金庸人物與心理學</div>
+  <p class="footer-desc">以心理學之眼，讀金庸之書。刀光劍影是表象，人心纔是最深的江湖。</p>
+  <div class="footer-divider"></div>
+  <p class="footer-copy">本站內容僅供學習交流 · 金庸作品版權歸原作者所有</p>
+</footer>
+
+<script>
+// ===== 資料：人物 =====
+const characters = [
+  {
+    id: "guojing",
+    name: "郭靖",
+    work: "《射鵰英雄傳》",
+    mbti: "ISFJ",
+    tags: ["忠厚", "責任感", "堅韌", "大智若愚"],
+    personality: "守衛者型 — 沉默、務實、有強烈的責任感與道德感",
+    analysis: "郭靖天資平庸卻終成一代大俠，核心在於他的成長型思維和強烈的道德認同感。自我效能感理論指出，對自身能力的信念比實際能力更能預測成就。",
+    psychFocus: "成長型思維 · 自我效能感 · 道德認同",
+    quote: "俠之大者，為國為民。",
+    portrait: "images/portrait-guojing.webp",
+    link: "https://zh.wikipedia.org/wiki/郭靖"
+  },
+  {
+    id: "huangrong",
+    name: "黃蓉",
+    work: "《射鵰英雄傳》",
+    mbti: "ENTP",
+    tags: ["聰慧", "機敏", "狡黠", "深情"],
+    personality: "辯論家型 — 聰明、好奇、思維敏捷，善於在複雜局面中找到破局點",
+    analysis: "黃蓉是金庸筆下智商最高的女性角色之一。她的安全型依戀使她在感情中既獨立又投入。認知靈活性讓她能迅速找到最優解，但也有時因過度自信而低估風險。",
+    psychFocus: "認知靈活性 · 情緒智力 · 安全型依戀",
+    quote: "我黃蓉的女兒，豈能讓人欺負？",
+    portrait: "images/portrait-huangrong.webp",
+    link: "https://zh.wikipedia.org/wiki/黃蓉"
+  },
+  {
+    id: "yangkang",
+    name: "楊康",
+    work: "《射鵰英雄傳》",
+    mbti: "ESTP",
+    tags: ["機變", "虛榮", "矛盾", "悲劇"],
+    personality: "企業家型 — 機智善變、追求享樂，在身份認同中迷失",
+    analysis: "楊康的悲劇根源在於身份認同混亂。從小在金國王府長大，自認小王爺，卻發現自己是漢人遺孤。社會心理學中的「認知失調」理論解釋了他為何不願接受真相——改變自我認知的痛苦太大，寧可繼續活在謊言中。",
+    psychFocus: "身份認同 · 認知失調 · 道德脫鉤",
+    quote: "我是大金國的小王爺！",
+    portrait: "images/portrait-yangkang.webp",
+    link: "https://zh.wikipedia.org/wiki/楊康"
+  },
+  {
+    id: "munianci",
+    name: "穆念慈",
+    work: "《射鵰英雄傳》",
+    mbti: "ISFP",
+    tags: ["善良", "執著", "剛烈", "悲劇"],
+    personality: "探險家型 — 溫柔而有原則，在感情中執著付出",
+    analysis: "穆念慈對楊康的愛是一種「執著型依戀」——明知對方有嚴重缺陷，卻無法割捨。心理學上這與「創傷束縛」有關：不確定的回報反而會強化依戀，類似於間歇性強化機制。",
+    psychFocus: "執著型依戀 · 創傷束縛 · 道德堅守",
+    quote: "我生是楊家的人，死是楊家的鬼。",
+    portrait: "images/portrait-munianci.webp",
+    link: "https://zh.wikipedia.org/wiki/穆念慈"
+  },
+  {
+    id: "huangyaoshi",
+    name: "黃藥師",
+    work: "《射鵰英雄傳》",
+    mbti: "INTJ",
+    tags: ["孤傲", "博學", "深情", "離經叛道"],
+    personality: "建築師型 — 才智絕頂、憤世嫉俗，卻對亡妻一往情深",
+    analysis: "黃藥師是典型的「高功能自閉特質」與「天才型人格」的結合。他蔑視世俗禮法，卻在內心深處有著極其柔軟的情感寄託。妻子馮衡死後，他的悲傷轉化為對女兒的極度保護和對世間的憤懣。",
+    psychFocus: "悲傷轉化 · 社會性迴避 · 情感寄託",
+    quote: "桃花影落飛神劍，碧海潮生按玉簫。",
+    portrait: "images/portrait-huangyaoshi.webp",
+    link: "https://zh.wikipedia.org/wiki/黃藥師"
+  },
+  {
+    id: "ouyangfeng",
+    name: "歐陽鋒",
+    work: "《射鵰英雄傳》",
+    mbti: "INTJ",
+    tags: ["狠毒", "執著", "武癡", "瘋癲"],
+    personality: "建築師型（黑暗版）— 極度執著於武功天下第一，不擇手段",
+    analysis: "歐陽鋒對「天下第一」的執著是一種病態的目標固著。心理學上稱為「功能失調的完美主義」——目標本身已成為目的，而非實現幸福的手段。最終練成九陰真經卻走火入魔，正是這種執著的代價。",
+    psychFocus: "病態執著 · 完美主義 · 目標固著",
+    quote: "我就是天下第一！",
+    portrait: "images/portrait-ouyangfeng.webp",
+    link: "https://zh.wikipedia.org/wiki/歐陽鋒"
+  },
+  {
+    id: "yideng",
+    name: "一燈大師",
+    work: "《射鵰英雄傳》",
+    mbti: "INFJ",
+    tags: ["慈悲", "懺悔", "超脫", "智慧"],
+    personality: "提倡者型 — 由帝王轉為高僧，在懺悔中尋求解脫",
+    analysis: "一燈大師的轉變是「自我超越」的典範。從大理國皇帝到出家為僧，他經歷了深刻的存在性危機。心理學上，這類似於「中年轉機」——通過重新定義自我價值，從外在權力轉向內在修為。",
+    psychFocus: "自我超越 · 存在性危機 · 贖罪心理",
+    quote: "苦海無邊，回頭是岸。",
+    portrait: "images/portrait-yideng.webp",
+    link: "https://zh.wikipedia.org/wiki/一燈大師"
+  },
+  {
+    id: "hongqigong",
+    name: "洪七公",
+    work: "《射鵰英雄傳》",
+    mbti: "ESFP",
+    tags: ["豪邁", "正義", "貪吃", "逍遙"],
+    personality: "表演者型 — 熱愛生活、仗義直言，遊戲人間卻心懷大義",
+    analysis: "洪七公是「享樂型人格」的健康典範。他熱愛美食、遊戲人間，但在大是大非面前從不含糊。心理學上，這是「自我和諧」的體現——他的行為與內在價值觀高度一致，因此活得自在而有力量。",
+    psychFocus: "自我和諧 · 享樂主義 · 道德直覺",
+    quote: "吃乃人生第一大事！",
+    portrait: "images/portrait-hongqigong.webp",
+    link: "https://zh.wikipedia.org/wiki/洪七公"
+  },
+  {
+    id: "wangchongyang",
+    name: "王重陽",
+    work: "《射鵰英雄傳》",
+    mbti: "INFJ",
+    tags: ["傳奇", "博大", "悲劇", "超脫"],
+    personality: "提倡者型 — 中神通，武功天下第一，卻為情所困一生",
+    analysis: "王重陽是「自我實現者」的悲劇版本。他創立全真教、號令天下，卻在感情上終生遺憾。心理學上，他體現了「成就動機」與「親密動機」的衝突——當兩者不可兼得時，即使天下第一也無法彌補內心的空洞。",
+    psychFocus: "成就與親密衝突 · 自我實現 · 遺憾心理",
+    quote: "我終究是負了她。",
+    portrait: "images/portrait-wangchongyang.webp",
+    link: "https://zh.wikipedia.org/wiki/王重陽"
+  },
+  {
+    id: "zhoubotong",
+    name: "周伯通",
+    work: "《射鵰英雄傳》",
+    mbti: "ENFP",
+    tags: ["天真", "好動", "純粹", "聰明"],
+    personality: "競選者型 — 老頑童，心智如孩童，武功卻深不可測",
+    analysis: "周伯通是「永恆少年」的原型。心理學上，他體現了「創造性退行」——在保持赤子之心的同時，擁有超凡的能力。他的快樂源於不被世俗功利束縛，這與「內在動機」理論一致：為樂趣而做的事反而能達到最高成就。",
+    psychFocus: "內在動機 · 創造性退行 · 永恆少年",
+    quote: "好玩，好玩！",
+    portrait: "images/portrait-zhoubotong.webp",
+    link: "https://zh.wikipedia.org/wiki/周伯通"
+  },
+  {
+    id: "qiuchuji",
+    name: "丘處機",
+    work: "《射鵰英雄傳》",
+    mbti: "ENTJ",
+    tags: ["剛直", "正義", "急躁", "擔當"],
+    personality: "指揮官型 — 全真七子之首，嫉惡如仇，敢作敢當",
+    analysis: "丘處機是「正義感過剩」的典型。他的道德感強烈，但有時流於武斷和急躁。心理學上，這是「道德直覺型」決策——依賴內在的道德本能快速判斷，雖然高效，但容易忽略複雜性和個體差異。",
+    psychFocus: "道德直覺 · 正義感 · 認知閉合需求",
+    quote: "貧道今日就要替天行道！",
+    portrait: "images/portrait-qiuchuji.webp",
+    link: "https://zh.wikipedia.org/wiki/丘處機"
+  },
+  {
+    id: "meichaofeng",
+    name: "梅超風",
+    work: "《射鵰英雄傳》",
+    mbti: "ISTP",
+    tags: ["狠毒", "悲劇", "忠貞", "偏執"],
+    personality: "鑑賞家型 — 黑風雙煞，為愛背叛師門，最終淒涼",
+    analysis: "梅超風的人生是「悲劇性依戀」的縮影。她與陳玄風的愛情以背叛師門為代價，陳玄風死後，她的世界崩塌，只剩下復仇和修煉邪功。心理學上，這是「喪失後的病態固著」——無法走出喪偶之痛，將生命意義全部寄託在報仇上。",
+    psychFocus: "悲劇性依戀 · 喪失固著 · 道德脫軌",
+    quote: "賊漢子，你等我！",
+    portrait: "images/portrait-meichaofeng.webp",
+    link: "https://zh.wikipedia.org/wiki/梅超風"
+  },
+  {
+    id: "ouyangke",
+    name: "歐陽克",
+    work: "《射鵰英雄傳》",
+    mbti: "ESTP",
+    tags: ["風流", "傲慢", "悲劇", "虛榮"],
+    personality: "企業家型 — 白駝山少主，風流自負，最終死於非命",
+    analysis: "歐陽克是「權力型人格」的年輕版本。他依賴叔父的權勢和自己的外表，到處留情，本質上是缺乏真正的自我價值感。心理學上，這是「虛假自我」——通過他人的崇拜和慾望來證明自己的存在，一旦失去外在支撐就一無所有。",
+    psychFocus: "虛假自我 · 權力依賴 · 情慾化防禦",
+    quote: "天下女子，誰不愛我歐陽克？",
+    portrait: "images/portrait-ouyangke.webp",
+    link: "https://zh.wikipedia.org/wiki/歐陽克"
+  },
+  {
+    id: "tuolei",
+    name: "拖雷",
+    work: "《射鵰英雄傳》",
+    mbti: "ESTJ",
+    tags: ["忠義", "豪邁", "擔當", "友情"],
+    personality: "總經理型 — 成吉思汗四子，與郭靖結為安答，忠義兩全",
+    analysis: "拖雷體現了「跨文化友誼」中的忠誠與張力。他與郭靖的友情超越了民族和戰爭的界限，但最終仍無法擺脫各自的身份責任。心理學上，這是「群體認同與個體情感的衝突」——當忠誠對象發生矛盾時，個體往往陷入痛苦的兩難。",
+    psychFocus: "跨文化友誼 · 群體認同 · 忠誠衝突",
+    quote: "安答，我們永遠是兄弟！",
+    portrait: "images/portrait-tuolei.webp",
+    link: "https://zh.wikipedia.org/wiki/拖雷"
+  },
+  {
+    id: "huazheng",
+    name: "華箏",
+    work: "《射鵰英雄傳》",
+    mbti: "ISFJ",
+    tags: ["純情", "堅貞", "悲劇", "奉獻"],
+    personality: "守衛者型 — 成吉思汗之女，深愛郭靖，最終黯然退出",
+    analysis: "華箏的愛情是「無條件奉獻型」的典範。她從小愛慕郭靖，即使知道郭靖心繫黃蓉，仍默默付出。心理學上，這是「利他型愛情」——以對方的幸福為自己的幸福，但也容易在過程中失去自我。最終的退出既是成全，也是一種自我保護。",
+    psychFocus: "利他型愛情 · 無條件奉獻 · 自我放棄",
+    quote: "靖哥哥，你要好好的。",
+    portrait: "images/portrait-huazheng.webp",
+    link: "https://zh.wikipedia.org/wiki/華箏"
+  },
+  {
+    id: "yangguo",
+    name: "楊過",
+    work: "《神鵰俠侶》",
+    mbti: "INFP",
+    tags: ["深情", "孤傲", "叛逆", "癡情"],
+    personality: "調停者型 — 深情而叛逆，在誤解與磨難中追尋真愛",
+    analysis: "楊過的核心心理議題是「被遺棄創傷」。童年被拋棄的經歷使他對拒絕極度敏感，需要不斷確認被愛。他與小龍女的愛情是一種「創傷後成長」——每一次分離和誤解都將他推向更深的自我認知，最終從憤世少年成长為悲憫大俠。",
+    psychFocus: "被遺棄創傷 · 焦慮型依戀 · 創傷後成長",
+    quote: "問世間情是何物，直教生死相許？",
+    portrait: "images/portrait-yangguo.webp",
+    link: "https://zh.wikipedia.org/wiki/楊過"
+  },
+  {
+    id: "xiaolongnv",
+    name: "小龍女",
+    work: "《神鵰俠侶》",
+    mbti: "ISTP",
+    tags: ["清冷", "純潔", "堅定", "超脫"],
+    personality: "鑑賞家型 — 古墓長大，不食人間煙火，對愛情卻極其堅定",
+    analysis: "小龍女是「迴避型依戀」的典型。古墓中長大，缺乏人際互動，對親密感到不適，習慣以疏離保護自己。但她的內心其實極其柔軟和堅定，一旦認定楊過，便生死相隨。心理學上，這是「恐懼型依戀」——渴望親密又害怕受傷。",
+    psychFocus: "迴避型依戀 · 情感壓抑 · 承諾堅定性",
+    quote: "過兒，我永遠不會離開你。",
+    portrait: "images/portrait-xiaolongnv.webp",
+    link: "https://zh.wikipedia.org/wiki/小龍女"
+  },
+  {
+    id: "guofu",
+    name: "郭芙",
+    work: "《神鵰俠侶》",
+    mbti: "ESTJ",
+    tags: ["驕縱", "善良", "悔恨", "成長"],
+    personality: "總經理型 — 郭靖黃蓉之女，從嬌縱任性到最終醒悟",
+    analysis: "郭芙的性格是「教養失當」的產物。父母都是大俠，卻因忙碌而疏於教養，導致她嬌縱任性、自我中心。但她內心其實善良，砍斷楊過手臂後終生悔恨。心理學上，這是「延遲的道德覺醒」——成長環境的缺陷最終在現實打擊中得到修正。",
+    psychFocus: "教養失當 · 自我中心 · 延遲覺醒",
+    quote: "我到底做了什麼……",
+    portrait: "images/portrait-guofu.webp",
+    link: "https://zh.wikipedia.org/wiki/郭芙"
+  },
+  {
+    id: "guoxiang",
+    name: "郭襄",
+    work: "《神鵰俠侶》",
+    mbti: "ENFP",
+    tags: ["開朗", "深情", "灑脫", "傳奇"],
+    personality: "競選者型 — 東邪黃藥師的外孫女，風靈剔透，最終創立峨眉派",
+    analysis: "郭襄是「安全型依戀」的健康產物。在充滿愛的家庭中長大，她開朗自信、敢愛敢恨。對楊過的暗戀是「理想型投射」——將對英雄的崇拜投射到具體的人身上。最終她選擇出家創立峨眉派，不是因為絕望，而是找到了更高的人生追求。",
+    psychFocus: "安全型依戀 · 理想型投射 · 自我實現",
+    quote: "問世間情是何物……",
+    portrait: "images/portrait-guoxiang.webp",
+    link: "https://zh.wikipedia.org/wiki/郭襄"
+  },
+  {
+    id: "limochou",
+    name: "李莫愁",
+    work: "《神鵰俠侶》",
+    mbti: "INTJ",
+    tags: ["狠毒", "痴情", "悲劇", "偏執"],
+    personality: "建築師型（黑暗版）— 赤練仙子，因愛生恨，殺人如麻",
+    analysis: "李莫愁是「情傷後的病態轉化」的極致。被陸展元拋棄後，她將全部的痛苦轉化為對世界的憤怒和報復。心理學上，這是「防禦性攻擊」——通過傷害他人來避免感受自己的痛苦。她的內心其實從未走出那段感情，「問世間情是何物」是她永遠的詛咒。",
+    psychFocus: "情傷轉化 · 防禦性攻擊 · 病態固著",
+    quote: "問世間情是何物，直教生死相許？",
+    portrait: "images/portrait-limochou.webp",
+    link: "https://zh.wikipedia.org/wiki/李莫愁"
+  },
+  {
+    id: "gongsunlue",
+    name: "公孫綠萼",
+    work: "《神鵰俠侶》",
+    mbti: "INFP",
+    tags: ["善良", "悲劇", "純情", "犧牲"],
+    personality: "調停者型 — 絕情谷谷主之女，為愛犧牲，令人憐惜",
+    analysis: "公孫綠萼是「低自尊型奉獻」的悲劇。在殘酷的家庭環境中長大，她缺乏自我價值感，遇到楊過後便將全部生命意義寄託在他身上。最終為救楊過而死，心理學上這是「利他性自殺」——通過犧牲自己來證明愛的價值，本質上是對自我存在的否定。",
+    psychFocus: "低自尊 · 利他性犧牲 · 病態依戀",
+    quote: "楊大哥，你要好好活下去。",
+    portrait: "images/portrait-gongsunlue.webp",
+    link: "https://zh.wikipedia.org/wiki/公孫綠萼"
+  },
+  {
+    id: "jinlunfawang",
+    name: "金輪法王",
+    work: "《神鵰俠侶》",
+    mbti: "ENTJ",
+    tags: ["野心", "謀略", "悲劇", "執著"],
+    personality: "指揮官型 — 蒙古國師，武功高強，最終為救郭襄而死",
+    analysis: "金輪法王是「目標導向型人格」的代表。他的一生都在追求武功和權力的頂峰，但內心深處其實渴望親情。收郭襄為徒後，他的情感防線被動搖。心理學上，這是「情感覺醒」——長期被壓抑的親密需求在特定對象面前爆發，甚至超越了一生的目標追求。",
+    psychFocus: "目標導向 · 情感壓抑 · 延遲覺醒",
+    quote: "好徒弟，師父來救你！",
+    portrait: "images/portrait-jinlunfawang.webp",
+    link: "https://zh.wikipedia.org/wiki/金輪法王"
+  },
+  {
+    id: "luwushuang",
+    name: "陸無雙",
+    work: "《神鵰俠侶》",
+    mbti: "ESTP",
+    tags: ["潑辣", "堅強", "暗戀", "悲劇"],
+    personality: "企業家型 — 殘疾少女，性格潑辣堅強，暗戀楊過",
+    analysis: "陸無雙是「逆境復原力」的體現。身體殘疾、被仇人收養，她卻發展出潑辣堅強的性格來保護自己。對楊過的暗戀是「救命稻草式依戀」——在絕望中遇到的第一個溫暖，便成為全部的情感寄託。最終她選擇祝福，也是一種成熟。",
+    psychFocus: "逆境復原力 · 救命稻草依戀 · 防禦性潑辣",
+    quote: "傻蛋，你要記得我。",
+    portrait: "images/portrait-luwushuang.webp",
+    link: "https://zh.wikipedia.org/wiki/陸無雙"
+  },
+  {
+    id: "chengying",
+    name: "程英",
+    work: "《神鵰俠侶》",
+    mbti: "ISFJ",
+    tags: ["溫柔", "才華", "暗戀", "克制"],
+    personality: "守衛者型 — 黃藥師關門弟子，溫柔有才，默默愛著楊過",
+    analysis: "程英是「壓抑型愛情」的典範。她溫柔賢淑、才華橫溢，對楊過的愛深沉而克制，從不表露。心理學上，這是「迴避型情感表達」——害怕被拒絕，寧可將感情深埋心底。她的「既見君子，雲胡不喜」是壓抑型愛情的絕佳寫照。",
+    psychFocus: "壓抑型愛情 · 迴避型表達 · 情感剋制",
+    quote: "既見君子，雲胡不喜。",
+    portrait: "images/portrait-chengying.webp",
+    link: "https://zh.wikipedia.org/wiki/程英"
+  },
+  {
+    id: "yeluqi",
+    name: "耶律齊",
+    work: "《神鵰俠侶》",
+    mbti: "ESTJ",
+    tags: ["穩重", "能幹", "忠義", "擔當"],
+    personality: "總經理型 — 契丹貴族後裔，後成為丐幫幫主，郭芙之夫",
+    analysis: "耶律齊是「適應型人格」的優秀代表。身為契丹人在漢人世界中成長，他學會了在不同文化間遊走，最終贏得認可。心理學上，這是「文化整合」的成功案例——不是放棄原有身份，而是在新環境中找到平衡，同時保持核心價值觀。",
+    psychFocus: "文化整合 · 適應性 · 責任感",
+    quote: "我耶律齊豈是貪生怕死之輩？",
+    portrait: "images/portrait-yeluqi.webp",
+    link: "https://zh.wikipedia.org/wiki/耶律齊"
+  },
+  {
+    id: "wanyanping",
+    name: "完顏萍",
+    work: "《神鵰俠侶》",
+    mbti: "ISFJ",
+    tags: ["溫柔", "堅強", "復仇", "寬恕"],
+    personality: "守衛者型 — 金國貴族之女，為報仇接近武家兄弟，最終選擇寬恕",
+    analysis: "完顏萍的故事是「復仇與寬恕」的心理博弈。家仇使她背負沉重的心理負擔，但在與武氏兄弟的相處中，她的內心開始動搖。心理學上，這是「復仇動機的消解」——當仇恨的對象變成有血有肉的人時，抽象的復仇慾望會被具體的人性溫暖所取代。",
+    psychFocus: "復仇動機 · 寬恕心理 · 認知重評",
+    quote: "或許，仇恨真的可以放下。",
+    portrait: "images/portrait-wanyanping.webp",
+    link: "https://zh.wikipedia.org/wiki/完顏萍"
+  },
+  {
+    id: "wudunru",
+    name: "武敦儒",
+    work: "《神鵰俠侶》",
+    mbti: "ISTJ",
+    tags: ["老實", "忠義", "衝動", "成長"],
+    personality: "物流師型 — 武三通長子，性格老實，曾為郭芙爭風吃醋",
+    analysis: "武敦儒是「同儕競爭」的典型。與弟弟武修文同時愛上郭芙，兄弟間產生嚴重矛盾。心理學上，這是「兄弟競爭」的延伸——從小到大的比較和競爭，在愛情對象上集中爆發。最終在楊過的調解下和解，體現了「親情重於愛情」的認知重組。",
+    psychFocus: "兄弟競爭 · 同儕比較 · 認知重組",
+    quote: "大哥，我們錯了。",
+    portrait: "images/portrait-wudunru.webp",
+    link: "https://zh.wikipedia.org/wiki/武敦儒"
+  },
+  {
+    id: "wuxiuwen",
+    name: "武修文",
+    work: "《神鵰俠侶》",
+    mbti: "ISFP",
+    tags: ["活潑", "忠義", "衝動", "成長"],
+    personality: "探險家型 — 武三通次子，性格活潑，與兄長同時愛上郭芙",
+    analysis: "武修文與兄長的競爭體現了「出生順序效應」。作為弟弟，他可能更渴望通過贏得郭芙來證明自己不遜色於兄長。心理學上，阿德勒的「自卑與超越」理論可以解釋——弟弟在兄長的陰影下產生自卑感，試圖在其他領域超越。",
+    psychFocus: "出生順序效應 · 自卑與超越 · 親情修復",
+    quote: "二哥，我們以後再也不爭了。",
+    portrait: "images/portrait-wuxiuwen.webp",
+    link: "https://zh.wikipedia.org/wiki/武修文"
+  },
+  {
+    id: "gongsunzhi",
+    name: "公孫止",
+    work: "《神鵰俠侶》",
+    mbti: "ESTP",
+    tags: ["偽善", "狠毒", "自私", "悲劇"],
+    personality: "企業家型（黑暗版）— 絕情谷谷主，表面風雅，內心陰險",
+    analysis: "公孫止是「虛假自我」的極致。表面上是風雅的谷主，實際上陰險狠毒、自私自利。心理學上，這是「人格解離」的表現——公眾形象與真實自我完全割裂，長期的偽裝最終導致人性的扭曲。他對裘千尺的殘忍，本質上是對自己失敗婚姻的變種報復。",
+    psychFocus: "虛假自我 · 人格解離 · 婚姻暴力",
+    quote: "我公孫止想要的東西，從來沒有得不到的！",
+    portrait: "images/portrait-gongsunzhi.webp",
+    link: "https://zh.wikipedia.org/wiki/公孫止"
+  },
+  {
+    id: "qiuqianchi",
+    name: "裘千尺",
+    work: "《神鵰俠侶》",
+    mbti: "INTJ",
+    tags: ["狠毒", "悲劇", "偏執", "復仇"],
+    personality: "建築師型（黑暗版）— 被丈夫害成殘廢，在地牢中活下來，一心復仇",
+    analysis: "裘千尺是「極端逆境下的病態生存」的代表。被丈夫挑斷手筋腳筋、推入地牢，她靠棗核活下來，心中只有復仇。心理學上，這是「創傷後的病態固著」——極端的創傷使她的人格完全被復仇慾望吞噬，失去了所有其他的人性維度。",
+    psychFocus: "極端創傷 · 病態復仇 · 人性扭曲",
+    quote: "公孫止，我要你償命！",
+    portrait: "images/portrait-qiuqianchi.webp",
+    link: "https://zh.wikipedia.org/wiki/裘千尺"
+  },
+  {
+    id: "zhangwuji",
+    name: "張無忌",
+    work: "《倚天屠龍記》",
+    mbti: "ISFP",
+    tags: ["善良", "優柔", "仁厚", "傳奇"],
+    personality: "探險家型 — 明教教主，武功蓋世，卻在感情和決策中反覆搖擺",
+    analysis: "張無忌的核心心理特徵是「迴避型決策」。他害怕衝突、害怕傷害任何人，因此在四個女子間反覆搖擺，在教主之位上也時常退縮。心理學上，這是「損失厭惡」的極致——害怕選擇一個就失去其他可能性，本質是「獲得」遠比「損失」更讓人痛苦。",
+    psychFocus: "損失厭惡 · 迴避型決策 · 過度共情",
+    quote: "我張無忌但求問心無愧。",
+    portrait: "images/portrait-zhangwuji.webp",
+    link: "https://zh.wikipedia.org/wiki/張無忌"
+  },
+  {
+    id: "zhaomin",
+    name: "趙敏",
+    work: "《倚天屠龍記》",
+    mbti: "ENTJ",
+    tags: ["機智", "果敢", "深情", "叛逆"],
+    personality: "指揮官型 — 蒙古郡主，智計絕頂，為愛放棄一切",
+    analysis: "趙敏是「認知重評」的大師。她原本是朝廷鷹犬，與明教為敵，但在與張無忌的相處中，逐漸重新評估了自己的價值觀和立場。心理學上，這是「態度改變」的經典案例——通過深度接觸和情感連結，打破了原有偏見，最終選擇了愛情而非身份。",
+    psychFocus: "認知重評 · 態度改變 · 身份重構",
+    quote: "我趙敏想要的，從來沒有得不到的！",
+    portrait: "images/portrait-zhaomin.webp",
+    link: "https://zh.wikipedia.org/wiki/趙敏"
+  },
+  {
+    id: "zhouzhiruo",
+    name: "周芷若",
+    work: "《倚天屠龍記》",
+    mbti: "INFJ",
+    tags: ["溫柔", "偏執", "悲劇", "轉變"],
+    personality: "提倡者型 — 峨眉弟子，從溫柔少女變成狠毒魔女，最終悔悟",
+    analysis: "周芷若的轉變是「環境壓力下的人格扭曲」。滅絕師太的遺囑、對張無忌的愛而不得、同門的壓力，使她一步步走向極端。心理學上，這是「道德脫鉤」的過程——通過重新定義行為的性質，使自己能夠做出原本無法接受的事情。最終的失憶和悔悟，是心理防線崩潰後的自我保護。",
+    psychFocus: "道德脫鉤 · 環境扭曲 · 防禦性失憶",
+    quote: "無忌哥哥，對不起……",
+    portrait: "images/portrait-zhouzhiruo.webp",
+    link: "https://zh.wikipedia.org/wiki/周芷若"
+  },
+  {
+    id: "xiaozhao",
+    name: "小昭",
+    work: "《倚天屠龍記》",
+    mbti: "ISFJ",
+    tags: ["溫柔", "聰慧", "奉獻", "悲劇"],
+    personality: "守衛者型 — 紫衫龍王之女，為愛甘於奉獻，最遠去波斯",
+    analysis: "小昭是「利他型人格」的溫柔版本。她隱藏身份、甘於做婢女，默默守護張無忌。心理學上，這是「自我放棄型愛情」——將自己的需求完全置於對方之後，甚至願意為對方的幸福而離開。最終成為波斯明教教主，不是她想要的，而是她必須承擔的責任。",
+    psychFocus: "利他型人格 · 自我放棄 · 責任與情感衝突",
+    quote: "公子，小昭永遠記得你。",
+    portrait: "images/portrait-xiaozhao.webp",
+    link: "https://zh.wikipedia.org/wiki/小昭"
+  },
+  {
+    id: "yinli",
+    name: "殷離",
+    work: "《倚天屠龍記》",
+    mbti: "ISTP",
+    tags: ["倔強", "悲劇", "專情", "邊緣"],
+    personality: "鑑賞家型 — 蛛兒，修練千蛛萬毒手，面容毀損，一心找尋少年張無忌",
+    analysis: "殷離是「創傷後的邊緣型人格」的體現。幼年被父親拋棄、母親慘死，她的世界充滿了痛苦和憤怒。對少年張無忌的執著，本質上是對「那個唯一對我好的人」的固著。心理學上，這是「創傷記憶的情感固著」——將所有的情感寄託在過去的某個溫暖瞬間，無法走出。",
+    psychFocus: "創傷固著 · 邊緣型特質 · 情感執著",
+    quote: "張無忌，你還記得我嗎？",
+    portrait: "images/portrait-yinli.webp",
+    link: "https://zh.wikipedia.org/wiki/殷離"
+  },
+  {
+    id: "xiexun",
+    name: "謝遜",
+    work: "《倚天屠龍記》",
+    mbti: "INTJ",
+    tags: ["悲劇", "狂暴", "智慧", "贖罪"],
+    personality: "建築師型 — 金毛獅王，全家被殺，瘋狂報復，最終出家贖罪",
+    analysis: "謝遜是「創傷後的狂暴與救贖」的深刻描寫。全家被成昆殺害後，他的世界崩塌，以瘋狂報復來掩蓋內心的痛苦。心理學上，這是「創傷後應激障礙」的典型表現——閃回、暴怒、麻木。在張無忌的愛和少林的包容下，他最終選擇原諒和贖罪，體現了「創傷後成長」的可能性。",
+    psychFocus: "PTSD · 狂暴防禦 · 創傷後成長",
+    quote: "我謝遜一生殺人無數，今日終於解脫了。",
+    portrait: "images/portrait-xiexun.webp",
+    link: "https://zh.wikipedia.org/wiki/謝遜"
+  },
+  {
+    id: "zhangcuishan",
+    name: "張翠山",
+    work: "《倚天屠龍記》",
+    mbti: "ISFJ",
+    tags: ["仁義", "忠厚", "悲劇", "擔當"],
+    personality: "守衛者型 — 武當五俠，張無忌之父，為義氣自盡",
+    analysis: "張翠山是「道德兩難」的悲劇人物。他與謝遜結為兄弟，但謝遜是武林公敵；他忠於武當，但師兄的死與謝遜有關。心理學上，這是「忠誠衝突」的極致——當兩種同樣重要的道德義務發生矛盾時，個體可能選擇以死亡來解脫。他的自盡本質上是一種「道德性自殺」。",
+    psychFocus: "道德兩難 · 忠誠衝突 · 道德性自殺",
+    quote: "我張翠山對不起大家！",
+    portrait: "images/portrait-zhangcuishan.webp",
+    link: "https://zh.wikipedia.org/wiki/張翠山"
+  },
+  {
+    id: "yinsusu",
+    name: "殷素素",
+    work: "《倚天屠龍記》",
+    mbti: "ESTP",
+    tags: ["機變", "深情", "轉變", "悲劇"],
+    personality: "企業家型 — 天鷹教教主之女，為愛改邪歸正，最終殉夫",
+    analysis: "殷素素是「愛情驅動的身份轉變」的代表。她原本是邪教妖女，遇到張翠山後逐漸改變。心理學上，這是「親密關係中的自我擴展」——通過與伴侶的深度連結，個體會吸收對方的價值觀，從而實現自我的轉變。最終殉夫，體現了「共生型依戀」——失去伴侶就失去了自我。",
+    psychFocus: "自我擴展 · 身份轉變 · 共生型依戀",
+    quote: "五哥，我陪你一起去！",
+    portrait: "images/portrait-yinsusu.webp",
+    link: "https://zh.wikipedia.org/wiki/殷素素"
+  },
+  {
+    id: "zhangsanfeng",
+    name: "張三豐",
+    work: "《倚天屠龍記》",
+    mbti: "INFJ",
+    tags: ["傳奇", "智慧", "博大", "超脫"],
+    personality: "提倡者型 — 武當祖師，百歲高齡，武功與修為皆達化境",
+    analysis: "張三豐是「自我實現者」的典範。他從少林雜役成長為開宗立派的祖師，經歷了無數磨難，最終達到了從心所欲不逾矩的境界。心理學上，這是「智慧的發展」——隨著年齡和閱歷的增長，個體能夠超越非黑即白的思維，達到對複雜人性的深刻理解和包容。",
+    psychFocus: "自我實現 · 智慧發展 · 超越性思維",
+    quote: "他強由他強，清風拂山崗。",
+    portrait: "images/portrait-zhangsanfeng.webp",
+    link: "https://zh.wikipedia.org/wiki/張三豐"
+  },
+  {
+    id: "songqingshu",
+    name: "宋青書",
+    work: "《倚天屠龍記》",
+    mbti: "ESTJ",
+    tags: ["驕傲", "嫉妒", "悲劇", "墮落"],
+    personality: "總經理型 — 武當大師兄，原本前途無量，因嫉妒張無忌而墮落",
+    analysis: "宋青書是「嫉妒驅動的自我毀滅」的典型。作為武當第三代首徒，他一直是眾人矚目的焦點，但張無忌的出現使他的優越感受到嚴重挑戰。心理學上，這是「自我價值感的脆弱性」——他的自尊建立在比較和優越感之上，一旦被超越，就會通過貶低和傷害對方來維持自我。",
+    psychFocus: "脆弱自尊 · 嫉妒心理 · 自我毀滅",
+    quote: "為什麼！為什麼他處處比我強！",
+    portrait: "images/portrait-songqingshu.webp",
+    link: "https://zh.wikipedia.org/wiki/宋青書"
+  },
+  {
+    id: "yangxiao",
+    name: "楊逍",
+    work: "《倚天屠龍記》",
+    mbti: "INTJ",
+    tags: ["孤傲", "才華", "深情", "爭議"],
+    personality: "建築師型 — 光明左使，風流倜儻，與紀曉芙的愛情飽受爭議",
+    analysis: "楊逍是「道德灰色地帶」的人物。他強擄紀曉芙，卻也深情以待；他是明教的中流砥柱，卻也因作風爭議而被非議。心理學上，這體現了「道德評價的複雜性」——人的行為不能簡單地用善惡來劃分，動機和情境同樣重要。他的孤獨源於不被理解。",
+    psychFocus: "道德灰色地帶 · 複雜性 · 孤獨感",
+    quote: "我楊逍行事，但求問心無愧。",
+    portrait: "images/portrait-yangxiao.webp",
+    link: "https://zh.wikipedia.org/wiki/楊逍"
+  },
+  {
+    id: "fanyao",
+    name: "范遙",
+    work: "《倚天屠龍記》",
+    mbti: "ISTP",
+    tags: ["忠義", "隱忍", "智慧", "犧牲"],
+    personality: "鑑賞家型 — 光明右使，自毀容顏潛伏敵營，為明教忍辱負重",
+    analysis: "范遙是「長期臥底的心理代價」的體現。他自毀容貌，在敵營中潛伏多年，每天都在扮演另一個人。心理學上，這是「身份認同的模糊化」——長期的角色扮演會使真實自我與虛假身份的界限變得模糊，即使任務完成，也很難完全回到從前。他的忠義令人敬佩，代價也令人唏噓。",
+    psychFocus: "身份模糊 · 長期偽裝 · 忠義代價",
+    quote: "光明右使范遙，參見教主！",
+    portrait: "images/portrait-fanyao.webp",
+    link: "https://zh.wikipedia.org/wiki/范遙"
+  },
+  {
+    id: "yintianzheng",
+    name: "殷天正",
+    work: "《倚天屠龍記》",
+    mbti: "ESTJ",
+    tags: ["豪氣", "擔當", "忠義", "長者"],
+    personality: "總經理型 — 白眉鷹王，明教四大護教法王之首，後回歸明教",
+    analysis: "殷天正是「領導者的責任與擔當」的代表。他在明教分裂時自立天鷹教，但在明教危機時毅然回歸。心理學上，這是「原群體忠誠」的體現——即使與群體有分歧，在群體面臨危機時仍然會選擇承擔責任。他的領導風格是「權威型與仁慈型的結合」，既有威嚴又有人情味。",
+    psychFocus: "原群體忠誠 · 領導擔當 · 權威仁慈結合",
+    quote: "老夫殷天正，豈能坐視明教覆滅！",
+    portrait: "images/portrait-yintianzheng.webp",
+    link: "https://zh.wikipedia.org/wiki/殷天正"
+  },
+  {
+    id: "weiyixiao",
+    name: "韋一笑",
+    work: "《倚天屠龍記》",
+    mbti: "ENFP",
+    tags: ["風趣", "忠義", "特殊", "瀟灑"],
+    personality: "競選者型 — 青翼蝠王，輕功絕頂，因體質需要飲血，性格風趣",
+    analysis: "韋一笑是「與特殊體質共處」的幽默典範。他因修練武功導致需要飲血，這在武林中是駭人聽聞的，但他用幽默和灑脫化解了他人的偏見。心理學上，這是「幽默防禦機制」的健康運用——通過自嘲和詼諧，將可能被歧視的特點轉化為個人魅力，同時保持內心的坦然。",
+    psychFocus: "幽默防禦 · 自我接納 · 偏見化解",
+    quote: "哈哈，我韋一笑別的不會，逃命可是一流的！",
+    portrait: "images/portrait-weiyixiao.webp",
+    link: "https://zh.wikipedia.org/wiki/韋一笑"
+  },
+  {
+    id: "miejue",
+    name: "滅絕師太",
+    work: "《倚天屠龍記》",
+    mbti: "ESTJ",
+    tags: ["剛烈", "偏執", "正義", "悲劇"],
+    personality: "總經理型（極端版）— 峨眉派掌門，正義感極端，手段殘忍",
+    analysis: "滅絕師太是「正義感的病態化」的代表。她的出發點是維護道義，但手段極端殘忍，甚至逼徒弟發毒誓。心理學上，這是「道德絕對主義」的危險——當一個人確信自己代表絕對正義時，就會將對手視為絕對邪惡，從而合理化任何殘忍的手段。她的悲劇在於至死都不認為自己有錯。",
+    psychFocus: "道德絕對主義 · 正義感病態化 · 確證偏誤",
+    quote: "貧道今日就要除魔衛道！",
+    portrait: "images/portrait-miejue.webp",
+    link: "https://zh.wikipedia.org/wiki/滅絕師太"
+  },
+  {
+    id: "xiaofeng",
+    name: "蕭峯",
+    work: "《天龍八部》",
+    mbti: "ENTJ",
+    tags: ["豪邁", "悲劇", "忠義", "擔當"],
+    personality: "指揮官型 — 丐幫幫主，契丹人身世揭曉後世界崩塌，最終以死換和平",
+    analysis: "蕭峯是「身份認同危機」的極致。漢人養大的契丹人，在身世揭曉後，他的整個世界觀崩塌了。心理學上，這是「存在性危機」——當核心身份被否定時，個體會經歷劇烈的心理動盪。他最終以生命完成了身份整合：既不是純漢人，也不是純契丹人，而是一個超越民族界限的「人」。",
+    psychFocus: "身份認同危機 · 存在性危機 · 身份整合",
+    quote: "蕭某但求問心無愧！",
+    portrait: "images/portrait-xiaofeng.webp",
+    link: "https://zh.wikipedia.org/wiki/蕭峯"
+  },
+  {
+    id: "duanyu",
+    name: "段譽",
+    work: "《天龍八部》",
+    mbti: "INFP",
+    tags: ["癡情", "善良", "書卷", "傳奇"],
+    personality: "調停者型 — 大理王子，不愛武功愛佛經，對王語嫣一見傾心",
+    analysis: "段譽是「理想主義者的成長」的代表。他一開始是個不食人間煙火的書呆子，對王語嫣的愛是「理想化投射」——將她視為完美的女神。心理學上，隨著經歷的增長，他逐漸從理想化走向現實，最終發現自己愛的其實是「愛的感覺」而非具體的人。他的善良和初心是他最強大的力量。",
+    psychFocus: "理想化投射 · 理想主義成長 · 初心力量",
+    quote: "神仙姐姐，段譽這廂有禮了。",
+    portrait: "images/portrait-duanyu.webp",
+    link: "https://zh.wikipedia.org/wiki/段譽"
+  },
+  {
+    id: "xuzhu",
+    name: "虛竹",
+    work: "《天龍八部》",
+    mbti: "ISFJ",
+    tags: ["純真", "善良", "被動", "傳奇"],
+    personality: "守衛者型 — 少林小和尚，被迫破戒，成為靈鷲宮主和駙馬",
+    analysis: "虛竹是「被動型人生」的傳奇。他從來不想爭什麼，卻被命運推著走，不斷得到他不想要的東西：武功、權力、妻子。心理學上，這是「外部控制傾向」的體現——他相信一切都是命中注定，因此很少主動爭取。但他的善良和純真使他在被動中依然做出了正確的選擇。",
+    psychFocus: "外部控制傾向 · 被動成長 · 純真力量",
+    quote: "阿彌陀佛，小僧……小僧該怎麼辦？",
+    portrait: "images/portrait-xuzhu.webp",
+    link: "https://zh.wikipedia.org/wiki/虛竹"
+  },
+  {
+    id: "wangyuyan",
+    name: "王語嫣",
+    work: "《天龍八部》",
+    mbti: "ISFJ",
+    tags: ["聰慧", "癡情", "依附", "覺醒"],
+    personality: "守衛者型 — 慕容復的表妹，博覽武功書籍，一心幫助表哥",
+    analysis: "王語嫣是「情感依附型人格」的典型。她的全部人生都圍繞著慕容復轉，為他研讀武功、為他出謀劃策，完全失去了自我。心理學上，這是「共生型依戀」——她的自我價值完全建立在對方的認可之上。最終在慕容復的徹底失望後，她才開始尋找真正的自我，這是「覺醒型成長」的開始。",
+    psychFocus: "共生型依戀 · 情感依附 · 自我覺醒",
+    quote: "表哥，你還好嗎？",
+    portrait: "images/portrait-wangyuyan.webp",
+    link: "https://zh.wikipedia.org/wiki/王語嫣"
+  },
+  {
+    id: "azhu",
+    name: "阿朱",
+    work: "《天龍八部》",
+    mbti: "ENFJ",
+    tags: ["聰慧", "善良", "深情", "悲劇"],
+    personality: "主人公型 — 慕容復的侍女，與蕭峯相愛，最終被誤殺",
+    analysis: "阿朱是「悲劇性自我犧牲」的代表。她為了化解蕭峯與段正淳的仇恨，易容成段正淳赴死。心理學上，這是「利他型自殺」的變種——她相信自己的死可以解決一切問題，但實際上只帶給了蕭峯終生的痛苦。她的善良和智慧令人動容，但她的解決方式卻是悲劇性的。",
+    psychFocus: "利他型犧牲 · 悲劇性誤解 · 情感深度",
+    quote: "喬大爺，阿朱永遠陪著你。",
+    portrait: "images/portrait-azhu.webp",
+    link: "https://zh.wikipedia.org/wiki/阿朱"
+  },
+  {
+    id: "azi",
+    name: "阿紫",
+    work: "《天龍八部》",
+    mbti: "ESTP",
+    tags: ["狠毒", "偏執", "悲劇", "深情"],
+    personality: "企業家型（黑暗版）— 阿朱的妹妹，從小在星宿派長大，心狠手辣，偏執愛著蕭峯",
+    analysis: "阿紫是「病態環境下的人格扭曲」的產物。從小在丁春秋的星宿派長大，那裡只有欺騙和殘忍，她學會了用狠毒來保護自己。對蕭峯的愛是她唯一的柔軟，但表達方式卻是病態的——她想弄瞎蕭峯讓他離不開自己。心理學上，這是「不安全依戀的病態表達」。",
+    psychFocus: "病態環境 · 不安全依戀 · 情感表達障礙",
+    quote: "蕭峯，你為什麼不喜歡我！",
+    portrait: "images/portrait-azi.webp",
+    link: "https://zh.wikipedia.org/wiki/阿紫"
+  },
+  {
+    id: "murongfu",
+    name: "慕容復",
+    work: "《天龍八部》",
+    mbti: "INTJ",
+    tags: ["野心", "才華", "偏執", "瘋癲"],
+    personality: "建築師型（病態版）— 南慕容，一心復國，最終瘋癲",
+    analysis: "慕容復是「目標固著導致的自我毀滅」的極致。他的一生都被「復國」這個目標綁架，為此犧牲了愛情、友情、名譽，甚至人性。心理學上，這是「功能失調的完美主義」——目標本身已經成為目的，而非實現幸福的手段。當目標最終破滅時，他的整個自我也隨之崩潰，陷入瘋癲。",
+    psychFocus: "目標固著 · 功能失調完美主義 · 自我崩潰",
+    quote: "我要復國！我要做皇帝！",
+    portrait: "images/portrait-murongfu.webp",
+    link: "https://zh.wikipedia.org/wiki/慕容復"
+  },
+  {
+    id: "jiumozhi",
+    name: "鳩摩智",
+    work: "《天龍八部》",
+    mbti: "INTJ",
+    tags: ["癡迷", "才華", "偏執", "覺醒"],
+    personality: "建築師型 — 大輪明王，武功高強，癡迷於武功，最終大徹大悟",
+    analysis: "鳩摩智是「執著與放下」的心理學課題。他癡迷於收集天下武功，為此不擇手段，但最終在走火入魔、武功盡失後反而大徹大悟。心理學上，這是「剝奪性覺醒」——當長期執著的東西被奪走時，個體反而能看清什麼才是真正重要的。他的轉變是「放下」的力量的最好證明。",
+    psychFocus: "執著與放下 · 剝奪性覺醒 · 重新定義",
+    quote: "貧僧終於明白了……",
+    portrait: "images/portrait-jiumozhi.webp",
+    link: "https://zh.wikipedia.org/wiki/鳩摩智"
+  },
+  {
+    id: "duanzhengchun",
+    name: "段正淳",
+    work: "《天龍八部》",
+    mbti: "ESFP",
+    tags: ["風流", "多情", "擔當", "悲劇"],
+    personality: "表演者型 — 大理鎮南王，到處留情，最終為愛殉情",
+    analysis: "段正淳是「多情型人格」的典型。他對每一個女人都是真心的，但他的真心太多了。心理學上，這是「情感豐富但缺乏承諾能力」的體現——他能夠深刻地愛，但無法將愛轉化為長期的承諾和責任。最終他為所有愛人殉情，既是他的深情，也是他的終極承擔。",
+    psychFocus: "多情型人格 · 承諾困難 · 終極承擔",
+    quote: "我段正淳對不起你們每一個人。",
+    portrait: "images/portrait-duanzhengchun.webp",
+    link: "https://zh.wikipedia.org/wiki/段正淳"
+  },
+  {
+    id: "muwanqing",
+    name: "木婉清",
+    work: "《天龍八部》",
+    mbti: "ISTP",
+    tags: ["剛烈", "純情", "邊緣", "成長"],
+    personality: "鑑賞家型 — 秦紅棉之女，蒙面行走江湖，性格剛烈，對段譽一往情深",
+    analysis: "木婉清是「邊緣型人格的健康轉化」的代表。從小在山野中長大，性格剛烈、不信任他人，但內心其實純情而脆弱。遇到段譽後，她的防備被逐漸打破。心理學上，這是「安全型依戀的治癒力量」——一個穩定、溫暖的關係可以幫助邊緣型特質的人建立起對他人的信任。",
+    psychFocus: "邊緣型特質 · 防禦性剛烈 · 安全依戀治癒",
+    quote: "段郎，你不能不要我！",
+    portrait: "images/portrait-muwanqing.webp",
+    link: "https://zh.wikipedia.org/wiki/木婉清"
+  },
+  {
+    id: "zhongling",
+    name: "鍾靈",
+    work: "《天龍八部》",
+    mbti: "ESFP",
+    tags: ["活潑", "可愛", "善良", "聰慧"],
+    personality: "表演者型 — 甘寶寶之女，活潑可愛，養靈蛇貂，對段譽有好感",
+    analysis: "鍾靈是「健康型少女」的代表。她在相對溫暖的環境中長大，性格活潑開朗、善良可愛。心理學上，這是「安全型依戀」的自然產物——她相信世界是安全的，他人是可信的，因此能夠自由地表達自己的情感。她對段譽的好感是純真的，即使發現是兄妹也能坦然接受。",
+    psychFocus: "安全型依戀 · 健康自我表達 · 情感彈性",
+    quote: "段大哥，你真有趣！",
+    portrait: "images/portrait-zhongling.webp",
+    link: "https://zh.wikipedia.org/wiki/鍾靈"
+  },
+  {
+    id: "youtanzhi",
+    name: "游坦之",
+    work: "《天龍八部》",
+    mbti: "ISFP",
+    tags: ["悲劇", "偏執", "卑微", "病態"],
+    personality: "探險家型（病態版）— 聚賢莊少莊主，家破人亡後被阿紫折磨，卻癡戀阿紫",
+    analysis: "游坦之是「斯德哥爾摩綜合徵」的文學經典。他被阿紫折磨、毀容、利用，卻反而癡戀著她。心理學上，這是「創傷性依戀」——在極端的權力不對等和虐待關係中，受害者可能對施虐者產生情感依戀，這是一種生存策略。他的悲劇在於將虐待誤認為愛情，最終為阿紫而死。",
+    psychFocus: "創傷性依戀 · 斯德哥爾摩綜合徵 · 自我價值喪失",
+    quote: "阿紫姑娘，只要你高興，我做什麼都願意。",
+    portrait: "images/portrait-youtanzhi.webp",
+    link: "https://zh.wikipedia.org/wiki/游坦之"
+  },
+  {
+    id: "tianshantonglao",
+    name: "天山童姥",
+    work: "《天龍八部》",
+    mbti: "ENTJ",
+    tags: ["強大", "偏執", "悲情", "超脫"],
+    personality: "指揮官型 — 靈鷲宮主人，武功絕頂，與李秋水爭鬥一生，臨終和解",
+    analysis: "天山童姥是「終生競爭的心理代價」的代表。她與師妹李秋水為了無崖子爭鬥了一輩子，兩敗俱傷。心理學上，這是「競爭性目標固著」——當一個人將自我價值完全建立在「贏過對方」之上時，即使贏了也不會快樂。臨終前她們發現無崖子愛的是另一個女人，一生的爭鬥變成了笑話，這是最殘酷的覺醒。",
+    psychFocus: "終生競爭 · 目標固著 · 荒謬性覺醒",
+    quote: "哈哈，我們爭了一輩子，原來都是笑話！",
+    portrait: "images/portrait-tianshantonglao.webp",
+    link: "https://zh.wikipedia.org/wiki/天山童姥"
+  },
+  {
+    id: "liqiushui",
+    name: "李秋水",
+    work: "《天龍八部》",
+    mbti: "ESTJ",
+    tags: ["美麗", "狠毒", "悲情", "爭鬥"],
+    personality: "總經理型 — 無崖子的師妹，與天山童姥爭鬥一生，臨終和解",
+    analysis: "李秋水是「嫉妒驅動的人生」的代表。她的一生都在與天山童姥比較和爭鬥，從容貌到武功到愛情。心理學上，這是「向上社會比較的毒性」——當一個人不斷與他人比較時，永遠不會滿足，因為總有人在某些方面比你強。她的悲劇在於將一生浪費在比較上，忘記了自己真正想要的是什麼。",
+    psychFocus: "社會比較 · 嫉妒驅動 · 自我迷失",
+    quote: "師姐，我們都輸了。",
+    portrait: "images/portrait-liqiushui.webp",
+    link: "https://zh.wikipedia.org/wiki/李秋水"
+  },
+  {
+    id: "wuyazi",
+    name: "無崖子",
+    work: "《天龍八部》",
+    mbti: "INTP",
+    tags: ["傳奇", "博學", "深情", "悲劇"],
+    personality: "邏輯學家型 — 逍遙派掌門，博學多才，被徒弟暗算，終身殘廢",
+    analysis: "無崖子是「天才的悲劇」的代表。他武功高強、博學多才，卻因為輕信徒弟而被暗算，終身殘廢。心理學上，這是「過度自信的盲點」——天才往往因為自己的才華而低估他人的惡意和現實的殘酷。他對李秋水和天山童姥的感情也是模糊的，這種「情感曖昧」最終釀成了兩個女人一生的悲劇。",
+    psychFocus: "過度自信盲點 · 天才悲劇 · 情感曖昧",
+    quote: "我無崖子一生，終究是負了她們。",
+    portrait: "images/portrait-wuyazi.webp",
+    link: "https://zh.wikipedia.org/wiki/無崖子"
+  },
+  {
+    id: "linghuchong",
+    name: "令狐沖",
+    work: "《笑傲江湖》",
+    mbti: "ENFP",
+    tags: ["瀟灑", "深情", "重義", "自由"],
+    personality: "競選者型 — 華山大弟子，被誤解、被逐師門，最終笑傲江湖",
+    analysis: "令狐沖是「自由靈魂的堅守」的代表。他在充滿偽善和權謀的武林中，始終保持著內心的自由和善良。心理學上，這是「內在動機的力量」——他的行為不是為了獲得認可或回報，而是出於內在的價值觀和情感。即使被全世界誤解，他依然做自己認為對的事，這是「自我和諧」的最高境界。",
+    psychFocus: "內在動機 · 自由靈魂 · 自我和諧",
+    quote: "我令狐沖但求問心無愧！",
+    portrait: "images/portrait-linghuchong.webp",
+    link: "https://zh.wikipedia.org/wiki/令狐沖"
+  },
+  {
+    id: "renyingying",
+    name: "任盈盈",
+    work: "《笑傲江湖》",
+    mbti: "INTJ",
+    tags: ["聰慧", "深情", "獨立", "隱忍"],
+    personality: "建築師型 — 聖姑，魔教任我行之女，卻愛上華山弟子，為愛隱忍",
+    analysis: "任盈盈是「高自尊女性的愛情」的代表。她身為聖姑，地位崇高，卻在愛情中保持著獨立和尊嚴。心理學上，這是「安全型依戀」的體現——她愛令狐沖，但不會因為愛而失去自我。她的愛是成熟的、有邊界的，既深情又獨立，這是健康親密關係的典範。",
+    psychFocus: "安全型依戀 · 高自尊 · 成熟愛情",
+    quote: "沖哥，無論你去哪裡，我都等你。",
+    portrait: "images/portrait-renyingying.webp",
+    link: "https://zh.wikipedia.org/wiki/任盈盈"
+  },
+  {
+    id: "yuelingshan",
+    name: "岳靈珊",
+    work: "《笑傲江湖》",
+    mbti: "ESFP",
+    tags: ["活潑", "單純", "悲劇", "忠貞"],
+    personality: "表演者型 — 岳不群之女，令狐沖的小師妹，最終嫁給林平之",
+    analysis: "岳靈珊是「天真者的幻滅」的代表。她從小崇拜父親、暗戀林平之，對世界充滿了美好的想像。但父親的偽善和丈夫的變態，將她的世界徹底粉碎。心理學上，這是「理想化崩塌」的過程——當她發現所愛的人並非想像中那樣時，她的整個世界觀都受到了衝擊。最終她選擇原諒和守護，體現了「悲劇中的人性光輝」。",
+    psychFocus: "理想化崩塌 · 天真者幻滅 · 悲劇性忠貞",
+    quote: "大師哥，你要好好照顧自己。",
+    portrait: "images/portrait-yuelingshan.webp",
+    link: "https://zh.wikipedia.org/wiki/岳靈珊"
+  },
+  {
+    id: "linpingzhi",
+    name: "林平之",
+    work: "《笑傲江湖》",
+    mbti: "INTJ",
+    tags: ["悲劇", "復仇", "墮落", "偏執"],
+    personality: "建築師型（病態版）— 福威鏢局少局長，滿門被殺，為復仇揮刀自宮",
+    analysis: "林平之是「復仇驅動的自我毀滅」的經典。他原本是個錦衣玉食的少爺，滿門被殺後，復仇成為他生命的唯一意義。心理學上，這是「創傷後的意義危機」——當原有世界崩塌後，他將復仇作為新的人生意義，但這個意義最終吞噬了他的人性。揮刀自宮象徵著為了目標而徹底放棄自我。",
+    psychFocus: "復仇驅動 · 創傷後意義危機 · 自我放棄",
+    quote: "我林平之一定要報仇！",
+    portrait: "images/portrait-linpingzhi.webp",
+    link: "https://zh.wikipedia.org/wiki/林平之"
+  },
+  {
+    id: "yuebuqun",
+    name: "岳不群",
+    work: "《笑傲江湖》",
+    mbti: "INTJ",
+    tags: ["偽善", "權謀", "偏執", "悲劇"],
+    personality: "建築師型（黑暗版）— 華山派掌門，人稱君子劍，實為偽君子",
+    analysis: "岳不群是「偽善者的心理結構」的深刻剖析。他表面上是謙謙君子，實際上權欲薰心、不擇手段。心理學上，這是「印象管理」的病態形式——他長期扮演君子角色，以至於自己都開始相信自己的偽裝。但在內心深處，他知道自己的真實面目，這種「認知失調」使他更加偏執和極端。",
+    psychFocus: "偽善心理 · 印象管理 · 認知失調",
+    quote: "我岳不群行得正坐得端！",
+    portrait: "images/portrait-yuebuqun.webp",
+    link: "https://zh.wikipedia.org/wiki/岳不群"
+  },
+  {
+    id: "renwoxing",
+    name: "任我行",
+    work: "《笑傲江湖》",
+    mbti: "ENTJ",
+    tags: ["豪邁", "野心", "霸道", "悲劇"],
+    personality: "指揮官型 — 魔教教主，武功蓋世，豪邁霸道，最終死於非命",
+    analysis: "任我行是「權力型人格」的代表。他熱愛權力、享受統治，性格豪邁霸道，但也有著真性情的一面。心理學上，這是「權力動機」的健康與病態並存——他的領導力和魅力是真實的，但對權力的無限追求最終也傷害了他自己。他對令狐沖的欣賞，體現了「英雄惜英雄」的超越性。",
+    psychFocus: "權力動機 · 魅力型領導 · 真性情",
+    quote: "我任我行要做的事，誰能攔得住！",
+    portrait: "images/portrait-renwoxing.webp",
+    link: "https://zh.wikipedia.org/wiki/任我行"
+  },
+  {
+    id: "dongfangbubai",
+    name: "東方不敗",
+    work: "《笑傲江湖》",
+    mbti: "INFJ",
+    tags: ["傳奇", "偏執", "深情", "超脫"],
+    personality: "提倡者型（極端版）— 日月神教教主，武功天下第一，揮刀自宮後性情大變",
+    analysis: "東方不敗是「性別與權力的心理學謎題」。他為了修練葵花寶典揮刀自宮，此後從一個野心勃勃的權力追求者變成了一個沉迷於刺繡和愛情的人。心理學上，這可以解讀為「權力追求的終極荒謬」——當他獲得了天下第一的權力和武功後，發現這些都不如一個愛人來得真實。他的轉變是對權力價值的終極質疑。",
+    psychFocus: "權力荒謬 · 性別流動 · 終極質疑",
+    quote: "問世間權力為何物？",
+    portrait: "images/portrait-dongfangbubai.webp",
+    link: "https://zh.wikipedia.org/wiki/東方不敗"
+  },
+  {
+    id: "xiangwentian",
+    name: "向問天",
+    work: "《笑傲江湖》",
+    mbti: "ISTP",
+    tags: ["忠義", "豪邁", "智慧", "擔當"],
+    personality: "鑑賞家型 — 魔教光明左使，對任我行忠心耿耿，幫助令狐沖",
+    analysis: "向問天是「忠義型人格」的豪邁代表。他在任我行被囚禁後，依然忠於教主，四處奔走營救。心理學上，這是「承諾型忠誠」——他的忠誠不是基於恐懼或利益，而是基於對領袖的認可和道義的承諾。他的智慧和擔當使他成為令狐沖最重要的盟友之一。",
+    psychFocus: "承諾型忠誠 · 道義擔當 · 智慧型輔佐",
+    quote: "我向問天一條命，早就交給教主了！",
+    portrait: "images/portrait-xiangwentian.webp",
+    link: "https://zh.wikipedia.org/wiki/向問天"
+  },
+  {
+    id: "fengqingyang",
+    name: "風清揚",
+    work: "《笑傲江湖》",
+    mbti: "INTP",
+    tags: ["傳奇", "超脫", "智慧", "隱士"],
+    personality: "邏輯學家型 — 華山派前輩，獨孤九劍傳人，隱居思過崖",
+    analysis: "風清揚是「智慧型隱士」的代表。他經歷了華山派的內鬥和情感的創傷，選擇隱居思過崖，不再過問江湖事。心理學上，這是「情感抽離的防禦機制」——通過遠離紛爭來保護自己不再受傷。但他傳授令狐沖獨孤九劍，體現了「智慧的傳承」——即使隱居，他依然關心著武林的未來。",
+    psychFocus: "情感抽離 · 智慧傳承 · 隱士心理",
+    quote: "劍術的最高境界，是無招勝有招。",
+    portrait: "images/portrait-fengqingyang.webp",
+    link: "https://zh.wikipedia.org/wiki/風清揚"
+  },
+  {
+    id: "fangzheng",
+    name: "方證大師",
+    work: "《笑傲江湖》",
+    mbti: "INFJ",
+    tags: ["慈悲", "智慧", "包容", "超脫"],
+    personality: "提倡者型 — 少林方丈，武功高強，慈悲為懷，是武林的良心",
+    analysis: "方證大師是「慈悲型領導者」的代表。他不僅武功高強，更有著一顆包容和慈悲的心。心理學上，這是「無條件積極關注」的體現——他能夠看到每個人內心的善，即使是被世人唾棄的人。他對令狐沖的維護和對任我行的包容，體現了「超越門戶之見的大智慧」。",
+    psychFocus: "無條件積極關注 · 慈悲型領導 · 超越性智慧",
+    quote: "阿彌陀佛，眾生皆有佛性。",
+    portrait: "images/portrait-fangzheng.webp",
+    link: "https://zh.wikipedia.org/wiki/方證大師"
+  },
+  {
+    id: "zuolengchan",
+    name: "左冷禪",
+    work: "《笑傲江湖》",
+    mbti: "ENTJ",
+    tags: ["野心", "權謀", "霸道", "悲劇"],
+    personality: "指揮官型（黑暗版）— 嵩山派掌門，五嶽劍派盟主，野心勃勃",
+    analysis: "左冷禪是「權力型人格的病態版本」。他的一生都在追求統一五嶽、稱霸武林的目標。心理學上，這是「權力動機的極端化」——當權力成為唯一的人生目標時，個體會變得冷酷、算計、不擇手段。他的失敗在於低估了人性的複雜性——以為靠權謀和武力就能控制一切，最終被更偽善的岳不群算計。",
+    psychFocus: "權力動機極端化 · 控制欲 · 人性低估",
+    quote: "我左冷禪要做的，就是五嶽盟主！",
+    portrait: "images/portrait-zuolengchan.webp",
+    link: "https://zh.wikipedia.org/wiki/左冷禪"
+  },
+  {
+    id: "tianboguang",
+    name: "田伯光",
+    work: "《笑傲江湖》",
+    mbti: "ESTP",
+    tags: ["風流", "豪邁", "轉變", "忠義"],
+    personality: "企業家型 — 萬里獨行，採花大盜，後被儀琳感化，出家為僧",
+    analysis: "田伯光是「浪子回頭」的心理學案例。他原本是個採花大盜，被視為武林敗類，但在與令狐沖和儀琳的相處中，他的內心善念被喚醒。心理學上，這是「積極人際關係的改變力量」——即使是被標籤化的「壞人」，在真誠和尊重的關係中也可能發生改變。他的轉變不是被迫的，而是自發的。",
+    psychFocus: "浪子回頭 · 積極關係改變 · 標籤化超越",
+    quote: "我田伯光今日起，便是不可不戒和尚！",
+    portrait: "images/portrait-tianboguang.webp",
+    link: "https://zh.wikipedia.org/wiki/田伯光"
+  },
+  {
+    id: "weixiaobao",
+    name: "韋小寶",
+    work: "《鹿鼎記》",
+    mbti: "ESTP",
+    tags: ["機智", "風流", "忠義", "傳奇"],
+    personality: "企業家型 — 揚州麗春院出身，不會武功，卻在官場和江湖中如魚得水",
+    analysis: "韋小寶是「反英雄的心理學」的經典。他不識字、不會武功、貪財好色，卻憑藉機智和口才在宮廷和江湖中遊刃有餘。心理學上，他體現了「情緒智力」的強大力量——能夠精準讀取他人心理、靈活應對各種局面。他的忠義是「實用型忠義」——不講大道理，但在關鍵時刻絕不含糊。",
+    psychFocus: "情緒智力 · 反英雄 · 實用型忠義",
+    quote: "老子韋小寶，怕過誰來！",
+    portrait: "images/portrait-weixiaobao.webp",
+    link: "https://zh.wikipedia.org/wiki/韋小寶"
+  },
+  {
+    id: "kangxi",
+    name: "康熙",
+    work: "《鹿鼎記》",
+    mbti: "INTJ",
+    tags: ["英明", "孤獨", "制衡", "傳奇"],
+    personality: "建築師型 — 少年天子，智擒鰲拜，與韋小寶亦君亦友",
+    analysis: "康熙是「孤獨的權力者」的深刻描寫。他是一代明君，但在至高無上的權力中，他是孤獨的。與韋小寶的友情是他唯一能夠做真實自己的關係。心理學上，這是「權力的社會隔離效應」——地位越高，能夠信任的人越少，真實的情感連結也越稀缺。他對韋小寶的包容，本質上是對真實友情的渴望。",
+    psychFocus: "權力孤獨 · 社會隔離 · 真實友情渴望",
+    quote: "小桂子，你是朕唯一的朋友。",
+    portrait: "images/portrait-kangxi.webp",
+    link: "https://zh.wikipedia.org/wiki/康熙"
+  },
+  {
+    id: "shuanger",
+    name: "雙兒",
+    work: "《鹿鼎記》",
+    mbti: "ISFJ",
+    tags: ["溫柔", "忠貞", "能幹", "奉獻"],
+    personality: "守衛者型 — 韋小寶的七個老婆之一，最受寵愛，溫柔能幹",
+    analysis: "雙兒是「健康型依戀」的完美體現。她溫柔、忠貞、能幹，對韋小寶無微不至，但也有自己的原則和能力。心理學上，這是「安全型依戀」的體現——她的付出不是出於恐懼或低自尊，而是出於真誠的愛和關懷。她能夠在親密關係中保持自我，這是健康依戀的標誌。",
+    psychFocus: "安全型依戀 · 健康奉獻 · 親密中的自我",
+    quote: "相公，雙兒永遠陪著你。",
+    portrait: "images/portrait-shuanger.webp",
+    link: "https://zh.wikipedia.org/wiki/雙兒"
+  },
+  {
+    id: "jianning",
+    name: "建寧公主",
+    work: "《鹿鼎記》",
+    mbti: "ESFP",
+    tags: ["嬌縱", "瘋癲", "深情", "悲劇"],
+    personality: "表演者型 — 皇帝的妹妹，性格嬌縱瘋癲，對韋小寶又打又愛",
+    analysis: "建寧公主是「邊緣型人格特質」的喜劇版本。她的情緒起伏劇烈，對韋小寶又打又愛，行為不可預測。心理學上，這與她的成長環境有關——在深宮中長大，缺乏真實的情感連結，導致她用極端的方式來尋求關注。但她的內心其實是孤獨和渴望愛的，這是「被忽視兒童的補償性行為」。",
+    psychFocus: "邊緣型特質 · 尋求關注 · 情感匱乏補償",
+    quote: "韋小寶！你給我過來！",
+    portrait: "images/portrait-jianning.webp",
+    link: "https://zh.wikipedia.org/wiki/建寧公主"
+  },
+  {
+    id: "chenjinnan",
+    name: "陳近南",
+    work: "《鹿鼎記》",
+    mbti: "INFJ",
+    tags: ["忠義", "智慧", "悲劇", "擔當"],
+    personality: "提倡者型 — 天地會總舵主，反清復明的領袖，韋小寶的師父",
+    analysis: "陳近南是「理想主義者的悲劇」的代表。他一生致力於反清復明，但他所效忠的明室後裔卻是個昏庸無能之輩。心理學上，這是「忠誠的困境」——當你所忠誠的對象本身不值得忠誠時，是繼續堅持還是選擇放棄？他的悲劇在於將道義置於現實之上，最終為自己的理想付出了生命。",
+    psychFocus: "忠誠困境 · 理想主義悲劇 · 道義與現實衝突",
+    quote: "我陳近南但求問心無愧！",
+    portrait: "images/portrait-chenjinnan.webp",
+    link: "https://zh.wikipedia.org/wiki/陳近南"
+  },
+  {
+    id: "aobai",
+    name: "鰲拜",
+    work: "《鹿鼎記》",
+    mbti: "ESTJ",
+    tags: ["霸道", "權臣", "傲慢", "悲劇"],
+    personality: "總經理型（極端版）— 顧命大臣，權傾朝野，最終被康熙智擒",
+    analysis: "鰲拜是「權力腐蝕人性」的經典案例。他作為顧命大臣，原本是為了輔佐幼帝，但權力使他變得傲慢和霸道。心理學上，這是「權力的腐蝕效應」——長期擁有不被制約的權力，會使個體的自我評估膨脹、同理心下降、衝動性增加。他的失敗在於沒有意識到少年康熙已經成長，仍然用對待孤兒的方式對待皇帝。",
+    psychFocus: "權力腐蝕 · 自我膨脹 · 同理心下降",
+    quote: "我鰲拜怕過誰！",
+    portrait: "images/portrait-aobai.webp",
+    link: "https://zh.wikipedia.org/wiki/鰲拜"
+  },
+  {
+    id: "wusangui",
+    name: "吳三桂",
+    work: "《鹿鼎記》",
+    mbti: "INTJ",
+    tags: ["權謀", "反覆", "悲情", "野心"],
+    personality: "建築師型 — 平西王，衝冠一怒為紅顏，後又起兵反清",
+    analysis: "吳三桂是「反覆無常的心理學」的案例。他先降清、後反清，每一次選擇都被視為背叛。心理學上，這是「情境性道德」的體現——他的道德判斷不是基於固定的原則，而是基於現實利益和情境壓力。「衝冠一怒為紅顏」可能是真實的情感，但更多的是政治計算的結果。他的一生都在權力的賭局中輾轉。",
+    psychFocus: "情境性道德 · 反覆無常 · 權力賭局",
+    quote: "我吳三桂豈能久居人下！",
+    portrait: "images/portrait-wusangui.webp",
+    link: "https://zh.wikipedia.org/wiki/吳三桂"
+  },
+  {
+    id: "zhengkeshuang",
+    name: "鄭克塽",
+    work: "《鹿鼎記》",
+    mbti: "ESTP",
+    tags: ["虛榮", "懦弱", "悲劇", "投機"],
+    personality: "企業家型 — 延平郡王，鄭成功之孫，風流倜儻卻懦弱無能",
+    analysis: "鄭克塽是「富貴紈絝子弟的心理」的代表。他出身尊貴，外表風流，但內心懦弱、缺乏擔當。心理學上，這是「溺愛型教養的產物」——在優渥的環境中長大，從未經歷過真正的挫折，導致心理彈性不足、責任感缺失。他對阿珂的追求更多是出於佔有慾而非真愛，最終的悲劇也是性格使然。",
+    psychFocus: "溺愛教養 · 心理彈性不足 · 佔有慾",
+    quote: "我鄭克塽想要的，還沒有得不到的！",
+    portrait: "images/portrait-zhengkeshuang.webp",
+    link: "https://zh.wikipedia.org/wiki/鄭克塽"
+  },
+  {
+    id: "hongantong",
+    name: "洪安通",
+    work: "《鹿鼎記》",
+    mbti: "INTJ",
+    tags: ["陰險", "權謀", "偏執", "悲劇"],
+    personality: "建築師型（黑暗版）— 神龍教教主，利用邪教控制教眾，最終眾叛親離",
+    analysis: "洪安通是「邪教領袖的心理學」的剖析。他通過洗腦、恐嚇和神化自己來控制教眾，建立起一個個人崇拜的體系。心理學上，這是「權力型人格的病態極致」——他不僅要控制他人的行為，還要控制他人的思想。但這種控制是脆弱的，一旦神話破滅，就會眾叛親離。他的悲劇在於從未得到過真正的忠誠。",
+    psychFocus: "邪教心理 · 思想控制 · 脆弱權威",
+    quote: "我洪安通就是神龍教主！",
+    portrait: "images/portrait-hongantong.webp",
+    link: "https://zh.wikipedia.org/wiki/洪安通"
+  },
+  {
+    id: "jiunan",
+    name: "九難",
+    work: "《鹿鼎記》",
+    mbti: "INFJ",
+    tags: ["悲劇", "堅強", "超脫", "復仇"],
+    personality: "提倡者型 — 崇禎皇帝之女，斷臂公主，後出家為尼",
+    analysis: "九難是「亡國公主的心理創傷」的深刻描寫。她經歷了亡國、斷臂、父親自盡的慘痛，內心充滿了仇恨和痛苦。心理學上，這是「集體創傷的個人承擔」——她背負的不僅是個人的悲劇，更是一個王朝的滅亡。出家為尼是她的生存策略，但內心的仇恨從未真正消散。對阿珂的複雜感情，體現了「創傷的代際傳遞」。",
+    psychFocus: "集體創傷 · 亡國之痛 · 創傷代際傳遞",
+    quote: "我九難一生，只為復仇。",
+    portrait: "images/portrait-jiunan.webp",
+    link: "https://zh.wikipedia.org/wiki/九難"
+  },
+  {
+    id: "chenjialuo",
+    name: "陳家洛",
+    work: "《書劍恩仇錄》",
+    mbti: "INFJ",
+    tags: ["書生", "矛盾", "忠義", "悲劇"],
+    personality: "提倡者型 — 紅花會總舵主，書生領袖，在感情和大義間掙扎",
+    analysis: "陳家洛是「書生領袖的兩難」的代表。他才華橫溢、忠義兩全，但在關鍵時刻卻因為書生氣而猶豫不決。心理學上，這是「認知過載導致的決策癱瘓」——他考慮的因素太多，反而無法做出果斷的選擇。將香香公主送給乾隆的決定，是他一生最大的錯誤，也是「理性計算戰勝情感直覺」的悲劇。",
+    psychFocus: "決策癱瘓 · 書生氣 · 理性與情感衝突",
+    quote: "我陳家洛對不起她……",
+    portrait: "images/portrait-chenjialuo.webp",
+    link: "https://zh.wikipedia.org/wiki/陳家洛"
+  },
+  {
+    id: "huoqingtong",
+    name: "霍青桐",
+    work: "《書劍恩仇錄》",
+    mbti: "ENTJ",
+    tags: ["智慧", "勇敢", "獨立", "悲劇"],
+    personality: "指揮官型 — 回部公主，翠羽黃杉，智計過人，能領兵打仗",
+    analysis: "霍青桐是「強勢女性的愛情困境」的代表。她智勇雙全、能文能武，但在愛情中卻因為太過強勢而被陳家洛誤解。心理學上，這是「性別角色衝突」的體現——她的能力和獨立超出了當時社會對女性的期待，反而成為她獲得愛情的障礙。她的悲劇在於，她的優秀反而使她失去了所愛之人。",
+    psychFocus: "性別角色衝突 · 強勢女性困境 · 能力詛咒",
+    quote: "我霍青桐難道比不上她嗎？",
+    portrait: "images/portrait-huoqingtong.webp",
+    link: "https://zh.wikipedia.org/wiki/霍青桐"
+  },
+  {
+    id: "xianxiangongzhu",
+    name: "香香公主",
+    work: "《書劍恩仇錄》",
+    mbti: "ISFP",
+    tags: ["純美", "純真", "悲劇", "犧牲"],
+    personality: "探險家型 — 霍青桐的妹妹，傾國傾城，純真善良，最終為愛犧牲",
+    analysis: "香香公主是「理想化女性形象的悲劇」的代表。她的美麗和純真使她成為眾人爭奪的對象，但也使她失去了對自己命運的控制權。心理學上，這是「物化」的悲劇——她被當作一個美的符號，而非一個有獨立意志的人。她的自殺是她唯一能夠自主的選擇，也是對物化她的世界的終極抗議。",
+    psychFocus: "物化悲劇 · 理想化女性 · 自主性喪失",
+    quote: "我只要陳大哥好好的。",
+    portrait: "images/portrait-xianxiangongzhu.webp",
+    link: "https://zh.wikipedia.org/wiki/香香公主"
+  },
+  {
+    id: "yuwanting",
+    name: "于萬亭",
+    work: "《書劍恩仇錄》",
+    mbti: "INFJ",
+    tags: ["智慧", "擔當", "長者", "犧牲"],
+    personality: "提倡者型 — 紅花會創始人，陳家洛的義父，為反清復明奮鬥一生",
+    analysis: "于萬亭是「理想主義者的堅守」的代表。他創立紅花會，一生致力於反清復明，即使困難重重也從不放棄。心理學上，這是「長期目標的堅持力」——他能夠將遠大的目標轉化為具體的行動，並且在挫折中保持信念。他對陳家洛的培養，體現了「傳承者的胸懷」——知道自己可能看不到成功，但依然為後人鋪路。",
+    psychFocus: "長期目標堅持 · 傳承者胸懷 · 理想主義堅守",
+    quote: "反清復明，任重道遠。",
+    portrait: "images/portrait-yuwanting.webp",
+    link: "https://zh.wikipedia.org/wiki/于萬亭"
+  },
+  {
+    id: "wentailai",
+    name: "文泰來",
+    work: "《書劍恩仇錄》",
+    mbti: "ESTP",
+    tags: ["豪邁", "忠義", "剛烈", "擔當"],
+    personality: "企業家型 — 紅花會四當家，奔雷手，性格剛烈，忠義凜然",
+    analysis: "文泰來是「豪俠型人格」的代表。他性格剛烈、忠義凜然，是那種可以為朋友兩肋插刀的人。心理學上，這是「榮譽感驅動的行為」——他的行為不是出於計算，而是出於內在的榮譽感和道義感。即使身受重傷、被追殺，他也絕不出賣兄弟，這是「道德同一性」的體現。",
+    psychFocus: "榮譽感驅動 · 豪俠人格 · 道德同一性",
+    quote: "我文泰來豈是出賣兄弟之人！",
+    portrait: "images/portrait-wentailai.webp",
+    link: "https://zh.wikipedia.org/wiki/文泰來"
+  },
+  {
+    id: "luobing",
+    name: "駱冰",
+    work: "《書劍恩仇錄》",
+    mbti: "ESFP",
+    tags: ["美麗", "活潑", "忠貞", "傳奇"],
+    personality: "表演者型 — 文泰來的妻子，紅花會十一當家，人稱鴛鴦刀",
+    analysis: "駱冰是「巾幗不讓鬚眉」的代表。她美麗活潑、武藝高強，在紅花會中佔有重要地位。心理學上，這是「性別角色超越」的體現——她不僅是文泰來的妻子，更是一個有獨立能力和地位的江湖人物。她對丈夫的深情和對兄弟的忠義，體現了「親密關係與社群歸屬的平衡」。",
+    psychFocus: "性別角色超越 · 巾幗英雄 · 關係平衡",
+    quote: "誰敢動我丈夫，先問我駱冰的刀！",
+    portrait: "images/portrait-luobing.webp",
+    link: "https://zh.wikipedia.org/wiki/駱冰"
+  },
+  {
+    id: "yuyutong",
+    name: "余魚同",
+    work: "《書劍恩仇錄》",
+    mbti: "INFP",
+    tags: ["才華", "苦戀", "矛盾", "救贖"],
+    personality: "調停者型 — 紅花會十四當家，金笛書生，暗戀駱冰，最終救贖",
+    analysis: "余魚同是「不倫之戀的心理掙扎」的代表。他暗戀著義嫂駱冰，這份感情使他陷入深深的道德自責。心理學上，這是「超我與本我的衝突」——他的情感是真實的，但他的道德觀告訴他這是不對的。最終他通過捨身救人來完成自我救贖，這是「贖罪心理」的體現——通過犧牲來懲罰自己的「罪惡」情感。",
+    psychFocus: "超我本我衝突 · 道德自責 · 贖罪心理",
+    quote: "我余魚同此生，終究是對不起四哥四嫂。",
+    portrait: "images/portrait-yuyutong.webp",
+    link: "https://zh.wikipedia.org/wiki/余魚同"
+  },
+  {
+    id: "zhangzhaozhong",
+    name: "張召重",
+    work: "《書劍恩仇錄》",
+    mbti: "ESTJ",
+    tags: ["狠毒", "能幹", "悲劇", "忠誠"],
+    personality: "總經理型（黑暗版）— 清廷鷹犬，火手判官，武功高強，手段狠毒",
+    analysis: "張召重是「體制內鷹犬的心理」的代表。他為清廷效力，手段狠毒，是紅花會的主要對手。心理學上，這是「權威主義人格」的體現——他服從上級的權威，將自己的行為正當化為「執行公務」，從而逃避個人道德責任。他的忠誠是「盲從型忠誠」——不質疑命令的正當性，只關心是否完成任務。",
+    psychFocus: "權威主義人格 · 盲從型忠誠 · 道德責任轉移",
+    quote: "我張召重只知有朝廷，不知有其他！",
+    portrait: "images/portrait-zhangzhaozhong.webp",
+    link: "https://zh.wikipedia.org/wiki/張召重"
+  },
+  {
+    id: "hufei",
+    name: "胡斐",
+    work: "《飛狐外傳》",
+    mbti: "ISFP",
+    tags: ["正義", "瀟灑", "深情", "傳奇"],
+    personality: "探險家型 — 雪山飛狐，胡一刀之子，為父報仇，行走江湖",
+    analysis: "胡斐是「復仇與正義的平衡」的代表。他一生都在為父報仇，但在過程中，他發現復仇並不是簡單的善惡對決。心理學上，這是「復仇動機的演變」——一開始是單純的報仇，但隨著對真相的了解，他開始思考正義的真正含義。他對程靈素和袁紫衣的感情，體現了「愛情中的責任與無奈」。",
+    psychFocus: "復仇動機演變 · 正義思考 · 情感責任",
+    quote: "我胡斐但求問心無愧！",
+    portrait: "images/portrait-hufei.webp",
+    link: "https://zh.wikipedia.org/wiki/胡斐"
+  },
+  {
+    id: "yuanziyi",
+    name: "袁紫衣",
+    work: "《飛狐外傳》",
+    mbti: "INTJ",
+    tags: ["矛盾", "深情", "悲劇", "信仰"],
+    personality: "建築師型 — 鳳天南的私生女，出家為尼，與胡斐相愛卻不能相守",
+    analysis: "袁紫衣是「信仰與愛情的衝突」的代表。她身為出家人，卻愛上了胡斐，這使她陷入深深的矛盾。心理學上，這是「角色衝突」的體現——她的宗教身份和她的情感需求發生了不可調和的矛盾。她最終選擇回到佛門，不是因為不愛，而是因為她無法超越自己的身份認同。這是「自我壓抑的悲劇」。",
+    psychFocus: "角色衝突 · 信仰與愛情 · 自我壓抑",
+    quote: "胡大哥，我們緣分已盡。",
+    portrait: "images/portrait-yuanziyi.webp",
+    link: "https://zh.wikipedia.org/wiki/袁紫衣"
+  },
+  {
+    id: "chenglingyu",
+    name: "程靈素",
+    work: "《飛狐外傳》",
+    mbti: "ISFJ",
+    tags: ["聰慧", "善良", "深情", "犧牲"],
+    personality: "守衛者型 — 毒手藥王無嗔大師的關門弟子，醫毒雙絕，暗戀胡斐",
+    analysis: "程靈素是「暗戀者的偉大與悲劇」的代表。她相貌平平，但心靈手巧、醫毒雙絕，對胡斐一往情深。心理學上，這是「內在美被忽視的悲哀」——在一個看重外貌的世界裡，她的善良和才華往往被忽略。最終她為救胡斐而死，這是「利他型愛情的終極表達」——用生命來證明愛的深度。",
+    psychFocus: "內在美忽視 · 利他型愛情 · 自我犧牲",
+    quote: "胡大哥，你要好好活下去。",
+    portrait: "images/portrait-chenglingyu.webp",
+    link: "https://zh.wikipedia.org/wiki/程靈素"
+  },
+  {
+    id: "miaoruolan",
+    name: "苗若蘭",
+    work: "《雪山飛狐》",
+    mbti: "ISFP",
+    tags: ["溫柔", "純真", "勇敢", "深情"],
+    personality: "探險家型 — 苗人鳳之女，溫柔純真，在雪山飛狐的故事中扮演關鍵角色",
+    analysis: "苗若蘭是「純真者的力量」的代表。她在相對封閉的環境中長大，性格溫柔純真，但在關鍵時刻卻表現出非凡的勇氣。心理學上，這是「純真不等於軟弱」的體現——她的善良和純真不是因為無知，而是經歷過黑暗後的選擇。她對胡斐的信任，體現了「純真者的直覺智慧」。",
+    psychFocus: "純真力量 · 溫柔中的勇氣 · 直覺智慧",
+    quote: "胡大哥，我相信你。",
+    portrait: "images/portrait-miaoruolan.webp",
+    link: "https://zh.wikipedia.org/wiki/苗若蘭"
+  },
+  {
+    id: "miaorenfeng",
+    name: "苗人鳳",
+    work: "《雪山飛狐》",
+    mbti: "ISTJ",
+    tags: ["沉默", "忠義", "悲劇", "擔當"],
+    personality: "物流師型 — 金面佛，打遍天下無敵手，性格沉默寡言，忠義凜然",
+    analysis: "苗人鳳是「沉默型英雄的心理」的代表。他武功高強、忠義凜然，但性格沉默寡言，不擅表達情感。心理學上，這是「情感壓抑型人格」的體現——他將所有的情感都深埋心底，用行動而非言語來表達。他與胡一刀的英雄相惜，體現了「超越言語的靈魂共鳴」——有時候，最深的理解不需要語言。",
+    psychFocus: "情感壓抑 · 沉默型英雄 · 靈魂共鳴",
+    quote: "我苗人鳳，一生只認一個朋友。",
+    portrait: "images/portrait-miaorenfeng.webp",
+    link: "https://zh.wikipedia.org/wiki/苗人鳳"
+  },
+  {
+    id: "diyun",
+    name: "狄雲",
+    work: "《連城訣》",
+    mbti: "ISFP",
+    tags: ["善良", "悲劇", "堅韌", "覺醒"],
+    personality: "探險家型 — 鄉下少年，被誣陷入獄，經歷人間最黑暗的一面，最終超脫",
+    analysis: "狄雲是「極端惡劣環境下的人性堅守」的代表。他被師叔陷害、被關進死牢、被穿琵琶骨，經歷了人間最殘酷的折磨。心理學上，這是「創傷後的心理防禦」——他一度憤世嫉俗，但內心的善良始終沒有被磨滅。最終他選擇離開這個污濁的世界，這是「消極性自我保護」——不是改變世界，而是遠離傷害。",
+    psychFocus: "極端創傷 · 人性堅守 · 消極性自我保護",
+    quote: "這個世界，太骯髒了。",
+    portrait: "images/portrait-diyun.webp",
+    link: "https://zh.wikipedia.org/wiki/狄雲"
+  },
+  {
+    id: "qifang",
+    name: "戚芳",
+    work: "《連城訣》",
+    mbti: "ISFJ",
+    tags: ["善良", "悲劇", "無知", "犧牲"],
+    personality: "守衛者型 — 狄雲的師妹，被萬圭欺騙，最終為救狄雲而死",
+    analysis: "戚芳是「無知者的悲劇」的代表。她善良純真，但缺乏辨別善惡的能力，被萬圭的偽裝所欺騙。心理學上，這是「天真者的認知盲點」——她傾向於相信他人的表面，無法洞察背後的陰謀。她的悲劇在於，她的善良被惡人利用，最終付出了生命的代價。她的死是對狄雲最深的傷痛，也是對這個黑暗世界的控訴。",
+    psychFocus: "天真者盲點 · 善良被利用 · 認知脆弱",
+    quote: "狄雲師哥，對不起……",
+    portrait: "images/portrait-qifang.webp",
+    link: "https://zh.wikipedia.org/wiki/戚芳"
+  },
+  {
+    id: "dingdian",
+    name: "丁典",
+    work: "《連城訣》",
+    mbti: "INFJ",
+    tags: ["深情", "悲劇", "智慧", "犧牲"],
+    personality: "提倡者型 — 神照經傳人，與凌霜華相愛，被凌退思陷害，最終殉情",
+    analysis: "丁典是「愛情超越生死」的代表。他與凌霜華的愛情是純潔而堅定的，即使被凌退思殘酷迫害，也從未動搖。心理學上，這是「存在性愛情」的體現——他的愛不是基於慾望或利益，而是基於兩個靈魂的深層共鳴。他的死是對純潔愛情的終極守護，也是對那個黑暗時代的無聲抗議。",
+    psychFocus: "存在性愛情 · 靈魂共鳴 · 愛情超越生死",
+    quote: "霜華，我來陪你了。",
+    portrait: "images/portrait-dingdian.webp",
+    link: "https://zh.wikipedia.org/wiki/丁典"
+  },
+  {
+    id: "liwenxiu",
+    name: "李文秀",
+    work: "《白馬嘯西風》",
+    mbti: "INFP",
+    tags: ["孤獨", "善良", "堅強", "超脫"],
+    personality: "調停者型 — 漢族少女，父母被殺後在回疆長大，最終騎白馬離開",
+    analysis: "李文秀是「異鄉人的孤獨與堅守」的代表。她在異族的環境中長大，始終是個邊緣人，但她的善良和堅強使她贏得了尊重。心理學上，這是「文化邊緣性」的體現——她既不屬於漢族世界，也不屬於回疆世界，這種邊緣性使她能夠超越族群的偏見，看到更本質的人性。最終她騎白馬離開，是「主動性孤獨」的選擇——不是被遺棄，而是選擇不屬於任何地方。",
+    psychFocus: "文化邊緣性 · 主動性孤獨 · 超越族群偏見",
+    quote: "那些都是很好很好的，可是我偏偏不喜歡。",
+    portrait: "images/portrait-liwenxiu.webp",
+    link: "https://zh.wikipedia.org/wiki/李文秀"
+  },
+  {
+    id: "aqin",
+    name: "阿青",
+    work: "《越女劍》",
+    mbti: "ISFP",
+    tags: ["純真", "強大", "深情", "悲劇"],
+    personality: "探險家型 — 牧羊少女，從白猿處學得絕世劍術，幫助勾踐滅吳",
+    analysis: "阿青是「純真者的力量與失落」的代表。她是個純真的牧羊少女，卻擁有絕世的武功。她對范蠡的愛是純真而熾熱的，但范蠡心中只有西施。心理學上，這是「初戀的幻滅」——她第一次愛上一個人，卻發現自己永遠無法得到他。最終她選擇離開，這是「尊嚴型放棄」——不糾纏、不報復，保留最後的驕傲。",
+    psychFocus: "初戀幻滅 · 純真力量 · 尊嚴型放棄",
+    quote: "范蠡，你很好，可是我要走了。",
+    portrait: "images/portrait-aqin.webp",
+    link: "https://zh.wikipedia.org/wiki/阿青"
+  }
+];
+
+// ===== 資料：心理學理論 =====
+const psychTheories = [
+  {
+    id: "attachment",
+    name: "依戀理論",
+    origin: "約翰·鮑爾比 / 瑪麗·安斯沃斯",
+    desc: "依戀理論認爲，童年早期與主要照顧者的互動模式，會形成「內部工作模型」，深刻影響成年後的親密關係。分爲安全型、焦慮型、迴避型和混亂型四種依戀風格。",
+    detail: "金庸筆下的愛情悲劇，往往可以追溯到角色的依戀模式。郭靖的安全型依戀使他能穩定地愛與被愛；小龍女的迴避型依戀讓她在親密面前退縮；楊過的焦慮型依戀使他對被拋棄極度敏感。理解依戀模式，就能理解這些江湖兒女爲何愛得如此痛苦或如此堅定。",
+    chars: [
+      { name: "郭靖", desc: "安全型依戀 — 母親李萍的堅定教養賦予他穩定的內在安全感，能全心信任並投入關係。" },
+      { name: "小龍女", desc: "迴避型依戀 — 古墓中長大，缺乏人際互動，對親密感到不適，習慣以疏離保護自己。" },
+      { name: "楊過", desc: "焦慮型依戀 — 童年被拋棄的創傷使他對拒絕極度敏感，需要不斷確認被愛。" }
+    ]
+  },
+  {
+    id: "ptg",
+    name: "創傷後成長",
+    origin: "理查德·特德斯奇 / 勞倫斯·卡爾霍恩",
+    desc: "創傷後成長（PTG）指人在經歷重大創傷後，不僅能恢復，還能實作心理層面的積極轉變——更深刻的自我認知、更珍惜關係、更明確的人生意義。",
+    detail: "江湖兒女多災多難，但創傷未必只帶來毀滅。楊過在斷臂與分離中成長爲神鵰大俠；蕭峯在身份崩塌中找到了超越民族的良知；令狐沖在被逐出師門後獲得了真正的自由。這些角色展示了人類別心理最了不起的能力——在廢墟上建造更堅固的東西。",
+    chars: [
+      { name: "楊過", desc: "斷臂、失師、十六年分離 — 每一次創傷都將他推向更深的自我認知，最終從憤世少年成長爲悲憫大俠。" },
+      { name: "蕭峯", desc: "身份揭穿、親手打死摯愛 — 在最徹底的崩塌中，他找到了超越民族界限的人性立場。" },
+      { name: "令狐沖", desc: "被逐出師門、身受重傷、被誤解 — 在失去一切身份後，他反而獲得了選擇自己是誰的自由。" }
+    ]
+  },
+  {
+    id: "bigfive",
+    name: "大五人格",
+    origin: "戈登·奧爾波特 / 雷蒙德·卡特爾 / 羅伯特·麥克雷",
+    desc: "大五人格理論將人格分爲五個維度：開放性（O）、盡責性（C）、外向性（E）、宜人性（A）、神經質（N）。每個人在這五個維度上的高低組合，構成獨特的人格畫像。",
+    detail: "用大五人格的透鏡看金庸人物，會發現每個角色都是一個獨特的維度組合。郭靖高盡責性高宜人性；韋小寶低盡責性但高外向性；小龍女低外向性低神經質；楊過高開放性高神經質。這些維度組合不僅解釋了他們的行爲，也預測了他們的命運軌跡。",
+    chars: [
+      { name: "郭靖", desc: "高盡責性 + 高宜人性 — 可靠、有責任感、樂於助人，但開放性偏低，思維較爲刻板。" },
+      { name: "韋小寶", desc: "高外向性 + 低盡責性 — 善於社交、機智靈活，但缺乏自律和長期規劃，活在當下。" },
+      { name: "小龍女", desc: "低外向性 + 低神經質 — 內省、冷靜、情緒穩定，但宜人性表達不足，顯得疏離。" }
+    ]
+  },
+  {
+    id: "defense",
+    name: "防禦機制",
+    origin: "西格蒙德·弗洛伊德 / 安娜·弗洛伊德",
+    desc: "防禦機制是自我在面對焦慮、衝突或痛苦時，無意識中採用的心理策略。包括壓抑、否認、投射、合理化、昇華、理想化等。健康的防禦機制幫助人適應，僵化的防禦則造成困擾。",
+    detail: "金庸人物的許多「不可理喻」的行爲，其實都是防禦機制在運作。段譽對王語嫣的癡戀是理想化；張無忌的優柔寡斷是迴避；陳家洛的「犧牲小我」是合理化；虛竹的反覆糾結是認知失調後的自我防禦。識別這些防禦機制，就能看到角色行爲背後的心理需求。",
+    chars: [
+      { name: "段譽", desc: "理想化 — 將王語嫣完美化，逃避真實關係的複雜性，本質上是對「不完美」的防禦。" },
+      { name: "張無忌", desc: "迴避 — 用「善良」和「猶豫」迴避衝突和決策，本質上是對「讓某人失望」的恐懼。" },
+      { name: "陳家洛", desc: "合理化 — 將政治失敗包裝爲「犧牲小我完成大我」，用道德敘事迴避自己的決斷無能。" }
+    ]
+  },
+  {
+    id: "resilience",
+    name: "心理彈性",
+    origin: "埃米·維爾納 / 邁克爾·魯特",
+    desc: "心理彈性（Resilience）指在面對逆境、創傷或重大壓力時，能夠迅速恢復並持續成長的心理能力。它不是一種固定的特質，而是可以培養的動態過程，涉及認知、情緒和社會多方面的資源。",
+    detail: "江湖是一個充滿逆境的世界，但並非每個人都被逆境壓垮。令狐沖是心理彈性的典範——被逐、受傷、被誤解，依然笑傲江湖。黃蓉的彈性來自她的智慧和社會支持；郭靖的彈性來自他的堅定和意義感。他們的故事告訴我們：彈性不是不倒下，而是倒下後能站起來，並且站得更穩。",
+    chars: [
+      { name: "令狐沖", desc: "彈性典範 — 樂觀解釋風格 + 社會支持網絡 + 意義感，使他在連續打擊中始終保持自我。" },
+      { name: "黃蓉", desc: "認知彈性 — 高智商 + 情緒智力，使她能在困境中迅速找到破局點，不被情緒困住。" },
+      { name: "郭靖", desc: "意義彈性 — 堅定的道德信念和「爲國爲民」的使命感，使他在挫折中始終有方向。" }
+    ]
+  },
+  {
+    id: "identity",
+    name: "自我同一性",
+    origin: "埃裏克·埃裏克森",
+    desc: "自我同一性（Identity）是埃裏克森人格發展理論的核心概念，指個體對「我是誰」的穩定、連貫的認知。青少年期的核心任務就是建立自我同一性，未能完成則會陷入「同一性混亂」，在角色和價值觀中迷失。",
+    detail: "金庸筆下最震撼的悲劇，往往是同一性的悲劇。蕭峯的契丹/漢人身份衝突；虛竹的和尚/駙馬身份撕裂；楊過的「楊康之子」身份枷鎖；陳家洛的書生/革命者身份矛盾。這些角色的掙扎，本質上都是在回答同一個問題：我到底是誰？而他們的答案，決定了他們的命運。",
+    chars: [
+      { name: "蕭峯", desc: "同一性危機的極致 — 漢人養大的契丹人，身份揭穿後世界崩塌，最終以生命完成同一性整合。" },
+      { name: "虛竹", desc: "同一性混亂 — 想做和尚卻被迫成爲駙馬和宮主，經歷劇烈認知失調後完成身份重構。" },
+      { name: "楊過", desc: "同一性延緩 — 長期在「楊康之子」的陰影中掙扎，最終通過自己的選擇確立了「神鵰大俠」的身份。" }
+    ]
+  },
+  {
+    id: "emotion",
+    name: "情緒調節",
+    origin: "詹姆斯·格羅斯",
+    desc: "情緒調節指個體對情緒的產生、體驗和表達進行管理的過程。格羅斯的過程模型將情緒調節分爲五個階段：情境選擇、情境修正、注意分配、認知重評、反應調節。成熟的情緒調節是心理健康的核心。",
+    detail: "江湖兒女的情緒世界極爲豐富，但調節能力天差地別。任盈盈的情緒調節最爲成熟——能延遲滿足、能管理嫉妒；小龍女的情緒調節是壓抑型的——不表達不代表沒有；楊過的情緒調節是衝動型的——情緒來了如山洪；張無忌則是被情緒淹沒型的——無法在複雜情緒中做出決斷。",
+    chars: [
+      { name: "任盈盈", desc: "成熟調節 — 認知重評 + 延遲滿足，能在複雜情緒中保持清醒，不被嫉妒和焦慮吞噬。" },
+      { name: "小龍女", desc: "壓抑調節 — 情感表達高度抑制，外表平靜但內心波瀾壯闊，長期壓抑最終以極端方式爆發。" },
+      { name: "楊過", desc: "衝動調節 — 情緒反應強烈且迅速，缺乏反應調節能力，常因一時情緒做出影響一生的決定。" }
+    ]
+  },
+  {
+    id: "cognitive",
+    name: "認知偏差",
+    origin: "丹尼爾·卡尼曼 / 阿莫斯·特沃斯基",
+    desc: "認知偏差是人類別在判斷和決策中系統性偏離理性的心理傾向。包括確認偏誤、錨定效應、損失厭惡、沉沒成本謬誤、可得性啓發等。這些偏差是大腦「省力」的結果，但在關鍵決策中可能導致嚴重錯誤。",
+    detail: "金庸人物的許多「蠢決定」，其實都是認知偏差在作祟。張無忌的優柔寡斷有「損失厭惡」的影子——害怕選擇一個就失去另一個；陳家洛的政治誤判是「確認偏誤」——只看到支持自己幻想的證據；段譽的癡情是「錨定效應」——第一眼的印象鎖定了後續所有判斷。認識這些偏差，就能理解爲何聰明人也會做蠢事。",
+    chars: [
+      { name: "張無忌", desc: "損失厭惡 — 害怕選擇一個就失去其他可能性，在四個女子間反覆搖擺，本質是「損失」比「獲得」更讓人痛苦。" },
+      { name: "陳家洛", desc: "確認偏誤 — 只願意看到乾隆會「反清復明」的證據，忽略所有危險信號，最終導致全盤皆輸。" },
+      { name: "段譽", desc: "錨定效應 — 第一眼見到王語嫣就被「錨定」，後續所有判斷都圍繞這個初始印象，無法看到其他可能。" }
+    ]
+  }
+];
+
+// ===== 資料：測驗 =====
+const quizQuestions = [
+  {
+    q: "面對一個重大決定，你通常會：",
+    options: [
+      { text: "深思熟慮，考慮所有人的感受後再做決定", type: "C" },
+      { text: "聽從內心，哪怕可能傷害到一些人", type: "A" },
+      { text: "隨機應變，到時候再說", type: "B" },
+      { text: "儘量逃避，能不決定就不決定", type: "D" }
+    ]
+  },
+  {
+    q: "在一段感情中，你最看重的是：",
+    options: [
+      { text: "忠誠與承諾，一生一世一雙人", type: "A" },
+      { text: "自由與理解，彼此不束縛", type: "B" },
+      { text: "安全感與穩定，細水長流", type: "C" },
+      { text: "激情與浪漫，轟轟烈烈纔不枉此生", type: "D" }
+    ]
+  },
+  {
+    q: "當你被人誤解時，你會：",
+    options: [
+      { text: "憤怒反駁，絕不忍氣吞聲", type: "A" },
+      { text: "一笑置之，懂我的人自然懂", type: "B" },
+      { text: "耐心解釋，希望消除誤會", type: "C" },
+      { text: "默默難過，但不會主動解釋", type: "D" }
+    ]
+  },
+  {
+    q: "你理想中的生活是：",
+    options: [
+      { text: "建功立業，被世人銘記", type: "A" },
+      { text: "笑傲江湖，自由自在無拘無束", type: "B" },
+      { text: "安穩度日，與所愛之人相伴", type: "C" },
+      { text: "探索未知，經歷各種奇遇", type: "D" }
+    ]
+  },
+  {
+    q: "面對困難和挫折，你的第一反應是：",
+    options: [
+      { text: "迎難而上，越挫越勇", type: "A" },
+      { text: "靈活變通，換條路走", type: "B" },
+      { text: "堅持忍耐，相信終會過去", type: "C" },
+      { text: "感到迷茫，需要時間消化", type: "D" }
+    ]
+  },
+  {
+    q: "在朋友聚會中，你通常是：",
+    options: [
+      { text: "中心人物，大家都聽你的", type: "A" },
+      { text: "活躍氣氛的那個，段子手", type: "B" },
+      { text: "安靜傾聽，偶爾發言", type: "C" },
+      { text: "只和一兩個好朋友深聊", type: "D" }
+    ]
+  },
+  {
+    q: "你最不能接受的是：",
+    options: [
+      { text: "背叛與欺騙", type: "A" },
+      { text: "被束縛和限制自由", type: "B" },
+      { text: "不公平和恃強凌弱", type: "C" },
+      { text: "被忽視和不被理解", type: "D" }
+    ]
+  },
+  {
+    q: "如果用一個詞形容你自己，你會選：",
+    options: [
+      { text: "擔當", type: "A" },
+      { text: "灑脫", type: "B" },
+      { text: "真誠", type: "C" },
+      { text: "深情", type: "D" }
+    ]
+  }
+];
+
+const quizResults = {
+  A: {
+    char: "郭靖 / 蕭峯",
+    work: "大俠型人格",
+    desc: "你有強烈的責任感和道德感，是那種「天下興亡，匹夫有責」的人。面對困難，你選擇迎難而上而非退縮。你的感情深沉而堅定，一旦認定就不會改變。但有時你過於看重「應該做什麼」，而忽略了「自己想要什麼」。學會在擔當與自我之間找到平衡，你的江湖路會走得更從容。",
+    traits: ["責任感", "忠誠", "堅韌", "正義感", "擔當"]
+  },
+  B: {
+    char: "令狐沖 / 韋小寶",
+    work: "灑脫型人格",
+    desc: "你是天生的自由靈魂，不喜歡被規則和條條框框束縛。你的適應能力極強，在任何環境中都能找到樂趣和破局之道。你待人真誠，朋友遍天下，但內心深處也有不爲人知的孤獨。你的「無所謂」有時是一種保護色——害怕被傷害，所以先表現出不在乎。學會在灑脫中保留一份認真，你會收穫更深的連接。",
+    traits: ["自由", "機智", "樂觀", "社交力", "適應力"]
+  },
+  C: {
+    char: "黃蓉 / 任盈盈",
+    work: "睿智型人格",
+    desc: "你聰明、冷靜、有遠見，是那種能在混亂中保持清醒的人。你的情緒調節能力很強，不會被一時的衝動左右。你對感情專一而深沉，但不善於直接表達——更願意用行動來證明。你有時過於獨立，什麼事都自己扛，忘記了也可以依靠別人。學會在堅強中展示柔軟，你會發現真正的強大不是一個人扛下所有，而是有人可以並肩。",
+    traits: ["智慧", "獨立", "冷靜", "深情", "謀略"]
+  },
+  D: {
+    char: "楊過 / 小龍女",
+    work: "深情型人格",
+    desc: "你情感豐富而深邃，內心世界比表面看起來複雜得多。你對感情極其執着，一旦愛上就是全心全意。你可能有過被忽視或被誤解的經歷，這讓你在親密關係中既渴望又害怕。你的「疏離」有時是一種自我保護——不是不需要愛，而是太怕失去。學會在深情中保留自我，在依戀中保持獨立，你會發現真正的愛不是佔有，而是兩個完整的靈魂的相遇。",
+    traits: ["深情", "敏感", "執着", "內省", "理想主義"]
+  }
+};
+
+// ===== 資料：引言 =====
+const quotes = [
+  { text: "俠之大者，爲國爲民。", author: "—— 郭靖《射鵰英雄傳》" },
+  { text: "問世間，情是何物，直教生死相許。", author: "—— 元好問，《神鵰俠侶》引" },
+  { text: "人生在世，會當暢情適意。", author: "—— 令狐沖《笑傲江湖》" },
+  { text: "他強由他強，清風拂山崗；他橫由他橫，明月照大江。", author: "—— 《倚天屠龍記》九陽真經" },
+  { text: "紅顏彈指老，剎那芳華。", author: "—— 天山童姥《天龍八部》" },
+  { text: "涼風有信，秋月無邊。", author: "—— 韋小寶《鹿鼎記》" }
+];
+
+// ===== 狀態 =====
+const state = {
+  currentFilter: "all",
+  currentPsych: psychTheories[0].id,
+  quizStep: 0,
+  quizAnswers: {},
+  quizStarted: false,
+  currentPage: 1,
+  pageSize: 12
+};
+
+// ===== 渲染：人物篩選按鈕 =====
+function renderFilterBar() {
+  const works = ["all", ...new Set(characters.map(c => c.work))];
+  const labels = { all: "全部作品", "《射鵰英雄傳》": "射鵰英雄傳", "《神鵰俠侶》": "神鵰俠侶", "《倚天屠龍記》": "倚天屠龍記", "《天龍八部》": "天龍八部", "《笑傲江湖》": "笑傲江湖", "《鹿鼎記》": "鹿鼎記", "《書劍恩仇錄》": "書劍恩仇錄", "《飛狐外傳》": "飛狐外傳", "《雪山飛狐》": "雪山飛狐", "《連城訣》": "連城訣", "《白馬嘯西風》": "白馬嘯西風", "《越女劍》": "越女劍" };
+  const bar = document.getElementById("filterBar");
+  bar.innerHTML = works.map(w => `
+    <button class="filter-btn ${state.currentFilter === w ? "active" : ""}" data-work="${w}">
+      ${labels[w] || w}
+    </button>
+  `).join("");
+  bar.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.currentFilter = btn.dataset.work;
+      state.currentPage = 1;
+      renderFilterBar();
+      renderCharGrid();
+    });
+  });
+}
+
+// ===== 渲染：人物卡片 =====
+function renderCharGrid() {
+  const grid = document.getElementById("charGrid");
+  const filtered = state.currentFilter === "all"
+    ? characters
+    : characters.filter(c => c.work === state.currentFilter);
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+  if (state.currentPage > totalPages) state.currentPage = totalPages;
+  const start = (state.currentPage - 1) * state.pageSize;
+  const pageItems = filtered.slice(start, start + state.pageSize);
+  grid.innerHTML = pageItems.map(c => `
+    <div class="char-card" data-id="${c.id}">
+      <div class="char-portrait-wrap">
+        <img class="char-portrait" src="${c.portrait}" alt="${c.name}" loading="lazy">
+      </div>
+      <div class="char-info">
+        <div class="char-name">${c.name}</div>
+        <div class="char-work">${c.work}</div>
+        <div class="char-tags">
+          ${c.tags.slice(0, 3).map(t => `<span class="char-tag">${t}</span>`).join("")}
+        </div>
+        <div class="char-mbti"><span class="dot"></span>${c.mbti}</div>
+        <div class="char-personality">${c.personality.split("—")[0].trim()}</div>
+      </div>
+    </div>
+  `).join("");
+  grid.querySelectorAll(".char-card").forEach(card => {
+    card.addEventListener("click", () => openModal(card.dataset.id));
+  });
+  renderPagination(total, totalPages);
+}
+
+function renderPagination(total, totalPages) {
+  const wrap = document.getElementById("paginationWrap");
+  if (totalPages <= 1) { wrap.innerHTML = ""; return; }
+  const cur = state.currentPage;
+  let pages = [];
+  if (totalPages <= 7) {
+    pages = Array.from({length: totalPages}, (_, i) => i + 1);
+  } else {
+    pages = [1];
+    if (cur > 3) pages.push("...");
+    for (let p = Math.max(2, cur - 1); p <= Math.min(totalPages - 1, cur + 1); p++) pages.push(p);
+    if (cur < totalPages - 2) pages.push("...");
+    pages.push(totalPages);
+  }
+  const start = (cur - 1) * state.pageSize + 1;
+  const end = Math.min(cur * state.pageSize, total);
+  wrap.innerHTML = `
+    <span class="pagination-info">第 ${start}-${end} 筆，共 ${total} 位人物</span>
+    <button class="pagination-btn" ${cur === 1 ? "disabled" : ""} onclick="goToPage(${cur - 1})"><i class="fas fa-chevron-left"></i></button>
+    ${pages.map(p => p === "..."
+      ? '<span class="pagination-ellipsis">…</span>'
+      : `<button class="pagination-btn ${p === cur ? "active" : ""}" onclick="goToPage(${p})">${p}</button>`
+    ).join("")}
+    <button class="pagination-btn" ${cur === totalPages ? "disabled" : ""} onclick="goToPage(${cur + 1})"><i class="fas fa-chevron-right"></i></button>
+  `;
+}
+
+function goToPage(p) {
+  state.currentPage = p;
+  renderCharGrid();
+  document.getElementById("charGrid").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ===== 彈窗 =====
+function openModal(id) {
+  const c = characters.find(x => x.id === id);
+  if (!c) return;
+  const content = document.getElementById("modalContent");
+  content.innerHTML = `
+    <div class="modal-header">
+      <img class="modal-portrait" src="${c.portrait}" alt="${c.name}">
+      <div class="modal-title-group">
+        <div class="modal-name">${c.name}</div>
+        <div class="modal-work">${c.work}</div>
+        <div class="modal-meta">
+          <span class="modal-meta-item mbti">${c.mbti}</span>
+          ${c.tags.map(t => `<span class="modal-meta-item">${t}</span>`).join("")}
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">人格畫像</div>
+        <p>${c.personality}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">心理分析</div>
+        <p>${c.analysis}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">核心議題</div>
+        <p>${c.psychFocus}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">經典臺詞</div>
+        <div class="modal-quote">${c.quote}</div>
+    <div class="modal-link" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--rice-dark);"><a href="${c.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;color:var(--cinnabar);font-weight:600;text-decoration:none;font-size:14px;"><i class="fas fa-external-link-alt"></i> 查看更多資料（維基百科）</a></div>
+      </div>
+    </div>
+  `;
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+// ===== 渲染：心理學標籤 =====
+function renderPsychTabs() {
+  const tabs = document.getElementById("psychTabs");
+  tabs.innerHTML = psychTheories.map(t => `
+    <button class="psych-tab ${state.currentPsych === t.id ? "active" : ""}" data-id="${t.id}">${t.name}</button>
+  `).join("");
+  tabs.querySelectorAll(".psych-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      state.currentPsych = tab.dataset.id;
+      renderPsychTabs();
+      renderPsychContent();
+    });
+  });
+}
+
+// ===== 渲染：心理學內容 =====
+function renderPsychContent() {
+  const container = document.getElementById("psychContents");
+  container.innerHTML = psychTheories.map(t => `
+    <div class="psych-content ${state.currentPsych === t.id ? "active" : ""}" data-id="${t.id}">
+      <div class="psych-card">
+        <div class="psych-theory">
+          <h3>${t.name}</h3>
+          <div class="theory-origin">${t.origin}</div>
+          <p>${t.desc}</p>
+          <p>${t.detail}</p>
+        </div>
+        <div class="psych-chars">
+          <h4>江湖案例</h4>
+          <div class="psych-char-list">
+            ${t.chars.map(c => `
+              <div class="psych-char-item">
+                <div class="psych-char-name">${c.name}</div>
+                <div class="psych-char-desc">${c.desc}</div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ===== 測驗 =====
+function renderQuiz() {
+  const box = document.getElementById("quizBox");
+  if (!state.quizStarted) {
+    box.innerHTML = `
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-serif);font-weight:700;font-size:22px;color:var(--ink);margin-bottom:12px;">準備好踏入江湖了嗎？</div>
+        <p style="font-size:15px;color:var(--ink-muted);line-height:1.8;margin-bottom:32px;">八道題，約三分鐘。沒有標準答案，只有最真實的你自己。</p>
+        <button class="btn btn-primary" id="quizStart">開始測驗</button>
+      </div>
+    `;
+    document.getElementById("quizStart").addEventListener("click", () => {
+      state.quizStarted = true;
+      state.quizStep = 0;
+      state.quizAnswers = {};
+      renderQuiz();
+    });
+    return;
+  }
+
+  if (state.quizStep >= quizQuestions.length) {
+    // 計算結果
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(state.quizAnswers).forEach(v => counts[v]++);
+    const maxType = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+    const result = quizResults[maxType];
+    box.innerHTML = `
+      <div class="quiz-result">
+        <div class="quiz-result-label">你的江湖人格是</div>
+        <div class="quiz-result-char">${result.char}</div>
+        <div class="quiz-result-work">${result.work}</div>
+        <div class="quiz-result-traits">
+          ${result.traits.map(t => `<span class="quiz-result-trait">${t}</span>`).join("")}
+        </div>
+        <div class="quiz-result-desc">${result.desc}</div>
+        <button class="quiz-restart" id="quizRestart">重新測驗</button>
+      </div>
+    `;
+    document.getElementById("quizRestart").addEventListener("click", () => {
+      state.quizStarted = false;
+      state.quizStep = 0;
+      state.quizAnswers = {};
+      renderQuiz();
+    });
+    return;
+  }
+
+  const q = quizQuestions[state.quizStep];
+  const selected = state.quizAnswers[state.quizStep];
+  const progress = ((state.quizStep) / quizQuestions.length) * 100;
+  box.innerHTML = `
+    <div class="quiz-progress"><div class="quiz-progress-bar" style="width:${progress}%"></div></div>
+    <div class="quiz-question-num">第 ${state.quizStep + 1} 題 / 共 ${quizQuestions.length} 題</div>
+    <div class="quiz-question">${q.q}</div>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `
+        <button class="quiz-option ${selected === opt.type ? "selected" : ""}" data-type="${opt.type}">
+          <span class="quiz-option-letter">${String.fromCharCode(65 + i)}</span>
+          <span class="quiz-option-text">${opt.text}</span>
+        </button>
+      `).join("")}
+    </div>
+    <div class="quiz-nav">
+      <button class="quiz-btn quiz-btn-prev" id="quizPrev" ${state.quizStep === 0 ? "disabled" : ""}>上一題</button>
+      <button class="quiz-btn quiz-btn-next" id="quizNext" ${!selected ? "disabled" : ""}>
+        ${state.quizStep === quizQuestions.length - 1 ? "查看結果" : "下一題"}
+      </button>
+    </div>
+  `;
+  box.querySelectorAll(".quiz-option").forEach(opt => {
+    opt.addEventListener("click", () => {
+      state.quizAnswers[state.quizStep] = opt.dataset.type;
+      renderQuiz();
+    });
+  });
+  const prevBtn = document.getElementById("quizPrev");
+  if (prevBtn && state.quizStep > 0) {
+    prevBtn.addEventListener("click", () => {
+      state.quizStep--;
+      renderQuiz();
+    });
+  }
+  const nextBtn = document.getElementById("quizNext");
+  if (nextBtn && selected) {
+    nextBtn.addEventListener("click", () => {
+      state.quizStep++;
+      renderQuiz();
+    });
+  }
+}
+
+// ===== 引言輪播 =====
+let quoteIndex = 0;
+function rotateQuote() {
+  const q = quotes[quoteIndex];
+  const textEl = document.getElementById("quoteText");
+  const authorEl = document.getElementById("quoteAuthor");
+  textEl.style.opacity = "0";
+  setTimeout(() => {
+    textEl.textContent = q.text;
+    authorEl.textContent = q.author;
+    textEl.style.opacity = "1";
+  }, 300);
+  quoteIndex = (quoteIndex + 1) % quotes.length;
+}
+
+// ===== 導覽滾動效果 =====
+function initNav() {
+  const nav = document.getElementById("nav");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) nav.classList.add("scrolled");
+    else nav.classList.remove("scrolled");
+  });
+
+  const toggle = document.getElementById("navToggle");
+  const links = document.getElementById("navLinks");
+  toggle.addEventListener("click", () => links.classList.toggle("open"));
+  links.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => links.classList.remove("open"));
+  });
+}
+
+// ===== 初始化 =====
+function init() {
+  renderFilterBar();
+  renderCharGrid();
+  renderPsychTabs();
+  renderPsychContent();
+  renderQuiz();
+  initNav();
+
+  // 彈窗關閉
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  document.getElementById("modalOverlay").addEventListener("click", (e) => {
+    if (e.target === document.getElementById("modalOverlay")) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // 引言輪播
+  rotateQuote();
+  setInterval(rotateQuote, 5000);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+
+
+
+<!-- ===== 關於我連結 ===== -->
+<section style="max-width:820px;margin:32px auto;padding:24px;text-align:center;">
+  <a href="iamsusi.html" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4a2c2a,#6b3a30);color:#fff;padding:14px 36px;border-radius:50px;font-size:16px;font-weight:800;text-decoration:none;box-shadow:0 4px 16px rgba(74,44,42,.4);transition:transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    <i class="fas fa-user-circle"></i> 關於設計者：張書欣
+  </a>
+</section>
+</body>
+</html>

@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新北市 - 全台建案統計儀表板</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon.png">
+<link rel="shortcut icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#1a3a5c">
+<meta property="og:title" content="全台建案統計儀表板 | 不動產資料彙整平台">
+<meta property="og:description" content="彙整全台22縣市公寓大廈報備資料，提供縣市別、行政區別、個案建案的多維度統計與查詢。">
+<meta property="og:image" content="../assets/og/og-brand-main.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://9return.com.tw/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="9return.com.tw">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="全台建案統計儀表板">
+<meta name="twitter:description" content="彙整全台22縣市公寓大廈報備資料，提供多維度統計與查詢。">
+<meta name="twitter:image" content="../assets/og/og-brand-main.webp">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
+<style>
+:root{
+  --c-primary:#1a3a5c;--c-primary-light:#2d5a8a;--c-accent:#d4a017;
+  --c-danger:#b8453a;--c-success:#2d6a4f;--c-info:#3a7ca5;
+  --c-bg:#f5f3ef;--c-surface:#fff;--c-text:#2d2d2d;--c-text2:#6b6b6b;
+  --c-border:#e0ddd6;--c-border-l:#eeebe4;
+  --font-serif:'Noto Serif TC',serif;--font-sans:'Noto Sans TC',sans-serif;
+  --radius:4px;--shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow-md:0 4px 12px rgba(0,0,0,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--c-bg);color:var(--c-text);line-height:1.6;font-size:14px}
+a{color:var(--c-primary);text-decoration:none}
+a:hover{color:var(--c-accent)}
+.header{background:var(--c-primary);color:#fff;padding:16px 24px;border-bottom:3px solid var(--c-accent)
+  background-image:
+    linear-gradient(90deg,rgba(15,23,42,.9),rgba(30,41,59,.85)),
+    url('../assets/hero-county.webp');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+.header h1{font-family:var(--font-serif);font-size:22px;font-weight:700}
+.header .sub{font-size:12px;opacity:.7;margin-top:2px}
+.container{max-width:1400px;margin:0 auto;padding:20px 24px}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--c-primary);margin-bottom:20px}
+.tab{padding:10px 20px;cursor:pointer;font-size:14px;font-weight:600;color:var(--c-text2);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab:hover{color:var(--c-primary)}
+.tab.active{color:var(--c-primary);border-bottom-color:var(--c-accent)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.kpi-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c-primary)}
+.kpi-card.accent::before{background:var(--c-accent)}
+.kpi-card.danger::before{background:var(--c-danger)}
+.kpi-card.success::before{background:var(--c-success)}
+.kpi-card.info::before{background:var(--c-info)}
+.kpi-value{font-family:var(--font-serif);font-size:28px;font-weight:900;color:var(--c-primary);line-height:1.2}
+.kpi-value.pending{color:#ccc;font-size:18px}
+.kpi-label{font-size:12px;color:var(--c-text2);margin-top:6px}
+.kpi-note{font-size:10px;color:#999;margin-top:3px}
+.section{margin-bottom:32px}
+.section-title{font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--c-primary);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--c-primary)}
+.table-wrap{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+th{background:var(--c-primary);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--c-border-l)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--c-bg)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.center{text-align:center}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.badge.capital{background:var(--c-accent);color:var(--c-primary)}
+.badge.non-capital{background:var(--c-bg);color:var(--c-text2)}
+.badge.type{background:var(--c-bg-alt);color:var(--c-text2)}
+.badge.redev{background:#e8f4fd;color:var(--c-info)}
+.search-box{position:relative;margin-bottom:12px}
+.search-box input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--c-border);border-radius:var(--radius);font-size:14px}
+.search-box input:focus{outline:none;border-color:var(--c-primary)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#999}
+.filter-row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.filter-row select{padding:8px 12px;border:1px solid var(--c-border);border-radius:var(--radius);font-size:13px}
+.result-info{font-size:13px;color:var(--c-text2);margin-bottom:8px}
+.result-info strong{color:var(--c-primary)}
+.pagination{display:flex;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap}
+.page-btn{padding:6px 12px;border:1px solid var(--c-border);border-radius:var(--radius);font-size:13px;cursor:pointer;background:var(--c-surface)}
+.page-btn:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.page-btn.active{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+.page-btn:disabled{opacity:.4;cursor:not-allowed}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.chart-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px}
+.chart-title{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--c-primary);margin-bottom:4px}
+.chart-sub{font-size:11px;color:var(--c-text2);margin-bottom:12px}
+.chart-container{width:100%;min-height:280px}
+.breadcrumb{font-size:13px;color:var(--c-text2);margin-bottom:16px}
+.breadcrumb a{color:var(--c-primary)}
+.breadcrumb .sep{margin:0 6px;color:#999}
+.footer{background:var(--c-primary);color:rgba(255,255,255,.6);padding:20px;text-align:center;font-size:12px;margin-top:40px}
+.footer strong{color:var(--c-accent)}
+.pending-note{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:13px;color:#795548}
+.pending-note strong{color:#e65100}
+@media(max-width:768px){.chart-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.container{padding:12px}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>新北市 建案統計</h1>
+  <div class="sub">全台建案統計儀表板 · <span class="badge capital">六都</span> · 版本 v2.2</div>
+</div>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../dashboard.html">首頁</a><span class="sep">/</span><span class="current">新北市</span></div>
+
+  <!-- KPI -->
+  <div class="section">
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-value">4,714</div><div class="kpi-label">報備建案總數</div><div class="kpi-note">公寓大廈報備資料</div></div>
+      <div class="kpi-card accent"><div class="kpi-value">0</div><div class="kpi-label">報備總戶數</div><div class="kpi-note">戶數資料待補</div></div>
+      <div class="kpi-card info"><div class="kpi-value">12</div><div class="kpi-label">行政區數</div><div class="kpi-note">含鄉鎮市區</div></div>
+      <div class="kpi-card success"><div class="kpi-value">15</div><div class="kpi-label">重劃區標註</div><div class="kpi-note">依關鍵字比對</div></div>
+    </div>
+  </div>
+
+  <!-- 待補指標 -->
+  <div class="section">
+    <div class="section-title">新北市 建照/使照/待售/預售指標（待補開放資料）</div>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">年度建照件數</div><div class="kpi-note">含核發戶數、棟數</div></div>
+      <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">年度使照件數</div><div class="kpi-note">含完工戶數、棟數</div></div>
+      <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">第一次登記棟數</div><div class="kpi-note">完工登記</div></div>
+      <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">待售新成屋宅數</div><div class="kpi-note">預售屋件數/戶數待補</div></div>
+    </div>
+  </div>
+
+  <!-- 區級圖表 -->
+  <div class="section">
+    <div class="section-title">行政區建案分布</div>
+    <div class="chart-card"><div class="chart-title">各行政區建案數量 Top 20</div><div class="chart-sub">點擊柱體可篩選該區個案</div><div class="chart-container" id="chart-district" style="min-height:350px"></div></div>
+  </div>
+
+  <!-- 鄉鎮市區子表 -->
+  <div class="section">
+    <div class="section-title">鄉鎮市區子表（12 區）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>行政區</th><th class="num">建案數</th><th class="num">戶數</th><th>主要重劃區標註</th><th>佔比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>板橋區</strong></td><td class="num">976</td><td class="num">0</td><td style="font-size:12px">捷運, 板橋</td><td class="num">20.7%</td></tr>
+          <tr><td><strong>新店區</strong></td><td class="num">849</td><td class="num">0</td><td style="font-size:12px">中和, 工業區, 捷運</td><td class="num">18.0%</td></tr>
+          <tr><td><strong>土城區</strong></td><td class="num">567</td><td class="num">0</td><td style="font-size:12px">土城, 捷運, 頂埔</td><td class="num">12.0%</td></tr>
+          <tr><td><strong>三重區</strong></td><td class="num">473</td><td class="num">0</td><td style="font-size:12px">三重, 捷運, 新莊</td><td class="num">10.0%</td></tr>
+          <tr><td><strong>新莊區</strong></td><td class="num">380</td><td class="num">0</td><td style="font-size:12px">捷運, 新莊</td><td class="num">8.1%</td></tr>
+          <tr><td><strong>淡水區</strong></td><td class="num">329</td><td class="num">0</td><td style="font-size:12px">捷運, 樹林, 淡海</td><td class="num">7.0%</td></tr>
+          <tr><td><strong>中和區</strong></td><td class="num">286</td><td class="num">0</td><td style="font-size:12px">中和, 工業區, 捷運</td><td class="num">6.1%</td></tr>
+          <tr><td><strong>蘆洲區</strong></td><td class="num">271</td><td class="num">0</td><td style="font-size:12px">捷運, 蘆洲</td><td class="num">5.7%</td></tr>
+          <tr><td><strong>八里區</strong></td><td class="num">227</td><td class="num">0</td><td style="font-size:12px">—</td><td class="num">4.8%</td></tr>
+          <tr><td><strong>三峽區</strong></td><td class="num">171</td><td class="num">0</td><td style="font-size:12px">三峽, 永和</td><td class="num">3.6%</td></tr>
+          <tr><td><strong>五股區</strong></td><td class="num">162</td><td class="num">0</td><td style="font-size:12px">五股, 工業區, 林口</td><td class="num">3.4%</td></tr>
+          <tr><td><strong>三芝區</strong></td><td class="num">23</td><td class="num">0</td><td style="font-size:12px">—</td><td class="num">0.5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 個案列表 -->
+  <div class="section">
+    <div class="section-title">新北市 個案建案明細（4,714 筆）</div>
+    <div class="search-box"><span class="search-icon">&#128269;</span><input type="text" id="c-search" placeholder="搜尋建案名稱、地址..."></div>
+    <div class="filter-row">
+      <select id="c-district"><option value="">全部行政區</option></select>
+      <select id="c-type"><option value="">全部型態</option><option>大樓</option><option>華廈</option><option>社區</option><option>公寓</option><option>其他</option></select>
+    </div>
+    <div class="result-info" id="c-result"></div>
+    <div class="table-wrap">
+      <table><thead><tr><th>使照序號</th><th>建案名稱</th><th>行政區</th><th>地址</th><th class="num">戶數</th><th>型態</th><th>重劃區</th></tr></thead><tbody id="c-tbody"></tbody></table>
+    </div>
+    <div class="pagination" id="c-pagination"></div>
+  </div>
+
+</div>
+
+<div class="footer"><p><strong>全台建案統計儀表板</strong> · 新北市 · 版本 v2.2</p></div>
+
+
+<script>
+const DISTRICT_DATA = [{"name": "板橋區", "value": 976, "hh": 0}, {"name": "新店區", "value": 849, "hh": 0}, {"name": "土城區", "value": 567, "hh": 0}, {"name": "三重區", "value": 473, "hh": 0}, {"name": "新莊區", "value": 380, "hh": 0}, {"name": "淡水區", "value": 329, "hh": 0}, {"name": "中和區", "value": 286, "hh": 0}, {"name": "蘆洲區", "value": 271, "hh": 0}, {"name": "八里區", "value": 227, "hh": 0}, {"name": "三峽區", "value": 171, "hh": 0}, {"name": "五股區", "value": 162, "hh": 0}, {"name": "三芝區", "value": 23, "hh": 0}];
+</script>
+
+
+<script src="../data/county_newtaipei.js"></script>
+
+
+<script>
+// 區級圖表
+const cd=echarts.init(document.getElementById('chart-district'));
+cd.setOption({tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},grid:{left:'3%',right:'5%',bottom:'15%',containLabel:true},xAxis:{type:'category',data:DISTRICT_DATA.map(d=>d.name),axisLabel:{rotate:45,fontSize:10}},yAxis:{type:'value'},series:[{type:'bar',data:DISTRICT_DATA.map(d=>d.value),itemStyle:{color:'#1a3a5c'},barMaxWidth:30}]});
+new ResizeObserver(()=>cd.resize()).observe(document.getElementById('chart-district'));
+
+// 個案篩選
+const PER=50;let pg=1,flt=[];
+const dists=[...new Set(CASE_DATA.map(b=>b.district))].sort();
+const fd=document.getElementById('c-district');
+dists.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;fd.appendChild(o)});
+function applyF(){
+  const q=document.getElementById('c-search').value.trim().toLowerCase();
+  const d=document.getElementById('c-district').value;
+  const t=document.getElementById('c-type').value;
+  flt=CASE_DATA.filter(b=>{
+    if(q&&!(b.name.toLowerCase().includes(q)||b.address.toLowerCase().includes(q)))return false;
+    if(d&&b.district!==d)return false;
+    if(t&&b.building_type!==t)return false;
+    return true;
+  });
+  pg=1;renderF();
+}
+function renderF(){
+  document.getElementById('c-result').innerHTML='共 <strong>'+flt.length.toLocaleString()+'</strong> 筆';
+  const s=(pg-1)*PER;const pd=flt.slice(s,s+PER);
+  document.getElementById('c-tbody').innerHTML=pd.map(b=>{
+    const rt=b.redev_zone?'<span class="badge redev">'+b.redev_zone+'</span>':'';
+    return '<tr><td>'+b.id+'</td><td><strong>'+b.name+'</strong></td><td>'+b.district+'</td><td style="max-width:300px">'+b.address+'</td><td class="num">'+(b.households||'')+'</td><td><span class="badge type">'+b.building_type+'</span></td><td>'+rt+'</td></tr>';
+  }).join('');
+  const tp=Math.ceil(flt.length/PER);
+  if(tp<=1){document.getElementById('c-pagination').innerHTML='';return}
+  document.getElementById('c-pagination').innerHTML='<button class="page-btn" '+(pg===1?'disabled':'')+' onclick="gp('+(pg-1)+')">&#8249;</button><span class="page-btn active">'+pg+'/'+tp+'</span><button class="page-btn" '+(pg===tp?'disabled':'')+' onclick="gp('+(pg+1)+')">&#8250;</button>';
+}
+function gp(p){pg=p;renderF()}
+['c-search','c-district','c-type'].forEach(id=>{document.getElementById(id).addEventListener('input',applyF);document.getElementById(id).addEventListener('change',applyF)});
+applyF();
+</script>
+<footer style="background:var(--c-primary);color:rgba(255,255,255,.85);padding:28px 24px 20px;margin-top:40px;border-top:3px solid var(--c-accent)">
+<div style="max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px">
+<div>
+<div style="font-family:var(--font-serif);font-size:18px;font-weight:700;color:#fff;margin-bottom:6px">全台建案統計儀表板</div>
+<div style="font-size:12px;color:rgba(255,255,255,.6)">彙整全台22縣市公寓大廈報備開放資料 · 版本 v2.2</div>
+</div>
+<div style="text-align:right;font-size:13px;line-height:1.9">
+<div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>聯絡：<a href="tel:0968222201" style="color:var(--c-accent);text-decoration:none;font-weight:600">0968-222201</a></div>
+<div><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M19.365 9.863c.349 0 .63.285.63.636 0 .35-.281.636-.63.636-.35 0-.631-.286-.631-.636 0-.351.282-.636.631-.636zm-3.892 0c.349 0 .63.285.63.636 0 .35-.281.636-.63.636-.35 0-.631-.286-.631-.636 0-.351.282-.636.631-.636zm-7.53 6.818h1.735v-2.614H7.943v2.614zm2.614 0h1.736v-2.614h-1.736v2.614zm2.614 0h1.735v-2.614h-1.735v2.614zM12 0C5.373 0 0 4.928 0 11c0 3.454 1.76 6.546 4.527 8.568L3.545 24l4.864-2.432c1.11.307 2.293.476 3.591.476 6.627 0 12-4.928 12-11S18.627 0 12 0z"/></svg>Line：<span style="color:var(--c-accent);font-weight:600">331.today</span></div>
+<div style="color:rgba(255,255,255,.55);font-size:12px;margin-top:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>設計規劃開發：<a href="../jinyong-psychology/iamsusi.html" style="color:inherit;text-decoration:underline;font-weight:600;">張書欣</a></div>
+</div>
+</div>
+<div style="max-width:1400px;margin:14px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);font-size:11px;color:rgba(255,255,255,.4);text-align:center">
+資料來源：各縣市政府公寓大廈報備開放資料及 data.gov.tw · 本站僅供參考，實際資訊以政府公告為準 · &copy; 2026 9return.com.tw
+</div>
+</footer>
+</body>
+</html>

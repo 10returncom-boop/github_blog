@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九回房地 | 不動產智能儀表板</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png">
+<link rel="shortcut icon" href="assets/favicon.png">
+<meta name="theme-color" content="#1a3a5c">
+<meta property="og:title" content="九回房地 | 不動產智能儀表板">
+<meta property="og:description" content="彙整全台22縣市公寓大廈報備資料，提供縣市別、行政區別、個案建案的多維度統計與查詢。">
+<meta property="og:image" content="https://9return.com.tw/assets/og/og-dashboard.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://9return.com.tw/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="9return.com.tw">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="全台建案統計儀表板">
+<meta name="twitter:description" content="彙整全台22縣市公寓大廈報備資料，提供多維度統計與查詢。">
+<meta name="twitter:image" content="https://9return.com.tw/assets/og/og-dashboard.webp">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
+<style>
+:root{
+  --c-primary:#1a3a5c;--c-primary-light:#2d5a8a;--c-accent:#d4a017;
+  --c-danger:#b8453a;--c-success:#2d6a4f;--c-info:#3a7ca5;
+  --c-bg:#f5f3ef;--c-bg-alt:#ebe7df;--c-surface:#fff;--c-text:#2d2d2d;--c-text2:#6b6b6b;
+  --c-border:#e0ddd6;--c-border-l:#eeebe4;
+  --font-serif:'Noto Serif TC',serif;--font-sans:'Noto Sans TC',sans-serif;
+  --radius:4px;--shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow-md:0 4px 12px rgba(0,0,0,.1);
+}
+[data-theme="dark"]{
+  --c-bg:#1a1a2e;--c-bg-alt:#252540;--c-surface:#16213e;--c-text:#e0e0e0;--c-text2:#a0a0a0;
+  --c-border:#2d2d4a;--c-border-l:#252540;--c-primary:#4a90d9;--c-primary-light:#5aa0e9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--c-bg);color:var(--c-text);line-height:1.6;font-size:14px;transition:background .3s,color .3s}
+body.font-sm{font-size:12px}
+body.font-lg{font-size:16px}
+a{color:var(--c-primary);text-decoration:none}
+a:hover{color:var(--c-accent)}
+.header{background:var(--c-primary);color:#fff;padding:16px 24px;border-bottom:3px solid var(--c-accent)}
+.header h1{font-family:var(--font-serif);font-size:22px;font-weight:700}
+.header .sub{font-size:12px;opacity:.7;margin-top:2px}
+.container{max-width:1400px;margin:0 auto;padding:20px 24px}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--c-primary);margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:10px 20px;cursor:pointer;font-size:14px;font-weight:600;color:var(--c-text2);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab:hover{color:var(--c-primary)}
+.tab.active{color:var(--c-primary);border-bottom-color:var(--c-accent)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.kpi-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c-primary)}
+.kpi-card.accent::before{background:var(--c-accent)}
+.kpi-card.danger::before{background:var(--c-danger)}
+.kpi-card.success::before{background:var(--c-success)}
+.kpi-card.info::before{background:var(--c-info)}
+.kpi-value{font-family:var(--font-serif);font-size:28px;font-weight:900;color:var(--c-primary);line-height:1.2}
+.kpi-value.pending{color:#ccc;font-size:18px}
+.kpi-label{font-size:12px;color:var(--c-text2);margin-top:6px;display:inline-flex;align-items:center;gap:4px}
+.kpi-note{font-size:10px;color:#999;margin-top:3px}
+.info-icon{cursor:help;color:var(--c-info);font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--c-info);line-height:1}
+.info-icon:hover{background:var(--c-info);color:#fff}
+.section{margin-bottom:32px}
+.section-title{font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--c-primary);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--c-primary)}
+.table-wrap{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+th{background:var(--c-primary);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--c-border-l)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--c-bg)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.center{text-align:center}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.badge.capital{background:var(--c-accent);color:var(--c-primary)}
+.badge.non-capital{background:var(--c-bg);color:var(--c-text2)}
+.badge.type{background:var(--c-bg-alt);color:var(--c-text2)}
+.badge.redev{background:#e8f4fd;color:var(--c-info)}
+.search-box{position:relative;margin-bottom:12px}
+.search-box input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--c-border);border-radius:var(--radius);font-size:14px;background:var(--c-surface);color:var(--c-text)}
+.search-box input:focus{outline:none;border-color:var(--c-primary)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#999}
+.filter-row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.filter-row select,.filter-row input{padding:8px 12px;border:1px solid var(--c-border);border-radius:var(--radius);font-size:13px;background:var(--c-surface);color:var(--c-text)}
+.filter-row input[type="number"]{width:90px}
+.filter-row label{font-size:12px;color:var(--c-text2);display:flex;align-items:center;gap:4px;cursor:pointer}
+.btn{padding:8px 16px;border:1px solid var(--c-primary);border-radius:var(--radius);font-size:13px;cursor:pointer;background:var(--c-primary);color:#fff;font-weight:600;transition:all .2s}
+.btn:hover{background:var(--c-primary-light)}
+.btn-outline{background:transparent;color:var(--c-primary)}
+.btn-outline:hover{background:var(--c-primary);color:#fff}
+.result-info{font-size:13px;color:var(--c-text2);margin-bottom:8px}
+.result-info strong{color:var(--c-primary)}
+.pagination{display:flex;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap}
+.page-btn{padding:6px 12px;border:1px solid var(--c-border);border-radius:var(--radius);font-size:13px;cursor:pointer;background:var(--c-surface);color:var(--c-text)}
+.page-btn:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.page-btn.active{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+.page-btn:disabled{opacity:.4;cursor:not-allowed}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:24px}
+.chart-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.chart-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px}
+.chart-title{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--c-primary);margin-bottom:4px}
+.chart-sub{font-size:11px;color:var(--c-text2);margin-bottom:12px}
+.chart-container{width:100%;min-height:280px}
+.breadcrumb{font-size:13px;color:var(--c-text2);margin-bottom:16px}
+.breadcrumb a{color:var(--c-primary)}
+.breadcrumb .sep{margin:0 6px;color:#999}
+.footer{background:var(--c-primary);color:rgba(255,255,255,.6);padding:20px;text-align:center;font-size:12px;margin-top:40px}
+.footer strong{color:var(--c-accent)}
+.pending-note{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:13px;color:#795548}
+.pending-note strong{color:#e65100}
+
+.hero-header{position:relative;background:linear-gradient(135deg,rgba(26,58,92,.95) 0%,rgba(26,58,92,.88) 100%);padding:32px 24px 28px;border-bottom:3px solid var(--c-accent);overflow:hidden
+  background-image:
+    linear-gradient(135deg,rgba(15,23,42,.85),rgba(30,41,59,.8)),
+    url('assets/hero-dashboard.webp');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+.hero-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(26,58,92,.3) 100%);pointer-events:none}
+.hero-header h1{font-family:var(--font-serif);font-size:28px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4);position:relative;z-index:1}
+.hero-header .sub{font-size:13px;color:rgba(255,255,255,.85);margin-top:6px;position:relative;z-index:1}
+.hero-header .badge{display:inline-block;background:var(--c-accent);color:var(--c-primary);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;position:relative;z-index:1;cursor:pointer;transition:all .2s}
+.hero-header .badge:hover{transform:scale(1.05);box-shadow:0 2px 8px rgba(212,160,23,.4)}
+.hero-controls{display:flex;gap:8px;align-items:center;position:relative;z-index:2}
+.hero-ctrl-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.hero-ctrl-btn:hover{background:rgba(255,255,255,.25);border-color:var(--c-accent)}
+.font-ctrl{display:flex;gap:2px;background:rgba(255,255,255,.1);border-radius:20px;padding:2px}
+.font-ctrl button{background:transparent;border:none;color:#fff;cursor:pointer;padding:4px 8px;border-radius:16px;font-size:12px;font-weight:600;transition:all .2s}
+.font-ctrl button:hover{background:rgba(255,255,255,.2)}
+.font-ctrl button.active{background:var(--c-accent);color:var(--c-primary)}
+
+/* News */
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.news-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px;transition:all .2s;display:flex;flex-direction:column}
+.news-card:hover{border-color:var(--c-accent);box-shadow:var(--shadow-md)}
+.news-cat{display:inline-block;font-size:11px;font-weight:600;color:var(--c-accent);background:rgba(212,160,23,.1);padding:2px 8px;border-radius:10px;margin-bottom:8px;align-self:flex-start}
+.news-title{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--c-primary);margin-bottom:6px;line-height:1.4}
+.news-summary{font-size:12px;color:var(--c-text2);line-height:1.6;margin-bottom:10px;flex-grow:1}
+.news-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#999;border-top:1px solid var(--c-border-l);padding-top:8px}
+.news-source{font-weight:600;color:var(--c-text2)}
+.news-link{color:var(--c-primary);text-decoration:none;font-size:11px;font-weight:600}
+.news-link:hover{color:var(--c-accent)}
+
+/* Modal */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:10000;justify-content:center;align-items:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--c-surface);border-radius:8px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center}
+.modal-header h3{font-family:var(--font-serif);font-size:16px;color:var(--c-primary)}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-text2);line-height:1}
+.modal-close:hover{color:var(--c-danger)}
+.modal-body{padding:20px;font-size:13px;line-height:1.8;color:var(--c-text)}
+
+/* Compare tool */
+.compare-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.compare-check{display:flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--c-border);border-radius:20px;cursor:pointer;font-size:12px;background:var(--c-surface);transition:all .2s}
+.compare-check:hover{border-color:var(--c-primary)}
+.compare-check.checked{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+.compare-check input{display:none}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.compare-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:14px;text-align:center}
+.compare-card h4{font-family:var(--font-serif);font-size:15px;color:var(--c-primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--c-border-l)}
+.compare-stat{margin-bottom:6px}
+.compare-stat .val{font-size:20px;font-weight:700;color:var(--c-primary);font-family:var(--font-serif)}
+.compare-stat .lbl{font-size:11px;color:var(--c-text2)}
+
+/* Redev zone table */
+.redev-table-wrap{max-height:400px;overflow-y:auto}
+.redev-tag{display:inline-block;padding:2px 8px;margin:2px;background:var(--c-bg-alt);border-radius:10px;font-size:11px;color:var(--c-text2)}
+
+/* Progress */
+.progress-bar{width:100%;height:20px;background:var(--c-bg-alt);border-radius:10px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--c-primary),var(--c-accent));border-radius:10px;transition:width .5s;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:600}
+
+/* Favorites */
+.fav-btn{background:none;border:none;cursor:pointer;font-size:16px;color:#ccc;padding:0 4px;transition:all .2s}
+.fav-btn.active{color:var(--c-accent)}
+tr.fav-row td{background:rgba(212,160,23,.08)}
+tr.fav-row:hover td{background:rgba(212,160,23,.12)}
+
+/* Recent cases */
+.recent-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding:10px 12px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius)}
+.recent-bar .label{font-size:12px;color:var(--c-text2);font-weight:600;align-self:center}
+.recent-tag{font-size:11px;padding:3px 10px;background:var(--c-bg-alt);border-radius:12px;cursor:pointer;color:var(--c-text);transition:all .2s;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.recent-tag:hover{background:var(--c-primary);color:#fff}
+
+/* Heatmap cell */
+.heat-cell{font-variant-numeric:tabular-nums}
+
+/* Print */
+@media print{
+  .tabs,.filter-row,.pagination,.search-box,.footer,.hero-controls,.recent-bar,.compare-selector,.btn{display:none!important}
+  .tab-content{display:block!important}
+  .tab-content:not(.active){display:none!important}
+  body{background:#fff;color:#000;font-size:12px}
+  .kpi-card,.chart-card,.news-card,.table-wrap{break-inside:avoid;border:1px solid #ccc}
+  th{background:#333!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-title{display:block!important;text-align:center;font-family:var(--font-serif);font-size:18px;margin-bottom:16px}
+}
+.print-title{display:none}
+
+@media(max-width:768px){
+  .chart-grid{grid-template-columns:1fr}
+  .chart-grid-2{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .container{padding:12px}
+  .news-grid{grid-template-columns:1fr}
+}
+
+/* ===== Anti-Copy Protection ===== */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+img, a {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+.protect-toast {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: rgba(35,20,9,0.95); color: #E8C84B; padding: 18px 32px;
+  border-radius: 8px; font-size: 16px; font-weight: 600; z-index: 99999;
+  border: 1px solid rgba(232,200,75,0.4); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.protect-toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="print-title">全台建案統計儀表板 — 列印報表</div>
+
+<div class="hero-header">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;position:relative;z-index:1">
+    <div>
+      <h1>全台建案統計儀表板</h1>
+      <div class="sub">不動產資料彙整平台 · 版本 v2.2 · 更新 2026-09-07</div>
+      <div class="badge" id="version-badge" role="button" tabindex="0" aria-label="點擊查看版本資訊">8 縣市 37,188 筆 · 22 縣市架構 · v2.2</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+      <div class="hero-controls">
+        <button class="hero-ctrl-btn" id="theme-toggle" aria-label="切換日夜模式" title="切換日夜模式">🌙</button>
+        <div class="font-ctrl" role="group" aria-label="字級調整">
+          <button id="font-sm" aria-label="小字級">A-</button>
+          <button id="font-md" class="active" aria-label="中字級">A</button>
+          <button id="font-lg" aria-label="大字級">A+</button>
+        </div>
+      </div>
+      <div style="text-align:right;font-size:13px;line-height:2;color:rgba(255,255,255,.92);white-space:nowrap">
+        <div style="margin-bottom:6px"><a href="./index.html" style="display:inline-flex;align-items:center;gap:4px;color:var(--c-accent);text-decoration:none;font-size:12px;font-weight:600;padding:4px 12px;border:1px solid rgba(212,160,23,.4);border-radius:100px;backdrop-filter:blur(8px);background:rgba(0,0,0,.2);transition:all .3s" onmouseover="this.style.background='rgba(212,160,23,.15)';this.style.borderColor='var(--c-accent)'" onmouseout="this.style.background='rgba(0,0,0,.2)';this.style.borderColor='rgba(212,160,23,.4)'">&#8592; 欣媒體入口</a></div>
+        <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>聯絡：<a href="tel:0968222201" style="color:var(--c-accent);text-decoration:none;font-weight:600">0968-222201</a></div>
+        <div><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M19.365 9.863c.349 0 .63.285.63.636 0 .35-.281.636-.63.636-.35 0-.631-.286-.631-.636 0-.351.282-.636.631-.636zm-3.892 0c.349 0 .63.285.63.636 0 .35-.281.636-.63.636-.35 0-.631-.286-.631-.636 0-.351.282-.636.631-.636zm-7.53 6.818h1.735v-2.614H7.943v2.614zm2.614 0h1.736v-2.614h-1.736v2.614zm2.614 0h1.735v-2.614h-1.735v2.614zM12 0C5.373 0 0 4.928 0 11c0 3.454 1.76 6.546 4.527 8.568L3.545 24l4.864-2.432c1.11.307 2.293.476 3.591.476 6.627 0 12-4.928 12-11S18.627 0 12 0z"/></svg>Line：<span style="color:var(--c-accent);font-weight:600">331.today</span></div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>設計規劃開發：<a href="jinyong-psychology/iamsusi.html" style="color:inherit;text-decoration:underline;font-weight:600;">張書欣</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 頂端最新不動產新聞 ===== -->
+  <div class="section top-news-section" style="margin-bottom:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div class="section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0;display:flex;align-items:center;gap:10px">
+        <span style="display:inline-block;background:var(--c-danger);color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;animation:pulse-dot 2s infinite">LIVE</span>
+        最新不動產新聞
+        <span style="font-size:12px;color:var(--c-text2);font-weight:400">2026-09-07 更新 · 共15則</span>
+      </div>
+      <button class="page-btn" onclick="document.querySelector('[data-tab=news]').click()" style="font-size:12px;padding:5px 14px;border-color:var(--c-accent);color:var(--c-accent);font-weight:600">查看全部新聞 &rarr;</button>
+    </div>
+    <div class="news-grid" id="top-news-grid">
+      <div class="news-card"><span class="news-cat">租屋市場</span><div class="news-title">台中租金暴漲16% 議員批集體掠奪 都發局：多管齊下穩定租屋市場</div><div class="news-summary">台中市議員施志昌痛批，台中整層住家平均租金9個月內從13,411元暴漲至15,557元，漲幅高達16%，獨立套房更突破8,000元。</div><div class="news-meta"><span><span class="news-source">元豐傳媒</span> · 09-06 · 臺中市</span><a href="https://yuanfengmedia.tw/detail.php?id=55613&type=lastest" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a></div></div>
+      <div class="news-card"><span class="news-cat">租屋市場</span><div class="news-title">全台租金行情出爐 80萬筆實價登錄分析 月租中位數27,838元</div><div class="news-summary">好房網租屋雷達以內政部租賃實價登錄超過80萬筆資料分析全台租金行情，全國月租中位數為27,838元，單價中位數897元/坪/月。</div><div class="news-meta"><span><span class="news-source">好房網</span> · 09-04 · 全台</span><a href="https://rent.housetw.com/taiwan" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a></div></div>
+      <div class="news-card"><span class="news-cat">都更危老</span><div class="news-title">北市危老重建利多 首創「地籍線與建築線預檢」免費申請</div><div class="news-summary">台北市為加速危險及老舊建築物更新重建，首創「危老重建案件地籍線與建築線預檢作業」便民服務，起造人可免費申請預檢，縮短審查時程。</div><div class="news-meta"><span><span class="news-source">中時新聞網</span> · 09-03 · 臺北市</span><a href="https://house.chinatimes.com/localhousinginfotaipei" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a></div></div>
+      <div class="news-card"><span class="news-cat">房價走勢</span><div class="news-title">台南6月住宅價格指數137.11 月增0.02% 年減2.20%</div><div class="news-summary">台南市地政局公布2026年6月住宅價格指數為137.11，較5月微幅上升0.02%，但與2025年同期相比仍下降2.20%，房市價格尚未擺脫盤整格局。</div><div class="news-meta"><span><span class="news-source">中時新聞網</span> · 09-02 · 臺南市</span><a href="https://house.chinatimes.com/localhousinginfotainan" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a></div></div>
+      <div class="news-card"><span class="news-cat">市場分析</span><div class="news-title">央行Q3理監事會議將登場 信用管制鬆綁與否成房市關鍵</div><div class="news-summary">中信房屋分析，9月份登場的央行第三季理監事會議將是影響後續房市走向的關鍵。國銀不動產放款比率降到近16年新低，信用管制是否進一步鬆綁成市場焦點。</div><div class="news-meta"><span><span class="news-source">中信房屋</span> · 09-01 · 全台</span><a href="https://www.cthouse.com.tw/about/newsindex/" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a></div></div>
+      <div class="news-card"><span class="news-cat">政策變化</span><div class="news-title">高鐵延伸宜蘭核定3,521億 南港到宜蘭最快20分鐘 房市聚焦</div><div class="news-summary">行政院正式核定總經費3,521億元的「高鐵延伸宜蘭」建設案，預計完工通車後南港到宜蘭最快僅需20分鐘，不僅大大改善東部交通，也讓宜蘭房市成為市場焦點。</div><div class="news-meta"><span><span class="news-source">中信房屋</span> · 08-30 · 宜蘭縣</span><a href="https://www.cthouse.com.tw/" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 資料狀態提示 -->
+  <div class="pending-note">
+    <strong>資料狀態（22縣市）：</strong>已彙整 <strong>8 縣市</strong>（37,188 筆公寓大廈報備資料，涵蓋 115 個行政區），
+    另有 <strong>14 縣市</strong>（基隆市、新竹縣、苗栗縣、南投縣、雲林縣、嘉義縣、高雄市、屏東縣、宜蘭縣、花蓮縣、臺東縣、澎湖縣、金門縣、連江縣）之公寓大廈報備開放資料尚未釋出，標示為「待補」。
+    <strong>建照/使照/待售/預售</strong>等指標亦待匯入開放資料。
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs" role="tablist">
+    <div class="tab active" data-tab="overview" role="tab" aria-selected="true" tabindex="0">總覽指標</div>
+    <div class="tab" data-tab="county" role="tab" aria-selected="false" tabindex="0">縣市別主表</div>
+    <div class="tab" data-tab="cases" role="tab" aria-selected="false" tabindex="0">個案建案明細庫</div>
+    <div class="tab" data-tab="news" role="tab" aria-selected="false" tabindex="0">最新新聞</div>
+  </div>
+
+  <!-- Tab 1: 總覽指標 -->
+  <div class="tab-content active" id="tab-overview" role="tabpanel">
+    <div class="section">
+      <div class="section-title">全台總覽指標</div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-value">22</div><div class="kpi-label">全台縣市總數 <span class="info-icon" data-info="county-total" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">六都6 + 非六都16</div></div>
+        <div class="kpi-card success"><div class="kpi-value">8</div><div class="kpi-label">已彙整縣市 <span class="info-icon" data-info="county-done" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">36% 覆蓋率</div></div>
+        <div class="kpi-card danger"><div class="kpi-value">14</div><div class="kpi-label">待補開放資料縣市 <span class="info-icon" data-info="county-pending" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">尚未釋出公寓大廈報備資料</div></div>
+        <div class="kpi-card"><div class="kpi-value">37,188</div><div class="kpi-label">公寓大廈報備總棟數 <span class="info-icon" data-info="buildings" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">8 縣市 / 115 區</div></div>
+        <div class="kpi-card accent"><div class="kpi-value">696,768</div><div class="kpi-label">報備總戶數 <span class="info-icon" data-info="households" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">僅臺中/嘉義有戶數資料</div></div>
+        <div class="kpi-card info"><div class="kpi-value">79</div><div class="kpi-label">標註重劃區建案 <span class="info-icon" data-info="redev" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">各縣市獨特重劃區名稱加總</div></div>
+        <div class="kpi-card success"><div class="kpi-value">22,196</div><div class="kpi-label">有完整住址 <span class="info-icon" data-info="addr" tabindex="0" aria-label="資料來源說明">ⓘ</span></div><div class="kpi-note">59.7% 覆蓋率</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">建照 / 使用執照 / 待售 / 預售（待補開放資料）</div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">全台建照年度累計件數</div><div class="kpi-note">含核發戶數、總棟數、樓地板面積</div></div>
+        <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">全台使用執照年度累計件數</div><div class="kpi-note">含完工件數、完工戶數、總棟數</div></div>
+        <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">待售新成屋總宅數</div><div class="kpi-note">來源：內政部不動產資訊平台</div></div>
+        <div class="kpi-card"><div class="kpi-value pending">待補</div><div class="kpi-label">預售屋建案總件數</div><div class="kpi-note">來源：實價登錄開放CSV聚合</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">視覺化分析</div>
+      <div class="chart-grid">
+        <div class="chart-card"><div class="chart-title">各縣市建案數量</div><div class="chart-sub">公寓大廈報備棟數排名（六都標註）</div><div class="chart-container" id="chart-county" role="img" aria-label="各縣市建案數量長條圖"></div></div>
+        <div class="chart-card"><div class="chart-title">建物型態分布</div><div class="chart-sub">大樓 / 華廈 / 社區 / 公寓 / 其他</div><div class="chart-container" id="chart-btype" role="img" aria-label="建物型態分布甜甜圈圖"></div></div>
+        <div class="chart-card"><div class="chart-title">歷年建照/使照趨勢</div><div class="chart-sub">模擬數據，待匯入開放資料</div><div class="chart-container" id="chart-trend" role="img" aria-label="歷年建照使照趨勢折線圖"></div></div>
+      </div>
+      <div class="chart-grid-2">
+        <div class="chart-card"><div class="chart-title">戶數分布直方圖</div><div class="chart-sub">有戶數資料之建案分布（依 CASE_DB 計算）</div><div class="chart-container" id="chart-hhhist" role="img" aria-label="戶數分布直方圖"></div></div>
+        <div class="chart-card"><div class="chart-title">管理組織類型統計</div><div class="chart-sub">管理委員會 / 管理負責人 / 未標註（依 CASE_DB 計算）</div><div class="chart-container" id="chart-mgmt" role="img" aria-label="管理組織類型圓餅圖"></div></div>
+      </div>
+    </div>
+
+    <!-- 縣市比較工具 -->
+    <div class="section">
+      <div class="section-title">縣市比較工具</div>
+      <div class="compare-selector" id="compare-selector"></div>
+      <div class="compare-grid" id="compare-grid"></div>
+    </div>
+
+    <!-- 重劃區專區 -->
+    <div class="section">
+      <div class="section-title">重劃區專區</div>
+      <div class="table-wrap redev-table-wrap">
+        <table aria-label="各縣市重劃區一覽表">
+          <thead><tr><th>縣市</th><th class="num">重劃區數</th><th>重劃區名稱</th></tr></thead>
+          <tbody id="redev-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 待補縣市進度 -->
+    <div class="section">
+      <div class="section-title">待補縣市進度追蹤</div>
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+          <span>已彙整進度</span>
+          <strong id="progress-text">8 / 22（36%）</strong>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:36%">36%</div></div>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="待補縣市進度表">
+          <thead><tr><th>縣市</th><th>狀態</th><th>預期資料來源</th></tr></thead>
+          <tbody id="pending-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: 縣市別主表 -->
+  <div class="tab-content" id="tab-county" role="tabpanel">
+    <div class="section">
+      <div class="section-title">縣市別主表（點擊縣市進入區級子表與個案）</div>
+      <div class="table-wrap">
+        <table aria-label="縣市別主表">
+          <thead><tr>
+            <th>縣市</th><th class="center">六都</th>
+            <th class="num">報備建案數</th><th class="num">報備戶數</th>
+            <th class="num">行政區數</th><th class="num">重劃區標註</th>
+            <th class="num">建照件數</th><th class="num">建照戶數</th>
+            <th class="num">使照件數</th><th class="num">使照戶數</th>
+            <th class="num">第一次登記棟數</th>
+            <th class="num">待售新成屋宅數</th>
+            <th class="num">預售屋件數</th><th class="num">預售戶數</th>
+            <th>操作</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><strong><a href="counties/taichung.html">臺中市</a></strong></td>
+              <td class="center"><span class="badge capital">六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.18)">12,004</td>
+              <td class="num">647,409</td>
+              <td class="num">29</td>
+              <td class="num">27</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/taichung.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/taipei.html">臺北市</a></strong></td>
+              <td class="center"><span class="badge capital">六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.14)">9,155</td>
+              <td class="num" style="color:#b8453a;font-size:11px">資料異常</td>
+              <td class="num">12</td>
+              <td class="num">13</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/taipei.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/newtaipei.html">新北市</a></strong></td>
+              <td class="center"><span class="badge capital">六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.09)">4,714</td>
+              <td class="num">0</td>
+              <td class="num">12</td>
+              <td class="num">15</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/newtaipei.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/taoyuan.html">桃園市</a></strong></td>
+              <td class="center"><span class="badge capital">六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.07)">3,191</td>
+              <td class="num">0</td>
+              <td class="num">3</td>
+              <td class="num">8</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/taoyuan.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/tainan.html">臺南市</a></strong></td>
+              <td class="center"><span class="badge capital">六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.06)">2,847</td>
+              <td class="num">0</td>
+              <td class="num">30</td>
+              <td class="num">7</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/tainan.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/hsinchu.html">新竹市</a></strong></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.05)">2,536</td>
+              <td class="num">0</td>
+              <td class="num">3</td>
+              <td class="num">5</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/hsinchu.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/chiayi.html">嘉義市</a></strong></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.04)">1,624</td>
+              <td class="num">49,359</td>
+              <td class="num">3</td>
+              <td class="num">1</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/chiayi.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr>
+              <td><strong><a href="counties/changhua.html">彰化縣</a></strong></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num heat-cell" style="background:rgba(26,58,92,.03)">1,117</td>
+              <td class="num">0</td>
+              <td class="num">23</td>
+              <td class="num">3</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td class="num" style="color:#ccc">待補</td>
+              <td><a href="counties/changhua.html" class="page-btn" style="padding:3px 10px;font-size:12px">進入 &rarr;</a></td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">高雄市</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge capital">六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">基隆市</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">新竹縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">苗栗縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">南投縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">雲林縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">嘉義縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">屏東縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">宜蘭縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">花蓮縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">臺東縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">澎湖縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">金門縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+            <tr style="background:#fafafa;color:#999">
+              <td><strong style="color:#999">連江縣</strong> <span class="badge" style="background:#eee;color:#999">待補</span></td>
+              <td class="center"><span class="badge non-capital">非六都</span></td>
+              <td class="num" colspan="5" style="color:#bbb">— 開放資料尚未釋出 —</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td class="num" style="color:#ddd">待補</td>
+              <td style="color:#ccc">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: 個案建案明細庫 -->
+  <div class="tab-content" id="tab-cases" role="tabpanel">
+    <div class="section">
+      <div class="section-title">個案建案明細庫（<span id="case-total-count">37,188</span> 筆）</div>
+      <div class="recent-bar" id="recent-bar" style="display:none">
+        <span class="label">最近查看：</span>
+        <span id="recent-list"></span>
+      </div>
+      <div class="search-box"><span class="search-icon">&#128269;</span><input type="text" id="case-search" placeholder="搜尋建案名稱、地址、使照序號..." aria-label="搜尋建案"></div>
+      <div class="filter-row">
+        <select id="filter-county" aria-label="篩選縣市"><option value="">全部縣市</option></select>
+        <select id="filter-district" aria-label="篩選行政區"><option value="">全部行政區</option></select>
+        <select id="filter-type" aria-label="篩選建物型態"><option value="">全部建物型態</option><option>大樓</option><option>華廈</option><option>社區</option><option>公寓</option><option>其他</option></select>
+        <select id="filter-mgmt" aria-label="篩選管理組織"><option value="">全部管理組織</option><option>管理委員會</option><option>管理負責人</option><option>其他</option></select>
+        <select id="filter-redev" aria-label="篩選重劃區"><option value="">全部</option><option value="1">有重劃區標註</option></select>
+        <input type="number" id="filter-hh-min" placeholder="最小戶數" aria-label="最小戶數" min="0">
+        <input type="number" id="filter-hh-max" placeholder="最大戶數" aria-label="最大戶數" min="0">
+        <label><input type="checkbox" id="filter-fav" aria-label="只顯示最愛"> 只顯示最愛</label>
+        <button class="btn btn-outline" id="btn-export-csv" aria-label="匯出CSV">匯出 CSV</button>
+      </div>
+      <div class="result-info" id="case-result"></div>
+      <div class="table-wrap">
+        <table id="case-table" aria-label="個案建案明細表">
+          <thead><tr>
+            <th style="width:30px">★</th>
+            <th>使照序號</th><th>建案名稱</th><th>縣市</th><th>行政區</th>
+            <th>地址</th><th class="num">戶數</th><th>建物型態</th><th>管理組織</th><th>重劃區</th>
+          </tr></thead>
+          <tbody id="case-tbody"></tbody>
+        </table>
+      </div>
+      <div class="pagination" id="case-pagination"></div>
+    </div>
+  </div>
+
+  <!-- Tab 4: 最新新聞 -->
+  <div class="tab-content" id="tab-news" role="tabpanel">
+    <div class="section">
+      <div class="section-title">不動產最新新聞</div>
+      <div class="filter-row">
+        <select id="news-category" aria-label="新聞分類"><option value="">全部分類</option></select>
+        <select id="news-county" aria-label="新聞縣市"><option value="">全部縣市</option></select>
+      </div>
+      <div id="news-grid" class="news-grid"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>全台建案統計儀表板</strong> · 資料來源：各縣市政府公寓大廈報備開放資料 · 版本 v2.2 · 更新 2026-09-07</p>
+  <p>建照/使照/待售/預售指標待匯入開放資料 · 本平台僅供研究參考</p>
+  <p id="perf-info" style="margin-top:6px;font-size:11px;opacity:.7"></p>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">標題</h3>
+      <button class="modal-close" id="modal-close" aria-label="關閉">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const COUNTY_DATA = [{"name": "臺中市", "value": 12004, "hh": 647409, "capital": true}, {"name": "臺北市", "value": 9155, "hh": null, "capital": true}, {"name": "新北市", "value": 4714, "hh": 0, "capital": true}, {"name": "桃園市", "value": 3191, "hh": 0, "capital": true}, {"name": "臺南市", "value": 2847, "hh": 0, "capital": true}, {"name": "新竹市", "value": 2536, "hh": 0, "capital": false}, {"name": "嘉義市", "value": 1624, "hh": 49359, "capital": false}, {"name": "彰化縣", "value": 1117, "hh": 0, "capital": false}];
+</script>
+
+<script>
+const BTYPE_DATA = {"大樓": 11771, "華廈": 639, "社區": 12156, "公寓": 273, "其他": 12349};
+</script>
+
+<script>
+const REDEV_DATA = {
+  "臺中市": ["七期","中山","中正","九期","八期","北屯","十一期","十三期","十二期","十四期","十期","南屯","大坑","大安","大里","太平","工業區","廍子","復興","捷運","新市鎮","水湳","河濱","湖濱","科學園區","西屯","高鐵"],
+  "臺北市": ["中山","中正","信義","內湖","北投","南港","士林","大同","大安","捷運","文山","松山","萬華"],
+  "新北市": ["三峽","三重","中和","五股","土城","工業區","捷運","新莊","板橋","林口","樹林","永和","淡海","蘆洲","頂埔"],
+  "桃園市": ["A18","A19","中壢","八德","復興","捷運","青埔","高鐵"],
+  "臺南市": ["仁德","安南","安平","新市","歸仁","永康","高鐵"],
+  "新竹市": ["寶山","復興","新竹","濱海","香山"],
+  "嘉義市": ["復興"],
+  "彰化縣": ["工業區","新市","濱海"]
+};
+const PENDING_COUNTIES = [
+  {name:"基隆市",source:"基隆市政府都市發展處"},
+  {name:"新竹縣",source:"新竹县政府建設處"},
+  {name:"苗栗縣",source:"苗栗縣政府城鄉發展處"},
+  {name:"南投縣",source:"南投縣政府建設處"},
+  {name:"雲林縣",source:"雲林縣政府城鄉發展處"},
+  {name:"嘉義縣",source:"嘉義縣政府建設處"},
+  {name:"高雄市",source:"高雄市政府都發局"},
+  {name:"屏東縣",source:"屏東縣政府城鄉發展處"},
+  {name:"宜蘭縣",source:"宜蘭縣政府建設處"},
+  {name:"花蓮縣",source:"花蓮縣政府建設處"},
+  {name:"臺東縣",source:"臺東縣政府建設處"},
+  {name:"澎湖縣",source:"澎湖縣政府建設處"},
+  {name:"金門縣",source:"金門縣政府建設處"},
+  {name:"連江縣",source:"連江縣政府建設處"}
+];
+const KPI_INFO = {
+  "county-total":"全台縣市總數：中華民國自由地區共計22個縣市（6個直轄市 + 16個縣市）。",
+  "county-done":"已彙整縣市：目前已完成8個縣市之公寓大廈報備開放資料彙整，涵蓋臺中市、臺北市、新北市、桃園市、臺南市、新竹市、嘉義市、彰化縣。",
+  "county-pending":"待補開放資料縣市：其餘14個縣市之公寓大廈報備開放資料尚未於政府開放資料平台釋出，持續關注中。",
+  "buildings":"公寓大廈報備總棟數：來源為各縣市政府公寓大廈報備開放資料，彙整8縣市共37,188筆，涵蓋115個行政區。",
+  "households":"報備總戶數：僅臺中市（647,409戶）與嘉義市（49,359戶）有戶數欄位資料，其餘縣市開放資料未提供戶數。臺北市戶數資料異常（僅大安區有302戶），已標註排除。",
+  "redev":"標註重劃區建案：依建案名稱與地址關鍵字比對各縣市重劃區名稱，各縣市獨特重劃區名稱加總共79個。",
+  "addr":"有完整住址：37,188筆中22,196筆有完整地址欄位，覆蓋率59.7%。"
+};
+</script>
+
+<script src="data/case_db.js"></script>
+<script src="data/news.js"></script>
+
+<script>
+// ===== Modal =====
+const modalOverlay=document.getElementById('modal-overlay');
+const modalTitle=document.getElementById('modal-title');
+const modalBody=document.getElementById('modal-body');
+function showModal(title,html){modalTitle.textContent=title;modalBody.innerHTML=html;modalOverlay.classList.add('show')}
+function hideModal(){modalOverlay.classList.remove('show')}
+document.getElementById('modal-close').addEventListener('click',hideModal);
+modalOverlay.addEventListener('click',e=>{if(e.target===modalOverlay)hideModal()});
+
+// ===== 功能1: 版本徽章彈窗 =====
+document.getElementById('version-badge').addEventListener('click',()=>{
+  showModal('版本資訊','<p><strong>版本：</strong>v2.2</p><p><strong>更新日期：</strong>2026-09-07</p><p><strong>資料來源：</strong>各縣市政府公寓大廈報備開放資料及 data.gov.tw</p><p><strong>本次更新重點：</strong></p><ul><li>清理 county_stats.json / district_stats.json / overview.json 髒資料</li><li>臺北市戶數資料異常標註</li><li>行政區數修正為115區</li><li>重劃區標註修正為79個</li><li>新增最新新聞模組（15條）</li><li>新增20大互動功能</li></ul>');
+});
+
+// ===== 功能14: 主題切換 =====
+const themeBtn=document.getElementById('theme-toggle');
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  try{localStorage.setItem('theme',t)}catch(e){}
+}
+try{const saved=localStorage.getItem('theme');if(saved)setTheme(saved)}catch(e){}
+themeBtn.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme')||'light';
+  setTheme(cur==='light'?'dark':'light');
+});
+
+// ===== 功能15: 字級調整 =====
+const fontBtns={sm:document.getElementById('font-sm'),md:document.getElementById('font-md'),lg:document.getElementById('font-lg')};
+function setFontSize(s){
+  document.body.classList.remove('font-sm','font-lg');
+  if(s==='sm')document.body.classList.add('font-sm');
+  if(s==='lg')document.body.classList.add('font-lg');
+  Object.keys(fontBtns).forEach(k=>fontBtns[k].classList.toggle('active',k===s));
+  try{localStorage.setItem('font_size',s)}catch(e){}
+}
+try{const saved=localStorage.getItem('font_size');if(saved)setFontSize(saved)}catch(e){}
+fontBtns.sm.addEventListener('click',()=>setFontSize('sm'));
+fontBtns.md.addEventListener('click',()=>setFontSize('md'));
+fontBtns.lg.addEventListener('click',()=>setFontSize('lg'));
+
+// ===== 功能16: KPI 資料來源說明 =====
+document.querySelectorAll('.info-icon').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const key=el.dataset.info;
+    if(KPI_INFO[key])showModal('資料來源說明','<p>'+KPI_INFO[key]+'</p>');
+  });
+});
+
+// ===== Tab 切換 =====
+const tabOrder=['overview','county','cases','news'];
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>switchTab(t.dataset.tab));
+  t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();switchTab(t.dataset.tab)}});
+});
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});
+  document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));
+  const tab=document.querySelector('.tab[data-tab="'+name+'"]');
+  tab.classList.add('active');tab.setAttribute('aria-selected','true');
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='overview')renderCharts();
+  if(name==='news')renderNews();
+}
+
+// ===== 圖表 =====
+let chartsRendered=false;
+function renderCharts(){
+  if(chartsRendered)return;chartsRendered=true;
+  // 各縣市建案數
+  const c1=echarts.init(document.getElementById('chart-county'));
+  c1.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    grid:{left:'3%',right:'5%',bottom:'15%',containLabel:true},
+    xAxis:{type:'category',data:COUNTY_DATA.map(d=>d.name),axisLabel:{rotate:30,fontSize:11}},
+    yAxis:{type:'value',name:'建案數'},
+    series:[{type:'bar',data:COUNTY_DATA.map(d=>({value:d.value,itemStyle:{color:d.capital?'#d4a017':'#1a3a5c'}})),barMaxWidth:40,label:{show:true,position:'top',fontSize:10}}]
+  });
+  new ResizeObserver(()=>c1.resize()).observe(document.getElementById('chart-county'));
+
+  // 建物型態分布（功能6: 優化甜甜圈）
+  const c2=echarts.init(document.getElementById('chart-btype'));
+  const bd=Object.entries(BTYPE_DATA);
+  const totalB=bd.reduce((s,[,v])=>s+v,0);
+  c2.setOption({
+    tooltip:{trigger:'item',formatter:'{b}: {c} 棟 ({d}%)'},
+    legend:{bottom:0,selectedMode:true},
+    title:{text:totalB.toLocaleString(),subtext:'總棟數',left:'center',top:'38%',textStyle:{fontSize:20,fontWeight:700,color:'#1a3a5c'},subtextStyle:{fontSize:11,color:'#6b6b6b'}},
+    series:[{type:'pie',radius:['40%','70%'],center:['50%','45%'],
+      data:bd.map(([k,v])=>({name:k,value:v})),
+      label:{formatter:'{b}\n{d}%',fontSize:11},itemStyle:{borderColor:'#fff',borderWidth:2},
+      emphasis:{scale:true,scaleSize:8}
+    }],color:['#1a3a5c','#d4a017','#2d6a4f','#b8453a','#999']
+  });
+  new ResizeObserver(()=>c2.resize()).observe(document.getElementById('chart-btype'));
+
+  // 功能3: 歷年趨勢圖（模擬數據）
+  const c3=echarts.init(document.getElementById('chart-trend'));
+  c3.setOption({
+    tooltip:{trigger:'axis'},
+    legend:{data:['建照件數','使照件數'],bottom:0},
+    grid:{left:'3%',right:'5%',bottom:'18%',containLabel:true},
+    xAxis:{type:'category',data:['2020','2021','2022','2023','2024','2025']},
+    yAxis:{type:'value',name:'件數'},
+    series:[
+      {name:'建照件數',type:'line',smooth:true,data:[8200,9100,10500,9800,8600,7900],itemStyle:{color:'#1a3a5c'},areaStyle:{color:'rgba(26,58,92,.1)'}},
+      {name:'使照件數',type:'line',smooth:true,data:[7500,8300,9200,10100,9500,8200],itemStyle:{color:'#d4a017'},areaStyle:{color:'rgba(212,160,23,.1)'}}
+    ]
+  });
+  new ResizeObserver(()=>c3.resize()).observe(document.getElementById('chart-trend'));
+
+  // 功能18: 戶數分布直方圖
+  const c4=echarts.init(document.getElementById('chart-hhhist'));
+  const hhBins={'1-50':0,'51-100':0,'101-200':0,'201-500':0,'500+':0};
+  CASE_DB.forEach(b=>{
+    const h=b.households;
+    if(!h||h<=0)return;
+    if(h<=50)hhBins['1-50']++;
+    else if(h<=100)hhBins['51-100']++;
+    else if(h<=200)hhBins['101-200']++;
+    else if(h<=500)hhBins['201-500']++;
+    else hhBins['500+']++;
+  });
+  c4.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    grid:{left:'3%',right:'5%',bottom:'10%',containLabel:true},
+    xAxis:{type:'category',data:Object.keys(hhBins),name:'戶數區間'},
+    yAxis:{type:'value',name:'建案數'},
+    series:[{type:'bar',data:Object.values(hhBins),itemStyle:{color:'#2d6a4f'},barMaxWidth:50,label:{show:true,position:'top',fontSize:10}}]
+  });
+  new ResizeObserver(()=>c4.resize()).observe(document.getElementById('chart-hhhist'));
+
+  // 功能19: 管理組織統計圖
+  const c5=echarts.init(document.getElementById('chart-mgmt'));
+  const mgmtCount={'管理委員會':0,'管理負責人':0,'未標註/其他':0};
+  CASE_DB.forEach(b=>{
+    const m=b.mgmt_type;
+    if(m==='管理委員會')mgmtCount['管理委員會']++;
+    else if(m==='管理負責人')mgmtCount['管理負責人']++;
+    else mgmtCount['未標註/其他']++;
+  });
+  c5.setOption({
+    tooltip:{trigger:'item',formatter:'{b}: {c} 筆 ({d}%)'},
+    legend:{bottom:0},
+    series:[{type:'pie',radius:['35%','65%'],center:['50%','45%'],
+      data:Object.entries(mgmtCount).map(([k,v])=>({name:k,value:v})),
+      label:{formatter:'{b}\n{d}%',fontSize:11},itemStyle:{borderColor:'#fff',borderWidth:2}
+    }],color:['#1a3a5c','#d4a017','#999']
+  });
+  new ResizeObserver(()=>c5.resize()).observe(document.getElementById('chart-mgmt'));
+}
+setTimeout(renderCharts,300);
+
+// ===== 功能4: 縣市比較工具 =====
+let compareSelected=['臺中市','臺北市','新北市'];
+function renderCompareSelector(){
+  const sel=document.getElementById('compare-selector');
+  sel.innerHTML=COUNTY_DATA.map(d=>{
+    const checked=compareSelected.includes(d.name);
+    return '<label class="compare-check'+(checked?' checked':'')+'"><input type="checkbox" value="'+d.name+'"'+(checked?' checked':'')+'>'+d.name+'</label>';
+  }).join('');
+  sel.querySelectorAll('input').forEach(cb=>{
+    cb.addEventListener('change',()=>{
+      if(cb.checked){
+        if(compareSelected.length>=3){cb.checked=false;showModal('提示','<p>最多同時比較3個縣市</p>');return}
+        compareSelected.push(cb.value);
+      }else{
+        compareSelected=compareSelected.filter(n=>n!==cb.value);
+      }
+      renderCompareSelector();
+      renderCompareGrid();
+    });
+  });
+}
+function renderCompareGrid(){
+  const grid=document.getElementById('compare-grid');
+  if(compareSelected.length===0){grid.innerHTML='<p style="color:var(--c-text2);font-size:13px">請至少選擇1個縣市</p>';return}
+  grid.innerHTML=compareSelected.map(name=>{
+    const d=COUNTY_DATA.find(x=>x.name===name);
+    const hhText=d.hh===null?'資料異常':(d.hh||0).toLocaleString();
+    const redevCount=REDEV_DATA[name]?REDEV_DATA[name].length:0;
+    const districtInfo={臺中市:29,臺北市:12,新北市:12,桃園市:3,臺南市:30,新竹市:3,嘉義市:3,彰化縣:23};
+    return '<div class="compare-card"><h4>'+name+'</h4>'+
+      '<div class="compare-stat"><div class="val">'+d.value.toLocaleString()+'</div><div class="lbl">建案數</div></div>'+
+      '<div class="compare-stat"><div class="val">'+hhText+'</div><div class="lbl">戶數</div></div>'+
+      '<div class="compare-stat"><div class="val">'+(districtInfo[name]||0)+'</div><div class="lbl">行政區數</div></div>'+
+      '<div class="compare-stat"><div class="val">'+redevCount+'</div><div class="lbl">重劃區數</div></div>'+
+      '</div>';
+  }).join('');
+}
+renderCompareSelector();
+renderCompareGrid();
+
+// ===== 功能5: 重劃區專區 =====
+function renderRedevTable(){
+  const tbody=document.getElementById('redev-tbody');
+  tbody.innerHTML=Object.entries(REDEV_DATA).map(([county,zones])=>{
+    return '<tr><td><strong>'+county+'</strong></td><td class="num">'+zones.length+'</td><td>'+
+      zones.map(z=>'<span class="redev-tag">'+z+'</span>').join('')+'</td></tr>';
+  }).join('');
+}
+renderRedevTable();
+
+// ===== 功能17: 待補縣市進度 =====
+function renderPendingTable(){
+  const tbody=document.getElementById('pending-tbody');
+  tbody.innerHTML=PENDING_COUNTIES.map(c=>{
+    return '<tr><td><strong style="color:#999">'+c.name+'</strong></td><td><span class="badge" style="background:#eee;color:#999">待補開放資料</span></td><td style="font-size:12px;color:var(--c-text2)">'+c.source+'</td></tr>';
+  }).join('');
+}
+renderPendingTable();
+
+// ===== 個案庫搜尋篩選分頁 =====
+const PER_PAGE=50;let page=1,filtered=[];
+const tbody=document.getElementById('case-tbody');
+const resultEl=document.getElementById('case-result');
+const pagEl=document.getElementById('case-pagination');
+document.getElementById('case-total-count').textContent=CASE_DB.length.toLocaleString();
+
+// 載入篩選選項
+const counties=[...new Set(CASE_DB.map(b=>b.county))].sort();
+const fc=document.getElementById('filter-county');
+counties.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;fc.appendChild(o)});
+fc.addEventListener('change',()=>{
+  const fd=document.getElementById('filter-district');
+  fd.innerHTML='<option value="">全部行政區</option>';
+  const dists=[...new Set(CASE_DB.filter(b=>b.county===fc.value).map(b=>b.district))].sort();
+  dists.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;fd.appendChild(o)});
+  applyFilter();
+});
+['filter-district','filter-type','filter-mgmt','filter-redev','case-search','filter-hh-min','filter-hh-max','filter-fav'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',applyFilter);
+  document.getElementById(id).addEventListener('change',applyFilter);
+});
+
+// 功能9: 最愛收藏
+let favCases=[];
+try{favCases=JSON.parse(localStorage.getItem('fav_cases')||'[]')}catch(e){}
+function toggleFav(id){
+  const idx=favCases.indexOf(id);
+  if(idx>=0)favCases.splice(idx,1);else favCases.push(id);
+  try{localStorage.setItem('fav_cases',JSON.stringify(favCases))}catch(e){}
+  applyFilter();
+}
+
+// 功能10: 最近查看
+let recentCases=[];
+try{recentCases=JSON.parse(localStorage.getItem('recent_cases')||'[]')}catch(e){}
+function addRecent(b){
+  recentCases=recentCases.filter(x=>x.id!==b.id);
+  recentCases.unshift({id:b.id,name:b.name});
+  if(recentCases.length>10)recentCases=recentCases.slice(0,10);
+  try{localStorage.setItem('recent_cases',JSON.stringify(recentCases))}catch(e){}
+  renderRecentBar();
+}
+function renderRecentBar(){
+  const bar=document.getElementById('recent-bar');
+  const list=document.getElementById('recent-list');
+  if(recentCases.length===0){bar.style.display='none';return}
+  bar.style.display='flex';
+  list.innerHTML=recentCases.slice(0,5).map(b=>{
+    return '<span class="recent-tag" title="'+b.name+'" data-id="'+b.id+'">'+b.name+'</span>';
+  }).join('');
+  list.querySelectorAll('.recent-tag').forEach(tag=>{
+    tag.addEventListener('click',()=>{
+      const id=tag.dataset.id;
+      document.getElementById('case-search').value=id;
+      switchTab('cases');
+      applyFilter();
+    });
+  });
+}
+renderRecentBar();
+
+function applyFilter(){
+  const q=document.getElementById('case-search').value.trim().toLowerCase();
+  const c=document.getElementById('filter-county').value;
+  const d=document.getElementById('filter-district').value;
+  const t=document.getElementById('filter-type').value;
+  const m=document.getElementById('filter-mgmt').value;
+  const r=document.getElementById('filter-redev').value;
+  const hhMin=parseInt(document.getElementById('filter-hh-min').value)||0;
+  const hhMax=parseInt(document.getElementById('filter-hh-max').value)||Infinity;
+  const favOnly=document.getElementById('filter-fav').checked;
+  filtered=CASE_DB.filter(b=>{
+    if(q&&!(b.name.toLowerCase().includes(q)||b.address.toLowerCase().includes(q)||b.id.toLowerCase().includes(q)))return false;
+    if(c&&b.county!==c)return false;
+    if(d&&b.district!==d)return false;
+    if(t&&b.building_type!==t)return false;
+    if(m){
+      if(m==='其他'){if(b.mgmt_type==='管理委員會'||b.mgmt_type==='管理負責人')return false}
+      else if(b.mgmt_type!==m)return false;
+    }
+    if(r==='1'&&!b.redev_zone)return false;
+    if(hhMin>0&&(!b.households||b.households<hhMin))return false;
+    if(hhMax!==Infinity&&(!b.households||b.households>hhMax))return false;
+    if(favOnly&&!favCases.includes(b.id))return false;
+    return true;
+  });
+  page=1;renderCases();
+}
+
+function renderCases(){
+  resultEl.innerHTML='共 <strong>'+filtered.length.toLocaleString()+'</strong> 筆結果';
+  const start=(page-1)*PER_PAGE;
+  const pageData=filtered.slice(start,start+PER_PAGE);
+  tbody.innerHTML=pageData.map(b=>{
+    const rt=b.redev_zone?'<span class="badge redev">'+b.redev_zone+'</span>':'';
+    const isFav=favCases.includes(b.id);
+    return '<tr class="'+(isFav?'fav-row':'')+'">'+
+      '<td><button class="fav-btn'+(isFav?' active':'')+'" data-id="'+b.id+'" aria-label="收藏">'+(isFav?'★':'☆')+'</button></td>'+
+      '<td>'+b.id+'</td>'+
+      '<td><strong><a href="javascript:void(0)" class="case-name-link" data-id="'+b.id+'" style="color:var(--c-primary)">'+b.name+'</a></strong></td>'+
+      '<td>'+b.county+'</td><td>'+b.district+'</td>'+
+      '<td style="max-width:300px">'+b.address+'</td>'+
+      '<td class="num">'+(b.households||'')+'</td>'+
+      '<td><span class="badge type">'+b.building_type+'</span></td>'+
+      '<td>'+b.mgmt_type+'</td><td>'+rt+'</td></tr>';
+  }).join('');
+  // 綁定最愛按鈕
+  tbody.querySelectorAll('.fav-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>toggleFav(btn.dataset.id));
+  });
+  // 綁定建案名稱點擊（最近查看）
+  tbody.querySelectorAll('.case-name-link').forEach(link=>{
+    link.addEventListener('click',()=>{
+      const b=CASE_DB.find(x=>x.id===link.dataset.id);
+      if(b)addRecent(b);
+    });
+  });
+  const totalPages=Math.ceil(filtered.length/PER_PAGE);
+  if(totalPages<=1){pagEl.innerHTML='';return}
+  let html='<button class="page-btn" '+(page===1?'disabled':'')+' onclick="goPage('+(page-1)+')">&#8249;</button>';
+  html+='<span class="page-btn active">'+page+'/'+totalPages+'</span>';
+  html+='<button class="page-btn" '+(page===totalPages?'disabled':'')+' onclick="goPage('+(page+1)+')">&#8250;</button>';
+  pagEl.innerHTML=html;
+}
+function goPage(p){page=p;renderCases();window.scrollTo({top:document.getElementById('case-table').offsetTop-20,behavior:'smooth'})}
+
+// 功能2: 匯出CSV
+document.getElementById('btn-export-csv').addEventListener('click',()=>{
+  if(filtered.length===0){showModal('提示','<p>目前沒有可匯出的資料</p>');return}
+  const headers=['使照序號','建案名稱','縣市','行政區','地址','戶數','建物型態','管理組織','重劃區'];
+  const rows=filtered.map(b=>[b.id,b.name,b.county,b.district,b.address,b.households||'',b.building_type,b.mgmt_type||'',b.redev_zone||'']);
+  const csv='\uFEFF'+[headers,...rows].map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='建案匯出_'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+applyFilter();
+
+// ===== 新聞模組 =====
+let newsFiltered=[];
+function renderNews(){
+  const grid=document.getElementById('news-grid');
+  if(typeof NEWS_DATA==='undefined'){grid.innerHTML='<p>新聞載入中…</p>';return}
+  const cat=document.getElementById('news-category').value;
+  const county=document.getElementById('news-county').value;
+  // 動態產生選項（僅首次）
+  const catSel=document.getElementById('news-category');
+  if(catSel.options.length<=1){
+    const cats=[...new Set(NEWS_DATA.articles.map(a=>a.category))].sort();
+    cats.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;catSel.appendChild(o)});
+  }
+  const countySel=document.getElementById('news-county');
+  if(countySel.options.length<=1){
+    const cos=[...new Set(NEWS_DATA.articles.map(a=>a.county))].sort();
+    cos.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;countySel.appendChild(o)});
+  }
+  newsFiltered=NEWS_DATA.articles.filter(a=>{
+    if(cat&&a.category!==cat)return false;
+    if(county&&a.county!==county)return false;
+    return true;
+  });
+  if(newsFiltered.length===0){grid.innerHTML='<p style="color:var(--c-text2)">沒有符合條件的新聞</p>';return}
+  grid.innerHTML=newsFiltered.map(a=>{
+    return '<div class="news-card">'+
+      '<span class="news-cat">'+a.category+'</span>'+
+      '<div class="news-title">'+a.title+'</div>'+
+      '<div class="news-summary">'+a.summary+'</div>'+
+      '<div class="news-meta">'+
+        '<span><span class="news-source">'+a.source+'</span> · '+a.date+' · '+a.county+'</span>'+
+        '<a href="'+a.url+'" target="_blank" rel="noopener" class="news-link">閱讀全文 &rarr;</a>'+
+      '</div></div>';
+  }).join('');
+}
+document.getElementById('news-category').addEventListener('change',renderNews);
+document.getElementById('news-county').addEventListener('change',renderNews);
+
+// ===== 功能11: 鍵盤快捷鍵 =====
+document.addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  const isInput=tag==='input'||tag==='select'||tag==='textarea'||e.target.isContentEditable;
+  if(e.key==='Escape'){
+    if(modalOverlay.classList.contains('show')){hideModal();return}
+    document.getElementById('case-search').value='';
+    ['filter-county','filter-district','filter-type','filter-mgmt','filter-redev'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('filter-hh-min').value='';
+    document.getElementById('filter-hh-max').value='';
+    document.getElementById('filter-fav').checked=false;
+    applyFilter();
+    return;
+  }
+  if(isInput)return;
+  if(e.key==='/'){e.preventDefault();document.getElementById('case-search').focus();switchTab('cases')}
+  if(e.key==='t'||e.key==='T'){
+    e.preventDefault();
+    const active=document.querySelector('.tab.active');
+    const idx=tabOrder.indexOf(active.dataset.tab);
+    switchTab(tabOrder[(idx+1)%tabOrder.length]);
+  }
+});
+
+// ===== 功能20: 頁面載入效能 =====
+window.addEventListener('load',()=>{
+  const loadTime=(performance.now()/1000).toFixed(1);
+  document.getElementById('perf-info').textContent='頁面載入耗時 '+loadTime+' 秒 · CASE_DB 共 '+CASE_DB.length.toLocaleString()+' 筆';
+});
+</script>
+
+<footer style="background:var(--c-primary);color:rgba(255,255,255,.85);padding:28px 24px 20px;margin-top:40px;border-top:3px solid var(--c-accent)">
+<div style="max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px">
+<div>
+<div style="font-family:var(--font-serif);font-size:18px;font-weight:700;color:#fff;margin-bottom:6px">全台建案統計儀表板</div>
+<div style="font-size:12px;color:rgba(255,255,255,.6)">彙整全台22縣市公寓大廈報備開放資料 · 版本 v2.2</div>
+</div>
+<div style="text-align:right;font-size:13px;line-height:1.9">
+<div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>聯絡：<a href="tel:0968222201" style="color:var(--c-accent);text-decoration:none;font-weight:600">0968-222201</a></div>
+<div><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M19.365 9.863c.349 0 .63.285.63.636 0 .35-.281.636-.63.636-.35 0-.631-.286-.631-.636 0-.351.282-.636.631-.636zm-3.892 0c.349 0 .63.285.63.636 0 .35-.281.636-.63.636-.35 0-.631-.286-.631-.636 0-.351.282-.636.631-.636zm-7.53 6.818h1.735v-2.614H7.943v2.614zm2.614 0h1.736v-2.614h-1.736v2.614zm2.614 0h1.735v-2.614h-1.735v2.614zM12 0C5.373 0 0 4.928 0 11c0 3.454 1.76 6.546 4.527 8.568L3.545 24l4.864-2.432c1.11.307 2.293.476 3.591.476 6.627 0 12-4.928 12-11S18.627 0 12 0z"/></svg>Line：<span style="color:var(--c-accent);font-weight:600">331.today</span></div>
+<div style="color:rgba(255,255,255,.55);font-size:12px;margin-top:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>設計規劃開發：<a href="jinyong-psychology/iamsusi.html" style="color:inherit;text-decoration:underline;font-weight:600;">張書欣</a></div>
+</div>
+</div>
+<div style="max-width:1400px;margin:14px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);font-size:11px;color:rgba(255,255,255,.4);text-align:center">
+資料來源：各縣市政府公寓大廈報備開放資料及 data.gov.tw · 本站僅供參考，實際資訊以政府公告為準 · &copy; 2026 9return.com.tw
+</div>
+</footer>
+
+<script>
+/* ===== Anti-Copy / Anti-Save / Anti-Download Protection ===== */
+(function() {
+  'use strict';
+  function showToast(msg) {
+    var t = document.querySelector('.protect-toast');
+    if (!t) { t = document.createElement('div'); t.className = 'protect-toast'; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 1800);
+  }
+  document.addEventListener('contextmenu', function(e) {
+    if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA')return;
+    e.preventDefault(); showToast('本網站禁止右鍵複製'); return false;
+  });
+  document.addEventListener('copy', function(e) {
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+    e.preventDefault(); showToast('本網站禁止複製內容'); return false;
+  });
+  document.addEventListener('cut', function(e) {
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+    e.preventDefault(); showToast('本網站禁止剪下內容'); return false;
+  });
+  document.addEventListener('dragstart', function(e) { if (e.target.tagName === 'IMG' || e.target.tagName === 'A') { e.preventDefault(); showToast('本網站禁止拖曳存檔'); return false; } });
+  document.addEventListener('keydown', function(e) {
+    var key = e.key.toLowerCase();
+    var tag=(e.target.tagName||'').toLowerCase();
+    if(tag==='input'||tag==='select'||tag==='textarea')return;
+    if (e.ctrlKey || e.metaKey) {
+      if (key === 'c' || key === 'x' || key === 'u' || key === 's' || key === 'a') {
+        e.preventDefault(); showToast('本網站禁止此操作'); return false;
+      }
+      if (e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) {
+        e.preventDefault(); showToast('本網站禁止開發者工具'); return false;
+      }
+    }
+    if (key === 'f12') { e.preventDefault(); showToast('本網站禁止開發者工具'); return false; }
+  });
+  document.addEventListener('selectstart', function(e) {
+    var tag=(e.target.tagName||'').toLowerCase();
+    if(tag==='input'||tag==='select'||tag==='textarea')return;
+    e.preventDefault(); return false;
+  });
+})();
+</script>
+</body>
+</html>
